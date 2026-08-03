@@ -18,6 +18,23 @@ This is a design-and-build specification, not a finished theme. The main deliver
 - Visibility: public, so the design brief can be shared by URL.
 - The working branch contains the README, the full design prompt, and the two validated schema examples. It was created from `main` and is kept separate so the implementation work can continue without changing the default branch.
 
+## Demo preview
+
+The `demo/` directory is a self-contained static preview of the documented header. It is intended for visual and interaction review before the Liquid section is wired into a Shopify theme. It includes:
+
+- `demo/index.html` — semantic header, announcement bar, hero, responsive navigation, drawers, and preview content.
+- `demo/styles.css` — responsive tokens and the desktop/tablet/mobile visual system.
+- `demo/script.js` — announcement rotation, mega-menu, drawer, nested-menu, focus, Escape, scrim, and sticky-header behavior.
+- `demo/server.mjs` — a small no-build local server for checking the preview.
+
+Run it from the repository root with:
+
+```powershell
+node demo/server.mjs
+```
+
+Then open <http://127.0.0.1:4173/>. Check the desktop mega-menu, search/account/cart drawers, announcement controls, scroll hide/reveal behavior, and the mobile menu by resizing the browser below the documented 992 px breakpoint. This preview is not a Shopify runtime: it does not render Liquid, connect to Shopify routes, or load store data.
+
 ## Deliverables
 
 | File | Purpose |
@@ -26,6 +43,7 @@ This is a design-and-build specification, not a finished theme. The main deliver
 | `docs/helix-header-implementation-prompt.md` | Full implementation prompt with the complete observation log, measurements, CSS behavior, Liquid schema, interaction states, and verification plan. |
 | `examples/header-schema-validation.liquid` | Minimal, Theme Check-validated header section/schema example used to prove the settings and block model. |
 | `examples/announcement-bar-schema-validation.liquid` | Minimal, Theme Check-validated announcement-bar section/schema example. |
+| `demo/` | Runnable static preview for visual and interaction review of the documented header states. |
 
 The local working copy also contains the original design document at `outputs/helix-header-implementation-prompt.md`.
 
