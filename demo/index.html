@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Helix Shoes header design preview">
+    <title>Helix Shoes — Header preview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <div class="announcement" data-announcement>
+      <button class="announcement__control" type="button" data-announcement-prev aria-label="Previous announcement">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m14.5 5-7 7 7 7"/></svg>
+      </button>
+      <div class="announcement__viewport" aria-live="polite">
+        <div class="announcement__track" data-announcement-track>
+          <a href="#shipping" class="announcement__message">Free shipping on orders over 5.000.000₫</a>
+          <a href="#sale" class="announcement__message">Get 20% off your first Helix pair</a>
+        </div>
+      </div>
+      <button class="announcement__control" type="button" data-announcement-next aria-label="Next announcement">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9.5 5 7 7-7 7"/></svg>
+      </button>
+    </div>
+
+    <header class="site-header" data-header>
+      <div class="header__inner">
+        <button class="icon-button header__menu-toggle" type="button" data-open-drawer="navigation" aria-label="Open menu" aria-controls="navigation-drawer" aria-expanded="false">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+        </button>
+
+        <nav class="desktop-nav" aria-label="Primary">
+          <div class="nav-item" data-menu="women">
+            <a href="#women">Women</a>
+            <button class="nav-item__toggle" type="button" data-mega-toggle aria-label="Open Women menu" aria-controls="mega-women" aria-expanded="false">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m7 9 5 5 5-5"/></svg>
+            </button>
+            <div class="mega-menu" id="mega-women" data-mega-panel hidden>
+              <div class="mega-menu__columns">
+                <div><p class="eyebrow">Quick links</p><a href="#women-top-picks">Top picks</a><a href="#women-best-sellers">Best sellers</a><a href="#women-new">New arrivals</a><a href="#women-sale">On sale</a></div>
+                <div><p class="eyebrow">Shop by activity</p><a href="#hiking">Hiking</a><a href="#running">Running</a><a href="#training">Training</a><a href="#lifestyle">Lifestyle</a><a href="#women-all">Shop all women</a></div>
+                <div><p class="eyebrow">Shop by feature</p><a href="#cushioned">Cushioned</a><a href="#waterproof">Waterproof</a><a href="#breathable">Breathable</a><a href="#windproof">Windproof</a></div>
+                <a class="promo-card promo-card--lime" href="#women-favorites"><span>Women’s favorites</span><strong>Find your everyday pair <span aria-hidden="true">↗</span></strong></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="nav-item" data-menu="men">
+            <a href="#men">Men</a>
+            <button class="nav-item__toggle" type="button" data-mega-toggle aria-label="Open Men menu" aria-controls="mega-men" aria-expanded="false">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m7 9 5 5 5-5"/></svg>
+            </button>
+            <div class="mega-menu" id="mega-men" data-mega-panel hidden>
+              <div class="mega-menu__columns">
+                <div><p class="eyebrow">Quick links</p><a href="#men-top-picks">Top picks</a><a href="#men-best-sellers">Best sellers</a><a href="#men-new">New arrivals</a><a href="#men-sale">On sale</a></div>
+                <div><p class="eyebrow">Shop by activity</p><a href="#men-hiking">Hiking</a><a href="#men-running">Running</a><a href="#men-training">Training</a><a href="#men-lifestyle">Lifestyle</a><a href="#men-all">Shop all men</a></div>
+                <div><p class="eyebrow">Featured models</p><a href="#prime-form">Prime form</a><a href="#base-line">Base line</a><a href="#form-core">Form core</a><a href="#frame-one">Frame one</a><a href="#drift-prime">Drift prime</a></div>
+                <a class="promo-card promo-card--ink" href="#men-favorites"><span>New season</span><strong>Built for more miles <span aria-hidden="true">↗</span></strong></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="nav-item nav-item--single"><a href="#pages">Pages</a></div>
+        </nav>
+
+        <a class="brand" href="#top" aria-label="Helix Shoes home">
+          <span class="brand__wordmark">helix</span>
+          <span class="brand__descriptor">shoes</span>
+        </a>
+
+        <div class="header__actions">
+          <button class="icon-button" type="button" data-open-drawer="search" aria-label="Search" aria-controls="search-drawer" aria-expanded="false">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.5 4.5"/></svg>
+          </button>
+          <button class="icon-button account-action" type="button" data-open-drawer="account" aria-label="Account" aria-controls="account-drawer" aria-expanded="false">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 20c.7-3.3 3-5 6.5-5s5.8 1.7 6.5 5"/></svg>
+          </button>
+          <button class="icon-button cart-action" type="button" data-open-drawer="cart" aria-label="Cart, 0 items" aria-controls="cart-drawer" aria-expanded="false">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 5h2l1.5 10.5h10L20 8H7"/><circle cx="9.5" cy="19" r="1"/><circle cx="17" cy="19" r="1"/></svg>
+            <span class="cart-count" aria-hidden="true">0</span>
+          </button>
+          <button class="currency" type="button" aria-label="Currency: Vietnamese dong">VND <span aria-hidden="true">⌄</span></button>
+        </div>
+      </div>
+    </header>
+
+    <div class="scrim" data-scrim hidden></div>
+
+    <main id="main-content">
+      <section class="hero" id="top">
+        <div class="hero__copy">
+          <p class="eyebrow">Helix / SS26</p>
+          <h1>Move in your own direction.</h1>
+          <p class="hero__lede">Performance-minded shoes with a softer point of view.</p>
+          <div class="hero__buttons"><a class="button button--ink" href="#women">Shop women</a><a class="button button--ghost" href="#men">Shop men</a></div>
+        </div>
+        <div class="hero__visual" aria-label="Abstract shoe campaign preview" role="img">
+          <div class="shoe-shape shoe-shape--one"></div>
+          <div class="shoe-shape shoe-shape--two"></div>
+          <div class="hero__badge">LIGHT / FAST / READY</div>
+        </div>
+      </section>
+
+      <section class="demo-guide" aria-labelledby="demo-title">
+        <div><p class="eyebrow">Interactive preview</p><h2 id="demo-title">Check the header states</h2></div>
+        <div class="demo-guide__items"><span>Desktop: hover or click Women / Men</span><span>Mobile: resize below 992px, then open Menu</span><span>Scroll to test sticky hide / reveal</span></div>
+      </section>
+
+      <section class="tiles" aria-label="Featured collections">
+        <a class="feature-tile feature-tile--lime" href="#women"><span>01 / Women</span><strong>Soft landings.</strong><span class="tile-arrow">↗</span></a>
+        <a class="feature-tile feature-tile--sand" href="#men"><span>02 / Men</span><strong>Longer miles.</strong><span class="tile-arrow">↗</span></a>
+        <a class="feature-tile feature-tile--violet" href="#pages"><span>03 / The journal</span><strong>Stories in motion.</strong><span class="tile-arrow">↗</span></a>
+      </section>
+    </main>
+
+    <aside class="drawer drawer--left" id="navigation-drawer" data-drawer="navigation" role="dialog" aria-modal="true" aria-labelledby="navigation-title" aria-hidden="true" hidden>
+      <div class="drawer__header"><h2 id="navigation-title">Menu</h2><button class="icon-button drawer__close" type="button" data-close-drawer aria-label="Close menu"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+      <div class="drawer__body drawer__body--nav">
+        <div class="drawer__nav-root" data-nav-root>
+          <a href="#women">Women <span aria-hidden="true">↗</span></a>
+          <button type="button" data-open-nested="women">Women menu <span aria-hidden="true">→</span></button>
+          <a href="#men">Men <span aria-hidden="true">↗</span></a>
+          <button type="button" data-open-nested="men">Men menu <span aria-hidden="true">→</span></button>
+          <a href="#pages">Pages <span aria-hidden="true">↗</span></a>
+          <a href="#journal">Our journal <span aria-hidden="true">↗</span></a>
+        </div>
+        <section class="drawer__nested" data-nested="women" hidden aria-labelledby="women-menu-title"><button class="back-button" type="button" data-close-nested><span aria-hidden="true">←</span> Back</button><h3 id="women-menu-title">Women</h3><a href="#women-top-picks">Top picks</a><a href="#women-best-sellers">Best sellers</a><a href="#hiking">Hiking</a><a href="#running">Running</a><a href="#women-sale">On sale</a><a href="#women-all">Shop all women</a></section>
+        <section class="drawer__nested" data-nested="men" hidden aria-labelledby="men-menu-title"><button class="back-button" type="button" data-close-nested><span aria-hidden="true">←</span> Back</button><h3 id="men-menu-title">Men</h3><a href="#men-top-picks">Top picks</a><a href="#men-best-sellers">Best sellers</a><a href="#men-running">Running</a><a href="#men-training">Training</a><a href="#men-sale">On sale</a><a href="#men-all">Shop all men</a></section>
+      </div>
+      <div class="drawer__footer"><a href="#account">Log in</a><a href="#stores">Store locations</a><button class="currency currency--drawer" type="button">VND <span aria-hidden="true">⌄</span></button></div>
+    </aside>
+
+    <aside class="drawer" id="search-drawer" data-drawer="search" role="dialog" aria-modal="true" aria-labelledby="search-title" aria-hidden="true" hidden>
+      <div class="drawer__header"><h2 id="search-title">Search</h2><button class="icon-button drawer__close" type="button" data-close-drawer aria-label="Close search"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+      <div class="drawer__body"><form class="search-form" action="#search" role="search"><label class="sr-only" for="search-input">Search products</label><input id="search-input" type="search" placeholder="Search shoes, stories, or activities"><button class="icon-button" type="submit" aria-label="Submit search"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.5 4.5"/></svg></button></form><p class="drawer__hint">Try “running”, “waterproof”, or “new arrivals”.</p><div class="search-suggestions"><p class="eyebrow">Popular right now</p><a href="#running">Running</a><a href="#waterproof">Waterproof</a><a href="#new">New arrivals</a></div></div>
+    </aside>
+
+    <aside class="drawer" id="account-drawer" data-drawer="account" role="dialog" aria-modal="true" aria-labelledby="account-title" aria-hidden="true" hidden>
+      <div class="drawer__header"><h2 id="account-title">Account</h2><button class="icon-button drawer__close" type="button" data-close-drawer aria-label="Close account"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+      <div class="drawer__body account-body"><p>Sign in to view orders, save favorites, and check out faster.</p><a class="button button--ink" href="#login">Log in</a><a class="button button--ghost" href="#register">Create account</a></div>
+    </aside>
+
+    <aside class="drawer" id="cart-drawer" data-drawer="cart" role="dialog" aria-modal="true" aria-labelledby="cart-title" aria-hidden="true" hidden>
+      <div class="drawer__header"><h2 id="cart-title">Cart <span class="drawer__count">(0)</span></h2><button class="icon-button drawer__close" type="button" data-close-drawer aria-label="Close cart"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+      <div class="drawer__body cart-empty"><div class="cart-empty__icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 5h2l1.5 10.5h10L20 8H7"/><circle cx="9.5" cy="19" r="1"/><circle cx="17" cy="19" r="1"/></svg></div><h3>Your cart is empty</h3><p>Good shoes are waiting. Add a pair and they’ll show up here.</p><a class="button button--ink" href="#shop">Continue shopping</a></div>
+    </aside>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
