@@ -1,0 +1,51 @@
+<aside
+  class="helix-announcement"
+  aria-label="{{ 'sections.announcement.label' | t }}"
+  style="--announcement-height: {{ section.settings.height }}px;"
+  data-autoplay-seconds="{{ section.settings.autoplay_seconds }}"
+>
+  {% for block in section.blocks %}
+    <div {{ block.shopify_attributes }}>
+      {% case block.type %}
+        {% when 'message' %}
+          {{ block.settings.text }}
+        {% when 'free_shipping' %}
+          {{ 'sections.announcement.free_shipping' | t: threshold: block.settings.threshold }}
+      {% endcase %}
+    </div>
+  {% endfor %}
+</aside>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "tag": "section",
+  "class": "section-announcement-bar",
+  "limit": 1,
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-4" },
+    { "type": "range", "id": "height", "label": "Height", "min": 32, "max": 56, "step": 1, "unit": "px", "default": 38 },
+    { "type": "checkbox", "id": "autoplay", "label": "Auto-rotate messages", "default": true },
+    { "type": "range", "id": "autoplay_seconds", "label": "Seconds per message", "min": 3, "max": 10, "step": 1, "unit": "s", "default": 5 },
+    { "type": "checkbox", "id": "show_arrows", "label": "Show previous and next buttons", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        { "type": "inline_richtext", "id": "text", "label": "Text", "default": "Receive 20% off your first order. <a href=\"/collections/all\">Shop now</a>" }
+      ]
+    },
+    {
+      "type": "free_shipping",
+      "name": "Free shipping threshold",
+      "settings": [
+        { "type": "text", "id": "threshold", "label": "Formatted threshold", "default": "$200" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [{ "name": "Announcement bar" }]
+}
+{% endschema %}
