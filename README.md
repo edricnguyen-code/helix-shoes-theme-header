@@ -68,6 +68,7 @@ The `demo/` directory is a self-contained static preview of the documented heade
 - Matched the mobile drawer’s 64 px header, 59 px drawer logo, 20 px navigation inset, 42 px login control, 47 px localization row, and 53 px social row. Facebook, Instagram, YouTube, and TikTok circles remain visible as non-interactive placeholders until merchant URLs are configured.
 - Added editor controls for drawer-logo width, separate desktop/mobile sticky top offsets and corner radii, and the mobile nested-panel duration. The checked-in Shopify section-group values now match the floating demo card instead of retaining the older zero-inset state.
 - Preserved the Shopify-synced `pebble-demo` navigation and merchant block data while removing the duplicated announcement/hero pair that had been added to the homepage template.
+- Kept the top-of-page mega menu full viewport width, while constraining a sticky floating header's mega menu to the card's exact left and right edges. The panel now drops directly below the card and shares its rounded lower corners without changing the menu content layout.
 
 Run it from the repository root with:
 
