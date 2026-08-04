@@ -39,6 +39,8 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 .announcement__viewport { width: min(700px, calc(100% - 88px)); height: 22.4px; overflow: hidden; }
 .announcement__track { position: relative; width: 100%; height: 100%; }
 .announcement__message { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; min-height: 22.4px; padding: 0 12px; text-align: center; opacity: 0; transform: translate3d(0, 100%, 0); transition: transform .72s var(--ease-announcement), opacity .72s var(--ease-announcement); will-change: transform, opacity; }
+.announcement__message strong { font-weight: 700; }
+.announcement__link { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .announcement__message.is-hidden { z-index: 0; opacity: 0; transform: translate3d(0, 100%, 0); transition: none; }
 .announcement__message.is-active { z-index: 2; opacity: 1; transform: translate3d(0, 0, 0); }
 .announcement__message.is-entering { z-index: 2; opacity: 0; transform: translate3d(0, 100%, 0); transition: none; }

@@ -252,6 +252,12 @@
   let queuedAnnouncementIndex = null;
   const announcementDuration = 760;
   const normalizeAnnouncementIndex = (index) => (index + messages.length) % messages.length;
+  const setAnnouncementInteractivity = (message, active) => {
+    message.tabIndex = -1;
+    message.querySelectorAll('a, button').forEach((control) => {
+      control.tabIndex = active ? 0 : -1;
+    });
+  };
   const commitAnnouncement = (index) => {
     messages.forEach((message, messageIndex) => {
       const active = messageIndex === index;
@@ -259,7 +265,7 @@
       message.classList.toggle('is-hidden', !active);
       message.classList.remove('is-entering', 'is-leaving');
       message.setAttribute('aria-hidden', active ? 'false' : 'true');
-      message.tabIndex = active ? 0 : -1;
+      setAnnouncementInteractivity(message, active);
     });
   };
   const setAnnouncement = (index) => {
@@ -286,18 +292,18 @@
       message.classList.remove('is-active', 'is-entering', 'is-leaving');
       message.classList.add('is-hidden');
       message.setAttribute('aria-hidden', 'true');
-      message.tabIndex = -1;
+      setAnnouncementInteractivity(message, false);
     });
 
     currentMessage.classList.remove('is-active');
     currentMessage.classList.remove('is-hidden');
     currentMessage.classList.add('is-leaving');
     currentMessage.setAttribute('aria-hidden', 'true');
-    currentMessage.tabIndex = -1;
+    setAnnouncementInteractivity(currentMessage, false);
     nextMessage.classList.remove('is-hidden');
     nextMessage.classList.add('is-entering');
     nextMessage.setAttribute('aria-hidden', 'false');
-    nextMessage.tabIndex = 0;
+    setAnnouncementInteractivity(nextMessage, true);
 
     // Force the entering state to paint before promoting it to the active state.
     void nextMessage.offsetHeight;
