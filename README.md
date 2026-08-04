@@ -53,6 +53,7 @@ The `demo/` directory is a self-contained static preview of the documented heade
 
 - Changed announcement messages to use explicit enter/leave states so every direction change still brings the next message from the bottom upward.
 - Added a shared cubic-bezier ease-in-out curve for the vertical travel and a synchronized opacity fade for outgoing/incoming messages.
+- Made the loop deterministic with a queued transition state so rapid clicks and timer ticks cannot interrupt or reverse the bottom-up direction.
 - Preserved the reduced-motion override so the announcement remains static for users who request less motion.
 
 Run it from the repository root with:

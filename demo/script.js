@@ -243,41 +243,76 @@
   }, { passive: true });
   updateStickyHeader();
 
-  const track = document.querySelector('[data-announcement-track]');
   const messages = [...document.querySelectorAll('.announcement__message')];
   let announcementIndex = 0;
   let announcementTimer;
   let announcementTransitionTimer;
+  let announcementFrame;
+  let announcementAnimating = false;
+  let queuedAnnouncementIndex = null;
+  const announcementDuration = 760;
+  const normalizeAnnouncementIndex = (index) => (index + messages.length) % messages.length;
+  const commitAnnouncement = (index) => {
+    messages.forEach((message, messageIndex) => {
+      const active = messageIndex === index;
+      message.classList.toggle('is-active', active);
+      message.classList.toggle('is-hidden', !active);
+      message.classList.remove('is-entering', 'is-leaving');
+      message.setAttribute('aria-hidden', active ? 'false' : 'true');
+      message.tabIndex = active ? 0 : -1;
+    });
+  };
   const setAnnouncement = (index) => {
-    announcementIndex = (index + messages.length) % messages.length;
-    const nextMessage = messages[announcementIndex];
-    const currentMessage = messages.find((message) => message.classList.contains('is-active'));
-    window.clearTimeout(announcementTransitionTimer);
-
-    if (!currentMessage || currentMessage === nextMessage) {
-      messages.forEach((message, messageIndex) => {
-        const active = messageIndex === announcementIndex;
-        message.classList.toggle('is-active', active);
-        message.classList.remove('is-leaving');
-        message.setAttribute('aria-hidden', active ? 'false' : 'true');
-        message.tabIndex = active ? 0 : -1;
-      });
+    if (!messages.length) return;
+    const targetIndex = normalizeAnnouncementIndex(index);
+    if (announcementAnimating) {
+      queuedAnnouncementIndex = targetIndex === announcementIndex ? null : targetIndex;
       return;
     }
 
+    const nextMessage = messages[targetIndex];
+    const currentMessage = messages.find((message) => message.classList.contains('is-active'));
+    announcementIndex = targetIndex;
+
+    if (!currentMessage || currentMessage === nextMessage || reduceMotion.matches) {
+      commitAnnouncement(targetIndex);
+      return;
+    }
+
+    announcementAnimating = true;
+    window.clearTimeout(announcementTransitionTimer);
+    window.cancelAnimationFrame(announcementFrame);
+    messages.forEach((message) => {
+      message.classList.remove('is-active', 'is-entering', 'is-leaving');
+      message.classList.add('is-hidden');
+      message.setAttribute('aria-hidden', 'true');
+      message.tabIndex = -1;
+    });
+
     currentMessage.classList.remove('is-active');
+    currentMessage.classList.remove('is-hidden');
     currentMessage.classList.add('is-leaving');
     currentMessage.setAttribute('aria-hidden', 'true');
     currentMessage.tabIndex = -1;
-    nextMessage.classList.remove('is-leaving', 'is-active');
+    nextMessage.classList.remove('is-hidden');
     nextMessage.classList.add('is-entering');
     nextMessage.setAttribute('aria-hidden', 'false');
     nextMessage.tabIndex = 0;
-    requestAnimationFrame(() => {
+
+    // Force the entering state to paint before promoting it to the active state.
+    void nextMessage.offsetHeight;
+    announcementFrame = requestAnimationFrame(() => {
       nextMessage.classList.remove('is-entering');
       nextMessage.classList.add('is-active');
     });
-    announcementTransitionTimer = window.setTimeout(() => currentMessage.classList.remove('is-leaving'), reduceMotion.matches ? 0 : 760);
+    announcementTransitionTimer = window.setTimeout(() => {
+      currentMessage.classList.remove('is-leaving');
+      commitAnnouncement(targetIndex);
+      announcementAnimating = false;
+      const queuedIndex = queuedAnnouncementIndex;
+      queuedAnnouncementIndex = null;
+      if (queuedIndex !== null && queuedIndex !== announcementIndex) setAnnouncement(queuedIndex);
+    }, announcementDuration);
   };
   const stopAnnouncement = () => window.clearInterval(announcementTimer);
   const startAnnouncement = () => {
