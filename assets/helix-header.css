@@ -5,9 +5,8 @@
 
 .helix-header-component {
   --helix-header-bottom: var(--helix-header-height-desktop, 80px);
-  --helix-panel-ease: cubic-bezier(.22, 1, .36, 1);
-  --helix-surface-ease: cubic-bezier(.4, 0, .2, 1);
-  --helix-reveal-ease: cubic-bezier(.22, .61, .36, 1);
+  --helix-panel-ease: cubic-bezier(.6, 0, .4, 1);
+  --helix-surface-ease: cubic-bezier(.6, .14, 0, 1);
   display: block;
   position: relative;
   height: var(--helix-header-height-desktop, 80px);
@@ -79,23 +78,25 @@
   width: 100%;
   min-height: var(--helix-header-height-desktop, 80px);
   border: 0 solid var(--helix-border, #eaeaea);
-  border-bottom-width: 1px;
+  border-bottom-width: 0;
   border-radius: 0;
   background: transparent;
   color: var(--helix-foreground, #1a1a1a);
-  transition: min-height var(--helix-header-duration, 625ms) ease, color var(--helix-surface-duration, 425ms) var(--helix-panel-ease), border-color var(--helix-surface-duration, 425ms) ease, border-radius 500ms var(--helix-panel-ease), box-shadow var(--helix-surface-duration, 425ms) ease;
+  transition: min-height var(--helix-header-duration, 625ms) ease, color var(--helix-surface-duration, 150ms) var(--helix-panel-ease), border-color var(--helix-surface-duration, 150ms) ease, border-radius 500ms var(--helix-panel-ease), box-shadow var(--helix-surface-duration, 150ms) ease;
 }
 
 .helix-header__shell::before {
   position: absolute;
-  inset: 0;
+  top: 0;
+  right: 0;
+  left: 0;
   z-index: 0;
+  height: 100%;
   border-radius: inherit;
   background: var(--helix-surface, #fff);
   content: "";
-  transform: scaleY(1);
-  transform-origin: top;
-  transition: transform var(--helix-surface-duration, 425ms) var(--helix-surface-ease);
+  transition: height var(--helix-panel-duration, 300ms) var(--helix-surface-ease), border-radius 500ms var(--helix-panel-ease), box-shadow var(--helix-panel-duration, 300ms) var(--helix-surface-ease);
+  will-change: height;
 }
 
 .helix-header-component[data-transparent="true"]:not(.is-sticky):not(.has-open-menu):not(.has-open-localization) .helix-header__shell {
@@ -104,7 +105,7 @@
 }
 
 .helix-header-component[data-transparent="true"]:not(.is-sticky):not(.has-open-menu):not(.has-open-localization) .helix-header__shell::before {
-  transform: scaleY(0);
+  height: 0;
 }
 
 .helix-header-component.is-sticky .helix-header__shell {
@@ -119,6 +120,10 @@
 
 .helix-header-component.has-open-mega .helix-header__shell {
   border-bottom-width: 0;
+}
+
+.helix-header-component.has-open-mega .helix-header__shell::before {
+  height: calc(100% + var(--helix-open-panel-height, 390px) - 1px);
 }
 
 .helix-header-component:not(.is-sticky).has-open-menu .helix-header__shell,
@@ -590,23 +595,17 @@
   min-height: 390px;
   overflow: hidden;
   border-top: 0;
-  background: var(--helix-surface, #fff);
+  background: transparent;
   opacity: 1;
-  clip-path: inset(0 0 100% 0);
-  transform-origin: top;
-  transition: clip-path var(--helix-panel-duration, 400ms) var(--helix-reveal-ease), visibility 0s linear var(--helix-panel-duration, 400ms);
+  transition: visibility 0s linear var(--helix-panel-duration, 300ms);
   visibility: hidden;
-  will-change: clip-path;
+  pointer-events: none;
 }
 
 .helix-nav-item.is-open > .helix-mega {
-  clip-path: inset(0 0 0 0);
   transition-delay: 0ms;
   visibility: visible;
-}
-
-.helix-nav-item.is-open.is-sequenced-open > .helix-mega {
-  transition-delay: var(--helix-sequence-delay, var(--helix-surface-duration, 425ms));
+  pointer-events: auto;
 }
 
 @media (min-width: 991px) {
@@ -614,13 +613,18 @@
     right: var(--helix-desktop-inset, 50px);
     left: var(--helix-desktop-inset, 50px);
     border-radius: 0 0 var(--helix-desktop-sticky-radius, 16px) var(--helix-desktop-sticky-radius, 16px);
-    box-shadow: 0 18px 34px rgba(0, 0, 0, .12);
+    box-shadow: none;
   }
 
   .helix-header-component.is-sticky.has-open-mega .helix-header__shell {
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
     box-shadow: none;
+  }
+
+  .helix-header-component.is-sticky.has-open-mega .helix-header__shell::before {
+    border-radius: var(--helix-desktop-sticky-radius, 16px);
+    box-shadow: 0 18px 34px rgba(0, 0, 0, .12);
   }
 }
 
@@ -636,27 +640,15 @@
 .helix-mega__inner > .helix-mega__navigation,
 .helix-mega__inner > .helix-mega-feature {
   opacity: 0;
-  transform: translate3d(0, 32px, 0);
-  transition: opacity var(--helix-content-duration, 425ms) ease, transform var(--helix-content-duration, 425ms) var(--helix-panel-ease);
+  transform: translate3d(0, 15px, 0);
+  transition: opacity var(--helix-content-duration, 200ms) ease, transform var(--helix-content-duration, 200ms) var(--helix-surface-ease);
 }
 
 .helix-nav-item.is-open > .helix-mega .helix-mega__inner > .helix-mega__navigation,
 .helix-nav-item.is-open > .helix-mega .helix-mega__inner > .helix-mega-feature {
   opacity: 1;
   transform: translate3d(0, 0, 0);
-  transition-delay: var(--helix-content-delay, 100ms);
-}
-
-.helix-nav-item.is-open > .helix-mega .helix-mega__inner > .helix-mega-feature {
-  transition-delay: calc(var(--helix-content-delay, 100ms) + 45ms);
-}
-
-.helix-nav-item.is-open.is-sequenced-open > .helix-mega .helix-mega__inner > .helix-mega__navigation {
-  transition-delay: calc(var(--helix-sequence-delay, var(--helix-surface-duration, 425ms)) + var(--helix-content-delay, 100ms));
-}
-
-.helix-nav-item.is-open.is-sequenced-open > .helix-mega .helix-mega__inner > .helix-mega-feature {
-  transition-delay: calc(var(--helix-sequence-delay, var(--helix-surface-duration, 425ms)) + var(--helix-content-delay, 100ms) + 45ms);
+  transition-delay: var(--helix-content-delay, 70ms);
 }
 
 .helix-mega__inner--links-only {

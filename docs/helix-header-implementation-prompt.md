@@ -220,16 +220,16 @@ Use a small directional threshold, approximately 8–12 px, to prevent jitter. D
 **Observed from CSS/DOM; open visual dimensions inferred**
 
 - The panel is absolutely positioned directly below the header and spans the header width plus its horizontal padding.
-- Solid white background with dark text.
+- Solid white background with dark text. The visible white area must be one shared surface behind both the header and mega menu, not two adjacent backgrounds.
 - Inner vertical padding: 40 px.
 - Container horizontal padding follows the 50 px page/header inset.
 - Main content uses flex with 40 px gap.
 - Navigation list uses a three-column grid.
 - Individual columns use 15 px padding and 16 px vertical content gaps.
-- Open panel height transitions from 0 to its measured content height.
+- Measure the active menu before opening and transition one shared surface from its closed header height to the combined header-plus-menu height. In transparent mode, that same surface grows from 0 to the complete combined height.
 - Maximum open height: `85svh - mega-menu top`; overflow becomes vertically scrollable when required.
-- Panel: height 0.3 s `cubic-bezier(0.6, 0.14, 0, 1)`; opacity 0.2 s with the same curve.
-- Individual menu columns/product cards: start at opacity 0 and `translate3d(0, 15px, 0)`, then animate to opacity 1 and zero translation over 0.4 s ease, beginning around 0.15 s.
+- Shared surface: height 0.3 s `cubic-bezier(0.6, 0.14, 0, 1)` on both open and close. Do not delay a second panel animation or paint an independent panel background.
+- Individual menu columns/product cards: start at opacity 0 and `translate3d(0, 15px, 0)`, then animate to opacity 1 and zero translation over 0.2 s, beginning after a 0.07 s delay. Remove that delay on close so content clears before the shared sheet retracts.
 - The chevron flips vertically with `scaleY(-1)`.
 - Link underline: 1 px current-color pseudo-element; width animates from 0 to 100% over 0.2 s ease-in-out.
 - Page overlay: `rgba(50,50,50,0.50)`, 20 px backdrop blur, 0.3 s fade in/out.

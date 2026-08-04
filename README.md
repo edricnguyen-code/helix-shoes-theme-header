@@ -87,6 +87,15 @@ The `demo/` directory is a self-contained static preview of the documented heade
 - Staged the desktop country panel after its closed state is rendered so its top-down animation is also repeatable.
 - Added the `Panel handoff overlap` Shopify editor control and mirrored the corrected timing in the standalone demo.
 
+### August 5, 2026 single-sheet mega-menu motion
+
+- Rechecked the password-protected reference theme and matched its actual motion model: one shared white background grows from the header top to the combined header-and-mega-menu height.
+- Removed the independent mega-menu background and reveal transition, so opening and closing can no longer expose two separately moving white surfaces or a seam between them.
+- Matched the live sheet timing at 300 ms with `cubic-bezier(.6, .14, 0, 1)`, shortened the header color change to 150 ms, and reduced the content travel to 15 px over 200 ms.
+- Made JavaScript measure the active Shopify menu's rendered height before the open state is painted. This keeps the shared surface exact for merchant-managed links, promotion cards, and product content at desktop and tablet widths.
+- Reduced desktop hover-close intent to 70 ms and preserved compact Pages/country sequencing as a separate editor-controlled behavior.
+- Mirrored the same shared-height surface, fast close, easing, and content glide in the standalone demo.
+
 Run it from the repository root with:
 
 ```powershell

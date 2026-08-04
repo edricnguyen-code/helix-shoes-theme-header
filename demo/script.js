@@ -14,8 +14,9 @@
   let scrollIntent = 0;
   let scrollFrame = 0;
   let surfaceReadyAt = 0;
-  const surfaceDuration = 425;
-  const handoffOverlap = 55;
+  const surfaceDuration = 150;
+  const panelDuration = 300;
+  const handoffOverlap = 20;
 
   const focusable = (root) => [...root.querySelectorAll('a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])')]
     .filter((element) => !element.closest('[inert]') && element.offsetParent !== null);
@@ -57,12 +58,13 @@
     button?.setAttribute('aria-expanded', 'false');
     if (activeMega === item) activeMega = null;
     if (!activeMega && !preserveHeader) {
-      header.classList.remove('is-menu-active');
+      header.classList.remove('is-menu-active', 'is-mega-active');
       surfaceReadyAt = 0;
     }
     window.setTimeout(() => {
       if (panel && !item.classList.contains('is-open')) panel.hidden = true;
-    }, immediate || reduceMotion.matches ? 0 : 440);
+      if (!header.classList.contains('is-mega-active')) header.style.removeProperty('--open-panel-height');
+    }, immediate || reduceMotion.matches ? 0 : panelDuration);
   };
 
   const closeMegaMenus = (immediate = false) => {
@@ -75,9 +77,12 @@
     if (!item || !window.matchMedia('(min-width: 991px)').matches) return;
     if (item.classList.contains('is-open')) return;
     window.clearTimeout(megaCloseTimer);
+    const panel = item.querySelector('[data-mega-panel]');
+    if (!panel) return;
+    const isFullMega = panel.classList.contains('mega-menu');
     const now = performance.now();
     let sequenceDelay = 0;
-    if (!reduceMotion.matches && !header.classList.contains('is-sticky')) {
+    if (!isFullMega && !reduceMotion.matches && !header.classList.contains('is-sticky')) {
       if (header.classList.contains('is-menu-active')) sequenceDelay = Math.max(0, Math.round(surfaceReadyAt - now - handoffOverlap));
       else {
         sequenceDelay = Math.max(0, surfaceDuration - handoffOverlap);
@@ -86,9 +91,11 @@
     }
     megaItems.forEach((entry) => { if (entry !== item) closeMega(entry, true, true); });
     const button = item.querySelector('[data-mega-toggle]');
-    const panel = item.querySelector('[data-mega-panel]');
-    if (!panel) return;
     panel.hidden = false;
+    if (isFullMega) {
+      const panelHeight = Math.max(panel.scrollHeight, panel.getBoundingClientRect().height);
+      if (panelHeight > 0) header.style.setProperty('--open-panel-height', `${Math.ceil(panelHeight)}px`);
+    }
     panel.getBoundingClientRect();
     activeMega = item;
     item.classList.toggle('is-sequenced-open', sequenceDelay > 0);
@@ -97,6 +104,7 @@
       item.classList.add('is-open');
       button?.setAttribute('aria-expanded', 'true');
       header.classList.add('is-menu-active');
+      header.classList.toggle('is-mega-active', isFullMega);
       header.classList.remove('is-hidden');
       showScrim('menu');
     });
@@ -115,7 +123,7 @@
       if (item.matches(':hover') || item.matches(':focus-within')) return;
       closeMega(item);
       hideScrimIfIdle();
-    }, item.classList.contains('is-sequenced-open') ? surfaceDuration + 160 : 140);
+    }, item.classList.contains('is-sequenced-open') ? surfaceDuration + 80 : 70);
   };
 
   megaItems.forEach((item) => {
@@ -442,7 +450,14 @@
 
   window.addEventListener('resize', () => {
     if (window.matchMedia('(max-width: 990px)').matches) closeMegaMenus(true);
-    if (activeMega) showScrim('menu');
+    if (activeMega) {
+      const panel = activeMega.querySelector('[data-mega-panel]');
+      if (panel?.classList.contains('mega-menu')) {
+        const panelHeight = Math.max(panel.scrollHeight, panel.getBoundingClientRect().height);
+        if (panelHeight > 0) header.style.setProperty('--open-panel-height', `${Math.ceil(panelHeight)}px`);
+      }
+      showScrim('menu');
+    }
   }, { passive: true });
 
   document.querySelectorAll('form').forEach((form) => form.addEventListener('submit', (event) => event.preventDefault()));
