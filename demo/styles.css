@@ -55,8 +55,9 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 .nav-item--single { padding: 8px 0; }
 .nav-item--single > a { position: relative; padding: 8px 0; }
 .nav-item__trigger { position: relative; display: inline-flex; min-height: 38px; align-items: center; gap: 5px; padding: 8px 0; font-weight: inherit; }
-.nav-item__trigger::after, .nav-item--single > a::after, .mega-menu a::after { position: absolute; right: 0; bottom: 4px; left: 0; height: 1px; background: currentColor; content: ""; transform: scaleX(0); transform-origin: right; transition: transform .3s var(--ease-sticky); }
-.nav-item:is(:hover, :focus-within, .is-open) .nav-item__trigger::after, .nav-item--single > a:hover::after, .mega-menu a:hover::after { transform: scaleX(1); transform-origin: left; }
+.nav-item__trigger > span { position: relative; display: inline-block; }
+.nav-item__trigger > span::after, .nav-item--single > a::after, .mega-menu a::after { position: absolute; right: 0; bottom: 1px; left: 0; height: 1px; background: currentColor; content: ""; transform: scaleX(0); transform-origin: right; transition: transform .3s var(--ease-sticky); }
+.nav-item:is(:hover, :focus-within, .is-open) .nav-item__trigger > span::after, .nav-item--single > a:hover::after, .mega-menu a:hover::after { transform: scaleX(1); transform-origin: left; }
 .nav-item__trigger svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.6; transform: rotate(0); transition: transform .3s var(--ease-sticky); }
 .nav-item:is(:hover, :focus-within, .is-open) .nav-item__trigger svg { transform: rotate(180deg); }
 .header__actions { display: flex; align-items: center; justify-self: end; gap: 1px; }
