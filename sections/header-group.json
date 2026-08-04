@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "header",
   "name": "Header group",
@@ -5,21 +14,140 @@
     "announcement": {
       "type": "announcement-bar",
       "blocks": {
-        "shipping": { "type": "free_shipping", "settings": { "threshold": "5.000.000₫" } },
-        "welcome": { "type": "message", "settings": { "text": "Receive 20% off your first order. <a href=\"/collections/all\">Shop now</a>" } }
+        "shipping": {
+          "type": "free_shipping",
+          "settings": {
+            "threshold": "5.000.000₫"
+          }
+        },
+        "welcome": {
+          "type": "message",
+          "settings": {
+            "text": "Receive 20% off your first order. <a href=\"/collections/all\">Shop now</a>"
+          }
+        }
       },
-      "block_order": ["shipping", "welcome"],
-      "settings": {}
+      "block_order": [
+        "shipping",
+        "welcome"
+      ],
+      "settings": {
+        "background_color": "#d3f285",
+        "foreground_color": "#1a1312",
+        "height": 38,
+        "stage_width": 700,
+        "font_size": 14,
+        "arrow_size": 20,
+        "show_arrows": true,
+        "autoplay": true,
+        "autoplay_seconds": 5,
+        "transition_duration": 700,
+        "pause_on_hover": true,
+        "pause_on_focus": true
+      }
     },
     "header": {
       "type": "header",
       "blocks": {
-        "women": { "type": "mega_menu", "settings": { "trigger_label": "Women", "quick_links_heading": "Top picks", "content_mode": "promos", "promo_heading_1": "Women's sale", "promo_label_1": "Shop now", "promo_heading_2": "Women’s favorites", "promo_label_2": "Shop now" } },
-        "men": { "type": "mega_menu", "settings": { "trigger_label": "Men", "quick_links_heading": "Top picks", "content_mode": "collection", "collection_heading": "Best deals 🔥", "product_limit": 4, "show_prices": true, "show_discount": true, "show_quick_add": true } }
+        "mega_menu_9HjKrY": {
+          "type": "mega_menu",
+          "settings": {
+            "trigger_label": "",
+            "quick_links_heading": "Top picks",
+            "content_mode": "promos",
+            "promo_alt_1": "",
+            "promo_eyebrow_1": "",
+            "promo_heading_1": "Women's sale",
+            "promo_label_1": "Shop now",
+            "promo_link_1": "",
+            "promo_alt_2": "",
+            "promo_eyebrow_2": "",
+            "promo_heading_2": "Women's favorites",
+            "promo_label_2": "Shop now",
+            "promo_link_2": "",
+            "featured_collection": "",
+            "collection_heading": "Best deals 🔥",
+            "product_limit": 4,
+            "show_prices": true,
+            "show_discount": true,
+            "show_quick_add": true
+          }
+        },
+        "men": {
+          "type": "mega_menu",
+          "settings": {
+            "trigger_label": "Men",
+            "quick_links_heading": "Top picks",
+            "content_mode": "collection",
+            "promo_alt_1": "",
+            "promo_eyebrow_1": "",
+            "promo_heading_1": "Women's sale",
+            "promo_label_1": "Shop now",
+            "promo_link_1": "",
+            "promo_alt_2": "",
+            "promo_eyebrow_2": "",
+            "promo_heading_2": "Women's favorites",
+            "promo_label_2": "Shop now",
+            "promo_link_2": "",
+            "featured_collection": "",
+            "collection_heading": "Best deals 🔥",
+            "product_limit": 4,
+            "show_prices": true,
+            "show_discount": true,
+            "show_quick_add": true
+          }
+        }
       },
-      "block_order": ["women", "men"],
-      "settings": { "menu": "main-menu", "transparent_homepage": true }
+      "block_order": [
+        "mega_menu_9HjKrY",
+        "men"
+      ],
+      "settings": {
+        "menu": "pebble-demo",
+        "popular_searches": "",
+        "cart_empty_menu": "",
+        "logo_width_desktop": 110,
+        "logo_width_mobile": 90,
+        "transparent_homepage": true,
+        "sticky_mode": "scroll_up",
+        "hide_on_scroll": true,
+        "desktop_sticky_inset": 0,
+        "mobile_sticky_inset": 4,
+        "sticky_radius": 0,
+        "header_transition_duration": 425,
+        "panel_transition_duration": 300,
+        "z_index": 40,
+        "desktop_height": 80,
+        "mobile_height": 56,
+        "horizontal_padding": 50,
+        "navigation_gap": 28,
+        "navigation_font_size": 14,
+        "navigation_font_weight": "500",
+        "navigation_line_height": 160,
+        "navigation_letter_spacing": 0,
+        "surface_color": "#ffffff",
+        "foreground_color": "#1a1a1a",
+        "transparent_foreground_color": "#ffffff",
+        "border_color": "#eaeaea",
+        "overlay_color": "#323232",
+        "overlay_opacity": 50,
+        "overlay_blur": 20,
+        "show_search": true,
+        "show_account": true,
+        "show_cart": true,
+        "show_country_selector": true,
+        "show_language_selector": true,
+        "currency_badge": "🇻🇳",
+        "desktop_drawer_width": 480,
+        "facebook_url": "",
+        "instagram_url": "",
+        "youtube_url": "",
+        "tiktok_url": ""
+      }
     }
   },
-  "order": ["announcement", "header"]
+  "order": [
+    "announcement",
+    "header"
+  ]
 }
