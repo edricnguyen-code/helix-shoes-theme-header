@@ -1,0 +1,25 @@
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "blocks": {
+        "shipping": { "type": "free_shipping", "settings": { "threshold": "5.000.000₫" } },
+        "welcome": { "type": "message", "settings": { "text": "Receive 20% off your first order. <a href=\"/collections/all\">Shop now</a>" } }
+      },
+      "block_order": ["shipping", "welcome"],
+      "settings": {}
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "women": { "type": "mega_menu", "settings": { "trigger_label": "Women", "quick_links_heading": "Top picks", "content_mode": "promos", "promo_heading_1": "Women's sale", "promo_label_1": "Shop now", "promo_heading_2": "Women’s favorites", "promo_label_2": "Shop now" } },
+        "men": { "type": "mega_menu", "settings": { "trigger_label": "Men", "quick_links_heading": "Top picks", "content_mode": "collection", "collection_heading": "Best deals 🔥", "product_limit": 4, "show_prices": true, "show_discount": true, "show_quick_add": true } }
+      },
+      "block_order": ["women", "men"],
+      "settings": { "menu": "main-menu", "transparent_homepage": true }
+    }
+  },
+  "order": ["announcement", "header"]
+}

@@ -1,0 +1,50 @@
+{% doc %}
+Renders a decorative Helix header icon.
+
+@param {string} name - Icon name.
+@param {string} [class] - Optional CSS class.
+@param {number} [stroke_width] - Optional stroke width.
+
+@example
+{% render 'helix-icon', name: 'search' %}
+{% enddoc %}
+
+{%- liquid
+  assign icon_class = class | default: 'helix-icon'
+  assign icon_stroke = stroke_width | default: 1.4
+-%}
+
+<svg class="{{ icon_class }}" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ icon_stroke }}" stroke-linecap="round" stroke-linejoin="round">
+  {%- case name -%}
+    {%- when 'menu' -%}
+      <path d="M3 7h18M3 12h18M3 17h18"/>
+    {%- when 'close' -%}
+      <path d="m6 6 12 12M18 6 6 18"/>
+    {%- when 'search' -%}
+      <circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.5 4.5"/>
+    {%- when 'account' -%}
+      <circle cx="12" cy="8" r="3.2"/><path d="M5.5 20c.7-3.3 3-5 6.5-5s5.8 1.7 6.5 5"/>
+    {%- when 'cart' -%}
+      <path d="M5.25 8.25h13.5l-.8 12H6.05l-.8-12Z"/><path d="M9 9V6.75a3 3 0 0 1 6 0V9"/>
+    {%- when 'chevron-down' -%}
+      <path d="m7 9 5 5 5-5"/>
+    {%- when 'chevron-left' -%}
+      <path d="m15 5-7 7 7 7"/>
+    {%- when 'chevron-right' -%}
+      <path d="m9 5 7 7-7 7"/>
+    {%- when 'arrow-up-right' -%}
+      <path d="M7 17 17 7M8 7h9v9"/>
+    {%- when 'minus' -%}
+      <path d="M5 12h14"/>
+    {%- when 'plus' -%}
+      <path d="M5 12h14M12 5v14"/>
+    {%- when 'facebook' -%}
+      <path d="M14.5 8H17V4.5h-2.5C11.7 4.5 10 6.2 10 9v2H7v3.5h3V21h4v-6.5h3l.6-3.5H14V9c0-.7.3-1 1-1Z"/>
+    {%- when 'instagram' -%}
+      <rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>
+    {%- when 'youtube' -%}
+      <path d="M21 12s0-4-1-5c-1-1-8-1-8-1s-7 0-8 1-1 5-1 5 0 4 1 5 8 1 8 1 7 0 8-1 1-5 1-5Z"/><path d="m10 9 5 3-5 3Z"/>
+    {%- when 'tiktok' -%}
+      <path d="M14 4v10.5a4.5 4.5 0 1 1-4-4.47"/><path d="M14 4c.8 2.4 2.3 3.8 4.5 4"/>
+  {%- endcase -%}
+</svg>

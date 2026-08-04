@@ -1,0 +1,70 @@
+{% doc %}
+Renders a desktop full-width mega menu for a top-level navigation link.
+
+@param {link} link - Top-level navigation link.
+@param {block} menu_block - Matching mega-menu block.
+@param {string} section_id - Parent section ID.
+@param {number} item_index - One-based menu item index.
+
+@example
+{% render 'helix-mega-menu', link: link, menu_block: menu_block, section_id: section.id, item_index: forloop.index %}
+{% enddoc %}
+
+{%- liquid
+  assign panel_id = 'HelixMega-' | append: section_id | append: '-' | append: item_index
+  assign link_active = false
+  if link.current or link.child_active
+    assign link_active = true
+  endif
+  assign has_direct_links = false
+  for child_link in link.links
+    if child_link.links == blank
+      assign has_direct_links = true
+    endif
+  endfor
+  assign quick_links_heading = menu_block.settings.quick_links_heading
+  if quick_links_heading == blank
+    assign quick_links_heading = 'sections.header.quick_links' | t
+  endif
+-%}
+
+<li class="helix-nav-item helix-nav-item--mega{% if link_active %} is-current{% endif %}" data-helix-menu-item data-block-id="{{ menu_block.id }}"{% if menu_block != blank %} {{ menu_block.shopify_attributes }}{% endif %}>
+  <div class="helix-nav-trigger">
+    <a class="helix-nav-link" href="{{ link.url }}"{% if link_active %} aria-current="page"{% endif %}><span>{{ link.title | escape }}</span></a>
+    <button class="helix-nav-toggle" type="button" aria-expanded="false" aria-controls="{{ panel_id }}" aria-label="{{ 'sections.header.toggle_menu' | t: title: link.title }}" data-helix-menu-toggle>{% render 'helix-icon', name: 'chevron-down' %}</button>
+  </div>
+
+  <div class="helix-mega" id="{{ panel_id }}" data-helix-menu-panel hidden>
+    <div class="helix-mega__inner">
+      <div class="helix-mega__navigation">
+        {%- if has_direct_links -%}
+          <div class="helix-mega__column">
+            <p class="helix-mega__heading">{{ quick_links_heading | escape }}</p>
+            <ul role="list">
+              {%- for child_link in link.links -%}
+                {%- if child_link.links == blank -%}
+                  <li><a href="{{ child_link.url }}"{% if child_link.current %} aria-current="page"{% endif %}>{{ child_link.title | escape }}</a></li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        {%- for child_link in link.links -%}
+          {%- if child_link.links != blank -%}
+            <div class="helix-mega__column">
+              <a class="helix-mega__heading" href="{{ child_link.url }}"{% if child_link.current %} aria-current="page"{% endif %}>{{ child_link.title | escape }}</a>
+              <ul role="list">
+                {%- for grandchild_link in child_link.links -%}
+                  <li><a href="{{ grandchild_link.url }}"{% if grandchild_link.current %} aria-current="page"{% endif %}>{{ grandchild_link.title | escape }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      {% render 'helix-mega-feature', menu_block: menu_block, mobile: false %}
+    </div>
+  </div>
+</li>

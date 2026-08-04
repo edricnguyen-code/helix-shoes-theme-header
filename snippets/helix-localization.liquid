@@ -1,0 +1,66 @@
+{% doc %}
+Renders Shopify country/currency and optional language localization forms.
+
+@param {section} section - Header section object.
+@param {string} context - Unique rendering context.
+@param {boolean} [show_language] - Whether to render the language selector.
+
+@example
+{% render 'helix-localization', section: section, context: 'desktop', show_language: false %}
+{% enddoc %}
+
+{%- liquid
+  assign localization_id = section.id | append: '-' | append: context
+  assign country_form_id = localization_id | append: '-country'
+  assign language_form_id = localization_id | append: '-language'
+-%}
+
+<div class="helix-localization" data-helix-localization>
+  {%- if section.settings.show_country_selector and localization.available_countries.size > 1 -%}
+    {% form 'localization', id: country_form_id, class: 'helix-localization__form' %}
+      <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}" data-helix-localization-input>
+      <details class="helix-localization__details" data-helix-localization-details>
+        <summary class="helix-localization__summary" aria-label="{{ 'sections.header.country_currency' | t }}">
+          <span class="helix-localization__flag" aria-hidden="true">{{ section.settings.currency_badge | default: '★' }}</span>
+          <span>{{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }}</span>
+          {% render 'helix-icon', name: 'chevron-down' %}
+        </summary>
+        <div class="helix-localization__popover">
+          <p>{{ 'sections.header.country_currency' | t }}</p>
+          <ul role="list">
+            {%- for country in localization.available_countries -%}
+              <li>
+                <button type="button" data-helix-localization-option="{{ country.iso_code }}"{% if country.iso_code == localization.country.iso_code %} aria-current="true"{% endif %}>
+                  <span>{{ country.name | escape }}</span>
+                  <small>{{ country.currency.iso_code }} {{ country.currency.symbol }}</small>
+                </button>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      </details>
+    {% endform %}
+  {%- endif -%}
+
+  {%- if show_language and section.settings.show_language_selector and localization.available_languages.size > 1 -%}
+    {% form 'localization', id: language_form_id, class: 'helix-localization__form' %}
+      <input type="hidden" name="language_code" value="{{ localization.language.iso_code }}" data-helix-localization-input>
+      <details class="helix-localization__details" data-helix-localization-details>
+        <summary class="helix-localization__summary" aria-label="{{ 'sections.header.language' | t }}">
+          <span>{{ localization.language.endonym_name | capitalize | escape }}</span>
+          {% render 'helix-icon', name: 'chevron-down' %}
+        </summary>
+        <div class="helix-localization__popover">
+          <p>{{ 'sections.header.language' | t }}</p>
+          <ul role="list">
+            {%- for language in localization.available_languages -%}
+              <li>
+                <button type="button" data-helix-localization-option="{{ language.iso_code }}"{% if language.iso_code == localization.language.iso_code %} aria-current="true"{% endif %}>{{ language.endonym_name | capitalize | escape }}</button>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      </details>
+    {% endform %}
+  {%- endif -%}
+</div>

@@ -1,0 +1,36 @@
+{% doc %}
+Renders the search drawer with a working Shopify search fallback and predictive results region.
+
+@param {section} section - Header section object.
+
+@example
+{% render 'helix-search-drawer', section: section %}
+{% enddoc %}
+
+<dialog class="helix-drawer helix-drawer--right helix-search-drawer" id="HelixSearchDrawer-{{ section.id }}" aria-labelledby="HelixSearchTitle-{{ section.id }}" data-helix-drawer data-helix-search-drawer>
+  <div class="helix-drawer__surface">
+    <div class="helix-drawer__header">
+      <h2 id="HelixSearchTitle-{{ section.id }}">{{ 'sections.header.search' | t }}</h2>
+      <button class="helix-icon-button" type="button" aria-label="{{ 'sections.header.close_search' | t }}" data-helix-close-drawer>{% render 'helix-icon', name: 'close' %}</button>
+    </div>
+    <div class="helix-drawer__body">
+      <form class="helix-search-form" action="{{ routes.search_url }}" method="get" role="search">
+        <label class="helix-visually-hidden" for="HelixSearchInput-{{ section.id }}">{{ 'sections.header.search' | t }}</label>
+        <input id="HelixSearchInput-{{ section.id }}" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'sections.header.search_placeholder' | t }}" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="HelixPredictiveResults-{{ section.id }}" data-helix-predictive-input>
+        <input type="hidden" name="options[prefix]" value="last">
+        <button class="helix-icon-button" type="submit" aria-label="{{ 'sections.header.submit_search' | t }}">{% render 'helix-icon', name: 'search' %}</button>
+      </form>
+
+      <div class="helix-predictive-results" id="HelixPredictiveResults-{{ section.id }}" aria-live="polite" data-helix-predictive-results>
+        {%- if section.settings.popular_searches != blank -%}
+          <p class="helix-drawer__eyebrow">{{ 'sections.header.popular_searches' | t }}</p>
+          <ul class="helix-search-suggestions" role="list">
+            {%- for link in section.settings.popular_searches.links -%}
+              <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</dialog>

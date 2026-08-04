@@ -169,8 +169,8 @@
             <p class="mobile-submenu-preview">Women submenu preview</p>
             <nav class="mobile-submenu" aria-label="Women">
               <a href="#women-top-picks">Top picks</a><a href="#women-best-sellers">Best sellers</a><a href="#women-trending">Trending</a><a href="#women-new">New arrivals</a><a href="#women-sale">On sale</a>
-              <button type="button">By activity <span aria-hidden="true">›</span></button>
-              <button type="button">By feature <span aria-hidden="true">›</span></button>
+              <button type="button" data-open-subnested="women-activity" aria-controls="mobile-women-activity" aria-expanded="false">By activity <span aria-hidden="true">›</span></button>
+              <button type="button" data-open-subnested="women-feature" aria-controls="mobile-women-feature" aria-expanded="false">By feature <span aria-hidden="true">›</span></button>
             </nav>
             <a class="mobile-promo-card mobile-promo-card--women" href="#women-sale"><span class="mobile-promo-art"><strong>UP TO <b>50% OFF</b></strong><i class="menu-shoe menu-shoe--light"></i></span><b>Women's sale</b><small>Shop now <span aria-hidden="true">↗</span></small></a>
             <a class="mobile-promo-card mobile-promo-card--pool" href="#summer-edit"><span class="mobile-promo-art"><i class="pool-person"></i></span><b>Summer edit</b><small>Discover <span aria-hidden="true">↗</span></small></a>
@@ -187,8 +187,8 @@
             <p class="mobile-submenu-preview">Men submenu preview</p>
             <nav class="mobile-submenu" aria-label="Men">
               <a href="#men-top-picks">Top picks</a><a href="#men-best-sellers">Best sellers</a><a href="#men-trending">Trending</a><a href="#men-new">New arrivals</a><a href="#men-sale">On sale</a>
-              <button type="button">By activity <span aria-hidden="true">›</span></button>
-              <button type="button">By feature <span aria-hidden="true">›</span></button>
+              <button type="button" data-open-subnested="men-activity" aria-controls="mobile-men-activity" aria-expanded="false">By activity <span aria-hidden="true">›</span></button>
+              <button type="button" data-open-subnested="men-feature" aria-controls="mobile-men-feature" aria-expanded="false">By feature <span aria-hidden="true">›</span></button>
             </nav>
             <section class="mobile-deals" aria-labelledby="mobile-deals-title">
               <h4 id="mobile-deals-title">Best deals 🔥</h4>
@@ -200,6 +200,42 @@
               </div>
             </section>
           </div>
+        </section>
+
+        <section class="mobile-nav-panel mobile-nav-panel--subnested" id="mobile-women-activity" data-subnested="women-activity" data-subnested-parent="women" aria-labelledby="women-activity-title" aria-hidden="true" inert>
+          <div class="mobile-nav-header mobile-nav-header--nested">
+            <button class="mobile-back" type="button" data-close-subnested aria-label="Back to Women"><span aria-hidden="true">‹</span></button>
+            <h3 id="women-activity-title">By activity</h3>
+            <button class="icon-button drawer__close" type="button" data-close-drawer aria-label="Close menu"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+          </div>
+          <nav class="mobile-third-level" aria-label="Women by activity"><a href="#women-hiking">Hiking</a><a href="#women-running">Running</a><a href="#women-training">Training</a><a href="#women-tennis">Tennis</a><a href="#women-lifestyle">Lifestyle</a><a href="#women-all">Shop all</a></nav>
+        </section>
+
+        <section class="mobile-nav-panel mobile-nav-panel--subnested" id="mobile-women-feature" data-subnested="women-feature" data-subnested-parent="women" aria-labelledby="women-feature-title" aria-hidden="true" inert>
+          <div class="mobile-nav-header mobile-nav-header--nested">
+            <button class="mobile-back" type="button" data-close-subnested aria-label="Back to Women"><span aria-hidden="true">‹</span></button>
+            <h3 id="women-feature-title">By feature</h3>
+            <button class="icon-button drawer__close" type="button" data-close-drawer aria-label="Close menu"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+          </div>
+          <nav class="mobile-third-level" aria-label="Women by feature"><a href="#women-cushioned">Cushioned</a><a href="#women-waterproof">Waterproof</a><a href="#women-resistant">Water-resistant</a><a href="#women-breathable">Breathable</a><a href="#women-windproof">Windproof</a></nav>
+        </section>
+
+        <section class="mobile-nav-panel mobile-nav-panel--subnested" id="mobile-men-activity" data-subnested="men-activity" data-subnested-parent="men" aria-labelledby="men-activity-title" aria-hidden="true" inert>
+          <div class="mobile-nav-header mobile-nav-header--nested">
+            <button class="mobile-back" type="button" data-close-subnested aria-label="Back to Men"><span aria-hidden="true">‹</span></button>
+            <h3 id="men-activity-title">By activity</h3>
+            <button class="icon-button drawer__close" type="button" data-close-drawer aria-label="Close menu"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+          </div>
+          <nav class="mobile-third-level" aria-label="Men by activity"><a href="#men-hiking">Hiking</a><a href="#men-running">Running</a><a href="#men-training">Training</a><a href="#men-tennis">Tennis</a><a href="#men-lifestyle">Lifestyle</a><a href="#men-all">Shop all</a></nav>
+        </section>
+
+        <section class="mobile-nav-panel mobile-nav-panel--subnested" id="mobile-men-feature" data-subnested="men-feature" data-subnested-parent="men" aria-labelledby="men-feature-title" aria-hidden="true" inert>
+          <div class="mobile-nav-header mobile-nav-header--nested">
+            <button class="mobile-back" type="button" data-close-subnested aria-label="Back to Men"><span aria-hidden="true">‹</span></button>
+            <h3 id="men-feature-title">By feature</h3>
+            <button class="icon-button drawer__close" type="button" data-close-drawer aria-label="Close menu"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+          </div>
+          <nav class="mobile-third-level" aria-label="Men by feature"><a href="#men-cushioned">Cushioned</a><a href="#men-waterproof">Waterproof</a><a href="#men-resistant">Water-resistant</a><a href="#men-breathable">Breathable</a><a href="#men-windproof">Windproof</a></nav>
         </section>
       </div>
     </aside>

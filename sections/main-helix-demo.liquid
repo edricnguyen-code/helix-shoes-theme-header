@@ -1,0 +1,43 @@
+<section class="helix-demo-hero" style="--helix-demo-height: {{ section.settings.height }}px; --helix-demo-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }}; --helix-demo-bg: {{ section.settings.background_color }};">
+  {%- if section.settings.image != blank -%}
+    {%- assign hero_alt = section.settings.image.alt | default: section.settings.heading -%}
+    {{ section.settings.image | image_url: width: 2400 | image_tag: widths: '750, 1100, 1500, 2000, 2400', sizes: '100vw', loading: 'eager', fetchpriority: 'high', alt: hero_alt, class: 'helix-demo-hero__image' }}
+  {%- endif -%}
+  <div class="helix-demo-hero__scrim" aria-hidden="true"></div>
+  <div class="helix-demo-hero__content">
+    {%- if section.settings.eyebrow != blank -%}<p>{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+    {%- if section.settings.heading != blank -%}<h1>{{ section.settings.heading | escape }}</h1>{%- endif -%}
+    {%- if section.settings.text != blank -%}<div>{{ section.settings.text }}</div>{%- endif -%}
+    {%- if section.settings.button_label != blank -%}<a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }}</a>{%- endif -%}
+  </div>
+</section>
+
+{% style %}
+  .helix-demo-hero { position: relative; display: grid; min-height: var(--helix-demo-height, 720px); place-items: center; overflow: hidden; padding: 130px 24px 70px; background: var(--helix-demo-bg, #56644e); color: #fff; }
+  .helix-demo-hero__image, .helix-demo-hero__scrim { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .helix-demo-hero__image { object-fit: cover; }
+  .helix-demo-hero__scrim { background: linear-gradient(90deg, rgba(0, 0, 0, calc(var(--helix-demo-overlay) + .12)), rgba(0, 0, 0, calc(var(--helix-demo-overlay) * .4))); }
+  .helix-demo-hero__content { position: relative; z-index: 1; width: min(1320px, 100%); }
+  .helix-demo-hero__content p { margin: 0 0 12px; font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+  .helix-demo-hero__content h1 { max-width: 760px; margin: 0; font-size: clamp(42px, 7vw, 104px); line-height: .95; }
+  .helix-demo-hero__content div { max-width: 540px; margin-top: 22px; font-size: 17px; line-height: 1.6; }
+  .helix-demo-hero__content a { display: inline-flex; min-height: 48px; align-items: center; margin-top: 28px; padding: 12px 26px; border-radius: 999px; background: #fff; color: #171717; font-weight: 700; text-decoration: none; }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Header preview hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "color", "id": "background_color", "label": "Fallback background", "default": "#56644E" },
+    { "type": "range", "id": "overlay_opacity", "label": "Image overlay", "min": 0, "max": 70, "step": 5, "unit": "%", "default": 25 },
+    { "type": "range", "id": "height", "label": "Height", "min": 500, "max": 900, "step": 20, "unit": "px", "default": 720 },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Move differently" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Find your next pair" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>A complete preview surface for the responsive Helix header.</p>" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop all shoes" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "presets": [{ "name": "Header preview hero" }]
+}
+{% endschema %}

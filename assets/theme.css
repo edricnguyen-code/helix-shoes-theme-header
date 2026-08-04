@@ -1,0 +1,46 @@
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  background: var(--color-background, #fff);
+  color: var(--color-foreground, #1a1a1a);
+  font-family: var(--font-body-family, system-ui, sans-serif);
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.theme-skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 999;
+  padding: 10px 14px;
+  background: #fff;
+  color: #111;
+  transform: translateY(-150%);
+}
+
+.theme-skip-link:focus {
+  transform: translateY(0);
+}

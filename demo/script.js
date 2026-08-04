@@ -34,7 +34,9 @@
     scrim.classList.remove('is-menu', 'is-drawer');
     scrim.classList.add(mode === 'menu' ? 'is-menu' : 'is-drawer');
     if (mode === 'menu') {
-      scrim.style.setProperty('--menu-scrim-top', `${Math.round(header.getBoundingClientRect().bottom)}px`);
+      const headerBottom = `${Math.round(header.getBoundingClientRect().bottom)}px`;
+      scrim.style.setProperty('--menu-scrim-top', headerBottom);
+      activeMega?.querySelector('[data-mega-panel]')?.style.setProperty('--menu-panel-top', headerBottom);
       body.classList.remove('has-overlay');
     } else {
       body.classList.add('has-overlay');
@@ -103,12 +105,19 @@
   const resetNestedNavigation = (drawer, immediate = false) => {
     if (!drawer) return;
     drawer.classList.remove('has-nested-open');
+    drawer.classList.remove('has-subnested-open');
     drawer.removeAttribute('data-active-nested');
     const root = drawer.querySelector('[data-nav-root]');
     root?.setAttribute('aria-hidden', 'false');
     root?.removeAttribute('inert');
     drawer.querySelectorAll('[data-open-nested]').forEach((button) => button.setAttribute('aria-expanded', 'false'));
+    drawer.querySelectorAll('[data-open-subnested]').forEach((button) => button.setAttribute('aria-expanded', 'false'));
     drawer.querySelectorAll('[data-nested]').forEach((panel) => {
+      panel.classList.remove('is-active');
+      panel.setAttribute('aria-hidden', 'true');
+      panel.setAttribute('inert', '');
+    });
+    drawer.querySelectorAll('[data-subnested]').forEach((panel) => {
       panel.classList.remove('is-active');
       panel.setAttribute('aria-hidden', 'true');
       panel.setAttribute('inert', '');
@@ -173,6 +182,7 @@
         entry.setAttribute('inert', '');
       });
       drawer.classList.add('has-nested-open');
+      drawer.classList.remove('has-subnested-open');
       drawer.dataset.activeNested = button.dataset.openNested;
       root.setAttribute('aria-hidden', 'true');
       root.setAttribute('inert', '');
@@ -204,8 +214,55 @@
 
   document.querySelectorAll('[data-close-nested]').forEach((button) => button.addEventListener('click', () => closeNested(button)));
 
+  document.querySelectorAll('[data-open-subnested]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const drawer = button.closest('[data-drawer]');
+      const parent = button.closest('[data-nested]');
+      const panel = drawer?.querySelector(`[data-subnested="${button.dataset.openSubnested}"]`);
+      if (!drawer || !parent || !panel) return;
+      drawer.querySelectorAll('[data-subnested]').forEach((entry) => {
+        entry.classList.remove('is-active');
+        entry.setAttribute('aria-hidden', 'true');
+        entry.setAttribute('inert', '');
+      });
+      drawer.classList.add('has-subnested-open');
+      parent.setAttribute('aria-hidden', 'true');
+      parent.setAttribute('inert', '');
+      panel.setAttribute('aria-hidden', 'false');
+      panel.removeAttribute('inert');
+      requestAnimationFrame(() => panel.classList.add('is-active'));
+      button.setAttribute('aria-expanded', 'true');
+      window.setTimeout(() => focusable(panel)[0]?.focus(), reduceMotion.matches ? 0 : 530);
+    });
+  });
+
+  const closeSubnested = (button) => {
+    const drawer = button.closest('[data-drawer]');
+    const panel = button.closest('[data-subnested]');
+    const parentName = panel?.dataset.subnestedParent;
+    const parent = drawer?.querySelector(`[data-nested="${parentName}"]`);
+    const opener = drawer?.querySelector(`[data-open-subnested="${panel?.dataset.subnested}"]`);
+    if (!drawer || !panel || !parent) return;
+    drawer.classList.remove('has-subnested-open');
+    panel.classList.remove('is-active');
+    panel.setAttribute('aria-hidden', 'true');
+    panel.setAttribute('inert', '');
+    parent.setAttribute('aria-hidden', 'false');
+    parent.removeAttribute('inert');
+    opener?.setAttribute('aria-expanded', 'false');
+    window.setTimeout(() => opener?.focus(), reduceMotion.matches ? 0 : 530);
+  };
+
+  document.querySelectorAll('[data-close-subnested]').forEach((button) => button.addEventListener('click', () => closeSubnested(button)));
+
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
+      const activeSubnested = activeDrawer?.querySelector('[data-subnested].is-active');
+      const subBackButton = activeSubnested?.querySelector('[data-close-subnested]');
+      if (subBackButton) {
+        closeSubnested(subBackButton);
+        return;
+      }
       const activeNested = activeDrawer?.querySelector('[data-nested].is-active');
       const backButton = activeNested?.querySelector('[data-close-nested]');
       if (backButton) closeNested(backButton);
@@ -236,6 +293,7 @@
       if (scrollIntent < -10) header.classList.remove('is-hidden');
     }
     lastScrollY = currentY;
+    if (activeMega) showScrim('menu');
   };
 
   window.addEventListener('scroll', () => {

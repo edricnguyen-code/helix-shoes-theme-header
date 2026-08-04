@@ -1,0 +1,199 @@
+{{ 'helix-header.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'helix-header.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign transparent_on_page = false
+  if section.settings.transparent_homepage and request.page_type == 'index'
+    assign transparent_on_page = true
+  endif
+  assign overlay_alpha = section.settings.overlay_opacity | divided_by: 100.0
+  assign overlay_color = section.settings.overlay_color | color_modify: 'alpha', overlay_alpha
+-%}
+
+<helix-header
+  class="helix-header-component"
+  data-section-id="{{ section.id }}"
+  data-transparent="{{ transparent_on_page }}"
+  data-sticky-mode="{{ section.settings.sticky_mode }}"
+  data-hide-on-scroll="{{ section.settings.hide_on_scroll }}"
+  data-predictive-url="{{ routes.predictive_search_url }}"
+  data-cart-url="{{ routes.cart_url }}"
+  data-cart-add-url="{{ routes.cart_add_url }}"
+  data-cart-change-url="{{ routes.cart_change_url }}"
+  style="
+    --helix-header-height-desktop: {{ section.settings.desktop_height }}px;
+    --helix-header-height-mobile: {{ section.settings.mobile_height }}px;
+    --helix-header-padding: {{ section.settings.horizontal_padding }}px;
+    --helix-header-nav-gap: {{ section.settings.navigation_gap }}px;
+    --helix-header-font-size: {{ section.settings.navigation_font_size }}px;
+    --helix-header-font-weight: {{ section.settings.navigation_font_weight }};
+    --helix-header-line-height: {{ section.settings.navigation_line_height | divided_by: 100.0 }};
+    --helix-header-letter-spacing: {{ section.settings.navigation_letter_spacing | divided_by: 100.0 }}em;
+    --helix-logo-desktop: {{ section.settings.logo_width_desktop }}px;
+    --helix-logo-mobile: {{ section.settings.logo_width_mobile }}px;
+    --helix-surface: {{ section.settings.surface_color }};
+    --helix-foreground: {{ section.settings.foreground_color }};
+    --helix-transparent-foreground: {{ section.settings.transparent_foreground_color }};
+    --helix-border: {{ section.settings.border_color }};
+    --helix-overlay: {{ overlay_color }};
+    --helix-overlay-blur: {{ section.settings.overlay_blur }}px;
+    --helix-desktop-inset: {{ section.settings.desktop_sticky_inset }}px;
+    --helix-mobile-inset: {{ section.settings.mobile_sticky_inset }}px;
+    --helix-sticky-radius: {{ section.settings.sticky_radius }}px;
+    --helix-drawer-desktop: {{ section.settings.desktop_drawer_width }}px;
+    --helix-header-duration: {{ section.settings.header_transition_duration }}ms;
+    --helix-panel-duration: {{ section.settings.panel_transition_duration }}ms;
+    --helix-header-z: {{ section.settings.z_index }};
+  "
+>
+  <div class="helix-header-positioner">
+    <header class="helix-header__shell" role="banner" data-helix-header-shell>
+      <div class="helix-header__desktop">
+        {% render 'helix-desktop-nav', section: section %}
+        {% render 'helix-logo', section: section, class: 'helix-header__logo helix-header__logo--desktop' %}
+        {% render 'helix-header-actions', section: section %}
+      </div>
+
+      <div class="helix-header__mobile">
+        <button class="helix-icon-button" type="button" aria-label="{{ 'sections.header.open_menu' | t }}" aria-controls="HelixMenuDrawer-{{ section.id }}" aria-expanded="false" data-helix-open-drawer="HelixMenuDrawer-{{ section.id }}">{% render 'helix-icon', name: 'menu' %}</button>
+        {% render 'helix-logo', section: section, class: 'helix-header__logo helix-header__logo--mobile' %}
+        <div class="helix-header__mobile-actions">
+          {%- if section.settings.show_search -%}
+            <button class="helix-icon-button" type="button" aria-label="{{ 'sections.header.search' | t }}" aria-controls="HelixSearchDrawer-{{ section.id }}" aria-expanded="false" data-helix-open-drawer="HelixSearchDrawer-{{ section.id }}">{% render 'helix-icon', name: 'search' %}</button>
+          {%- endif -%}
+          {%- if section.settings.show_cart -%}
+            <button class="helix-icon-button helix-cart-trigger" type="button" aria-label="{{ 'sections.header.cart_count' | t: count: cart.item_count }}" aria-controls="HelixCartDrawer-{{ section.id }}" aria-expanded="false" data-helix-open-drawer="HelixCartDrawer-{{ section.id }}">
+              {% render 'helix-icon', name: 'cart' %}
+              <span class="helix-cart-count{% if cart.item_count == 0 %} is-empty{% endif %}" data-helix-cart-count aria-hidden="true">{{ cart.item_count }}</span>
+            </button>
+          {%- endif -%}
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <button class="helix-header-overlay" type="button" aria-label="{{ 'sections.header.close_open_menu' | t }}" tabindex="-1" data-helix-header-overlay hidden></button>
+
+  {% render 'helix-mobile-menu', section: section %}
+  {%- if section.settings.show_search -%}{% render 'helix-search-drawer', section: section %}{%- endif -%}
+  {%- if section.settings.show_cart -%}{% render 'helix-cart-drawer', section: section %}{%- endif -%}
+</helix-header>
+
+{% schema %}
+{
+  "name": "Helix header",
+  "tag": "section",
+  "class": "helix-header-section",
+  "limit": 1,
+  "settings": [
+    { "type": "header", "content": "Navigation" },
+    { "type": "link_list", "id": "menu", "label": "Main menu", "default": "main-menu", "info": "Use three menu levels to enable the mobile sub-submenu panels." },
+    { "type": "link_list", "id": "popular_searches", "label": "Popular-search links" },
+    { "type": "link_list", "id": "cart_empty_menu", "label": "Empty-cart links" },
+
+    { "type": "header", "content": "Logo" },
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "image_picker", "id": "transparent_logo", "label": "White logo for transparent header", "info": "If blank, the standard logo is converted to white with CSS while transparent." },
+    { "type": "range", "id": "logo_width_desktop", "label": "Desktop logo width", "min": 70, "max": 220, "step": 2, "unit": "px", "default": 110 },
+    { "type": "range", "id": "logo_width_mobile", "label": "Mobile logo width", "min": 60, "max": 160, "step": 2, "unit": "px", "default": 90 },
+
+    { "type": "header", "content": "Position and motion" },
+    { "type": "checkbox", "id": "transparent_homepage", "label": "Transparent over homepage hero", "default": true },
+    { "type": "select", "id": "sticky_mode", "label": "Sticky behavior", "default": "scroll_up", "options": [
+      { "value": "none", "label": "Not sticky" },
+      { "value": "always", "label": "Always visible" },
+      { "value": "scroll_up", "label": "Reveal when scrolling up" }
+    ] },
+    { "type": "checkbox", "id": "hide_on_scroll", "label": "Hide while scrolling down", "default": true },
+    { "type": "range", "id": "desktop_sticky_inset", "label": "Desktop sticky side inset", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mobile_sticky_inset", "label": "Mobile sticky side inset", "min": 0, "max": 16, "step": 1, "unit": "px", "default": 4 },
+    { "type": "range", "id": "sticky_radius", "label": "Sticky corner radius", "min": 0, "max": 20, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "header_transition_duration", "label": "Sticky/header transition", "min": 150, "max": 800, "step": 25, "unit": "ms", "default": 425 },
+    { "type": "range", "id": "panel_transition_duration", "label": "Menu panel transition", "min": 150, "max": 600, "step": 25, "unit": "ms", "default": 300 },
+    { "type": "range", "id": "z_index", "label": "Header layer", "min": 10, "max": 100, "step": 1, "default": 40 },
+
+    { "type": "header", "content": "Sizing and typography" },
+    { "type": "range", "id": "desktop_height", "label": "Desktop height", "min": 64, "max": 110, "step": 1, "unit": "px", "default": 80 },
+    { "type": "range", "id": "mobile_height", "label": "Mobile height", "min": 48, "max": 76, "step": 1, "unit": "px", "default": 56 },
+    { "type": "range", "id": "horizontal_padding", "label": "Desktop horizontal padding", "min": 20, "max": 80, "step": 2, "unit": "px", "default": 50 },
+    { "type": "range", "id": "navigation_gap", "label": "Navigation gap", "min": 12, "max": 44, "step": 1, "unit": "px", "default": 28 },
+    { "type": "range", "id": "navigation_font_size", "label": "Navigation font size", "min": 11, "max": 18, "step": 1, "unit": "px", "default": 14 },
+    { "type": "select", "id": "navigation_font_weight", "label": "Navigation weight", "default": "500", "options": [
+      { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "600", "label": "Semibold" }, { "value": "700", "label": "Bold" }
+    ] },
+    { "type": "range", "id": "navigation_line_height", "label": "Navigation line height", "min": 100, "max": 200, "step": 5, "unit": "%", "default": 160 },
+    { "type": "range", "id": "navigation_letter_spacing", "label": "Navigation letter spacing", "min": -5, "max": 10, "step": 1, "unit": "%", "default": 0 },
+
+    { "type": "header", "content": "Colors and overlay" },
+    { "type": "color", "id": "surface_color", "label": "Solid background", "default": "#FFFFFF" },
+    { "type": "color", "id": "foreground_color", "label": "Solid text and icons", "default": "#1A1A1A" },
+    { "type": "color", "id": "transparent_foreground_color", "label": "Transparent text and icons", "default": "#FFFFFF" },
+    { "type": "color", "id": "border_color", "label": "Border color", "default": "#EAEAEA" },
+    { "type": "color", "id": "overlay_color", "label": "Page overlay color", "default": "#323232" },
+    { "type": "range", "id": "overlay_opacity", "label": "Page overlay opacity", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 50 },
+    { "type": "range", "id": "overlay_blur", "label": "Content blur", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 20 },
+
+    { "type": "header", "content": "Header controls" },
+    { "type": "checkbox", "id": "show_search", "label": "Show search", "default": true },
+    { "type": "checkbox", "id": "show_account", "label": "Show account", "default": true },
+    { "type": "checkbox", "id": "show_cart", "label": "Show cart", "default": true },
+    { "type": "checkbox", "id": "show_country_selector", "label": "Show country/currency", "default": true },
+    { "type": "checkbox", "id": "show_language_selector", "label": "Show language in mobile menu", "default": true },
+    { "type": "text", "id": "currency_badge", "label": "Currency badge", "default": "🇻🇳" },
+
+    { "type": "header", "content": "Drawers" },
+    { "type": "range", "id": "desktop_drawer_width", "label": "Search/cart drawer width", "min": 360, "max": 600, "step": 10, "unit": "px", "default": 480 },
+
+    { "type": "header", "content": "Social links" },
+    { "type": "url", "id": "facebook_url", "label": "Facebook" },
+    { "type": "url", "id": "instagram_url", "label": "Instagram" },
+    { "type": "url", "id": "youtube_url", "label": "YouTube" },
+    { "type": "url", "id": "tiktok_url", "label": "TikTok" }
+  ],
+  "blocks": [
+    {
+      "type": "mega_menu",
+      "name": "Mega menu",
+      "settings": [
+        { "type": "text", "id": "trigger_label", "label": "Top-level menu label", "info": "Must exactly match a main-menu item, for example Women or Men." },
+        { "type": "text", "id": "quick_links_heading", "label": "Quick-links heading", "default": "Top picks" },
+        { "type": "select", "id": "content_mode", "label": "Featured content", "default": "promos", "options": [
+          { "value": "none", "label": "None" }, { "value": "promos", "label": "Two promotion cards" }, { "value": "collection", "label": "Collection products" }
+        ] },
+        { "type": "header", "content": "Promotion card 1" },
+        { "type": "image_picker", "id": "promo_image_1", "label": "Image" },
+        { "type": "text", "id": "promo_alt_1", "label": "Image alt text" },
+        { "type": "text", "id": "promo_eyebrow_1", "label": "Eyebrow" },
+        { "type": "text", "id": "promo_heading_1", "label": "Heading", "default": "Women's sale" },
+        { "type": "text", "id": "promo_label_1", "label": "Link label", "default": "Shop now" },
+        { "type": "url", "id": "promo_link_1", "label": "Link" },
+        { "type": "header", "content": "Promotion card 2" },
+        { "type": "image_picker", "id": "promo_image_2", "label": "Image" },
+        { "type": "text", "id": "promo_alt_2", "label": "Image alt text" },
+        { "type": "text", "id": "promo_eyebrow_2", "label": "Eyebrow" },
+        { "type": "text", "id": "promo_heading_2", "label": "Heading", "default": "Women's favorites" },
+        { "type": "text", "id": "promo_label_2", "label": "Link label", "default": "Shop now" },
+        { "type": "url", "id": "promo_link_2", "label": "Link" },
+        { "type": "header", "content": "Collection products" },
+        { "type": "collection", "id": "featured_collection", "label": "Collection" },
+        { "type": "text", "id": "collection_heading", "label": "Heading", "default": "Best deals 🔥" },
+        { "type": "range", "id": "product_limit", "label": "Products", "min": 2, "max": 6, "step": 1, "default": 4 },
+        { "type": "checkbox", "id": "show_prices", "label": "Show prices", "default": true },
+        { "type": "checkbox", "id": "show_discount", "label": "Show discount badges", "default": true },
+        { "type": "checkbox", "id": "show_quick_add", "label": "Show quick add", "default": true }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Helix header",
+      "blocks": [
+        { "type": "mega_menu", "settings": { "trigger_label": "Women", "content_mode": "promos" } },
+        { "type": "mega_menu", "settings": { "trigger_label": "Men", "content_mode": "collection" } }
+      ]
+    }
+  ],
+  "enabled_on": { "groups": ["header"] }
+}
+{% endschema %}

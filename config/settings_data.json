@@ -1,0 +1,14 @@
+{
+  "current": {
+    "body_font": "figtree_n4",
+    "color_background": "#FFFFFF",
+    "color_foreground": "#1A1A1A"
+  },
+  "presets": {
+    "Default": {
+      "body_font": "figtree_n4",
+      "color_background": "#FFFFFF",
+      "color_foreground": "#1A1A1A"
+    }
+  }
+}

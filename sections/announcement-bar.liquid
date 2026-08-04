@@ -1,0 +1,89 @@
+{{ 'helix-announcement.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'helix-announcement.js' | asset_url }}" defer="defer"></script>
+
+<helix-announcement
+  class="helix-announcement"
+  aria-label="{{ 'sections.announcement.label' | t }}"
+  data-autoplay="{{ section.settings.autoplay }}"
+  data-autoplay-seconds="{{ section.settings.autoplay_seconds }}"
+  data-transition-duration="{{ section.settings.transition_duration }}"
+  data-pause-hover="{{ section.settings.pause_on_hover }}"
+  data-pause-focus="{{ section.settings.pause_on_focus }}"
+  style="--helix-announcement-height: {{ section.settings.height }}px; --helix-announcement-stage: {{ section.settings.stage_width }}px; --helix-announcement-bg: {{ section.settings.background_color }}; --helix-announcement-fg: {{ section.settings.foreground_color }}; --helix-announcement-font-size: {{ section.settings.font_size }}px; --helix-announcement-arrow-size: {{ section.settings.arrow_size }}px; --helix-announcement-duration: {{ section.settings.transition_duration }}ms;"
+>
+  {%- if section.settings.show_arrows and section.blocks.size > 1 -%}
+    <button class="helix-announcement__control" type="button" aria-label="{{ 'sections.announcement.previous' | t }}" data-helix-announcement-previous>{% render 'helix-icon', name: 'chevron-left' %}</button>
+  {%- endif -%}
+
+  <div class="helix-announcement__viewport" aria-live="off" aria-atomic="true" data-helix-announcement-viewport>
+    <div class="helix-announcement__track">
+      {%- for block in section.blocks -%}
+        <div class="helix-announcement__message{% if forloop.first %} is-active{% else %} is-hidden{% endif %}" data-helix-announcement-message data-block-id="{{ block.id }}" aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}" {{ block.shopify_attributes }}>
+          {%- case block.type -%}
+            {%- when 'message' -%}
+              {{ block.settings.text }}
+            {%- when 'free_shipping' -%}
+              {{ 'sections.announcement.free_shipping_html' | t: threshold: block.settings.threshold }}
+          {%- endcase -%}
+        </div>
+      {%- else -%}
+        <div class="helix-announcement__message is-active" data-helix-announcement-message aria-hidden="false">{{ 'sections.announcement.default_message' | t }}</div>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  {%- if section.settings.show_arrows and section.blocks.size > 1 -%}
+    <button class="helix-announcement__control" type="button" aria-label="{{ 'sections.announcement.next' | t }}" data-helix-announcement-next>{% render 'helix-icon', name: 'chevron-right' %}</button>
+  {%- endif -%}
+</helix-announcement>
+
+{% schema %}
+{
+  "name": "t:sections.announcement.name",
+  "tag": "section",
+  "class": "helix-announcement-section",
+  "limit": 1,
+  "settings": [
+    { "type": "header", "content": "t:sections.announcement.settings.appearance" },
+    { "type": "color", "id": "background_color", "label": "t:sections.announcement.settings.background", "default": "#D3F285" },
+    { "type": "color", "id": "foreground_color", "label": "t:sections.announcement.settings.foreground", "default": "#1A1312" },
+    { "type": "range", "id": "height", "label": "t:sections.announcement.settings.height", "min": 32, "max": 56, "step": 1, "unit": "px", "default": 38 },
+    { "type": "range", "id": "stage_width", "label": "t:sections.announcement.settings.stage_width", "min": 360, "max": 1000, "step": 20, "unit": "px", "default": 700 },
+    { "type": "range", "id": "font_size", "label": "t:sections.announcement.settings.font_size", "min": 11, "max": 18, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "arrow_size", "label": "t:sections.announcement.settings.arrow_size", "min": 16, "max": 32, "step": 1, "unit": "px", "default": 20 },
+    { "type": "checkbox", "id": "show_arrows", "label": "t:sections.announcement.settings.show_arrows", "default": true },
+    { "type": "header", "content": "t:sections.announcement.settings.rotation" },
+    { "type": "checkbox", "id": "autoplay", "label": "t:sections.announcement.settings.autoplay", "default": true },
+    { "type": "range", "id": "autoplay_seconds", "label": "t:sections.announcement.settings.autoplay_seconds", "min": 3, "max": 10, "step": 1, "unit": "s", "default": 5 },
+    { "type": "range", "id": "transition_duration", "label": "t:sections.announcement.settings.transition_duration", "min": 200, "max": 1200, "step": 50, "unit": "ms", "default": 700 },
+    { "type": "checkbox", "id": "pause_on_hover", "label": "t:sections.announcement.settings.pause_hover", "default": true },
+    { "type": "checkbox", "id": "pause_on_focus", "label": "t:sections.announcement.settings.pause_focus", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "free_shipping",
+      "name": "t:sections.announcement.blocks.free_shipping",
+      "settings": [
+        { "type": "text", "id": "threshold", "label": "t:sections.announcement.settings.threshold", "default": "5.000.000₫" }
+      ]
+    },
+    {
+      "type": "message",
+      "name": "t:sections.announcement.blocks.message",
+      "settings": [
+        { "type": "inline_richtext", "id": "text", "label": "t:sections.announcement.settings.message", "default": "Receive 20% off your first order. <a href=\"/collections/all\">Shop now</a>" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "t:sections.announcement.name",
+      "blocks": [
+        { "type": "free_shipping" },
+        { "type": "message" }
+      ]
+    }
+  ]
+}
+{% endschema %}

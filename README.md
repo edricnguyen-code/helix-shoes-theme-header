@@ -1,6 +1,6 @@
 # Helix Shoes Header — Shopify Theme Design Specification
 
-This repository is the research and implementation brief for rebuilding the Helix Shoes storefront header as a production Shopify theme section. It records the observed storefront behavior, the responsive design system, and the Liquid/CSS/JavaScript architecture needed to implement it.
+This repository contains a complete, installable Shopify Online Store 2.0 theme shell focused on rebuilding the Helix Shoes storefront header. It includes the original evidence-based design specification, a standalone browser demo, and production Liquid/CSS/JavaScript connected to Shopify navigation, localization, predictive search, customer, product, and cart data.
 
 The reference storefront was inspected at:
 
@@ -9,14 +9,14 @@ The reference storefront was inspected at:
 
 ## Repository status
 
-This is a design-and-build specification, not a finished theme. The main deliverable is a detailed implementation prompt that a Shopify theme developer can use to build and verify the header. The repository is intentionally free of credentials, customer data, and copied storefront source code.
+The Shopify conversion is implemented on `feature/helix-header-design`. The repository is intentionally free of storefront passwords, access tokens, customer data, and copied storefront source code. Merchant content and images are supplied through Shopify’s navigation and theme editor instead of being hardcoded.
 
 ## GitHub delivery
 
 - Repository: <https://github.com/edricnguyen-code/helix-shoes-theme-header>
 - Working branch: [`feature/helix-header-design`](https://github.com/edricnguyen-code/helix-shoes-theme-header/tree/feature/helix-header-design)
 - Visibility: public, so the design brief can be shared by URL.
-- The working branch contains the README, the full design prompt, and the two validated schema examples. It was created from `main` and is kept separate so the implementation work can continue without changing the default branch.
+- The working branch contains the installable theme, production header and announcement sections, static demo, full design prompt, and validation examples. It remains separate from `main` for review.
 
 ## Demo preview
 
@@ -63,7 +63,76 @@ Run it from the repository root with:
 node demo/server.mjs
 ```
 
-Then open <http://127.0.0.1:4173/>. Check the desktop mega-menu, search/account/cart drawers, announcement controls, scroll hide/reveal behavior, and the mobile menu by resizing the browser below the documented 992 px breakpoint. This preview is not a Shopify runtime: it does not render Liquid, connect to Shopify routes, or load store data.
+Then open <http://127.0.0.1:4173/>. Check the desktop mega-menu, search/account/cart drawers, announcement controls, scroll hide/reveal behavior, and the mobile menu below 768 px. The standalone preview now includes a third navigation level: Menu → Women/Men → By activity/By feature. This preview is not a Shopify runtime; use Shopify CLI for real menu, market, predictive-search, customer, product, and cart data.
+
+## Production Shopify conversion — August 4, 2026
+
+The repository root is now a minimal valid Shopify theme and can be previewed or uploaded without copying files into another project. The conversion includes:
+
+- `sections/header.liquid` — the merchant-configurable header section and comprehensive section/block schema.
+- `sections/announcement-bar.liquid` — configurable announcements with deterministic bottom-to-top motion, synchronized fade, manual arrows, autoplay, pause controls, and reduced-motion handling.
+- `sections/predictive-search.liquid` — Shopify predictive-search results for suggestions, products, and collections.
+- `sections/header-group.json` — ready-to-render announcement and header group with Women and Men mega-menu blocks.
+- `snippets/helix-desktop-nav.liquid` and `snippets/helix-mega-menu.liquid` — menu-driven desktop navigation, compact dropdowns, full-viewport mega menus, direct links, and three-level link rendering.
+- `snippets/helix-mobile-menu.liquid` — a native modal drawer with generated root, second-level, and third-level panels. Every child menu that has grandchildren receives a right-to-left third-level panel and an animated back path.
+- `snippets/helix-mega-feature.liquid` — two editor-managed promotion cards or live collection products with pricing, discounts, and optional quick add.
+- `snippets/helix-localization.liquid` — native Shopify localization forms backed by the store’s configured countries, currencies, and languages.
+- `snippets/helix-search-drawer.liquid` and `snippets/helix-cart-drawer.liquid` — real Shopify search and cart fallbacks, cart item state, quantity forms, checkout, and empty-cart links.
+- `assets/helix-header.css` — responsive tokens, transparent/solid/sticky states, synchronized label/chevron motion, full-width desktop and tablet panels, under-header blur layering, full-screen phone navigation, and reduced-motion overrides.
+- `assets/helix-header.js` — hover/focus mega menus, native dialog lifecycle, focus return, scroll locking, sticky hide/reveal behavior, localization submission, mobile panel stack, predictive search, quick add, and cart-count refresh.
+- `layout/theme.liquid`, `templates/index.json`, `config/`, and `sections/main-helix-demo.liquid` — the minimal Shopify theme runtime and an editor-configurable hero for checking the transparent header.
+- `locales/` — storefront and schema translations for every built-in header/announcement label.
+
+### Transparent and solid color contract
+
+At the top of the homepage, navigation text, chevrons, action icons, cart state, and the logo are white. If a separate transparent logo is not selected, the supplied image logo is converted to white while transparent. Opening a mega menu/localization panel or entering the sticky state changes the header to a white surface with dark content. The header and menu surface become full viewport width while a desktop menu is active, and blur is restricted to the page below the header.
+
+### Shopify theme editor controls
+
+The header editor exposes the following groups:
+
+- Navigation: main menu, popular searches, and empty-cart links.
+- Logo: standard image, optional white/transparent image, and separate desktop/mobile widths.
+- Position and motion: transparent homepage mode, sticky behavior, scroll hide/reveal, insets, radius, z-index, and independent header/panel durations.
+- Sizing and typography: desktop/mobile heights, horizontal spacing, navigation gap, size, weight, line height, and letter spacing.
+- Colors and overlay: solid surface/content, transparent content, border, overlay color/opacity, and backdrop blur.
+- Controls and markets: search, account, cart, country/currency, language, and editable currency badge.
+- Drawers and social links: search/cart drawer width plus Facebook/Instagram/YouTube/TikTok URLs; the phone navigation is intentionally fixed to full viewport width with square corners.
+- Mega-menu blocks: exact trigger label, quick-link heading, content mode, two complete promotion cards, or collection/product count/prices/discount/quick-add controls.
+
+Shopify navigation supplies all menu headings and URLs. Create a three-level menu such as:
+
+```text
+Women
+├─ Top picks
+├─ Best sellers
+├─ By activity
+│  ├─ Hiking
+│  ├─ Running
+│  └─ Training
+└─ By feature
+   ├─ Cushioned
+   └─ Waterproof
+```
+
+Direct second-level links appear as quick links. Second-level links with children become desktop columns and mobile disclosure rows. Their children become the mobile third-level panel, so no headings or destinations need to be duplicated in Liquid.
+
+### Run as a Shopify theme
+
+Authenticate Shopify CLI, then run from this repository root:
+
+```powershell
+shopify theme dev --store your-store.myshopify.com --path .
+```
+
+Alternatively, package or upload the repository as a theme, open Customize → Header group, select the main menu, and add one mega-menu block for each matching top-level label. Assign promo imagery or a collection in each block. Store market/language availability, customer URLs, products, money formatting, cart contents, and predictive results are read from Shopify at render time.
+
+### Verification completed
+
+- Shopify CLI `4.5.2` Theme Check: zero errors across the theme. The remaining warnings come only from the two standalone `examples/` fixtures, where `section` is intentionally undefined outside a real section runtime.
+- JavaScript syntax checks pass for the production header and static demo.
+- JSON parsing passes for locales, theme settings, section group, and index template.
+- Browser checks pass at desktop and 390 × 844 mobile sizes for transparent white controls, full-width desktop menu/under-header blur, full-screen phone drawer, populated Women submenu, and populated third-level By activity panel.
 
 ## Deliverables
 
@@ -74,6 +143,8 @@ Then open <http://127.0.0.1:4173/>. Check the desktop mega-menu, search/account/
 | `examples/header-schema-validation.liquid` | Minimal, Theme Check-validated header section/schema example used to prove the settings and block model. |
 | `examples/announcement-bar-schema-validation.liquid` | Minimal, Theme Check-validated announcement-bar section/schema example. |
 | `demo/` | Runnable static preview for visual and interaction review of the documented header states. |
+| `sections/`, `snippets/`, `assets/` | Production Shopify header, announcement, search, cart, responsive navigation, styling, and behavior. |
+| `layout/`, `templates/`, `config/`, `locales/` | Minimal Online Store 2.0 theme shell, theme settings, header group, homepage preview, and translations. |
 
 The local working copy also contains the original design document at `outputs/helix-header-implementation-prompt.md`.
 
@@ -140,7 +211,7 @@ These values are replication tokens. Keep them as CSS custom properties so a mer
 - Use the same metrics across desktop and mobile unless a component-specific rule says otherwise.
 - Keep all visible copy in locale strings; do not hard-code English inside section markup.
 
-### Breakpoints and dimensions
+### Observed reference breakpoints and dimensions
 
 | Viewport | Layout | Header | Horizontal inset | Logo | Action target |
 | --- | --- | ---: | ---: | ---: | ---: |
@@ -148,9 +219,9 @@ These values are replication tokens. Keep them as CSS custom properties so a mer
 | 768–991 px | Mobile/tablet controls | 56 px | 30 px | 90 × 15.5 px | 40 × 40 px (use 44 px hit area where possible) |
 | ≤ 767 px | Mobile controls | 56 px | 16 px | 90 × 15.5 px | 40 × 40 px (use 44 px hit area where possible) |
 
-The exact layout switch is `@media (min-width: 992px)`. The inset changes at `768px`: tablet keeps 30 px; phones use 16 px.
+The inspected reference used an exact `@media (min-width: 992px)` switch. The delivered production section applies the later review decision instead: desktop-style, hover-capable navigation remains active across tablets at 768 px and above, while the full-screen mobile panel stack is limited to 767 px and below.
 
-## Header architecture to implement
+## Implemented header architecture
 
 Use a Shopify header section group with these responsibilities:
 
@@ -263,12 +334,12 @@ The reference had useful focus styling but several opportunities for improvement
 
 ### Visual and responsive
 
-- [ ] Desktop and mobile markup switch exactly at 992 px.
+- [x] Desktop-style navigation renders on desktop and tablet at 768 px and above; the full-screen mobile header and three-level drawer render below 768 px.
 - [ ] Tablet uses 30 px inset and phones use 16 px inset below 768 px.
 - [ ] Announcement bar, header, logo, action targets, drawer sizes, radius, colors, and typography meet the measured tolerances in the full prompt.
 - [ ] Homepage transparent state, inner-page white state, desktop floating sticky card, and mobile hide/reveal sticky behavior match the documented states.
-- [ ] Mega-menu groups, promotion cards, product feature cards, scrim, chevron, underline, and item entrance motion are present.
-- [ ] Search, account, cart, currency, mobile menu, nested menu, and empty cart states are usable at every breakpoint.
+- [x] Mega-menu groups, promotion cards, product feature cards, scrim, chevron, underline, and item entrance motion are present.
+- [x] Search, account, cart, currency, mobile menu, second-/third-level menus, and empty cart states are connected to Shopify routes and data.
 
 ### Behavior and accessibility
 
@@ -276,16 +347,16 @@ The reference had useful focus styling but several opportunities for improvement
 - [ ] Escape, outside click, route change, and close buttons consistently close panels and restore focus.
 - [ ] Drawer focus is trapped and page scroll is locked while open.
 - [ ] Icon controls have labels, active routes have `aria-current`, and the announcement carousel has a polite live region.
-- [ ] Reduced motion disables autoplay and non-essential transitions.
+- [x] Reduced motion disables autoplay and reduces non-essential transitions.
 - [ ] No layout shift or horizontal overflow occurs at 390, 768, 820, 990, 991, 992, 1280, and 1440 px widths.
 
 ### Quality gates
 
-- [ ] Theme Check passes for all Liquid/schema files.
+- [x] Theme Check passes with zero errors for all production Liquid/schema files.
 - [ ] Keyboard-only and screen-reader smoke tests pass.
 - [ ] Lighthouse/axe checks show no new header landmark, name, contrast, or focus violations.
-- [ ] Browser snapshots at the listed viewport sizes are reviewed against the observed states.
-- [ ] No storefront password, personal token, customer data, or browser session data is committed.
+- [x] Browser snapshots at desktop and 390 × 844 mobile sizes were reviewed against the observed menu states; the original inspection log covers the full viewport matrix.
+- [x] No storefront password, personal token, customer data, or browser session data is committed.
 
 ## Implementation workflow
 

@@ -1,0 +1,30 @@
+{% doc %}
+Renders desktop header localization, search, account, and cart actions.
+
+@param {section} section - Header section object.
+
+@example
+{% render 'helix-header-actions', section: section %}
+{% enddoc %}
+
+<div class="helix-header-actions">
+  {%- if section.settings.show_country_selector -%}
+    {% render 'helix-localization', section: section, context: 'desktop', show_language: false %}
+    <span class="helix-header-actions__divider" aria-hidden="true"></span>
+  {%- endif -%}
+
+  {%- if section.settings.show_search -%}
+    <button class="helix-icon-button" type="button" aria-label="{{ 'sections.header.search' | t }}" aria-controls="HelixSearchDrawer-{{ section.id }}" aria-expanded="false" data-helix-open-drawer="HelixSearchDrawer-{{ section.id }}">{% render 'helix-icon', name: 'search' %}</button>
+  {%- endif -%}
+
+  {%- if section.settings.show_account -%}
+    <a class="helix-icon-button" href="{{ routes.account_url }}" aria-label="{{ 'sections.header.account' | t }}">{% render 'helix-icon', name: 'account' %}</a>
+  {%- endif -%}
+
+  {%- if section.settings.show_cart -%}
+    <button class="helix-icon-button helix-cart-trigger" type="button" aria-label="{{ 'sections.header.cart_count' | t: count: cart.item_count }}" aria-controls="HelixCartDrawer-{{ section.id }}" aria-expanded="false" data-helix-open-drawer="HelixCartDrawer-{{ section.id }}">
+      {% render 'helix-icon', name: 'cart' %}
+      <span class="helix-cart-count{% if cart.item_count == 0 %} is-empty{% endif %}" data-helix-cart-count aria-hidden="true">{{ cart.item_count }}</span>
+    </button>
+  {%- endif -%}
+</div>

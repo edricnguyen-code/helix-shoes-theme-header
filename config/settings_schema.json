@@ -1,0 +1,23 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Helix Header Reference",
+    "theme_author": "edricnguyen-code",
+    "theme_version": "1.0.0",
+    "theme_documentation_url": "https://github.com/edricnguyen-code/helix-shoes-theme-header",
+    "theme_support_url": "https://github.com/edricnguyen-code/helix-shoes-theme-header/issues"
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      { "type": "font_picker", "id": "body_font", "label": "Body and header font", "default": "figtree_n4" }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "color", "id": "color_background", "label": "Background", "default": "#FFFFFF" },
+      { "type": "color", "id": "color_foreground", "label": "Text", "default": "#1A1A1A" }
+    ]
+  }
+]

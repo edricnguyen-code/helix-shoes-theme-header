@@ -1,0 +1,109 @@
+{% doc %}
+Renders merchant-configured promotion cards or collection products in a mega menu.
+
+@param {block} menu_block - Mega-menu block.
+@param {boolean} [mobile] - Whether the feature area is inside mobile navigation.
+
+@example
+{% render 'helix-mega-feature', menu_block: menu_block, mobile: false %}
+{% enddoc %}
+
+{%- liquid
+  assign promo_sizes = '25vw'
+  assign product_sizes = '14vw'
+  if mobile
+    assign promo_sizes = '(max-width: 767px) calc(100vw - 48px)'
+    assign product_sizes = '(max-width: 767px) 44vw'
+  endif
+-%}
+
+{%- if menu_block != blank and menu_block.settings.content_mode != 'none' -%}
+  <div class="helix-mega-feature{% if mobile %} helix-mega-feature--mobile{% endif %}" data-helix-feature-mode="{{ menu_block.settings.content_mode }}">
+    {%- case menu_block.settings.content_mode -%}
+      {%- when 'promos' -%}
+        <div class="helix-promo-grid">
+          {%- for promo_index in (1..2) -%}
+            {%- liquid
+              assign image_key = 'promo_image_' | append: promo_index
+              assign eyebrow_key = 'promo_eyebrow_' | append: promo_index
+              assign heading_key = 'promo_heading_' | append: promo_index
+              assign label_key = 'promo_label_' | append: promo_index
+              assign link_key = 'promo_link_' | append: promo_index
+              assign alt_key = 'promo_alt_' | append: promo_index
+              assign promo_image = menu_block.settings[image_key]
+              assign promo_eyebrow = menu_block.settings[eyebrow_key]
+              assign promo_heading = menu_block.settings[heading_key]
+              assign promo_label = menu_block.settings[label_key]
+              assign promo_url = menu_block.settings[link_key]
+              assign promo_alt = menu_block.settings[alt_key] | default: promo_heading
+              if promo_label == blank
+                assign promo_label = 'sections.header.shop_now' | t
+              endif
+            -%}
+            {%- if promo_heading != blank or promo_image != blank -%}
+              <a class="helix-promo-card" href="{{ promo_url | default: routes.all_products_collection_url }}">
+                <span class="helix-promo-card__media">
+                  {%- if promo_image != blank -%}
+                    {{ promo_image | image_url: width: 900 | image_tag: widths: '320, 480, 640, 900', sizes: promo_sizes, loading: 'lazy', alt: promo_alt }}
+                  {%- else -%}
+                    {{ 'collection-1' | placeholder_svg_tag: 'helix-promo-card__placeholder' }}
+                  {%- endif -%}
+                </span>
+                <span class="helix-promo-card__copy">
+                  {%- if promo_eyebrow != blank -%}<small>{{ promo_eyebrow | escape }}</small>{%- endif -%}
+                  {%- if promo_heading != blank -%}<strong>{{ promo_heading | escape }}</strong>{%- endif -%}
+                  <span class="helix-promo-card__link">{{ promo_label | escape }} {% render 'helix-icon', name: 'arrow-up-right' %}</span>
+                </span>
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- when 'collection' -%}
+        {%- assign featured_collection = menu_block.settings.featured_collection -%}
+        {%- if featured_collection != blank -%}
+          <div class="helix-mega-products">
+            <div class="helix-mega-products__heading">
+              <strong>{{ menu_block.settings.collection_heading | default: featured_collection.title | escape }}</strong>
+              <a href="{{ featured_collection.url }}">{{ 'sections.header.view_all' | t }} {% render 'helix-icon', name: 'arrow-up-right' %}</a>
+            </div>
+            <div class="helix-mega-products__grid">
+              {%- for product in featured_collection.products limit: menu_block.settings.product_limit -%}
+                {%- liquid
+                  assign selected_variant = product.selected_or_first_available_variant
+                  assign product_image_alt = product.featured_image.alt | default: product.title
+                -%}
+                <article class="helix-mega-product">
+                  <a class="helix-mega-product__media" href="{{ product.url }}">
+                    {%- if product.featured_image != blank -%}
+                      {{ product.featured_image | image_url: width: 500 | image_tag: widths: '180, 260, 360, 500', sizes: product_sizes, loading: 'lazy', alt: product_image_alt }}
+                    {%- else -%}
+                      {{ 'product-1' | placeholder_svg_tag: 'helix-mega-product__placeholder' }}
+                    {%- endif -%}
+                    {%- if menu_block.settings.show_discount and product.compare_at_price_max > product.price -%}
+                      {%- assign discount_amount = product.compare_at_price_max | minus: product.price | times: 100.0 | divided_by: product.compare_at_price_max | round -%}
+                      <span class="helix-mega-product__badge">-{{ discount_amount }}%</span>
+                    {%- endif -%}
+                  </a>
+                  <div class="helix-mega-product__details">
+                    <a href="{{ product.url }}">{{ product.title | escape }}</a>
+                    {%- if menu_block.settings.show_prices -%}
+                      <span class="helix-mega-product__price">{{ product.price | money }}{%- if product.compare_at_price_max > product.price -%} <s>{{ product.compare_at_price_max | money }}</s>{%- endif -%}</span>
+                    {%- endif -%}
+                  </div>
+                  {%- if menu_block.settings.show_quick_add and selected_variant.available -%}
+                    <form class="helix-mega-product__quick-add" method="post" action="{{ routes.cart_add_url }}" data-helix-quick-add>
+                      <input type="hidden" name="id" value="{{ selected_variant.id }}">
+                      <input type="hidden" name="quantity" value="1">
+                      <button type="submit" aria-label="{{ 'sections.header.quick_add' | t: product: product.title }}">{% render 'helix-icon', name: 'cart' %}</button>
+                    </form>
+                  {%- endif -%}
+                </article>
+              {%- else -%}
+                <p>{{ 'sections.header.collection_empty' | t }}</p>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+    {%- endcase -%}
+  </div>
+{%- endif -%}

@@ -1,0 +1,68 @@
+{% doc %}
+Renders a Shopify-aware cart drawer with empty and populated states.
+
+@param {section} section - Header section object.
+
+@example
+{% render 'helix-cart-drawer', section: section %}
+{% enddoc %}
+
+<dialog class="helix-drawer helix-drawer--right helix-cart-drawer" id="HelixCartDrawer-{{ section.id }}" aria-labelledby="HelixCartTitle-{{ section.id }}" data-helix-drawer data-helix-cart-drawer>
+  <div class="helix-drawer__surface">
+    <div class="helix-drawer__header">
+      <h2 id="HelixCartTitle-{{ section.id }}">{{ 'sections.header.cart' | t }} <span data-helix-cart-heading-count>({{ cart.item_count }})</span></h2>
+      <button class="helix-icon-button" type="button" aria-label="{{ 'sections.header.close_cart' | t }}" data-helix-close-drawer>{% render 'helix-icon', name: 'close' %}</button>
+    </div>
+
+    <div class="helix-drawer__body helix-cart-drawer__body" data-helix-cart-body>
+      {%- if cart.empty? -%}
+        <div class="helix-cart-empty">
+          <span class="helix-cart-empty__icon" aria-hidden="true">{% render 'helix-icon', name: 'cart' %}</span>
+          <h3>{{ 'sections.header.cart_empty' | t }}</h3>
+          <p>{{ 'sections.header.cart_empty_support' | t }}</p>
+          {%- if section.settings.cart_empty_menu != blank -%}
+            <div class="helix-cart-empty__links">
+              {%- for link in section.settings.cart_empty_menu.links -%}<a href="{{ link.url }}">{{ link.title | escape }}</a>{%- endfor -%}
+            </div>
+          {%- else -%}
+            <a class="helix-button helix-button--dark" href="{{ routes.all_products_collection_url }}">{{ 'sections.header.continue_shopping' | t }}</a>
+          {%- endif -%}
+        </div>
+      {%- else -%}
+        <div class="helix-cart-items">
+          <ul role="list">
+            {%- for item in cart.items -%}
+              {%- assign cart_image_alt = item.image.alt | default: item.product.title -%}
+              <li class="helix-cart-item">
+                <a class="helix-cart-item__media" href="{{ item.url }}">
+                  {%- if item.image != blank -%}
+                    {{ item.image | image_url: width: 240 | image_tag: widths: '120, 180, 240', sizes: '96px', loading: 'lazy', alt: cart_image_alt }}
+                  {%- endif -%}
+                </a>
+                <div class="helix-cart-item__details">
+                  <a class="helix-cart-item__title" href="{{ item.url }}">{{ item.product.title | escape }}</a>
+                  {%- unless item.product.has_only_default_variant -%}<small>{{ item.variant.title | escape }}</small>{%- endunless -%}
+                  <span>{{ item.final_line_price | money }}</span>
+                  <form action="{{ routes.cart_change_url }}" method="post" data-helix-cart-form>
+                    <input type="hidden" name="line" value="{{ forloop.index }}">
+                    <label for="HelixCartQuantity-{{ section.id }}-{{ forloop.index }}">{{ 'sections.header.quantity' | t }}</label>
+                    <input id="HelixCartQuantity-{{ section.id }}-{{ forloop.index }}" type="number" name="quantity" value="{{ item.quantity }}" min="0" inputmode="numeric" data-helix-cart-quantity>
+                  </form>
+                  <a class="helix-cart-item__remove" href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0" data-helix-cart-remove="{{ forloop.index }}">{{ 'sections.header.remove' | t }}</a>
+                </div>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+
+        <div class="helix-cart-summary">
+          <p><span>{{ 'sections.header.subtotal' | t }}</span><strong>{{ cart.total_price | money }}</strong></p>
+          <small>{{ 'sections.header.shipping_at_checkout' | t }}</small>
+          <form action="{{ routes.cart_url }}" method="post"><button class="helix-button helix-button--dark" type="submit" name="checkout">{{ 'sections.header.checkout' | t }}</button></form>
+          <a class="helix-button helix-button--outline" href="{{ routes.cart_url }}">{{ 'sections.header.view_cart' | t }}</a>
+        </div>
+      {%- endif -%}
+    </div>
+    <p class="helix-visually-hidden" aria-live="polite" data-helix-cart-status></p>
+  </div>
+</dialog>

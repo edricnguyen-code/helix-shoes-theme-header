@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-helix-demo",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

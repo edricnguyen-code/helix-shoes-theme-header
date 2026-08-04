@@ -1,0 +1,29 @@
+{
+  "sections": {
+    "announcement": {
+      "name": "Helix announcement bar",
+      "blocks": {
+        "free_shipping": "Free-shipping threshold",
+        "message": "Announcement"
+      },
+      "settings": {
+        "appearance": "Appearance",
+        "arrow_size": "Arrow size",
+        "autoplay": "Auto-rotate announcements",
+        "autoplay_seconds": "Time between announcements",
+        "background": "Background",
+        "font_size": "Font size",
+        "foreground": "Text and icon color",
+        "height": "Bar height",
+        "message": "Message",
+        "pause_focus": "Pause while focused",
+        "pause_hover": "Pause on hover",
+        "rotation": "Rotation and animation",
+        "show_arrows": "Show previous/next arrows",
+        "stage_width": "Message area width",
+        "threshold": "Order threshold",
+        "transition_duration": "Bottom-up animation duration"
+      }
+    }
+  }
+}

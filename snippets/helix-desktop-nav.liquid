@@ -1,0 +1,55 @@
+{% doc %}
+Renders the desktop primary navigation and maps mega-menu blocks to menu labels.
+
+@param {section} section - Header section object.
+
+@example
+{% render 'helix-desktop-nav', section: section %}
+{% enddoc %}
+
+<nav class="helix-desktop-nav" aria-label="{{ 'sections.header.primary_navigation' | t }}">
+  <ul class="helix-desktop-nav__list" role="list">
+    {%- for link in section.settings.menu.links -%}
+      {%- liquid
+        assign menu_block = nil
+        assign normalized_title = link.title | strip | downcase
+        for candidate_block in section.blocks
+          if candidate_block.type == 'mega_menu'
+            assign normalized_trigger = candidate_block.settings.trigger_label | strip | downcase
+            if normalized_trigger == normalized_title
+              assign menu_block = candidate_block
+              break
+            endif
+          endif
+        endfor
+        assign link_active = false
+        if link.current or link.child_active
+          assign link_active = true
+        endif
+      -%}
+
+      {%- if link.links != blank and menu_block != blank -%}
+        {% render 'helix-mega-menu', link: link, menu_block: menu_block, section_id: section.id, item_index: forloop.index %}
+      {%- elsif link.links != blank -%}
+        {%- assign dropdown_id = 'HelixDropdown-' | append: section.id | append: '-' | append: forloop.index -%}
+        <li class="helix-nav-item helix-nav-item--dropdown{% if link_active %} is-current{% endif %}" data-helix-menu-item>
+          <div class="helix-nav-trigger">
+            <a class="helix-nav-link" href="{{ link.url }}"{% if link_active %} aria-current="page"{% endif %}><span>{{ link.title | escape }}</span></a>
+            <button class="helix-nav-toggle" type="button" aria-expanded="false" aria-controls="{{ dropdown_id }}" aria-label="{{ 'sections.header.toggle_menu' | t: title: link.title }}" data-helix-menu-toggle>{% render 'helix-icon', name: 'chevron-down' %}</button>
+          </div>
+          <div class="helix-dropdown" id="{{ dropdown_id }}" data-helix-menu-panel hidden>
+            <ul role="list">
+              {%- for child_link in link.links -%}
+                <li><a href="{{ child_link.url }}"{% if child_link.current %} aria-current="page"{% endif %}>{{ child_link.title | escape }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        </li>
+      {%- else -%}
+        <li class="helix-nav-item helix-nav-item--single{% if link_active %} is-current{% endif %}"><a class="helix-nav-link" href="{{ link.url }}"{% if link_active %} aria-current="page"{% endif %}><span>{{ link.title | escape }}</span></a></li>
+      {%- endif -%}
+    {%- else -%}
+      <li class="helix-nav-item helix-nav-item--single"><a class="helix-nav-link" href="{{ routes.all_products_collection_url }}"><span>{{ 'sections.header.shop_all' | t }}</span></a></li>
+    {%- endfor -%}
+  </ul>
+</nav>
