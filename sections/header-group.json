@@ -103,7 +103,7 @@
         "men"
       ],
       "settings": {
-        "menu": "pebble-demo",
+        "menu": "helix-menu",
         "popular_searches": "",
         "cart_empty_menu": "",
         "logo_width_desktop": 110,
