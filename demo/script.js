@@ -49,9 +49,10 @@
     item.classList.remove('is-open');
     button?.setAttribute('aria-expanded', 'false');
     if (activeMega === item) activeMega = null;
+    if (!activeMega) header.classList.remove('is-menu-active');
     window.setTimeout(() => {
       if (panel && !item.classList.contains('is-open')) panel.hidden = true;
-    }, immediate || reduceMotion.matches ? 0 : 390);
+    }, immediate || reduceMotion.matches ? 0 : 440);
   };
 
   const closeMegaMenus = (immediate = false) => {
@@ -71,6 +72,7 @@
     activeMega = item;
     item.classList.add('is-open');
     button?.setAttribute('aria-expanded', 'true');
+    header.classList.add('is-menu-active');
     header.classList.remove('is-hidden');
     showScrim('menu');
   };
@@ -94,26 +96,22 @@
     });
     button?.addEventListener('click', (event) => {
       event.preventDefault();
-      if (item.classList.contains('is-open')) {
-        closeMega(item);
-        hideScrimIfIdle();
-      } else {
-        openMega(item);
-      }
+      openMega(item);
     });
   });
 
   const resetNestedNavigation = (drawer, immediate = false) => {
     if (!drawer) return;
     drawer.classList.remove('has-nested-open');
+    drawer.removeAttribute('data-active-nested');
     const root = drawer.querySelector('[data-nav-root]');
     root?.setAttribute('aria-hidden', 'false');
-    if (root) root.inert = false;
+    root?.removeAttribute('inert');
     drawer.querySelectorAll('[data-open-nested]').forEach((button) => button.setAttribute('aria-expanded', 'false'));
     drawer.querySelectorAll('[data-nested]').forEach((panel) => {
       panel.classList.remove('is-active');
       panel.setAttribute('aria-hidden', 'true');
-      panel.inert = true;
+      panel.setAttribute('inert', '');
     });
     if (immediate) drawer.classList.add('no-nav-transition');
     requestAnimationFrame(() => drawer.classList.remove('no-nav-transition'));
@@ -169,12 +167,19 @@
       const root = drawer?.querySelector('[data-nav-root]');
       const panel = drawer?.querySelector(`[data-nested="${button.dataset.openNested}"]`);
       if (!drawer || !root || !panel) return;
+      drawer.querySelectorAll('[data-nested]').forEach((entry) => {
+        entry.classList.remove('is-active');
+        entry.setAttribute('aria-hidden', 'true');
+        entry.setAttribute('inert', '');
+      });
       drawer.classList.add('has-nested-open');
+      drawer.dataset.activeNested = button.dataset.openNested;
       root.setAttribute('aria-hidden', 'true');
-      root.inert = true;
+      root.setAttribute('inert', '');
+      panel.hidden = false;
       panel.setAttribute('aria-hidden', 'false');
-      panel.inert = false;
-      panel.classList.add('is-active');
+      panel.removeAttribute('inert');
+      requestAnimationFrame(() => panel.classList.add('is-active'));
       button.setAttribute('aria-expanded', 'true');
       window.setTimeout(() => focusable(panel)[0]?.focus(), reduceMotion.matches ? 0 : 530);
     });
@@ -187,11 +192,12 @@
     const opener = drawer?.querySelector(`[data-open-nested="${panel?.dataset.nested}"]`);
     if (!drawer || !panel || !root) return;
     drawer.classList.remove('has-nested-open');
+    drawer.removeAttribute('data-active-nested');
     panel.classList.remove('is-active');
     panel.setAttribute('aria-hidden', 'true');
-    panel.inert = true;
+    panel.setAttribute('inert', '');
     root.setAttribute('aria-hidden', 'false');
-    root.inert = false;
+    root.removeAttribute('inert');
     opener?.setAttribute('aria-expanded', 'false');
     window.setTimeout(() => opener?.focus(), reduceMotion.matches ? 0 : 530);
   };

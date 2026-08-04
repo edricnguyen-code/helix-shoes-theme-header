@@ -41,6 +41,14 @@ The `demo/` directory is a self-contained static preview of the documented heade
 - Rebuilt the mobile navigation as a full-viewport, square-corner drawer with the reference login, locale, and social footer.
 - Added separate Women editorial and Men deal submenu layouts; nested panels slide in from the right while the root menu exits left.
 
+### August 4, 2026 submenu follow-up
+
+- Added a top-down white header surface whenever a desktop mega menu or the currency selector is active at the top of the page; the header remains full viewport width in this state.
+- Rebuilt Women and Men as single text-and-chevron triggers so their underline and arrow reversal share the same `300ms` easing and activate together across the full control.
+- Added a hover/focus currency submenu with Vietnamese dong and US dollar preview rows.
+- Hardened mobile submenu switching with an explicit `data-active-nested` state in addition to the animated panel class.
+- Added an on-screen mobile instruction and submenu preview labels so the nested transition and populated layouts are immediately checkable.
+
 Run it from the repository root with:
 
 ```powershell

@@ -36,8 +36,8 @@
 
         <nav class="desktop-nav" aria-label="Primary">
           <div class="nav-item" data-menu="women">
-            <a href="#women">Women</a>
-            <button class="nav-item__toggle" type="button" data-mega-toggle aria-label="Open Women menu" aria-controls="mega-women" aria-expanded="false">
+            <button class="nav-item__trigger" type="button" data-mega-toggle aria-controls="mega-women" aria-expanded="false">
+              <span>Women</span>
               <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m7 9 5 5 5-5"/></svg>
             </button>
             <div class="mega-menu" id="mega-women" data-mega-panel hidden>
@@ -51,8 +51,8 @@
           </div>
 
           <div class="nav-item" data-menu="men">
-            <a href="#men">Men</a>
-            <button class="nav-item__toggle" type="button" data-mega-toggle aria-label="Open Men menu" aria-controls="mega-men" aria-expanded="false">
+            <button class="nav-item__trigger" type="button" data-mega-toggle aria-controls="mega-men" aria-expanded="false">
+              <span>Men</span>
               <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m7 9 5 5 5-5"/></svg>
             </button>
             <div class="mega-menu" id="mega-men" data-mega-panel hidden>
@@ -66,6 +66,7 @@
           </div>
 
           <div class="nav-item nav-item--single"><a href="#pages">Pages</a></div>
+          <div class="nav-item nav-item--single nav-item--find"><a href="#search">Find your shoes</a></div>
         </nav>
 
         <a class="brand" href="#top" aria-label="Helix home">
@@ -83,11 +84,18 @@
             <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5.25 8.25h13.5l-.8 12H6.05l-.8-12Z"/><path d="M9 9V6.75a3 3 0 0 1 6 0V9"/></svg>
             <span class="cart-count" aria-hidden="true">0</span>
           </button>
-          <button class="currency" type="button" aria-label="Currency: Vietnamese dong">
-            <span class="currency__flag" aria-hidden="true">★</span>
-            <span>VND ₫</span>
-            <svg aria-hidden="true" viewBox="0 0 12 12"><path d="m3 4.5 3 3 3-3"/></svg>
-          </button>
+          <div class="currency-switcher" data-menu="currency">
+            <button class="currency" type="button" data-mega-toggle aria-label="Currency: Vietnamese dong" aria-controls="currency-menu" aria-expanded="false">
+              <span class="currency__flag" aria-hidden="true">★</span>
+              <span>VND ₫</span>
+              <svg aria-hidden="true" viewBox="0 0 12 12"><path d="m3 4.5 3 3 3-3"/></svg>
+            </button>
+            <div class="currency-menu" id="currency-menu" data-mega-panel hidden>
+              <p>Currency</p>
+              <button type="button" aria-current="true"><span class="currency__flag" aria-hidden="true">★</span><span>Vietnamese dong</span><strong>VND ₫</strong></button>
+              <button type="button"><span class="currency__flag currency__flag--neutral" aria-hidden="true">$</span><span>US dollar</span><strong>USD $</strong></button>
+            </div>
+          </div>
         </div>
       </div>
     </header>
@@ -135,6 +143,7 @@
             <a href="#pages">Pages <span aria-hidden="true">›</span></a>
             <a href="#search" data-open-drawer="search">Find your shoes</a>
           </nav>
+          <p class="mobile-nav-demo-note"><span aria-hidden="true">↔</span> Tap Women or Men to preview the submenu slide.</p>
           <div class="mobile-nav-footer">
             <a class="mobile-login" href="#login">Login</a>
             <div class="mobile-locales">
@@ -157,6 +166,7 @@
             <button class="icon-button drawer__close" type="button" data-close-drawer aria-label="Close menu"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
           </div>
           <div class="mobile-nav-scroll">
+            <p class="mobile-submenu-preview">Women submenu preview</p>
             <nav class="mobile-submenu" aria-label="Women">
               <a href="#women-top-picks">Top picks</a><a href="#women-best-sellers">Best sellers</a><a href="#women-trending">Trending</a><a href="#women-new">New arrivals</a><a href="#women-sale">On sale</a>
               <button type="button">By activity <span aria-hidden="true">›</span></button>
@@ -174,6 +184,7 @@
             <button class="icon-button drawer__close" type="button" data-close-drawer aria-label="Close menu"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
           </div>
           <div class="mobile-nav-scroll">
+            <p class="mobile-submenu-preview">Men submenu preview</p>
             <nav class="mobile-submenu" aria-label="Men">
               <a href="#men-top-picks">Top picks</a><a href="#men-best-sellers">Best sellers</a><a href="#men-trending">Trending</a><a href="#men-new">New arrivals</a><a href="#men-sale">On sale</a>
               <button type="button">By activity <span aria-hidden="true">›</span></button>
