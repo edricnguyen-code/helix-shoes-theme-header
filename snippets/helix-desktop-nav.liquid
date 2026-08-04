@@ -26,10 +26,18 @@ Renders the desktop primary navigation and maps mega-menu blocks to menu labels.
         if link.current or link.child_active
           assign link_active = true
         endif
+        assign desktop_layout = 'compact'
+        if menu_block != blank
+          assign desktop_layout = menu_block.settings.desktop_layout | default: 'mega'
+        endif
       -%}
 
       {%- if link.links != blank -%}
-        {% render 'helix-mega-menu', link: link, menu_block: menu_block, section_id: section.id, item_index: forloop.index %}
+        {%- if desktop_layout == 'mega' -%}
+          {% render 'helix-mega-menu', link: link, menu_block: menu_block, section_id: section.id, item_index: forloop.index %}
+        {%- else -%}
+          {% render 'helix-dropdown-menu', link: link, menu_block: menu_block, section_id: section.id, item_index: forloop.index %}
+        {%- endif -%}
       {%- else -%}
         <li class="helix-nav-item helix-nav-item--single{% if link_active %} is-current{% endif %}"><a class="helix-nav-link" href="{{ link.url }}"{% if link_active %} aria-current="page"{% endif %}><span>{{ link.title | escape }}</span></a></li>
       {%- endif -%}

@@ -46,8 +46,14 @@
     --helix-mobile-sticky-radius: {{ section.settings.mobile_sticky_radius }}px;
     --helix-drawer-desktop: {{ section.settings.desktop_drawer_width }}px;
     --helix-header-duration: {{ section.settings.header_transition_duration }}ms;
+    --helix-surface-duration: {{ section.settings.surface_transition_duration }}ms;
     --helix-panel-duration: {{ section.settings.panel_transition_duration }}ms;
+    --helix-content-duration: {{ section.settings.panel_content_transition_duration }}ms;
+    --helix-content-delay: {{ section.settings.panel_content_delay }}ms;
     --helix-mobile-panel-duration: {{ section.settings.mobile_panel_transition_duration }}ms;
+    --helix-compact-menu-width: {{ section.settings.compact_menu_width }}px;
+    --helix-localization-width: {{ section.settings.localization_panel_width }}px;
+    --helix-panel-radius: {{ section.settings.desktop_panel_radius }}px;
     --helix-header-z: {{ section.settings.z_index }};
   "
 >
@@ -118,7 +124,10 @@
     { "type": "range", "id": "desktop_sticky_radius", "label": "Desktop sticky corner radius", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 16 },
     { "type": "range", "id": "mobile_sticky_radius", "label": "Mobile sticky corner radius", "min": 0, "max": 20, "step": 1, "unit": "px", "default": 12 },
     { "type": "range", "id": "header_transition_duration", "label": "Sticky/header transition", "min": 150, "max": 800, "step": 25, "unit": "ms", "default": 625 },
-    { "type": "range", "id": "panel_transition_duration", "label": "Menu panel transition", "min": 150, "max": 600, "step": 25, "unit": "ms", "default": 300 },
+    { "type": "range", "id": "surface_transition_duration", "label": "Transparent surface reveal", "min": 200, "max": 700, "step": 25, "unit": "ms", "default": 425, "info": "The submenu begins after this white header reveal completes." },
+    { "type": "range", "id": "panel_transition_duration", "label": "Menu panel transition", "min": 150, "max": 600, "step": 25, "unit": "ms", "default": 400 },
+    { "type": "range", "id": "panel_content_transition_duration", "label": "Menu content glide", "min": 150, "max": 700, "step": 25, "unit": "ms", "default": 425 },
+    { "type": "range", "id": "panel_content_delay", "label": "Menu content delay", "min": 0, "max": 250, "step": 10, "unit": "ms", "default": 100 },
     { "type": "range", "id": "mobile_panel_transition_duration", "label": "Mobile nested-menu transition", "min": 200, "max": 700, "step": 20, "unit": "ms", "default": 520 },
     { "type": "range", "id": "z_index", "label": "Header layer", "min": 10, "max": 100, "step": 1, "default": 40 },
 
@@ -127,6 +136,9 @@
     { "type": "range", "id": "mobile_height", "label": "Mobile height", "min": 48, "max": 76, "step": 1, "unit": "px", "default": 56 },
     { "type": "range", "id": "horizontal_padding", "label": "Desktop horizontal padding", "min": 20, "max": 80, "step": 2, "unit": "px", "default": 50 },
     { "type": "range", "id": "navigation_gap", "label": "Navigation gap", "min": 12, "max": 44, "step": 1, "unit": "px", "default": 28 },
+    { "type": "range", "id": "compact_menu_width", "label": "Pages/compact menu width", "min": 260, "max": 420, "step": 2, "unit": "px", "default": 338 },
+    { "type": "range", "id": "localization_panel_width", "label": "Country selector width", "min": 320, "max": 500, "step": 2, "unit": "px", "default": 414 },
+    { "type": "range", "id": "desktop_panel_radius", "label": "Compact panel corner radius", "min": 0, "max": 28, "step": 1, "unit": "px", "default": 20 },
     { "type": "range", "id": "navigation_font_size", "label": "Navigation font size", "min": 11, "max": 18, "step": 1, "unit": "px", "default": 14 },
     { "type": "select", "id": "navigation_font_weight", "label": "Navigation weight", "default": "500", "options": [
       { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "600", "label": "Semibold" }, { "value": "700", "label": "Bold" }
@@ -165,7 +177,10 @@
       "type": "mega_menu",
       "name": "Mega menu",
       "settings": [
-        { "type": "text", "id": "trigger_label", "label": "Top-level menu label", "info": "Optional featured content is attached when this exactly matches a main-menu item. All menu items with children still receive a full-width panel." },
+        { "type": "text", "id": "trigger_label", "label": "Top-level menu label", "info": "This must exactly match a main-menu item. Parent links without a matching block use the compact Pages-style dropdown." },
+        { "type": "select", "id": "desktop_layout", "label": "Desktop and tablet layout", "default": "mega", "options": [
+          { "value": "mega", "label": "Full-width mega menu" }, { "value": "compact", "label": "Compact dropdown" }
+        ] },
         { "type": "text", "id": "quick_links_heading", "label": "Quick-links heading", "default": "Top picks" },
         { "type": "select", "id": "content_mode", "label": "Featured content", "default": "promos", "options": [
           { "value": "none", "label": "None" }, { "value": "promos", "label": "Two promotion cards" }, { "value": "collection", "label": "Collection products" }
@@ -199,8 +214,8 @@
     {
       "name": "Helix header",
       "blocks": [
-        { "type": "mega_menu", "settings": { "trigger_label": "Women", "content_mode": "promos" } },
-        { "type": "mega_menu", "settings": { "trigger_label": "Men", "content_mode": "collection" } }
+        { "type": "mega_menu", "settings": { "trigger_label": "Women", "desktop_layout": "mega", "content_mode": "promos" } },
+        { "type": "mega_menu", "settings": { "trigger_label": "Men", "desktop_layout": "mega", "content_mode": "collection" } }
       ]
     }
   ],

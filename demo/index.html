@@ -65,7 +65,22 @@
             </div>
           </div>
 
-          <div class="nav-item nav-item--single"><a href="#pages">Pages</a></div>
+          <div class="nav-item nav-item--compact" data-menu="pages">
+            <button class="nav-item__trigger" type="button" data-mega-toggle aria-controls="pages-menu" aria-expanded="false">
+              <span>Pages</span>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m7 9 5 5 5-5"/></svg>
+            </button>
+            <div class="compact-menu" id="pages-menu" data-mega-panel hidden>
+              <div class="compact-menu__content">
+                <a href="#about">About us</a>
+                <a href="#contact">Contact</a>
+                <a href="#faqs">Faqs</a>
+                <a href="#stores">Store locations</a>
+                <a href="#recent">Recently viewed</a>
+                <a href="#journal">Our journal</a>
+              </div>
+            </div>
+          </div>
           <div class="nav-item nav-item--single nav-item--find"><a href="#search">Find your shoes</a></div>
         </nav>
 
@@ -86,14 +101,29 @@
           </button>
           <div class="currency-switcher" data-menu="currency">
             <button class="currency" type="button" data-mega-toggle aria-label="Currency: Vietnamese dong" aria-controls="currency-menu" aria-expanded="false">
-              <span class="currency__flag" aria-hidden="true">★</span>
+              <span class="currency__flag" aria-hidden="true"><img src="https://cdn.shopify.com/static/images/flags/vn.svg" alt=""></span>
               <span>VND ₫</span>
               <svg aria-hidden="true" viewBox="0 0 12 12"><path d="m3 4.5 3 3 3-3"/></svg>
             </button>
             <div class="currency-menu" id="currency-menu" data-mega-panel hidden>
-              <p>Currency</p>
-              <button type="button" aria-current="true"><span class="currency__flag" aria-hidden="true">★</span><span>Vietnamese dong</span><strong>VND ₫</strong></button>
-              <button type="button"><span class="currency__flag currency__flag--neutral" aria-hidden="true">$</span><span>US dollar</span><strong>USD $</strong></button>
+              <div class="currency-menu__content">
+                <label class="currency-search">
+                  <span class="sr-only">Search countries</span>
+                  <input type="search" placeholder="Search" autocomplete="off" data-demo-country-search>
+                  <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.5 4.5"/></svg>
+                </label>
+                <div class="currency-list" data-demo-country-list>
+                  <button type="button" data-country="australia aud"><span class="currency__flag" aria-hidden="true"><img src="https://cdn.shopify.com/static/images/flags/au.svg" alt=""></span><span>Australia</span><strong>AUD $</strong></button>
+                  <button type="button" data-country="belgium eur"><span class="currency__flag" aria-hidden="true"><img src="https://cdn.shopify.com/static/images/flags/be.svg" alt=""></span><span>Belgium</span><strong>EUR €</strong></button>
+                  <button type="button" data-country="canada cad"><span class="currency__flag" aria-hidden="true"><img src="https://cdn.shopify.com/static/images/flags/ca.svg" alt=""></span><span>Canada</span><strong>CAD $</strong></button>
+                  <button type="button" data-country="france eur"><span class="currency__flag" aria-hidden="true"><img src="https://cdn.shopify.com/static/images/flags/fr.svg" alt=""></span><span>France</span><strong>EUR €</strong></button>
+                  <button type="button" data-country="germany eur"><span class="currency__flag" aria-hidden="true"><img src="https://cdn.shopify.com/static/images/flags/de.svg" alt=""></span><span>Germany</span><strong>EUR €</strong></button>
+                  <button type="button" data-country="italy eur"><span class="currency__flag" aria-hidden="true"><img src="https://cdn.shopify.com/static/images/flags/it.svg" alt=""></span><span>Italy</span><strong>EUR €</strong></button>
+                  <button type="button" data-country="japan jpy"><span class="currency__flag" aria-hidden="true"><img src="https://cdn.shopify.com/static/images/flags/jp.svg" alt=""></span><span>Japan</span><strong>JPY ¥</strong></button>
+                  <button type="button" data-country="spain eur"><span class="currency__flag" aria-hidden="true"><img src="https://cdn.shopify.com/static/images/flags/es.svg" alt=""></span><span>Spain</span><strong>EUR €</strong></button>
+                </div>
+                <p class="currency-empty" data-demo-country-empty hidden>No countries found</p>
+              </div>
             </div>
           </div>
         </div>
@@ -119,7 +149,7 @@
 
       <section class="demo-guide" aria-labelledby="demo-title">
         <div><p class="eyebrow">Interactive preview</p><h2 id="demo-title">Check the header states</h2></div>
-        <div class="demo-guide__items"><span>Desktop: hover Women / Men</span><span>Mobile/tablet: resize to 990px or below, then open Menu</span><span>Scroll to test sticky hide / reveal</span></div>
+        <div class="demo-guide__items"><span>Desktop: hover Women, Men, Pages, or the country flag</span><span>Mobile/tablet: resize to 990px or below, then open Menu</span><span>Scroll to test sticky hide / reveal</span></div>
       </section>
 
       <section class="tiles" aria-label="Featured collections">

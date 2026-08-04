@@ -70,6 +70,15 @@ The `demo/` directory is a self-contained static preview of the documented heade
 - Preserved the Shopify-synced `pebble-demo` navigation and merchant block data while removing the duplicated announcement/hero pair that had been added to the homepage template.
 - Kept the top-of-page mega menu full viewport width, while constraining a sticky floating header's mega menu to the card's exact left and right edges. The panel now drops directly below the card and shares its rounded lower corners without changing the menu content layout.
 
+### August 4, 2026 submenu choreography and localization revision
+
+- Split desktop/tablet parent links into two merchant-controlled layouts: matching Women/Men blocks retain the full-width mega menu, while Pages and parent links without a matching block use the compact 338 px card.
+- Sequenced transparent-header opening into one continuous vertical reveal: the white header surface completes first, then the submenu background continues downward from the header edge.
+- Added a bottom-up content glide for full mega menus and a right-to-left content glide for compact Pages and country panels, including correct remaining-delay handling when the pointer switches menus mid-animation.
+- Rebuilt the country selector as a 414 px searchable panel using Shopify's country flag images. The header shows the selected flag and currency; every result shows the real flag, country name, ISO currency, and symbol.
+- Added editor controls for submenu surface timing, panel timing, content timing/delay, compact-menu width, country-panel width, and compact-panel radius.
+- Mirrored Pages, searchable countries, flag imagery, and the synchronized motion in the standalone demo for direct local verification.
+
 Run it from the repository root with:
 
 ```powershell

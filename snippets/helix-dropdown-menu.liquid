@@ -1,0 +1,36 @@
+{% doc %}
+Renders a compact desktop and tablet dropdown for a top-level navigation link.
+
+@param {link} link - Top-level navigation link.
+@param {block} menu_block - Optional matching submenu block.
+@param {string} section_id - Parent section ID.
+@param {number} item_index - One-based menu item index.
+
+@example
+{% render 'helix-dropdown-menu', link: link, menu_block: menu_block, section_id: section.id, item_index: forloop.index %}
+{% enddoc %}
+
+{%- liquid
+  assign panel_id = 'HelixDropdown-' | append: section_id | append: '-' | append: item_index
+  assign link_active = false
+  if link.current or link.child_active
+    assign link_active = true
+  endif
+-%}
+
+<li class="helix-nav-item helix-nav-item--dropdown{% if link_active %} is-current{% endif %}" data-helix-menu-item data-panel-type="dropdown"{% if menu_block != blank %} data-block-id="{{ menu_block.id }}" {{ menu_block.shopify_attributes }}{% endif %}>
+  <div class="helix-nav-trigger">
+    <a class="helix-nav-link" href="{{ link.url }}"{% if link_active %} aria-current="page"{% endif %}><span>{{ link.title | escape }}</span></a>
+    <button class="helix-nav-toggle" type="button" aria-expanded="false" aria-controls="{{ panel_id }}" aria-label="{{ 'sections.header.toggle_menu' | t: title: link.title }}" data-helix-menu-toggle>{% render 'helix-icon', name: 'chevron-down' %}</button>
+  </div>
+
+  <div class="helix-dropdown" id="{{ panel_id }}" data-helix-menu-panel hidden>
+    <div class="helix-dropdown__content">
+      <ul role="list">
+        {%- for child_link in link.links -%}
+          <li><a href="{{ child_link.url }}"{% if child_link.current or child_link.child_active %} aria-current="page"{% endif %}>{{ child_link.title | escape }}</a></li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</li>

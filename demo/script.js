@@ -13,6 +13,8 @@
   let lastScrollY = window.scrollY;
   let scrollIntent = 0;
   let scrollFrame = 0;
+  let surfaceReadyAt = 0;
+  const surfaceDuration = 425;
 
   const focusable = (root) => [...root.querySelectorAll('a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])')]
     .filter((element) => !element.closest('[inert]') && element.offsetParent !== null);
@@ -44,14 +46,19 @@
     requestAnimationFrame(() => scrim.classList.add('is-visible'));
   };
 
-  const closeMega = (item, immediate = false) => {
+  const closeMega = (item, immediate = false, preserveHeader = false) => {
     if (!item) return;
     const button = item.querySelector('[data-mega-toggle]');
     const panel = item.querySelector('[data-mega-panel]');
     item.classList.remove('is-open');
+    item.classList.remove('is-sequenced-open');
+    item.style.removeProperty('--sequence-delay');
     button?.setAttribute('aria-expanded', 'false');
     if (activeMega === item) activeMega = null;
-    if (!activeMega) header.classList.remove('is-menu-active');
+    if (!activeMega && !preserveHeader) {
+      header.classList.remove('is-menu-active');
+      surfaceReadyAt = 0;
+    }
     window.setTimeout(() => {
       if (panel && !item.classList.contains('is-open')) panel.hidden = true;
     }, immediate || reduceMotion.matches ? 0 : 440);
@@ -65,18 +72,40 @@
 
   const openMega = (item) => {
     if (!item || !window.matchMedia('(min-width: 991px)').matches) return;
+    if (item.classList.contains('is-open')) return;
     window.clearTimeout(megaCloseTimer);
-    megaItems.forEach((entry) => { if (entry !== item) closeMega(entry, true); });
+    const now = performance.now();
+    let sequenceDelay = 0;
+    if (!reduceMotion.matches && !header.classList.contains('is-sticky')) {
+      if (header.classList.contains('is-menu-active')) sequenceDelay = Math.max(0, Math.round(surfaceReadyAt - now));
+      else {
+        sequenceDelay = surfaceDuration;
+        surfaceReadyAt = now + surfaceDuration;
+      }
+    }
+    megaItems.forEach((entry) => { if (entry !== item) closeMega(entry, true, true); });
     const button = item.querySelector('[data-mega-toggle]');
     const panel = item.querySelector('[data-mega-panel]');
     if (!panel) return;
     panel.hidden = false;
+    panel.getBoundingClientRect();
     activeMega = item;
-    item.classList.add('is-open');
-    button?.setAttribute('aria-expanded', 'true');
-    header.classList.add('is-menu-active');
-    header.classList.remove('is-hidden');
-    showScrim('menu');
+    item.classList.toggle('is-sequenced-open', sequenceDelay > 0);
+    if (sequenceDelay > 0) item.style.setProperty('--sequence-delay', `${sequenceDelay}ms`);
+    requestAnimationFrame(() => {
+      item.classList.add('is-open');
+      button?.setAttribute('aria-expanded', 'true');
+      header.classList.add('is-menu-active');
+      header.classList.remove('is-hidden');
+      showScrim('menu');
+    });
+    if (sequenceDelay > 0) {
+      window.setTimeout(() => {
+        if (!item.classList.contains('is-open')) return;
+        item.classList.remove('is-sequenced-open');
+        item.style.removeProperty('--sequence-delay');
+      }, sequenceDelay + 480);
+    }
   };
 
   const scheduleMegaClose = (item) => {
@@ -85,7 +114,7 @@
       if (item.matches(':hover') || item.matches(':focus-within')) return;
       closeMega(item);
       hideScrimIfIdle();
-    }, 140);
+    }, item.classList.contains('is-sequenced-open') ? surfaceDuration + 160 : 140);
   };
 
   megaItems.forEach((item) => {
@@ -99,6 +128,24 @@
     button?.addEventListener('click', (event) => {
       event.preventDefault();
       openMega(item);
+    });
+  });
+
+  document.querySelectorAll('[data-demo-country-search]').forEach((input) => {
+    input.addEventListener('input', () => {
+      const query = input.value.trim().toLocaleLowerCase();
+      const menu = input.closest('.currency-menu');
+      let visibleCount = 0;
+      menu?.querySelectorAll('[data-country]').forEach((option) => {
+        const visible = !query || option.dataset.country.includes(query);
+        option.hidden = !visible;
+        if (visible) visibleCount += 1;
+      });
+      const empty = menu?.querySelector('[data-demo-country-empty]');
+      if (empty) empty.hidden = visibleCount !== 0;
+    });
+    input.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') event.preventDefault();
     });
   });
 

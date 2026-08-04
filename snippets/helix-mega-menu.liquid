@@ -39,7 +39,7 @@ Renders a desktop full-width mega menu for a top-level navigation link.
   endif
 -%}
 
-<li class="helix-nav-item helix-nav-item--mega{% if link_active %} is-current{% endif %}" data-helix-menu-item{% if menu_block != blank %} data-block-id="{{ menu_block.id }}" {{ menu_block.shopify_attributes }}{% endif %}>
+<li class="helix-nav-item helix-nav-item--mega{% if link_active %} is-current{% endif %}" data-helix-menu-item data-panel-type="mega"{% if menu_block != blank %} data-block-id="{{ menu_block.id }}" {{ menu_block.shopify_attributes }}{% endif %}>
   <div class="helix-nav-trigger">
     <a class="helix-nav-link" href="{{ link.url }}"{% if link_active %} aria-current="page"{% endif %}><span>{{ link.title | escape }}</span></a>
     <button class="helix-nav-toggle" type="button" aria-expanded="false" aria-controls="{{ panel_id }}" aria-label="{{ 'sections.header.toggle_menu' | t: title: link.title }}" data-helix-menu-toggle>{% render 'helix-icon', name: 'chevron-down' %}</button>
