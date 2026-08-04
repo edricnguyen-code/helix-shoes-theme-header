@@ -68,9 +68,8 @@
           <div class="nav-item nav-item--single"><a href="#pages">Pages</a></div>
         </nav>
 
-        <a class="brand" href="#top" aria-label="Helix Shoes home">
-          <span class="brand__wordmark">helix</span>
-          <span class="brand__descriptor">shoes</span>
+        <a class="brand" href="#top" aria-label="Helix home">
+          <img class="brand__image" src="helix-logo.svg" alt="HELIX" width="112" height="24">
         </a>
 
         <div class="header__actions">
@@ -81,10 +80,14 @@
             <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 20c.7-3.3 3-5 6.5-5s5.8 1.7 6.5 5"/></svg>
           </button>
           <button class="icon-button cart-action" type="button" data-open-drawer="cart" aria-label="Cart, 0 items" aria-controls="cart-drawer" aria-expanded="false">
-            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 5h2l1.5 10.5h10L20 8H7"/><circle cx="9.5" cy="19" r="1"/><circle cx="17" cy="19" r="1"/></svg>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5.25 8.25h13.5l-.8 12H6.05l-.8-12Z"/><path d="M9 9V6.75a3 3 0 0 1 6 0V9"/></svg>
             <span class="cart-count" aria-hidden="true">0</span>
           </button>
-          <button class="currency" type="button" aria-label="Currency: Vietnamese dong">VND <span aria-hidden="true">⌄</span></button>
+          <button class="currency" type="button" aria-label="Currency: Vietnamese dong">
+            <span class="currency__flag" aria-hidden="true">★</span>
+            <span>VND ₫</span>
+            <svg aria-hidden="true" viewBox="0 0 12 12"><path d="m3 4.5 3 3 3-3"/></svg>
+          </button>
         </div>
       </div>
     </header>
@@ -108,7 +111,7 @@
 
       <section class="demo-guide" aria-labelledby="demo-title">
         <div><p class="eyebrow">Interactive preview</p><h2 id="demo-title">Check the header states</h2></div>
-        <div class="demo-guide__items"><span>Desktop: hover or click Women / Men</span><span>Mobile: resize below 992px, then open Menu</span><span>Scroll to test sticky hide / reveal</span></div>
+        <div class="demo-guide__items"><span>Desktop + tablet: hover Women / Men</span><span>Mobile: resize below 768px, then open Menu</span><span>Scroll to test sticky hide / reveal</span></div>
       </section>
 
       <section class="tiles" aria-label="Featured collections">
@@ -118,21 +121,76 @@
       </section>
     </main>
 
-    <aside class="drawer drawer--left" id="navigation-drawer" data-drawer="navigation" role="dialog" aria-modal="true" aria-labelledby="navigation-title" aria-hidden="true" hidden>
-      <div class="drawer__header"><h2 id="navigation-title">Menu</h2><button class="icon-button drawer__close" type="button" data-close-drawer aria-label="Close menu"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
-      <div class="drawer__body drawer__body--nav">
-        <div class="drawer__nav-root" data-nav-root>
-          <a href="#women">Women <span aria-hidden="true">↗</span></a>
-          <button type="button" data-open-nested="women">Women menu <span aria-hidden="true">→</span></button>
-          <a href="#men">Men <span aria-hidden="true">↗</span></a>
-          <button type="button" data-open-nested="men">Men menu <span aria-hidden="true">→</span></button>
-          <a href="#pages">Pages <span aria-hidden="true">↗</span></a>
-          <a href="#journal">Our journal <span aria-hidden="true">↗</span></a>
-        </div>
-        <section class="drawer__nested" data-nested="women" hidden aria-labelledby="women-menu-title"><button class="back-button" type="button" data-close-nested><span aria-hidden="true">←</span> Back</button><h3 id="women-menu-title">Women</h3><a href="#women-top-picks">Top picks</a><a href="#women-best-sellers">Best sellers</a><a href="#hiking">Hiking</a><a href="#running">Running</a><a href="#women-sale">On sale</a><a href="#women-all">Shop all women</a></section>
-        <section class="drawer__nested" data-nested="men" hidden aria-labelledby="men-menu-title"><button class="back-button" type="button" data-close-nested><span aria-hidden="true">←</span> Back</button><h3 id="men-menu-title">Men</h3><a href="#men-top-picks">Top picks</a><a href="#men-best-sellers">Best sellers</a><a href="#men-running">Running</a><a href="#men-training">Training</a><a href="#men-sale">On sale</a><a href="#men-all">Shop all men</a></section>
+    <aside class="drawer drawer--left navigation-drawer" id="navigation-drawer" data-drawer="navigation" role="dialog" aria-modal="true" aria-labelledby="navigation-title" aria-hidden="true" hidden>
+      <h2 class="sr-only" id="navigation-title">Navigation menu</h2>
+      <div class="mobile-nav-stage" data-mobile-nav-stage>
+        <section class="mobile-nav-panel mobile-nav-panel--root" data-nav-root aria-label="Main menu">
+          <div class="mobile-nav-header">
+            <img class="mobile-nav-logo" src="helix-logo.svg" alt="HELIX" width="112" height="24">
+            <button class="icon-button drawer__close" type="button" data-close-drawer aria-label="Close menu"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+          </div>
+          <nav class="mobile-nav-links" aria-label="Mobile primary">
+            <button type="button" data-open-nested="women" aria-controls="mobile-women" aria-expanded="false">Women <span aria-hidden="true">›</span></button>
+            <button type="button" data-open-nested="men" aria-controls="mobile-men" aria-expanded="false">Men <span aria-hidden="true">›</span></button>
+            <a href="#pages">Pages <span aria-hidden="true">›</span></a>
+            <a href="#search" data-open-drawer="search">Find your shoes</a>
+          </nav>
+          <div class="mobile-nav-footer">
+            <a class="mobile-login" href="#login">Login</a>
+            <div class="mobile-locales">
+              <button type="button"><span class="currency__flag" aria-hidden="true">★</span> VND ₫ <span aria-hidden="true">⌄</span></button>
+              <button type="button">English <span aria-hidden="true">⌄</span></button>
+            </div>
+            <div class="mobile-socials" aria-label="Social media">
+              <a href="#facebook" aria-label="Facebook">f</a>
+              <a href="#instagram" aria-label="Instagram">◎</a>
+              <a href="#youtube" aria-label="YouTube">▶</a>
+              <a href="#tiktok" aria-label="TikTok">♪</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="mobile-nav-panel mobile-nav-panel--nested" id="mobile-women" data-nested="women" aria-labelledby="women-menu-title" aria-hidden="true" inert>
+          <div class="mobile-nav-header mobile-nav-header--nested">
+            <button class="mobile-back" type="button" data-close-nested aria-label="Back to main menu"><span aria-hidden="true">‹</span></button>
+            <h3 id="women-menu-title">Women</h3>
+            <button class="icon-button drawer__close" type="button" data-close-drawer aria-label="Close menu"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+          </div>
+          <div class="mobile-nav-scroll">
+            <nav class="mobile-submenu" aria-label="Women">
+              <a href="#women-top-picks">Top picks</a><a href="#women-best-sellers">Best sellers</a><a href="#women-trending">Trending</a><a href="#women-new">New arrivals</a><a href="#women-sale">On sale</a>
+              <button type="button">By activity <span aria-hidden="true">›</span></button>
+              <button type="button">By feature <span aria-hidden="true">›</span></button>
+            </nav>
+            <a class="mobile-promo-card mobile-promo-card--women" href="#women-sale"><span class="mobile-promo-art"><strong>UP TO <b>50% OFF</b></strong><i class="menu-shoe menu-shoe--light"></i></span><b>Women's sale</b><small>Shop now <span aria-hidden="true">↗</span></small></a>
+            <a class="mobile-promo-card mobile-promo-card--pool" href="#summer-edit"><span class="mobile-promo-art"><i class="pool-person"></i></span><b>Summer edit</b><small>Discover <span aria-hidden="true">↗</span></small></a>
+          </div>
+        </section>
+
+        <section class="mobile-nav-panel mobile-nav-panel--nested" id="mobile-men" data-nested="men" aria-labelledby="men-menu-title" aria-hidden="true" inert>
+          <div class="mobile-nav-header mobile-nav-header--nested">
+            <button class="mobile-back" type="button" data-close-nested aria-label="Back to main menu"><span aria-hidden="true">‹</span></button>
+            <h3 id="men-menu-title">Men</h3>
+            <button class="icon-button drawer__close" type="button" data-close-drawer aria-label="Close menu"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+          </div>
+          <div class="mobile-nav-scroll">
+            <nav class="mobile-submenu" aria-label="Men">
+              <a href="#men-top-picks">Top picks</a><a href="#men-best-sellers">Best sellers</a><a href="#men-trending">Trending</a><a href="#men-new">New arrivals</a><a href="#men-sale">On sale</a>
+              <button type="button">By activity <span aria-hidden="true">›</span></button>
+              <button type="button">By feature <span aria-hidden="true">›</span></button>
+            </nav>
+            <section class="mobile-deals" aria-labelledby="mobile-deals-title">
+              <h4 id="mobile-deals-title">Best deals 🔥</h4>
+              <div class="mobile-product-grid">
+                <a href="#prime-form"><span class="mobile-product-art"><em>-45%</em><i class="menu-shoe menu-shoe--brown"></i><b aria-hidden="true">▢</b></span><strong>Prime form - Men</strong><small><mark>2.935.000₫</mark> <s>5.337.000₫</s></small></a>
+                <a href="#base-line"><span class="mobile-product-art"><em>-40%</em><i class="menu-shoe menu-shoe--blue"></i><b aria-hidden="true">▢</b></span><strong>Base line - Men</strong><small><mark>3.202.000₫</mark> <s>5.337.000₫</s></small></a>
+                <a href="#form-core"><span class="mobile-product-art"><em>-11%</em><i class="menu-shoe menu-shoe--navy"></i><b aria-hidden="true">▢</b></span><strong>Form core - Men</strong><small><mark>3.825.000₫</mark></small></a>
+                <a href="#frame-one"><span class="mobile-product-art"><em>-17%</em><i class="menu-shoe menu-shoe--stone"></i><b aria-hidden="true">▢</b></span><strong>Frame one - Men</strong><small><mark>3.558.000₫</mark></small></a>
+              </div>
+            </section>
+          </div>
+        </section>
       </div>
-      <div class="drawer__footer"><a href="#account">Log in</a><a href="#stores">Store locations</a><button class="currency currency--drawer" type="button">VND <span aria-hidden="true">⌄</span></button></div>
     </aside>
 
     <aside class="drawer" id="search-drawer" data-drawer="search" role="dialog" aria-modal="true" aria-labelledby="search-title" aria-hidden="true" hidden>
@@ -147,7 +205,7 @@
 
     <aside class="drawer" id="cart-drawer" data-drawer="cart" role="dialog" aria-modal="true" aria-labelledby="cart-title" aria-hidden="true" hidden>
       <div class="drawer__header"><h2 id="cart-title">Cart <span class="drawer__count">(0)</span></h2><button class="icon-button drawer__close" type="button" data-close-drawer aria-label="Close cart"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
-      <div class="drawer__body cart-empty"><div class="cart-empty__icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 5h2l1.5 10.5h10L20 8H7"/><circle cx="9.5" cy="19" r="1"/><circle cx="17" cy="19" r="1"/></svg></div><h3>Your cart is empty</h3><p>Good shoes are waiting. Add a pair and they’ll show up here.</p><a class="button button--ink" href="#shop">Continue shopping</a></div>
+      <div class="drawer__body cart-empty"><div class="cart-empty__icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5.25 8.25h13.5l-.8 12H6.05l-.8-12Z"/><path d="M9 9V6.75a3 3 0 0 1 6 0V9"/></svg></div><h3>Your cart is empty</h3><p>Good shoes are waiting. Add a pair and they’ll show up here.</p><a class="button button--ink" href="#shop">Continue shopping</a></div>
     </aside>
 
     <script src="script.js" defer></script>

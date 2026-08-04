@@ -25,7 +25,21 @@ The `demo/` directory is a self-contained static preview of the documented heade
 - `demo/index.html` — semantic header, announcement bar, hero, responsive navigation, drawers, and preview content.
 - `demo/styles.css` — responsive tokens and the desktop/tablet/mobile visual system.
 - `demo/script.js` — announcement rotation, mega-menu, drawer, nested-menu, focus, Escape, scrim, and sticky-header behavior.
+- `demo/helix-logo.svg` — image-based HELIX wordmark used in the header and mobile drawer.
 - `demo/server.mjs` — a small no-build local server for checking the preview.
+
+### August 4, 2026 visual-alignment revision
+
+- Changed announcement rotation from horizontal movement to a vertical scroll-up transition.
+- Replaced the text-built logo with a dedicated SVG image wordmark.
+- Smoothed sticky-header morphing and scroll-direction hide/reveal motion.
+- Changed Women and Men mega menus to open on pointer hover and keyboard focus; the chevron reverses while active.
+- Made the desktop and tablet mega menus span the complete header width.
+- Limited the mega-menu blur layer to content below the header and reduced its opacity/blur strength.
+- Repositioned the action group and replaced the cart with a shopping-bag icon and a compact Vietnam currency selector.
+- Kept desktop-style navigation through the tablet breakpoint; mobile navigation begins below 768px.
+- Rebuilt the mobile navigation as a full-viewport, square-corner drawer with the reference login, locale, and social footer.
+- Added separate Women editorial and Men deal submenu layouts; nested panels slide in from the right while the root menu exits left.
 
 Run it from the repository root with:
 
