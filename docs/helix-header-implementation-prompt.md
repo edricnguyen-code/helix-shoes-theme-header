@@ -591,18 +591,31 @@ Implement a small custom element or controller for each concern rather than one 
 
 Avoid measuring `height: auto` every animation frame. Measure the panel once at open, set a CSS variable for the target height, animate, then clear the inline height after completion. In the Shopify editor, respond to section and block select/deselect events without autoplay fighting the editor.
 
+## Approved implementation overrides — August 4, 2026
+
+These decisions were made during visual review of the converted Shopify section and supersede conflicting geometry or behavior from earlier observations:
+
+- Desktop navigation is active at 991 px and wider. At 990 px and below, use the centered-logo hamburger header so labels, logo, currency, and actions cannot collide around 772–990 px.
+- Every top-level Shopify menu item with children opens the same full-width desktop mega-menu surface, even when no matching editor block exists. A matching block only adds optional promotion or collection content.
+- Do not show a permanent underline for `link.current` or `link.child_active`. Keep `aria-current` for assistive technology; animate the text-only underline during hover, focus-within, and open states. Rotate the neighboring chevron over the identical duration/easing without including it in the underline.
+- At 990 px and below, the navigation drawer is `100vw × 100dvh`, flush to the viewport, and square-cornered. Root link content uses 20 px inline padding. Search/cart drawers may keep their own responsive geometry.
+- A parent row is one full-width disclosure button. Its destination link moves to the heading of the resulting nested panel. Level-two and level-three panels enter from the right while the previous panel exits left over 520 ms `cubic-bezier(.7,0,.2,1)`.
+- The root drawer footer always displays four styled social circles. When a merchant URL is blank, render a non-interactive, `aria-hidden` icon placeholder rather than removing the circle.
+- Use a 64 px drawer heading, 59 px drawer logo, 42 px login pill, 47 px localization row, and 53 px social row.
+- Use accumulated scroll intent rather than single-event direction: sticky after 28 px; stay visible before 92 px; hide after more than 20 px net downward intent; reveal after more than 10 px net upward intent. Reset intent while a menu/drawer is open.
+- Insert a `.25em` inline gap before the free-shipping `<strong>` and message `<a>` elements. This recreates an ordinary typed space despite those nodes being separate flex items.
+
 ## Acceptance criteria
 
 ### Visual and responsive
 
 - At 1440 px, header is 80 ±1 px high with 50 px side insets, a 110 px centered logo, left navigation, currency, and three 44 px action targets.
 - At 991 px, desktop header remains active. At 990 px, it switches to the mobile/tablet header.
-- At 820 px, mobile-layout header uses 30 px side padding and the navigation drawer is 400 px wide with 16 px viewport inset.
-- At 768 px, side padding remains 30 px. At 767 px, it becomes 16 px.
-- At 390 px, header is 56 px high, logo is 90 px wide, and the navigation/search drawers use 8 px viewport inset and 16 px radius.
+- At 820 px and 768 px, the mobile/tablet header is active and its navigation drawer fills the viewport without radius.
+- At 390 px, the header is 56 px high, the header logo is 90 px wide, the drawer logo is 59 px wide, and navigation fills the viewport without radius.
 - Homepage at top is transparent over the hero; collection/product/content pages are solid white.
-- Desktop after scroll becomes a 16 px-radius floating card with 16 px top offset and subtle shadow.
-- Mobile/tablet after downward scroll hides by approximately 110%; any upward scroll beyond threshold restores it as a flat white header.
+- Desktop after scroll becomes a rounded floating card with a 12 px default top offset, 50 px default side inset, and subtle shadow; all three values remain editor-adjustable.
+- Mobile/tablet after sustained downward intent hides by approximately 110%; deliberate upward intent beyond the reveal threshold restores it as a white floating header.
 - No content jump occurs when switching transparent, solid, sticky, or open-drawer states.
 
 ### Navigation
@@ -628,7 +641,7 @@ Avoid measuring `height: auto` every animation frame. Measure the panel once at 
 - Every icon-only control has a unique accessible name and a target of at least 44 × 44 px.
 - Every disclosure reports expanded/collapsed state.
 - Dialogs expose `aria-modal`, move and trap focus, close with Escape, and restore focus.
-- `aria-current="page"` and a visible non-color-only current-page indicator are present.
+- `aria-current="page"` remains present without forcing the hover underline into a permanent active state.
 - Focus outline is 2 px `#0B61CD` with 1 px offset.
 - Reduced-motion behavior passes without losing functionality.
 - Keyboard-only operation can reach and use every menu, submenu, search, cart, locale, account, and announcement control.

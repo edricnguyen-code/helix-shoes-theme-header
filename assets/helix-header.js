@@ -7,11 +7,13 @@ if (!customElements.get('helix-header')) {
       this.openItem = null;
       this.closeTimer = null;
       this.lastScrollY = window.scrollY;
+      this.scrollIntent = 0;
       this.scrollTicking = false;
       this.drawerTrigger = null;
       this.searchAbortController = null;
       this.mobileTransitioning = false;
       this.panelDuration = Number.parseInt(getComputedStyle(this).getPropertyValue('--helix-panel-duration'), 10) || 300;
+      this.mobilePanelDuration = Number.parseInt(getComputedStyle(this).getPropertyValue('--helix-mobile-panel-duration'), 10) || 520;
       this.defaultPredictiveMarkup = new Map();
       this.onClick = this.handleClick.bind(this);
       this.onKeydown = this.handleKeydown.bind(this);
@@ -60,12 +62,12 @@ if (!customElements.get('helix-header')) {
     bindDesktopMenus() {
       this.menuItems.forEach((item) => {
         item.addEventListener('pointerenter', () => {
-          if (!window.matchMedia('(min-width: 768px)').matches) return;
+          if (!window.matchMedia('(min-width: 991px)').matches) return;
           clearTimeout(this.closeTimer);
           this.openDesktopItem(item);
         });
         item.addEventListener('pointerleave', () => {
-          if (!window.matchMedia('(min-width: 768px)').matches) return;
+          if (!window.matchMedia('(min-width: 991px)').matches) return;
           clearTimeout(this.closeTimer);
           this.closeTimer = setTimeout(() => this.closeDesktopItem(item), 110);
         });
@@ -82,13 +84,13 @@ if (!customElements.get('helix-header')) {
       this.querySelectorAll('[data-helix-localization-details]').forEach((details) => {
         let hoverTimer;
         details.addEventListener('pointerenter', () => {
-          if (!window.matchMedia('(min-width: 768px)').matches) return;
+          if (!window.matchMedia('(min-width: 991px)').matches) return;
           clearTimeout(hoverTimer);
           details.open = true;
           this.syncLocalizationState();
         });
         details.addEventListener('pointerleave', () => {
-          if (!window.matchMedia('(min-width: 768px)').matches) return;
+          if (!window.matchMedia('(min-width: 991px)').matches) return;
           clearTimeout(hoverTimer);
           hoverTimer = setTimeout(() => {
             details.open = false;
@@ -190,7 +192,7 @@ if (!customElements.get('helix-header')) {
 
     openDesktopItem(item) {
       const panel = item?.querySelector(':scope > [data-helix-menu-panel]');
-      if (!item || !panel || !window.matchMedia('(min-width: 768px)').matches) return;
+      if (!item || !panel || !window.matchMedia('(min-width: 991px)').matches) return;
       if (this.openItem && this.openItem !== item) this.closeDesktopItem(this.openItem, true);
       clearTimeout(this.closeTimer);
       panel.hidden = false;
@@ -200,6 +202,8 @@ if (!customElements.get('helix-header')) {
         item.classList.add('is-open');
         this.openItem = item;
         this.classList.add('has-open-menu');
+        this.classList.remove('is-hidden');
+        this.scrollIntent = 0;
         this.showOverlay();
         this.updateHeaderBottom();
       });
@@ -233,6 +237,8 @@ if (!customElements.get('helix-header')) {
       this.classList.toggle('has-open-localization', anyOpen);
       if (anyOpen) {
         this.closeAllDesktopMenus();
+        this.classList.remove('is-hidden');
+        this.scrollIntent = 0;
         this.showOverlay();
         this.updateHeaderBottom();
       } else if (!this.classList.contains('has-open-menu')) {
@@ -323,7 +329,7 @@ if (!customElements.get('helix-header')) {
           this.mobileTransitioning = false;
           const focusTarget = target.querySelector('[data-helix-mobile-back], a, button');
           focusTarget?.focus({ preventScroll: true });
-        }, this.panelDuration);
+        }, this.mobilePanelDuration);
       });
     }
 
@@ -460,19 +466,24 @@ if (!customElements.get('helix-header')) {
     updateStickyState(initial) {
       const mode = this.dataset.stickyMode;
       const currentY = Math.max(window.scrollY, 0);
-      const threshold = this.initialTop + (this.shell?.offsetHeight || 0);
-      const pastHeader = currentY > threshold;
+      const delta = currentY - this.lastScrollY;
+      const menuOpen = this.classList.contains('has-open-menu') || this.classList.contains('has-open-localization');
+      const drawerOpen = Boolean(this.querySelector('[data-helix-drawer][open]'));
+      const sticky = currentY > 28;
       if (mode === 'none') {
         this.classList.remove('is-sticky', 'is-hidden');
-      } else if (pastHeader) {
-        this.classList.add('is-sticky');
-        const movingDown = currentY > this.lastScrollY + 2;
-        const movingUp = currentY < this.lastScrollY - 2;
-        const canHide = this.dataset.hideOnScroll === 'true' && mode === 'scroll_up' && !this.classList.contains('has-open-menu') && !this.querySelector('[data-helix-drawer][open]');
-        if (canHide && movingDown && currentY > threshold + 30) this.classList.add('is-hidden');
-        if (movingUp || mode === 'always') this.classList.remove('is-hidden');
       } else {
-        this.classList.remove('is-sticky', 'is-hidden');
+        this.classList.toggle('is-sticky', sticky);
+        const canHide = this.dataset.hideOnScroll === 'true' && mode === 'scroll_up';
+        if (!sticky || currentY < 92 || menuOpen || drawerOpen || mode === 'always' || !canHide) {
+          this.classList.remove('is-hidden');
+          this.scrollIntent = 0;
+        } else if (Math.abs(delta) > 1) {
+          if (Math.sign(delta) !== Math.sign(this.scrollIntent)) this.scrollIntent = 0;
+          this.scrollIntent = Math.max(-32, Math.min(32, this.scrollIntent + delta));
+          if (this.scrollIntent > 20) this.classList.add('is-hidden');
+          if (this.scrollIntent < -10) this.classList.remove('is-hidden');
+        }
       }
       this.lastScrollY = currentY;
       if (!initial) this.updateHeaderBottom();
@@ -485,7 +496,7 @@ if (!customElements.get('helix-header')) {
 
     handleResize() {
       this.updateHeaderBottom();
-      if (!window.matchMedia('(min-width: 768px)').matches) this.closeAllDesktopMenus();
+      if (!window.matchMedia('(min-width: 991px)').matches) this.closeAllDesktopMenus();
     }
 
     handleEditorBlockSelect(event) {

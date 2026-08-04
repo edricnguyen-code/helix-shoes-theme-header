@@ -31,6 +31,7 @@
     --helix-header-letter-spacing: {{ section.settings.navigation_letter_spacing | divided_by: 100.0 }}em;
     --helix-logo-desktop: {{ section.settings.logo_width_desktop }}px;
     --helix-logo-mobile: {{ section.settings.logo_width_mobile }}px;
+    --helix-logo-drawer: {{ section.settings.logo_width_drawer }}px;
     --helix-surface: {{ section.settings.surface_color }};
     --helix-foreground: {{ section.settings.foreground_color }};
     --helix-transparent-foreground: {{ section.settings.transparent_foreground_color }};
@@ -39,10 +40,14 @@
     --helix-overlay-blur: {{ section.settings.overlay_blur }}px;
     --helix-desktop-inset: {{ section.settings.desktop_sticky_inset }}px;
     --helix-mobile-inset: {{ section.settings.mobile_sticky_inset }}px;
-    --helix-sticky-radius: {{ section.settings.sticky_radius }}px;
+    --helix-desktop-sticky-top: {{ section.settings.desktop_sticky_top }}px;
+    --helix-mobile-sticky-top: {{ section.settings.mobile_sticky_top }}px;
+    --helix-desktop-sticky-radius: {{ section.settings.desktop_sticky_radius }}px;
+    --helix-mobile-sticky-radius: {{ section.settings.mobile_sticky_radius }}px;
     --helix-drawer-desktop: {{ section.settings.desktop_drawer_width }}px;
     --helix-header-duration: {{ section.settings.header_transition_duration }}ms;
     --helix-panel-duration: {{ section.settings.panel_transition_duration }}ms;
+    --helix-mobile-panel-duration: {{ section.settings.mobile_panel_transition_duration }}ms;
     --helix-header-z: {{ section.settings.z_index }};
   "
 >
@@ -96,6 +101,7 @@
     { "type": "image_picker", "id": "transparent_logo", "label": "White logo for transparent header", "info": "If blank, the standard logo is converted to white with CSS while transparent." },
     { "type": "range", "id": "logo_width_desktop", "label": "Desktop logo width", "min": 70, "max": 220, "step": 2, "unit": "px", "default": 110 },
     { "type": "range", "id": "logo_width_mobile", "label": "Mobile logo width", "min": 60, "max": 160, "step": 2, "unit": "px", "default": 90 },
+    { "type": "range", "id": "logo_width_drawer", "label": "Mobile drawer logo width", "min": 40, "max": 120, "step": 1, "unit": "px", "default": 59 },
 
     { "type": "header", "content": "Position and motion" },
     { "type": "checkbox", "id": "transparent_homepage", "label": "Transparent over homepage hero", "default": true },
@@ -105,11 +111,15 @@
       { "value": "scroll_up", "label": "Reveal when scrolling up" }
     ] },
     { "type": "checkbox", "id": "hide_on_scroll", "label": "Hide while scrolling down", "default": true },
-    { "type": "range", "id": "desktop_sticky_inset", "label": "Desktop sticky side inset", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 0 },
-    { "type": "range", "id": "mobile_sticky_inset", "label": "Mobile sticky side inset", "min": 0, "max": 16, "step": 1, "unit": "px", "default": 4 },
-    { "type": "range", "id": "sticky_radius", "label": "Sticky corner radius", "min": 0, "max": 20, "step": 1, "unit": "px", "default": 0 },
-    { "type": "range", "id": "header_transition_duration", "label": "Sticky/header transition", "min": 150, "max": 800, "step": 25, "unit": "ms", "default": 425 },
+    { "type": "range", "id": "desktop_sticky_inset", "label": "Desktop sticky side inset", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 50 },
+    { "type": "range", "id": "mobile_sticky_inset", "label": "Mobile sticky side inset", "min": 0, "max": 16, "step": 1, "unit": "px", "default": 8 },
+    { "type": "range", "id": "desktop_sticky_top", "label": "Desktop sticky top offset", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "mobile_sticky_top", "label": "Mobile sticky top offset", "min": 0, "max": 16, "step": 1, "unit": "px", "default": 8 },
+    { "type": "range", "id": "desktop_sticky_radius", "label": "Desktop sticky corner radius", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "mobile_sticky_radius", "label": "Mobile sticky corner radius", "min": 0, "max": 20, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "header_transition_duration", "label": "Sticky/header transition", "min": 150, "max": 800, "step": 25, "unit": "ms", "default": 625 },
     { "type": "range", "id": "panel_transition_duration", "label": "Menu panel transition", "min": 150, "max": 600, "step": 25, "unit": "ms", "default": 300 },
+    { "type": "range", "id": "mobile_panel_transition_duration", "label": "Mobile nested-menu transition", "min": 200, "max": 700, "step": 20, "unit": "ms", "default": 520 },
     { "type": "range", "id": "z_index", "label": "Header layer", "min": 10, "max": 100, "step": 1, "default": 40 },
 
     { "type": "header", "content": "Sizing and typography" },
@@ -155,7 +165,7 @@
       "type": "mega_menu",
       "name": "Mega menu",
       "settings": [
-        { "type": "text", "id": "trigger_label", "label": "Top-level menu label", "info": "Must exactly match a main-menu item, for example Women or Men." },
+        { "type": "text", "id": "trigger_label", "label": "Top-level menu label", "info": "Optional featured content is attached when this exactly matches a main-menu item. All menu items with children still receive a full-width panel." },
         { "type": "text", "id": "quick_links_heading", "label": "Quick-links heading", "default": "Top picks" },
         { "type": "select", "id": "content_mode", "label": "Featured content", "default": "promos", "options": [
           { "value": "none", "label": "None" }, { "value": "promos", "label": "Two promotion cards" }, { "value": "collection", "label": "Collection products" }

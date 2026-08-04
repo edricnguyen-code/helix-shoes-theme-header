@@ -12,12 +12,12 @@ Renders the solid and optional transparent Helix logo variants with one accessib
 
 <a class="{{ logo_class }}{% if section.settings.transparent_logo != blank %} has-transparent-logo{% endif %}" href="{{ routes.root_url }}" aria-label="{{ 'sections.header.home_label' | t: shop_name: shop.name }}">
   {%- if section.settings.logo != blank -%}
-    {{ section.settings.logo | image_url: width: 500 | image_tag: widths: '180, 220, 330, 440, 500', sizes: '(min-width: 768px) var(--helix-logo-desktop), var(--helix-logo-mobile)', class: 'helix-header__logo-image helix-header__logo-image--solid', loading: 'eager', alt: shop.name }}
+    {{ section.settings.logo | image_url: width: 500 | image_tag: widths: '180, 220, 330, 440, 500', sizes: '(min-width: 991px) var(--helix-logo-desktop), var(--helix-logo-mobile)', class: 'helix-header__logo-image helix-header__logo-image--solid', loading: 'eager', alt: shop.name }}
   {%- else -%}
     <img class="helix-header__logo-image helix-header__logo-image--solid helix-header__logo-image--fallback" src="{{ 'helix-logo.svg' | asset_url }}" width="112" height="24" loading="eager" alt="{{ shop.name | escape }}">
   {%- endif -%}
 
   {%- if section.settings.transparent_logo != blank -%}
-    {{ section.settings.transparent_logo | image_url: width: 500 | image_tag: widths: '180, 220, 330, 440, 500', sizes: '(min-width: 768px) var(--helix-logo-desktop), var(--helix-logo-mobile)', class: 'helix-header__logo-image helix-header__logo-image--transparent', loading: 'eager', alt: '' }}
+    {{ section.settings.transparent_logo | image_url: width: 500 | image_tag: widths: '180, 220, 330, 440, 500', sizes: '(min-width: 991px) var(--helix-logo-desktop), var(--helix-logo-mobile)', class: 'helix-header__logo-image helix-header__logo-image--transparent', loading: 'eager', alt: '' }}
   {%- endif -%}
 </a>

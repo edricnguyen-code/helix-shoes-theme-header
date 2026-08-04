@@ -28,23 +28,8 @@ Renders the desktop primary navigation and maps mega-menu blocks to menu labels.
         endif
       -%}
 
-      {%- if link.links != blank and menu_block != blank -%}
+      {%- if link.links != blank -%}
         {% render 'helix-mega-menu', link: link, menu_block: menu_block, section_id: section.id, item_index: forloop.index %}
-      {%- elsif link.links != blank -%}
-        {%- assign dropdown_id = 'HelixDropdown-' | append: section.id | append: '-' | append: forloop.index -%}
-        <li class="helix-nav-item helix-nav-item--dropdown{% if link_active %} is-current{% endif %}" data-helix-menu-item>
-          <div class="helix-nav-trigger">
-            <a class="helix-nav-link" href="{{ link.url }}"{% if link_active %} aria-current="page"{% endif %}><span>{{ link.title | escape }}</span></a>
-            <button class="helix-nav-toggle" type="button" aria-expanded="false" aria-controls="{{ dropdown_id }}" aria-label="{{ 'sections.header.toggle_menu' | t: title: link.title }}" data-helix-menu-toggle>{% render 'helix-icon', name: 'chevron-down' %}</button>
-          </div>
-          <div class="helix-dropdown" id="{{ dropdown_id }}" data-helix-menu-panel hidden>
-            <ul role="list">
-              {%- for child_link in link.links -%}
-                <li><a href="{{ child_link.url }}"{% if child_link.current %} aria-current="page"{% endif %}>{{ child_link.title | escape }}</a></li>
-              {%- endfor -%}
-            </ul>
-          </div>
-        </li>
       {%- else -%}
         <li class="helix-nav-item helix-nav-item--single{% if link_active %} is-current{% endif %}"><a class="helix-nav-link" href="{{ link.url }}"{% if link_active %} aria-current="page"{% endif %}><span>{{ link.title | escape }}</span></a></li>
       {%- endif -%}

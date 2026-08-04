@@ -71,10 +71,12 @@
 }
 
 .helix-announcement__message strong {
+  margin-inline-start: .25em;
   font-weight: 700;
 }
 
 .helix-announcement__message a {
+  margin-inline-start: .25em;
   color: inherit;
   text-decoration: underline;
   text-decoration-thickness: 1px;

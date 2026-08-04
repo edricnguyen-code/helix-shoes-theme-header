@@ -21,61 +21,9 @@
         "button_label": "Shop all shoes",
         "button_link": ""
       }
-    },
-    "announcement_bar_39K87D": {
-      "type": "announcement-bar",
-      "blocks": {
-        "free_shipping_iWfLnk": {
-          "type": "free_shipping",
-          "settings": {
-            "threshold": "5.000.000₫"
-          }
-        },
-        "message_mgKVxz": {
-          "type": "message",
-          "settings": {
-            "text": "Receive 20% off your first order. <a href=\"/collections/all\">Shop now</a>"
-          }
-        }
-      },
-      "block_order": [
-        "free_shipping_iWfLnk",
-        "message_mgKVxz"
-      ],
-      "name": "t:sections.announcement.name",
-      "settings": {
-        "background_color": "#D3F285",
-        "foreground_color": "#1A1312",
-        "height": 38,
-        "stage_width": 700,
-        "font_size": 14,
-        "arrow_size": 20,
-        "show_arrows": true,
-        "autoplay": true,
-        "autoplay_seconds": 5,
-        "transition_duration": 700,
-        "pause_on_hover": true,
-        "pause_on_focus": true
-      }
-    },
-    "main_helix_demo_hzdeYC": {
-      "type": "main-helix-demo",
-      "name": "Header preview hero",
-      "settings": {
-        "background_color": "#56644E",
-        "overlay_opacity": 25,
-        "height": 720,
-        "eyebrow": "Move differently",
-        "heading": "Find your next pair",
-        "text": "<p>A complete preview surface for the responsive Helix header.</p>",
-        "button_label": "Shop all shoes",
-        "button_link": ""
-      }
     }
   },
   "order": [
-    "main",
-    "announcement_bar_39K87D",
-    "main_helix_demo_hzdeYC"
+    "main"
   ]
 }

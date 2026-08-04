@@ -37,7 +37,7 @@ The `demo/` directory is a self-contained static preview of the documented heade
 - Made the desktop and tablet mega menus span the complete header width.
 - Limited the mega-menu blur layer to content below the header and reduced its opacity/blur strength.
 - Repositioned the action group and replaced the cart with a shopping-bag icon and a compact Vietnam currency selector.
-- Kept desktop-style navigation through the tablet breakpoint; mobile navigation begins below 768px.
+- Kept desktop-style navigation at 991 px and wider; the collision-safe mobile/tablet header begins at 990 px.
 - Rebuilt the mobile navigation as a full-viewport, square-corner drawer with the reference login, locale, and social footer.
 - Added separate Women editorial and Men deal submenu layouts; nested panels slide in from the right while the root menu exits left.
 
@@ -57,13 +57,25 @@ The `demo/` directory is a self-contained static preview of the documented heade
 - Updated the announcement copy to match the reference: “Free shipping for all orders over 5.000.000₫” with a bold price, plus “Receive 20% off your first order. Shop now” with an underlined Shop now link.
 - Preserved the reduced-motion override so the announcement remains static for users who request less motion.
 
+### August 4, 2026 Shopify menu parity revision
+
+- Added a normal typographic gap before both the bold shipping threshold and the underlined “Shop now” link without changing the announcement copy or vertical motion.
+- Removed the route-current selector from the top-navigation underline animation. A label is now underlined only during hover, keyboard focus, or an open menu; the chevron reverses on the same state and timing while the line remains beneath the text only.
+- Made every Shopify top-level link with children render through the full-width mega-menu component. A matching mega-menu block is now optional and adds featured promotions/products instead of deciding whether the full-width layout exists.
+- Replaced the sticky direction check with the demo’s accumulated scroll-intent thresholds. The header morphs into the floating card after 28 px, hides after sustained downward travel, and reveals after deliberate upward travel without flickering on small wheel/touch deltas.
+- Moved the desktop/mobile layout boundary to 991/990 px. At 772 px the desktop navigation cannot overlap the centered logo or action controls because the hamburger layout is active.
+- Made mobile and tablet parent rows full-width disclosure buttons. Level two and level three panels both enter from the right while their parent exits left; the destination for each parent remains available from the nested panel heading.
+- Matched the mobile drawer’s 64 px header, 59 px drawer logo, 20 px navigation inset, 42 px login control, 47 px localization row, and 53 px social row. Facebook, Instagram, YouTube, and TikTok circles remain visible as non-interactive placeholders until merchant URLs are configured.
+- Added editor controls for drawer-logo width, separate desktop/mobile sticky top offsets and corner radii, and the mobile nested-panel duration. The checked-in Shopify section-group values now match the floating demo card instead of retaining the older zero-inset state.
+- Preserved the Shopify-synced `pebble-demo` navigation and merchant block data while removing the duplicated announcement/hero pair that had been added to the homepage template.
+
 Run it from the repository root with:
 
 ```powershell
 node demo/server.mjs
 ```
 
-Then open <http://127.0.0.1:4173/>. Check the desktop mega-menu, search/account/cart drawers, announcement controls, scroll hide/reveal behavior, and the mobile menu below 768 px. The standalone preview now includes a third navigation level: Menu → Women/Men → By activity/By feature. This preview is not a Shopify runtime; use Shopify CLI for real menu, market, predictive-search, customer, product, and cart data.
+Then open <http://127.0.0.1:4173/>. Check the desktop mega-menu, search/account/cart drawers, announcement controls, scroll hide/reveal behavior, and the mobile/tablet menu at 990 px or below. The standalone preview includes a third navigation level: Menu → Women/Men → By activity/By feature. This preview is not a Shopify runtime; use Shopify CLI for real menu, market, predictive-search, customer, product, and cart data.
 
 ## Production Shopify conversion — August 4, 2026
 
@@ -73,7 +85,7 @@ The repository root is now a minimal valid Shopify theme and can be previewed or
 - `sections/announcement-bar.liquid` — configurable announcements with deterministic bottom-to-top motion, synchronized fade, manual arrows, autoplay, pause controls, and reduced-motion handling.
 - `sections/predictive-search.liquid` — Shopify predictive-search results for suggestions, products, and collections.
 - `sections/header-group.json` — ready-to-render announcement and header group with Women and Men mega-menu blocks.
-- `snippets/helix-desktop-nav.liquid` and `snippets/helix-mega-menu.liquid` — menu-driven desktop navigation, compact dropdowns, full-viewport mega menus, direct links, and three-level link rendering.
+- `snippets/helix-desktop-nav.liquid` and `snippets/helix-mega-menu.liquid` — menu-driven desktop navigation where every parent item receives a full-viewport panel; matching editor blocks add optional promotional or collection content.
 - `snippets/helix-mobile-menu.liquid` — a native modal drawer with generated root, second-level, and third-level panels. Every child menu that has grandchildren receives a right-to-left third-level panel and an animated back path.
 - `snippets/helix-mega-feature.liquid` — two editor-managed promotion cards or live collection products with pricing, discounts, and optional quick add.
 - `snippets/helix-localization.liquid` — native Shopify localization forms backed by the store’s configured countries, currencies, and languages.
@@ -92,12 +104,12 @@ At the top of the homepage, navigation text, chevrons, action icons, cart state,
 The header editor exposes the following groups:
 
 - Navigation: main menu, popular searches, and empty-cart links.
-- Logo: standard image, optional white/transparent image, and separate desktop/mobile widths.
-- Position and motion: transparent homepage mode, sticky behavior, scroll hide/reveal, insets, radius, z-index, and independent header/panel durations.
+- Logo: standard image, optional white/transparent image, and separate desktop/mobile/drawer widths.
+- Position and motion: transparent homepage mode, sticky behavior, intent-based scroll hide/reveal, desktop/mobile top and side insets, radius, z-index, and independent header/desktop-panel/mobile-panel durations.
 - Sizing and typography: desktop/mobile heights, horizontal spacing, navigation gap, size, weight, line height, and letter spacing.
 - Colors and overlay: solid surface/content, transparent content, border, overlay color/opacity, and backdrop blur.
 - Controls and markets: search, account, cart, country/currency, language, and editable currency badge.
-- Drawers and social links: search/cart drawer width plus Facebook/Instagram/YouTube/TikTok URLs; the phone navigation is intentionally fixed to full viewport width with square corners.
+- Drawers and social links: search/cart drawer width plus Facebook/Instagram/YouTube/TikTok URLs; all four social icons stay visible as styled placeholders until URLs are configured, and mobile/tablet navigation uses the full viewport with square corners.
 - Mega-menu blocks: exact trigger label, quick-link heading, content mode, two complete promotion cards, or collection/product count/prices/discount/quick-add controls.
 
 Shopify navigation supplies all menu headings and URLs. Create a three-level menu such as:
@@ -132,7 +144,7 @@ Alternatively, package or upload the repository as a theme, open Customize → H
 - Shopify CLI `4.5.2` Theme Check: zero errors across the theme. The remaining warnings come only from the two standalone `examples/` fixtures, where `section` is intentionally undefined outside a real section runtime.
 - JavaScript syntax checks pass for the production header and static demo.
 - JSON parsing passes for locales, theme settings, section group, and index template.
-- Browser checks pass at desktop and 390 × 844 mobile sizes for transparent white controls, full-width desktop menu/under-header blur, full-screen phone drawer, populated Women submenu, and populated third-level By activity panel.
+- Browser checks pass at 1440 × 900, 772 × 900, and 390 × 844. Verified states include transparent white controls, non-persistent underlines, synchronized active underline/chevron, full-width desktop menu and under-header blur, sticky hide/reveal intent, the 990 px hamburger switch, full-screen square-corner drawer, four social controls, populated Women submenu, and the right-to-left third-level By activity panel. The browser console is clear.
 
 ## Deliverables
 
@@ -219,7 +231,7 @@ These values are replication tokens. Keep them as CSS custom properties so a mer
 | 768–991 px | Mobile/tablet controls | 56 px | 30 px | 90 × 15.5 px | 40 × 40 px (use 44 px hit area where possible) |
 | ≤ 767 px | Mobile controls | 56 px | 16 px | 90 × 15.5 px | 40 × 40 px (use 44 px hit area where possible) |
 
-The inspected reference used an exact `@media (min-width: 992px)` switch. The delivered production section applies the later review decision instead: desktop-style, hover-capable navigation remains active across tablets at 768 px and above, while the full-screen mobile panel stack is limited to 767 px and below.
+The inspected reference used an exact `@media (min-width: 992px)` switch. The delivered production section uses the equivalent collision-safe 991/990 boundary: hover navigation starts at 991 px, and the full-screen mobile/tablet panel stack is active at 990 px and below. This latest review decision supersedes the earlier experimental 768 px boundary.
 
 ## Implemented header architecture
 
@@ -288,7 +300,7 @@ Build these as merchant-editable navigation/block data rather than hard-coded ar
 - At 820 px the inset is 30 px; at 390 px it is 16 px.
 - Use a menu button, centered logo link, and search/account/cart controls. Keep minimum 44 px accessible hit areas even when the visual icon box is 40 px.
 - On scroll down, hide the header with `translateY(-110%)`; reveal it on scroll up using the observed 0.5 s `cubic-bezier(.6,0,.4,1)` transition. Respect `prefers-reduced-motion`.
-- The navigation drawer is a fixed panel: 400 px wide with 16 px inset on tablet; approximately 374 px wide with 8 px inset on the 390 px phone; 16 px radius; overlay scrim with blur/dim.
+- The original reference used an inset drawer in some captured states. The approved production behavior overrides that observation: at 990 px and below, navigation occupies the full viewport with no border radius; search/cart drawers retain their dedicated responsive geometry.
 - Drawer entry is `translateX(-100%) → 0` over 0.5 s `cubic-bezier(.7,0,.2,1)`. Nested Women content opens as a second panel with the same directional language and a visible Back control.
 - Implement a native dialog-like focus model: `role="dialog"`, `aria-modal="true"`, labelled heading, focus trap, Escape close, scroll lock, and return focus to the opening control.
 
@@ -334,10 +346,10 @@ The reference had useful focus styling but several opportunities for improvement
 
 ### Visual and responsive
 
-- [x] Desktop-style navigation renders on desktop and tablet at 768 px and above; the full-screen mobile header and three-level drawer render below 768 px.
-- [ ] Tablet uses 30 px inset and phones use 16 px inset below 768 px.
-- [ ] Announcement bar, header, logo, action targets, drawer sizes, radius, colors, and typography meet the measured tolerances in the full prompt.
-- [ ] Homepage transparent state, inner-page white state, desktop floating sticky card, and mobile hide/reveal sticky behavior match the documented states.
+- [x] Desktop navigation renders at 991 px and above; the full-screen mobile/tablet header and three-level drawer render at 990 px and below.
+- [x] At 772 px and 390 px the navigation drawer fills the viewport with square corners; root links have a 20 px inset and all four social controls are present.
+- [x] Announcement spacing, header/logo/action geometry, drawer sizing, colors, and typography match the approved demo tokens.
+- [x] Homepage transparent state, white menu-active state, floating sticky card, and intent-based hide/reveal behavior are implemented and browser-checked in the demo.
 - [x] Mega-menu groups, promotion cards, product feature cards, scrim, chevron, underline, and item entrance motion are present.
 - [x] Search, account, cart, currency, mobile menu, second-/third-level menus, and empty cart states are connected to Shopify routes and data.
 

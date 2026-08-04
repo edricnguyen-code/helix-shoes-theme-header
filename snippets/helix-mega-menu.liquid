@@ -22,20 +22,31 @@ Renders a desktop full-width mega menu for a top-level navigation link.
       assign has_direct_links = true
     endif
   endfor
-  assign quick_links_heading = menu_block.settings.quick_links_heading
+  assign has_feature = false
+  assign quick_links_heading = blank
+  if menu_block != blank
+    assign quick_links_heading = menu_block.settings.quick_links_heading
+    if menu_block.settings.content_mode == 'promos'
+      if menu_block.settings.promo_heading_1 != blank or menu_block.settings.promo_image_1 != blank or menu_block.settings.promo_heading_2 != blank or menu_block.settings.promo_image_2 != blank
+        assign has_feature = true
+      endif
+    elsif menu_block.settings.content_mode == 'collection' and menu_block.settings.featured_collection != blank
+      assign has_feature = true
+    endif
+  endif
   if quick_links_heading == blank
     assign quick_links_heading = 'sections.header.quick_links' | t
   endif
 -%}
 
-<li class="helix-nav-item helix-nav-item--mega{% if link_active %} is-current{% endif %}" data-helix-menu-item data-block-id="{{ menu_block.id }}"{% if menu_block != blank %} {{ menu_block.shopify_attributes }}{% endif %}>
+<li class="helix-nav-item helix-nav-item--mega{% if link_active %} is-current{% endif %}" data-helix-menu-item{% if menu_block != blank %} data-block-id="{{ menu_block.id }}" {{ menu_block.shopify_attributes }}{% endif %}>
   <div class="helix-nav-trigger">
     <a class="helix-nav-link" href="{{ link.url }}"{% if link_active %} aria-current="page"{% endif %}><span>{{ link.title | escape }}</span></a>
     <button class="helix-nav-toggle" type="button" aria-expanded="false" aria-controls="{{ panel_id }}" aria-label="{{ 'sections.header.toggle_menu' | t: title: link.title }}" data-helix-menu-toggle>{% render 'helix-icon', name: 'chevron-down' %}</button>
   </div>
 
   <div class="helix-mega" id="{{ panel_id }}" data-helix-menu-panel hidden>
-    <div class="helix-mega__inner">
+    <div class="helix-mega__inner{% unless has_feature %} helix-mega__inner--links-only{% endunless %}">
       <div class="helix-mega__navigation">
         {%- if has_direct_links -%}
           <div class="helix-mega__column">

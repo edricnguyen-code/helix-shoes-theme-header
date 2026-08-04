@@ -64,7 +64,7 @@
   };
 
   const openMega = (item) => {
-    if (!item || !window.matchMedia('(min-width: 768px)').matches) return;
+    if (!item || !window.matchMedia('(min-width: 991px)').matches) return;
     window.clearTimeout(megaCloseTimer);
     megaItems.forEach((entry) => { if (entry !== item) closeMega(entry, true); });
     const button = item.querySelector('[data-mega-toggle]');
@@ -393,7 +393,7 @@
   startAnnouncement();
 
   window.addEventListener('resize', () => {
-    if (window.matchMedia('(max-width: 767px)').matches) closeMegaMenus(true);
+    if (window.matchMedia('(max-width: 990px)').matches) closeMegaMenus(true);
     if (activeMega) showScrim('menu');
   }, { passive: true });
 

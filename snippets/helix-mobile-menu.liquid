@@ -33,8 +33,7 @@ Renders the responsive Shopify navigation drawer with second- and third-level sl
                 {%- assign level_two_id = 'HelixMobileLevel2-' | append: section.id | append: '-' | append: forloop.index -%}
                 <li class="helix-mobile-list__item{% if link.current or link.child_active %} is-current{% endif %}">
                   {%- if link.links != blank -%}
-                    <a href="{{ link.url }}"{% if link.current or link.child_active %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
-                    <button type="button" aria-label="{{ 'sections.header.open_submenu' | t: title: link.title }}" aria-controls="{{ level_two_id }}" aria-expanded="false" data-helix-mobile-open="{{ level_two_id }}">{% render 'helix-icon', name: 'chevron-right' %}</button>
+                    <button class="helix-mobile-list__submenu-trigger" type="button" aria-label="{{ 'sections.header.open_submenu' | t: title: link.title }}" aria-controls="{{ level_two_id }}" aria-expanded="false" data-helix-mobile-open="{{ level_two_id }}"><span>{{ link.title | escape }}</span>{% render 'helix-icon', name: 'chevron-right' %}</button>
                   {%- else -%}
                     <a class="helix-mobile-list__full-link" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
                   {%- endif -%}
@@ -49,11 +48,11 @@ Renders the responsive Shopify navigation drawer with second- and third-level sl
         <div class="helix-mobile-footer">
           {%- if section.settings.show_account -%}<a class="helix-mobile-footer__login" href="{{ login_url }}">{% if customer %}{{ 'sections.header.account' | t }}{% else %}{{ 'sections.header.login' | t }}{% endif %}</a>{%- endif -%}
           {% render 'helix-localization', section: section, context: 'mobile', show_language: true %}
-          <div class="helix-mobile-socials" aria-label="{{ 'sections.header.social_media' | t }}">
-            {%- if section.settings.facebook_url != blank -%}<a href="{{ section.settings.facebook_url }}" aria-label="{{ 'sections.header.social_facebook' | t }}">{% render 'helix-icon', name: 'facebook' %}</a>{%- endif -%}
-            {%- if section.settings.instagram_url != blank -%}<a href="{{ section.settings.instagram_url }}" aria-label="{{ 'sections.header.social_instagram' | t }}">{% render 'helix-icon', name: 'instagram' %}</a>{%- endif -%}
-            {%- if section.settings.youtube_url != blank -%}<a href="{{ section.settings.youtube_url }}" aria-label="{{ 'sections.header.social_youtube' | t }}">{% render 'helix-icon', name: 'youtube' %}</a>{%- endif -%}
-            {%- if section.settings.tiktok_url != blank -%}<a href="{{ section.settings.tiktok_url }}" aria-label="{{ 'sections.header.social_tiktok' | t }}">{% render 'helix-icon', name: 'tiktok' %}</a>{%- endif -%}
+          <div class="helix-mobile-socials" role="group" aria-label="{{ 'sections.header.social_media' | t }}">
+            {%- if section.settings.facebook_url != blank -%}<a href="{{ section.settings.facebook_url }}" aria-label="{{ 'sections.header.social_facebook' | t }}">{% render 'helix-icon', name: 'facebook' %}</a>{%- else -%}<span aria-hidden="true">{% render 'helix-icon', name: 'facebook' %}</span>{%- endif -%}
+            {%- if section.settings.instagram_url != blank -%}<a href="{{ section.settings.instagram_url }}" aria-label="{{ 'sections.header.social_instagram' | t }}">{% render 'helix-icon', name: 'instagram' %}</a>{%- else -%}<span aria-hidden="true">{% render 'helix-icon', name: 'instagram' %}</span>{%- endif -%}
+            {%- if section.settings.youtube_url != blank -%}<a href="{{ section.settings.youtube_url }}" aria-label="{{ 'sections.header.social_youtube' | t }}">{% render 'helix-icon', name: 'youtube' %}</a>{%- else -%}<span aria-hidden="true">{% render 'helix-icon', name: 'youtube' %}</span>{%- endif -%}
+            {%- if section.settings.tiktok_url != blank -%}<a href="{{ section.settings.tiktok_url }}" aria-label="{{ 'sections.header.social_tiktok' | t }}">{% render 'helix-icon', name: 'tiktok' %}</a>{%- else -%}<span aria-hidden="true">{% render 'helix-icon', name: 'tiktok' %}</span>{%- endif -%}
           </div>
         </div>
       </section>
@@ -96,8 +95,7 @@ Renders the responsive Shopify navigation drawer with second- and third-level sl
                   {%- if child_link.links != blank -%}
                     {%- assign level_three_id = 'HelixMobileLevel3-' | append: section.id | append: '-' | append: top_index | append: '-' | append: forloop.index -%}
                     <li class="helix-mobile-list__item{% if child_link.current or child_link.child_active %} is-current{% endif %}">
-                      <a href="{{ child_link.url }}"{% if child_link.current or child_link.child_active %} aria-current="page"{% endif %}>{{ child_link.title | escape }}</a>
-                      <button type="button" aria-label="{{ 'sections.header.open_submenu' | t: title: child_link.title }}" aria-controls="{{ level_three_id }}" aria-expanded="false" data-helix-mobile-open="{{ level_three_id }}">{% render 'helix-icon', name: 'chevron-right' %}</button>
+                      <button class="helix-mobile-list__submenu-trigger" type="button" aria-label="{{ 'sections.header.open_submenu' | t: title: child_link.title }}" aria-controls="{{ level_three_id }}" aria-expanded="false" data-helix-mobile-open="{{ level_three_id }}"><span>{{ child_link.title | escape }}</span>{% render 'helix-icon', name: 'chevron-right' %}</button>
                     </li>
                   {%- endif -%}
                 {%- endfor -%}

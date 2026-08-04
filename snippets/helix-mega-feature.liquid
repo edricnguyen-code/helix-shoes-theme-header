@@ -11,13 +11,23 @@ Renders merchant-configured promotion cards or collection products in a mega men
 {%- liquid
   assign promo_sizes = '25vw'
   assign product_sizes = '14vw'
+  assign render_feature = false
   if mobile
-    assign promo_sizes = '(max-width: 767px) calc(100vw - 48px)'
-    assign product_sizes = '(max-width: 767px) 44vw'
+    assign promo_sizes = '(max-width: 990px) calc(100vw - 48px)'
+    assign product_sizes = '(max-width: 990px) 44vw'
+  endif
+  if menu_block != blank
+    if menu_block.settings.content_mode == 'promos'
+      if menu_block.settings.promo_heading_1 != blank or menu_block.settings.promo_image_1 != blank or menu_block.settings.promo_heading_2 != blank or menu_block.settings.promo_image_2 != blank
+        assign render_feature = true
+      endif
+    elsif menu_block.settings.content_mode == 'collection' and menu_block.settings.featured_collection != blank
+      assign render_feature = true
+    endif
   endif
 -%}
 
-{%- if menu_block != blank and menu_block.settings.content_mode != 'none' -%}
+{%- if render_feature -%}
   <div class="helix-mega-feature{% if mobile %} helix-mega-feature--mobile{% endif %}" data-helix-feature-mode="{{ menu_block.settings.content_mode }}">
     {%- case menu_block.settings.content_mode -%}
       {%- when 'promos' -%}
