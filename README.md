@@ -49,6 +49,12 @@ The `demo/` directory is a self-contained static preview of the documented heade
 - Hardened mobile submenu switching with an explicit `data-active-nested` state in addition to the animated panel class.
 - Added an on-screen mobile instruction and submenu preview labels so the nested transition and populated layouts are immediately checkable.
 
+### August 4, 2026 announcement motion refinement
+
+- Changed announcement messages to use explicit enter/leave states so every direction change still brings the next message from the bottom upward.
+- Added a shared cubic-bezier ease-in-out curve for the vertical travel and a synchronized opacity fade for outgoing/incoming messages.
+- Preserved the reduced-motion override so the announcement remains static for users who request less motion.
+
 Run it from the repository root with:
 
 ```powershell

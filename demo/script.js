@@ -247,14 +247,37 @@
   const messages = [...document.querySelectorAll('.announcement__message')];
   let announcementIndex = 0;
   let announcementTimer;
+  let announcementTransitionTimer;
   const setAnnouncement = (index) => {
     announcementIndex = (index + messages.length) % messages.length;
-    track.style.transform = `translate3d(0, -${announcementIndex * 50}%, 0)`;
-    messages.forEach((message, messageIndex) => {
-      const active = messageIndex === announcementIndex;
-      message.setAttribute('aria-hidden', active ? 'false' : 'true');
-      message.tabIndex = active ? 0 : -1;
+    const nextMessage = messages[announcementIndex];
+    const currentMessage = messages.find((message) => message.classList.contains('is-active'));
+    window.clearTimeout(announcementTransitionTimer);
+
+    if (!currentMessage || currentMessage === nextMessage) {
+      messages.forEach((message, messageIndex) => {
+        const active = messageIndex === announcementIndex;
+        message.classList.toggle('is-active', active);
+        message.classList.remove('is-leaving');
+        message.setAttribute('aria-hidden', active ? 'false' : 'true');
+        message.tabIndex = active ? 0 : -1;
+      });
+      return;
+    }
+
+    currentMessage.classList.remove('is-active');
+    currentMessage.classList.add('is-leaving');
+    currentMessage.setAttribute('aria-hidden', 'true');
+    currentMessage.tabIndex = -1;
+    nextMessage.classList.remove('is-leaving', 'is-active');
+    nextMessage.classList.add('is-entering');
+    nextMessage.setAttribute('aria-hidden', 'false');
+    nextMessage.tabIndex = 0;
+    requestAnimationFrame(() => {
+      nextMessage.classList.remove('is-entering');
+      nextMessage.classList.add('is-active');
     });
+    announcementTransitionTimer = window.setTimeout(() => currentMessage.classList.remove('is-leaving'), reduceMotion.matches ? 0 : 760);
   };
   const stopAnnouncement = () => window.clearInterval(announcementTimer);
   const startAnnouncement = () => {
