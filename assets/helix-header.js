@@ -15,6 +15,8 @@ if (!customElements.get('helix-header')) {
       this.surfaceReadyAt = 0;
       this.panelDuration = Number.parseInt(getComputedStyle(this).getPropertyValue('--helix-panel-duration'), 10) || 300;
       this.surfaceDuration = Number.parseInt(getComputedStyle(this).getPropertyValue('--helix-surface-duration'), 10) || 425;
+      const handoffOverlap = Number.parseInt(getComputedStyle(this).getPropertyValue('--helix-panel-handoff'), 10);
+      this.handoffOverlap = Number.isNaN(handoffOverlap) ? 55 : Math.max(0, handoffOverlap);
       this.mobilePanelDuration = Number.parseInt(getComputedStyle(this).getPropertyValue('--helix-mobile-panel-duration'), 10) || 520;
       this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       this.defaultPredictiveMarkup = new Map();
@@ -92,6 +94,7 @@ if (!customElements.get('helix-header')) {
           if (details.closest('[data-helix-drawer]') || !window.matchMedia('(min-width: 991px)').matches) return;
           event.preventDefault();
           if (details.open) {
+            details.classList.remove('is-panel-open');
             details.open = false;
             this.syncLocalizationState();
             return;
@@ -99,7 +102,11 @@ if (!customElements.get('helix-header')) {
           this.setPanelSequence(details, this.getPanelSequenceDelay());
           this.positionLocalizationPopover(details);
           details.open = true;
+          details.querySelector('.helix-localization__popover--country')?.getBoundingClientRect();
           this.syncLocalizationState();
+          requestAnimationFrame(() => {
+            if (details.open) details.classList.add('is-panel-open');
+          });
         });
         details.addEventListener('pointerenter', () => {
           if (!window.matchMedia('(min-width: 991px)').matches) return;
@@ -107,12 +114,17 @@ if (!customElements.get('helix-header')) {
           if (!details.open) this.setPanelSequence(details, this.getPanelSequenceDelay());
           this.positionLocalizationPopover(details);
           details.open = true;
+          details.querySelector('.helix-localization__popover--country')?.getBoundingClientRect();
           this.syncLocalizationState();
+          requestAnimationFrame(() => {
+            if (details.open) details.classList.add('is-panel-open');
+          });
         });
         details.addEventListener('pointerleave', () => {
           if (!window.matchMedia('(min-width: 991px)').matches) return;
           clearTimeout(hoverTimer);
           hoverTimer = setTimeout(() => {
+            details.classList.remove('is-panel-open');
             details.open = false;
             this.syncLocalizationState();
           }, details.classList.contains('is-sequenced-open') ? this.surfaceDuration + 160 : 140);
@@ -120,6 +132,7 @@ if (!customElements.get('helix-header')) {
         details.addEventListener('toggle', () => {
           if (details.open) this.positionLocalizationPopover(details);
           else {
+            details.classList.remove('is-panel-open');
             this.clearPanelSequence(details);
             this.resetCountrySearch(details);
           }
@@ -231,6 +244,7 @@ if (!customElements.get('helix-header')) {
       this.setPanelSequence(item, sequenceDelay);
       panel.hidden = false;
       panel.removeAttribute('inert');
+      panel.getBoundingClientRect();
       item.querySelector('[data-helix-menu-toggle]')?.setAttribute('aria-expanded', 'true');
       requestAnimationFrame(() => {
         item.classList.add('is-open');
@@ -290,6 +304,7 @@ if (!customElements.get('helix-header')) {
 
     closeAllLocalization() {
       this.querySelectorAll('[data-helix-localization-details][open]').forEach((details) => {
+        details.classList.remove('is-panel-open');
         details.removeAttribute('open');
         this.clearPanelSequence(details);
         this.resetCountrySearch(details);
@@ -560,10 +575,10 @@ if (!customElements.get('helix-header')) {
         || this.classList.contains('is-sticky')) return 0;
       const now = performance.now();
       if (this.classList.contains('has-open-menu') || this.classList.contains('has-open-localization')) {
-        return Math.max(0, Math.round(this.surfaceReadyAt - now));
+        return Math.max(0, Math.round(this.surfaceReadyAt - now - this.handoffOverlap));
       }
       this.surfaceReadyAt = now + this.surfaceDuration;
-      return this.surfaceDuration;
+      return Math.max(0, this.surfaceDuration - this.handoffOverlap);
     }
 
     setPanelSequence(element, sequenceDelay) {

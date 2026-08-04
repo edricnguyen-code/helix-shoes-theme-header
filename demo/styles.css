@@ -53,7 +53,7 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 .announcement__control svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5; }
 
 .site-header { position: fixed; top: var(--announcement-height); left: 0; z-index: 80; isolation: isolate; width: 100%; border-radius: 0; color: #fff; transform: none; transition: top .62s var(--ease-sticky), left .62s var(--ease-sticky), width .62s var(--ease-sticky), border-radius .5s var(--ease-sticky), box-shadow .42s ease, color .42s var(--ease-sticky), transform .68s var(--ease-sticky); backface-visibility: hidden; }
-.site-header::before { position: absolute; inset: 0; z-index: 0; border-radius: inherit; background: rgba(255, 255, 255, .98); content: ""; transform: scaleY(0); transform-origin: top; transition: transform var(--surface-duration) var(--ease-sticky); }
+.site-header::before { position: absolute; inset: 0; z-index: 0; border-radius: inherit; background: rgba(255, 255, 255, .98); content: ""; transform: scaleY(0); transform-origin: top; transition: transform var(--surface-duration) cubic-bezier(.4, 0, .2, 1); }
 .site-header:is(.is-sticky, .is-menu-active)::before { transform: scaleY(1); }
 .site-header:is(.is-sticky, .is-menu-active) { color: var(--ink); }
 .site-header.is-sticky { top: 12px; left: var(--desktop-inset); width: calc(100% - (var(--desktop-inset) * 2)); border-radius: var(--drawer-radius); box-shadow: 0 10px 34px rgba(26, 19, 18, .12); }
@@ -105,10 +105,11 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 .currency-empty { margin: 0; padding: 30px 20px 40px; color: rgba(26, 19, 18, .58); text-align: center; }
 .header__menu-toggle { display: none; }
 
-.mega-menu { position: fixed; top: var(--menu-panel-top, calc(var(--announcement-height) + var(--header-desktop-height))); right: 0; left: 0; z-index: 2; width: 100%; padding: 32px 40px 38px; overflow: hidden; border-radius: 0; background: #fff; box-shadow: 0 20px 45px rgba(26, 19, 18, .12); clip-path: inset(0 0 100% 0); opacity: 0; transform: translate3d(0, -16px, 0); transform-origin: top; visibility: hidden; transition: clip-path var(--panel-duration) var(--ease-sticky), opacity .18s ease, transform var(--panel-duration) var(--ease-sticky), visibility 0s linear var(--panel-duration); pointer-events: none; }
-.nav-item.is-open .mega-menu { clip-path: inset(0 0 0 0); opacity: 1; transform: translate3d(0, 0, 0); visibility: visible; transition-delay: 0s; pointer-events: auto; }
+.mega-menu { position: fixed; top: calc(var(--menu-panel-top, calc(var(--announcement-height) + var(--header-desktop-height))) - 1px); right: 0; left: 0; z-index: 2; width: 100%; padding: 33px 40px 38px; overflow: hidden; border: 0; border-radius: 0; background: #fff; box-shadow: none; clip-path: inset(0 0 100% 0); opacity: 1; transform-origin: top; visibility: hidden; transition: clip-path var(--panel-duration) cubic-bezier(.22, .61, .36, 1), visibility 0s linear var(--panel-duration); pointer-events: none; }
+.nav-item.is-open .mega-menu { clip-path: inset(0 0 0 0); visibility: visible; transition-delay: 0s; pointer-events: auto; }
 .nav-item.is-open.is-sequenced-open .mega-menu { transition-delay: var(--sequence-delay, var(--surface-duration)); }
 .site-header.is-sticky .mega-menu { right: var(--desktop-inset); left: var(--desktop-inset); width: auto; border-radius: 0 0 var(--drawer-radius) var(--drawer-radius); }
+.site-header.is-sticky.is-menu-active { box-shadow: none; }
 .mega-menu__columns { display: grid; grid-template-columns: repeat(3, minmax(120px, 1fr)) minmax(210px, 1.3fr); gap: 30px; opacity: 0; transform: translate3d(0, 32px, 0); transition: opacity var(--content-duration) ease, transform var(--content-duration) var(--ease-sticky); }
 .nav-item.is-open .mega-menu__columns { opacity: 1; transform: translate3d(0, 0, 0); transition-delay: var(--content-delay); }
 .nav-item.is-open.is-sequenced-open .mega-menu__columns { transition-delay: calc(var(--sequence-delay, var(--surface-duration)) + var(--content-delay)); }

@@ -47,6 +47,7 @@
     --helix-drawer-desktop: {{ section.settings.desktop_drawer_width }}px;
     --helix-header-duration: {{ section.settings.header_transition_duration }}ms;
     --helix-surface-duration: {{ section.settings.surface_transition_duration }}ms;
+    --helix-panel-handoff: {{ section.settings.panel_handoff_overlap }}ms;
     --helix-panel-duration: {{ section.settings.panel_transition_duration }}ms;
     --helix-content-duration: {{ section.settings.panel_content_transition_duration }}ms;
     --helix-content-delay: {{ section.settings.panel_content_delay }}ms;
@@ -124,7 +125,8 @@
     { "type": "range", "id": "desktop_sticky_radius", "label": "Desktop sticky corner radius", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 16 },
     { "type": "range", "id": "mobile_sticky_radius", "label": "Mobile sticky corner radius", "min": 0, "max": 20, "step": 1, "unit": "px", "default": 12 },
     { "type": "range", "id": "header_transition_duration", "label": "Sticky/header transition", "min": 150, "max": 800, "step": 25, "unit": "ms", "default": 625 },
-    { "type": "range", "id": "surface_transition_duration", "label": "Transparent surface reveal", "min": 200, "max": 700, "step": 25, "unit": "ms", "default": 425, "info": "The submenu begins after this white header reveal completes." },
+    { "type": "range", "id": "surface_transition_duration", "label": "Transparent surface reveal", "min": 200, "max": 700, "step": 25, "unit": "ms", "default": 425, "info": "Controls the white header surface reveal before the submenu continues downward." },
+    { "type": "range", "id": "panel_handoff_overlap", "label": "Panel handoff overlap", "min": 0, "max": 120, "step": 5, "unit": "ms", "default": 55, "info": "Starts the submenu just before the header surface finishes so both read as one continuous sheet." },
     { "type": "range", "id": "panel_transition_duration", "label": "Menu panel transition", "min": 150, "max": 600, "step": 25, "unit": "ms", "default": 400 },
     { "type": "range", "id": "panel_content_transition_duration", "label": "Menu content glide", "min": 150, "max": 700, "step": 25, "unit": "ms", "default": 425 },
     { "type": "range", "id": "panel_content_delay", "label": "Menu content delay", "min": 0, "max": 250, "step": 10, "unit": "ms", "default": 100 },

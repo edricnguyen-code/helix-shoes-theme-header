@@ -15,6 +15,7 @@
   let scrollFrame = 0;
   let surfaceReadyAt = 0;
   const surfaceDuration = 425;
+  const handoffOverlap = 55;
 
   const focusable = (root) => [...root.querySelectorAll('a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])')]
     .filter((element) => !element.closest('[inert]') && element.offsetParent !== null);
@@ -77,9 +78,9 @@
     const now = performance.now();
     let sequenceDelay = 0;
     if (!reduceMotion.matches && !header.classList.contains('is-sticky')) {
-      if (header.classList.contains('is-menu-active')) sequenceDelay = Math.max(0, Math.round(surfaceReadyAt - now));
+      if (header.classList.contains('is-menu-active')) sequenceDelay = Math.max(0, Math.round(surfaceReadyAt - now - handoffOverlap));
       else {
-        sequenceDelay = surfaceDuration;
+        sequenceDelay = Math.max(0, surfaceDuration - handoffOverlap);
         surfaceReadyAt = now + surfaceDuration;
       }
     }

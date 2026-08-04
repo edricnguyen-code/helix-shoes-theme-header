@@ -6,6 +6,8 @@
 .helix-header-component {
   --helix-header-bottom: var(--helix-header-height-desktop, 80px);
   --helix-panel-ease: cubic-bezier(.22, 1, .36, 1);
+  --helix-surface-ease: cubic-bezier(.4, 0, .2, 1);
+  --helix-reveal-ease: cubic-bezier(.22, .61, .36, 1);
   display: block;
   position: relative;
   height: var(--helix-header-height-desktop, 80px);
@@ -93,7 +95,7 @@
   content: "";
   transform: scaleY(1);
   transform-origin: top;
-  transition: transform var(--helix-surface-duration, 425ms) var(--helix-panel-ease);
+  transition: transform var(--helix-surface-duration, 425ms) var(--helix-surface-ease);
 }
 
 .helix-header-component[data-transparent="true"]:not(.is-sticky):not(.has-open-menu):not(.has-open-localization) .helix-header__shell {
@@ -113,6 +115,10 @@
 .helix-header-component.has-open-menu .helix-header__shell,
 .helix-header-component.has-open-localization .helix-header__shell {
   color: var(--helix-foreground, #1a1a1a);
+}
+
+.helix-header-component.has-open-mega .helix-header__shell {
+  border-bottom-width: 0;
 }
 
 .helix-header-component:not(.is-sticky).has-open-menu .helix-header__shell,
@@ -471,7 +477,7 @@
   will-change: clip-path, transform;
 }
 
-.helix-localization--desktop .helix-localization__details[open] .helix-localization__popover--country {
+.helix-localization--desktop .helix-localization__details[open].is-panel-open .helix-localization__popover--country {
   clip-path: inset(0 0 0 0);
   opacity: 1;
   transform: translate3d(0, 0, 0);
@@ -479,7 +485,7 @@
   visibility: visible;
 }
 
-.helix-localization--desktop .helix-localization__details.is-sequenced-open[open] .helix-localization__popover--country {
+.helix-localization--desktop .helix-localization__details.is-sequenced-open[open].is-panel-open .helix-localization__popover--country {
   transition-delay: var(--helix-sequence-delay, var(--helix-surface-duration, 425ms));
 }
 
@@ -489,13 +495,13 @@
   transition: opacity var(--helix-content-duration, 425ms) ease, transform var(--helix-content-duration, 425ms) var(--helix-panel-ease);
 }
 
-.helix-localization--desktop .helix-localization__details[open] .helix-localization__popover-content {
+.helix-localization--desktop .helix-localization__details[open].is-panel-open .helix-localization__popover-content {
   opacity: 1;
   transform: translate3d(0, 0, 0);
   transition-delay: var(--helix-content-delay, 100ms);
 }
 
-.helix-localization--desktop .helix-localization__details.is-sequenced-open[open] .helix-localization__popover-content {
+.helix-localization--desktop .helix-localization__details.is-sequenced-open[open].is-panel-open .helix-localization__popover-content {
   transition-delay: calc(var(--helix-sequence-delay, var(--helix-surface-duration, 425ms)) + var(--helix-content-delay, 100ms));
 }
 
@@ -577,27 +583,24 @@
 
 .helix-mega {
   position: fixed;
-  top: var(--helix-header-bottom);
+  top: calc(var(--helix-header-bottom) - 1px);
   right: 0;
   left: 0;
   z-index: 1;
   min-height: 390px;
   overflow: hidden;
-  border-top: 1px solid var(--helix-border, #eaeaea);
+  border-top: 0;
   background: var(--helix-surface, #fff);
-  opacity: 0;
+  opacity: 1;
   clip-path: inset(0 0 100% 0);
-  transform: translate3d(0, -16px, 0);
   transform-origin: top;
-  transition: clip-path var(--helix-panel-duration, 400ms) var(--helix-panel-ease), opacity 180ms ease, transform var(--helix-panel-duration, 400ms) var(--helix-panel-ease), visibility 0s linear var(--helix-panel-duration, 400ms);
+  transition: clip-path var(--helix-panel-duration, 400ms) var(--helix-reveal-ease), visibility 0s linear var(--helix-panel-duration, 400ms);
   visibility: hidden;
-  will-change: clip-path, transform;
+  will-change: clip-path;
 }
 
 .helix-nav-item.is-open > .helix-mega {
-  opacity: 1;
   clip-path: inset(0 0 0 0);
-  transform: translate3d(0, 0, 0);
   transition-delay: 0ms;
   visibility: visible;
 }

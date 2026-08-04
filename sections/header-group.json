@@ -122,6 +122,7 @@
         "mobile_sticky_radius": 12,
         "header_transition_duration": 625,
         "surface_transition_duration": 425,
+        "panel_handoff_overlap": 55,
         "panel_transition_duration": 400,
         "panel_content_transition_duration": 425,
         "panel_content_delay": 100,

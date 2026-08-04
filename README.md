@@ -79,6 +79,14 @@ The `demo/` directory is a self-contained static preview of the documented heade
 - Added editor controls for submenu surface timing, panel timing, content timing/delay, compact-menu width, country-panel width, and compact-panel radius.
 - Mirrored Pages, searchable countries, flag imagery, and the synchronized motion in the standalone demo for direct local verification.
 
+### August 5, 2026 seamless mega-menu handoff
+
+- Re-timed the transparent white surface with a balanced easing curve and a configurable 55 ms panel overlap, removing the visible pause between the header and full mega-menu reveals.
+- Forced an initial rendered panel state before the open class is applied so repeated hover openings consistently animate instead of occasionally jumping to the end state.
+- Removed the mega menu's top border, vertical offset motion, opacity fade, and header bottom-border seam; the panel now overlaps the header by one pixel and reveals as one solid white sheet.
+- Staged the desktop country panel after its closed state is rendered so its top-down animation is also repeatable.
+- Added the `Panel handoff overlap` Shopify editor control and mirrored the corrected timing in the standalone demo.
+
 Run it from the repository root with:
 
 ```powershell
