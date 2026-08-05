@@ -21,9 +21,24 @@
         "button_label": "Shop all shoes",
         "button_link": ""
       }
+    },
+    "main_helix_demo_mCcFyK": {
+      "type": "main-helix-demo",
+      "name": "Header preview hero",
+      "settings": {
+        "background_color": "#56644E",
+        "overlay_opacity": 25,
+        "height": 720,
+        "eyebrow": "Move differently",
+        "heading": "Find your next pair",
+        "text": "<p>A complete preview surface for the responsive Helix header.</p>",
+        "button_label": "Shop all shoes",
+        "button_link": ""
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "main_helix_demo_mCcFyK"
   ]
 }
