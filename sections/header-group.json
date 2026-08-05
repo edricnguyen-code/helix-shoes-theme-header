@@ -115,7 +115,7 @@
         "logo_width_drawer": 59,
         "transparent_homepage": true,
         "sticky_mode": "scroll_up",
-        "hide_on_scroll": true,
+        "hide_on_scroll": false,
         "desktop_sticky_inset": 50,
         "mobile_sticky_inset": 8,
         "desktop_sticky_top": 12,

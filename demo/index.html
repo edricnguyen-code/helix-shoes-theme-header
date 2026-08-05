@@ -72,12 +72,12 @@
             </button>
             <div class="compact-menu" id="pages-menu" data-mega-panel hidden>
               <div class="compact-menu__content">
-                <a href="#about">About us</a>
-                <a href="#contact">Contact</a>
-                <a href="#faqs">Faqs</a>
-                <a href="#stores">Store locations</a>
-                <a href="#recent">Recently viewed</a>
-                <a href="#journal">Our journal</a>
+                <a href="#about"><span>About us</span></a>
+                <a href="#contact"><span>Contact</span></a>
+                <a href="#faqs"><span>Faqs</span></a>
+                <a href="#stores"><span>Store locations</span></a>
+                <a href="#recent"><span>Recently viewed</span></a>
+                <a href="#journal"><span>Our journal</span></a>
               </div>
             </div>
           </div>
@@ -272,7 +272,7 @@
 
     <aside class="drawer" id="search-drawer" data-drawer="search" role="dialog" aria-modal="true" aria-labelledby="search-title" aria-hidden="true" hidden>
       <div class="drawer__header"><h2 id="search-title">Search</h2><button class="icon-button drawer__close" type="button" data-close-drawer aria-label="Close search"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
-      <div class="drawer__body"><form class="search-form" action="#search" role="search"><label class="sr-only" for="search-input">Search products</label><input id="search-input" type="search" placeholder="Search shoes, stories, or activities"><button class="icon-button" type="submit" aria-label="Submit search"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.5 4.5"/></svg></button></form><p class="drawer__hint">Try “running”, “waterproof”, or “new arrivals”.</p><div class="search-suggestions"><p class="eyebrow">Popular right now</p><a href="#running">Running</a><a href="#waterproof">Waterproof</a><a href="#new">New arrivals</a></div></div>
+      <div class="drawer__body search-body"><form class="search-form" action="#search" role="search"><label class="sr-only" for="search-input">Search products</label><input id="search-input" type="search" placeholder="Search"><button class="icon-button" type="submit" aria-label="Submit search"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.5 4.5"/></svg></button></form><div class="search-suggestions"><p class="eyebrow">Popular searches</p><div class="search-suggestion-chips"><a href="#running">Running shoes</a><a href="#trail">Trail running shoes</a><a href="#hiking">Hiking shoes</a></div></div></div>
     </aside>
 
     <aside class="drawer" id="account-drawer" data-drawer="account" role="dialog" aria-modal="true" aria-labelledby="account-title" aria-hidden="true" hidden>
@@ -281,8 +281,8 @@
     </aside>
 
     <aside class="drawer" id="cart-drawer" data-drawer="cart" role="dialog" aria-modal="true" aria-labelledby="cart-title" aria-hidden="true" hidden>
-      <div class="drawer__header"><h2 id="cart-title">Cart <span class="drawer__count">(0)</span></h2><button class="icon-button drawer__close" type="button" data-close-drawer aria-label="Close cart"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
-      <div class="drawer__body cart-empty"><div class="cart-empty__icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5.25 8.25h13.5l-.8 12H6.05l-.8-12Z"/><path d="M9 9V6.75a3 3 0 0 1 6 0V9"/></svg></div><h3>Your cart is empty</h3><p>Good shoes are waiting. Add a pair and they’ll show up here.</p><a class="button button--ink" href="#shop">Continue shopping</a></div>
+      <div class="drawer__header"><h2 id="cart-title">Cart</h2><button class="icon-button drawer__close" type="button" data-close-drawer aria-label="Close cart"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+      <div class="drawer__body cart-empty"><h3>Your cart is empty</h3><p>Start exploring these great collections</p><nav class="cart-empty__links" aria-label="Suggested collections"><a href="#trending">Trending</a><a href="#best-sellers">Best sellers</a><a href="#sale">On sale</a></nav></div>
     </aside>
 
     <script src="script.js" defer></script>

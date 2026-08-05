@@ -29,6 +29,13 @@ Renders the search drawer with a working Shopify search fallback and predictive 
               <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
             {%- endfor -%}
           </ul>
+        {%- else -%}
+          <p class="helix-drawer__eyebrow">{{ 'sections.header.popular_searches' | t }}</p>
+          <ul class="helix-search-suggestions" role="list">
+            <li><a href="{{ routes.search_url }}?q=running+shoes">{{ 'sections.header.running_shoes' | t }}</a></li>
+            <li><a href="{{ routes.search_url }}?q=trail+running+shoes">{{ 'sections.header.trail_running_shoes' | t }}</a></li>
+            <li><a href="{{ routes.search_url }}?q=hiking+shoes">{{ 'sections.header.hiking_shoes' | t }}</a></li>
+          </ul>
         {%- endif -%}
       </div>
     </div>

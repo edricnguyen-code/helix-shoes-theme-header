@@ -10,7 +10,7 @@ Renders a Shopify-aware cart drawer with empty and populated states.
 <dialog class="helix-drawer helix-drawer--right helix-cart-drawer" id="HelixCartDrawer-{{ section.id }}" aria-labelledby="HelixCartTitle-{{ section.id }}" data-helix-drawer data-helix-cart-drawer>
   <div class="helix-drawer__surface">
     <div class="helix-drawer__header">
-      <h2 id="HelixCartTitle-{{ section.id }}">{{ 'sections.header.cart' | t }} <span data-helix-cart-heading-count>({{ cart.item_count }})</span></h2>
+      <h2 id="HelixCartTitle-{{ section.id }}">{{ 'sections.header.cart' | t }} <span data-helix-cart-heading-count>{% unless cart.empty? %}({{ cart.item_count }}){% endunless %}</span></h2>
       <button class="helix-icon-button" type="button" aria-label="{{ 'sections.header.close_cart' | t }}" data-helix-close-drawer>{% render 'helix-icon', name: 'close' %}</button>
     </div>
 
@@ -25,7 +25,11 @@ Renders a Shopify-aware cart drawer with empty and populated states.
               {%- for link in section.settings.cart_empty_menu.links -%}<a href="{{ link.url }}">{{ link.title | escape }}</a>{%- endfor -%}
             </div>
           {%- else -%}
-            <a class="helix-button helix-button--dark" href="{{ routes.all_products_collection_url }}">{{ 'sections.header.continue_shopping' | t }}</a>
+            <div class="helix-cart-empty__links">
+              <a href="{{ routes.all_products_collection_url }}">{{ 'sections.header.trending' | t }}</a>
+              <a href="{{ routes.all_products_collection_url }}?sort_by=best-selling">{{ 'sections.header.best_sellers' | t }}</a>
+              <a href="{{ routes.all_products_collection_url }}?filter.v.availability=1">{{ 'sections.header.on_sale' | t }}</a>
+            </div>
           {%- endif -%}
         </div>
       {%- else -%}

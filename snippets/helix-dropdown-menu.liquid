@@ -28,7 +28,8 @@ Renders a compact desktop and tablet dropdown for a top-level navigation link.
     <div class="helix-dropdown__content">
       <ul role="list">
         {%- for child_link in link.links -%}
-          <li><a href="{{ child_link.url }}"{% if child_link.current or child_link.child_active %} aria-current="page"{% endif %}>{{ child_link.title | escape }}</a></li>
+          {%- assign item_delay = forloop.index0 | times: 35 -%}
+          <li style="--helix-item-delay: {{ item_delay }}ms;"><a href="{{ child_link.url }}"{% if child_link.current or child_link.child_active %} aria-current="page"{% endif %}><span>{{ child_link.title | escape }}</span></a></li>
         {%- endfor -%}
       </ul>
     </div>

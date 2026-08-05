@@ -10,8 +10,6 @@
   let activeMega = null;
   let returnFocus = null;
   let megaCloseTimer = null;
-  let lastScrollY = window.scrollY;
-  let scrollIntent = 0;
   let scrollFrame = 0;
   let surfaceReadyAt = 0;
   const surfaceDuration = 150;
@@ -74,7 +72,7 @@
   };
 
   const openMega = (item) => {
-    if (!item || !window.matchMedia('(min-width: 991px)').matches) return;
+    if (!item || !window.matchMedia('(min-width: 768px)').matches) return;
     if (item.classList.contains('is-open')) return;
     window.clearTimeout(megaCloseTimer);
     const panel = item.querySelector('[data-mega-panel]');
@@ -337,18 +335,8 @@
   const updateStickyHeader = () => {
     scrollFrame = 0;
     const currentY = Math.max(window.scrollY, 0);
-    const delta = currentY - lastScrollY;
     header.classList.toggle('is-sticky', currentY > 28);
-    if (currentY < 92 || activeMega || activeDrawer) {
-      header.classList.remove('is-hidden');
-      scrollIntent = 0;
-    } else if (Math.abs(delta) > 1) {
-      if (Math.sign(delta) !== Math.sign(scrollIntent)) scrollIntent = 0;
-      scrollIntent = Math.max(-32, Math.min(32, scrollIntent + delta));
-      if (scrollIntent > 20) header.classList.add('is-hidden');
-      if (scrollIntent < -10) header.classList.remove('is-hidden');
-    }
-    lastScrollY = currentY;
+    header.classList.remove('is-hidden');
     if (activeMega) showScrim('menu');
   };
 
@@ -449,7 +437,7 @@
   startAnnouncement();
 
   window.addEventListener('resize', () => {
-    if (window.matchMedia('(max-width: 990px)').matches) closeMegaMenus(true);
+    if (window.matchMedia('(max-width: 767px)').matches) closeMegaMenus(true);
     if (activeMega) {
       const panel = activeMega.querySelector('[data-mega-panel]');
       if (panel?.classList.contains('mega-menu')) {

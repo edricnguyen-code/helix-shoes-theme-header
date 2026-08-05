@@ -11,9 +11,8 @@ Use this document as the implementation brief for a coding agent or theme develo
 The password-protected storefront was opened with the supplied password. The header was inspected at controlled viewport widths and in multiple states:
 
 - Desktop: 1440 × 900 and 1280 × 800.
-- Desktop/mobile switch boundary: 991 px and 990 px.
-- Tablet/mobile-layout view: 820 × 900.
-- Tablet/mobile spacing boundary: 768 px and 767 px.
+- Desktop/tablet versus mobile switch boundary: 768 px and 767 px.
+- Tablet desktop-navigation views: 820 × 900 and 772 × 900.
 - Mobile: 390 × 844.
 - Homepage at the top, homepage after scrolling, and a collection page at the top.
 - Closed header, mobile navigation drawer, nested mobile mega-menu panel, search drawer, cart drawer, keyboard focus, and scroll-down/scroll-up sticky behavior.
@@ -92,11 +91,11 @@ Use semantic HTML: a native `<header>` landmark, a native `<nav aria-label="Prim
 - Honor `prefers-reduced-motion: reduce` by disabling autoplay or requiring manual navigation.
 - Do not automatically announce every timed slide to screen readers. Use `aria-live="polite"` only for user-initiated changes.
 
-### 2. Desktop header: 991 px and wider
+### 2. Desktop and tablet header: 768 px and wider
 
 **Observed**
 
-- Desktop markup becomes visible at 991 px. It is hidden at 990 px.
+- Desktop markup becomes visible at 768 px. It is hidden at 767 px.
 - Header height: 80.39 px; implement as 80 px.
 - Horizontal section padding: 50 px.
 - Header row vertical padding: 24 px.
@@ -155,18 +154,18 @@ Opening any header surface must immediately switch the header to a solid white/d
 - Background opacity transition: 0.2 s `cubic-bezier(0.6, 0, 0.4, 1)`.
 - The floating card remains visible during continued downward scrolling.
 
-### 5. Tablet and mobile header: 990 px and narrower
+### 5. Mobile header: 767 px and narrower
 
 **Observed**
 
-- Mobile/tablet markup is visible at 990 px and below.
+- Mobile markup is visible at 767 px and below.
 - Height: 56 px.
 - Three visual zones:
   - Left: hamburger/menu toggle.
   - Center: logo.
   - Right: search and cart.
 - Account and country/currency are removed from the header row and moved into the navigation drawer.
-- Tablet horizontal padding from 768–990 px: 30 px.
+- Tablet desktop-navigation padding from 768–899 px is tightened to 16 px; from 900–1199 px it is capped at 28 px.
 - Mobile horizontal padding at 767 px and below: 16 px.
 - Menu/search/cart targets in the reference are 40 × 40 px, with a 24 px icon and 8 px padding.
 - Logo: 90 × 15.5 px.
@@ -189,6 +188,10 @@ Preserve the 24 px visible icons and 56 px header height, but enlarge the actual
 - The announcement bar does not return with the sticky header.
 
 Use a small directional threshold, approximately 8–12 px, to prevent jitter. Do not hide the header while a drawer or disclosure is open, while a header input has focus, or within the first header-height of the page.
+
+**Approved implementation update — August 5, 2026**
+
+The checked-in section keeps the floating header visible on desktop, tablet, and mobile. `hide_on_scroll` remains available for merchants that prefer the observed directional behavior, but its schema default and the supplied header-group value are `false`.
 
 ## Navigation and mega menus
 
@@ -368,10 +371,9 @@ Use these CSS variables as the baseline:
 Do not expose the responsive breakpoint as a merchant setting unless the generated CSS is guaranteed to update consistently. Use fixed implementation constants:
 
 ```css
-@media (min-width: 991px) { /* desktop */ }
-@media (max-width: 990px) { /* tablet/mobile header */ }
-@media (min-width: 768px) and (max-width: 990px) { /* 30px inline padding */ }
-@media (max-width: 767px) { /* 16px inline padding; 8px drawer inset */ }
+@media (min-width: 768px) { /* desktop and tablet navigation */ }
+@media (min-width: 768px) and (max-width: 899px) { /* compact tablet spacing */ }
+@media (max-width: 767px) { /* mobile header and inset drawers */ }
 ```
 
 ## States and interaction details
@@ -595,27 +597,38 @@ Avoid measuring `height: auto` every animation frame. Measure the panel once at 
 
 These decisions were made during visual review of the converted Shopify section and supersede conflicting geometry or behavior from earlier observations:
 
-- Desktop navigation is active at 991 px and wider. At 990 px and below, use the centered-logo hamburger header so labels, logo, currency, and actions cannot collide around 772–990 px.
+- Desktop/tablet navigation is active at 768 px and wider. Between 768 and 899 px, reduce navigation gaps, action sizes, and logo width so the centered layout remains collision-free. Use the centered-logo hamburger header at 767 px and below.
 - Every top-level Shopify menu item with children opens the same full-width desktop mega-menu surface, even when no matching editor block exists. A matching block only adds optional promotion or collection content.
 - Do not show a permanent underline for `link.current` or `link.child_active`. Keep `aria-current` for assistive technology; animate the text-only underline during hover, focus-within, and open states. Rotate the neighboring chevron over the identical duration/easing without including it in the underline.
-- At 990 px and below, the navigation drawer is `100vw × 100dvh`, flush to the viewport, and square-cornered. Root link content uses 20 px inline padding. Search/cart drawers may keep their own responsive geometry.
+- At 767 px and below, the navigation drawer is a narrow left rail with a 6 px viewport inset and 9 px corners. Search/cart drawers are wider right rails with the same inset and corners. Root link content uses 20 px inline padding.
 - A parent row is one full-width disclosure button. Its destination link moves to the heading of the resulting nested panel. Level-two and level-three panels enter from the right while the previous panel exits left over 520 ms `cubic-bezier(.7,0,.2,1)`.
 - The root drawer footer always displays four styled social circles. When a merchant URL is blank, render a non-interactive, `aria-hidden` icon placeholder rather than removing the circle.
 - Use a 64 px drawer heading, 59 px drawer logo, 42 px login pill, 47 px localization row, and 53 px social row.
-- Use accumulated scroll intent rather than single-event direction: sticky after 28 px; stay visible before 92 px; hide after more than 20 px net downward intent; reveal after more than 10 px net upward intent. Reset intent while a menu/drawer is open.
+- Make the floating header sticky after 28 px and keep it visible during continued downward scrolling by default. Retain the editor's optional accumulated-intent auto-hide mode for merchants that explicitly enable it.
 - Insert a `.25em` inline gap before the free-shipping `<strong>` and message `<a>` elements. This recreates an ordinary typed space despite those nodes being separate flex items.
+
+## Latest responsive and interaction correction — August 5, 2026
+
+- Use desktop/tablet navigation from 768 px upward and the hamburger header at 767 px and below. Between 768 and 899 px, use 16 px header padding, 12 px navigation gaps, 12 px navigation text, a 90 px logo, and smaller visual action boxes so the three-column grid remains centered without overlap.
+- Keep the sticky positioner `fixed` above page content once the page passes 28 px. The supplied configuration does not add the hidden state while scrolling down.
+- For compact Pages and currency panels, reveal the panel surface top-down, then reveal each search/row item from `translateY(-12px)` and `opacity: 0` with a 35 ms stagger. Do not move all contents as one horizontal block.
+- Reset item opacity/transform and force a closed-state layout before applying the open class. Keep localization `<details>` mounted until its exit transition completes, cancel its close timer when reopened, and clear sequence classes after every close. This makes repeated hover/focus/click openings animate reliably.
+- Direct links such as Find your shoes use the same text-only underline pseudo-element as parent labels. Full mega-menu links and compact submenu label spans also animate the underline from right-origin closed to left-origin open; never underline the chevron.
+- At mobile widths, use a 6 px viewport inset and 9 px radius. Navigation uses `min(clamp(200px, 64vw, 400px), 100vw - 12px)` on the left. Search/cart use `min(clamp(275px, 86vw, drawer-width), 100vw - 12px)` on the right.
+- Keep the root, second-level, and third-level navigation inside one clipped stage. Forward navigation moves the source to the left and the target from the right; Back reverses the direction. The root footer retains Login, localization, and four social circles.
+- Search uses a bordered pill field followed by Popular searches chips. The empty cart omits the decorative cart icon and exposes three stacked gray collection pills beneath its support text.
 
 ## Acceptance criteria
 
 ### Visual and responsive
 
 - At 1440 px, header is 80 ±1 px high with 50 px side insets, a 110 px centered logo, left navigation, currency, and three 44 px action targets.
-- At 991 px, desktop header remains active. At 990 px, it switches to the mobile/tablet header.
-- At 820 px and 768 px, the mobile/tablet header is active and its navigation drawer fills the viewport without radius.
-- At 390 px, the header is 56 px high, the header logo is 90 px wide, the drawer logo is 59 px wide, and navigation fills the viewport without radius.
+- At 768 px, the compact desktop/tablet header remains active. At 767 px, it switches to the mobile header.
+- At 820 px, 772 px, and 768 px, desktop/tablet hover navigation remains active without overlapping the centered logo or actions.
+- At 390 px, the header is 56 px high, the header logo is 90 px wide, the drawer logo is 59 px wide, and navigation uses the inset narrow left rail.
 - Homepage at top is transparent over the hero; collection/product/content pages are solid white.
 - Desktop after scroll becomes a rounded floating card with a 12 px default top offset, 50 px default side inset, and subtle shadow; all three values remain editor-adjustable.
-- Mobile/tablet after sustained downward intent hides by approximately 110%; deliberate upward intent beyond the reveal threshold restores it as a white floating header.
+- The checked-in header remains visible while scrolling on desktop, tablet, and mobile. If the merchant explicitly enables auto-hide, deliberate upward intent restores it as a white floating header.
 - No content jump occurs when switching transparent, solid, sticky, or open-drawer states.
 
 ### Navigation

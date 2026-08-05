@@ -33,7 +33,7 @@ Renders Shopify country/currency and optional language localization forms.
         <div class="helix-localization__popover helix-localization__popover--country">
           <div class="helix-localization__popover-content">
             {%- if context == 'desktop' -%}
-              <div class="helix-localization__search">
+              <div class="helix-localization__search" style="--helix-item-delay: 0ms;">
                 <label class="helix-visually-hidden" for="{{ country_search_id }}">{{ 'sections.header.country_search' | t }}</label>
                 <input id="{{ country_search_id }}" type="search" placeholder="{{ 'sections.header.country_search_placeholder' | t }}" autocomplete="off" aria-controls="{{ country_list_id }}" data-helix-country-search>
                 <span aria-hidden="true">{% render 'helix-icon', name: 'search' %}</span>
@@ -41,7 +41,8 @@ Renders Shopify country/currency and optional language localization forms.
             {%- endif -%}
             <ul class="helix-localization__country-list" id="{{ country_list_id }}" role="list" data-helix-country-list>
               {%- for country in localization.available_countries -%}
-                <li data-helix-country-item>
+                {%- assign item_delay = forloop.index | times: 35 -%}
+                <li style="--helix-item-delay: {{ item_delay }}ms;" data-helix-country-item>
                   <button type="button" data-helix-localization-option="{{ country.iso_code }}" data-country-search-text="{{ country.name | downcase | escape }} {{ country.iso_code | downcase | escape }} {{ country.currency.iso_code | downcase | escape }}"{% if country.iso_code == localization.country.iso_code %} aria-current="true"{% endif %}>
                     <span class="helix-localization__country">
                       <span class="helix-localization__flag" aria-hidden="true">
