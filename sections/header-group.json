@@ -155,6 +155,7 @@
         "show_language_selector": true,
         "currency_badge": "🇻🇳",
         "desktop_drawer_width": 480,
+        "drawer_transition_duration": 520,
         "facebook_url": "",
         "instagram_url": "",
         "youtube_url": "",

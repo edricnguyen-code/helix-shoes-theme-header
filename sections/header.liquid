@@ -52,6 +52,7 @@
     --helix-content-duration: {{ section.settings.panel_content_transition_duration }}ms;
     --helix-content-delay: {{ section.settings.panel_content_delay }}ms;
     --helix-mobile-panel-duration: {{ section.settings.mobile_panel_transition_duration }}ms;
+    --helix-drawer-duration: {{ section.settings.drawer_transition_duration }}ms;
     --helix-compact-menu-width: {{ section.settings.compact_menu_width }}px;
     --helix-localization-width: {{ section.settings.localization_panel_width }}px;
     --helix-panel-radius: {{ section.settings.desktop_panel_radius }}px;
@@ -167,6 +168,7 @@
 
     { "type": "header", "content": "Drawers" },
     { "type": "range", "id": "desktop_drawer_width", "label": "Search/cart drawer width", "min": 360, "max": 600, "step": 10, "unit": "px", "default": 480 },
+    { "type": "range", "id": "drawer_transition_duration", "label": "Drawer slide transition", "min": 240, "max": 700, "step": 20, "unit": "ms", "default": 520 },
 
     { "type": "header", "content": "Social links" },
     { "type": "url", "id": "facebook_url", "label": "Facebook" },
