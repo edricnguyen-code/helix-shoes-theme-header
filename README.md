@@ -106,13 +106,21 @@ The `demo/` directory is a self-contained static preview of the documented heade
 - Matched the mobile captures with an inset, rounded, narrow left navigation rail and wider right search/cart panels. Second- and third-level navigation panels retain the same right-to-left stage transition.
 - Updated search to use the reference pill input and Popular searches chips. Updated the empty cart to use the reference support line and three stacked collection pills without the decorative bag icon.
 
+### August 5, 2026 two-stage mobile drawer sizing and motion
+
+- Added a deliberate drawer breakpoint at 500 px. At 499 px and narrower, navigation, nested navigation, search, account, and cart slide to a true edge-to-edge `100vw` surface with no inset or corner radius.
+- Preserved the current partially exposed layout from 500 through 767 px: a narrower left navigation rail and wider inset right-side utility drawers, all with rounded corners and a visible blurred backdrop.
+- Separated drawer motion from the faster desktop mega-menu timing. Search, account, cart, and mobile navigation now use an editor-controlled 520 ms `cubic-bezier(.7, 0, .2, 1)` slide for both entry and exit.
+- Forced the off-screen drawer state to paint before the open state is applied, preventing native dialogs from appearing at their final position before the transform transition starts.
+- Mirrored the same full-width breakpoint and deterministic two-frame entrance sequence in the standalone demo.
+
 Run it from the repository root with:
 
 ```powershell
 node demo/server.mjs
 ```
 
-Then open <http://127.0.0.1:4173/>. Check the desktop/tablet mega-menu, repeated Pages/currency openings, the always-visible floating header, search/account/cart drawers, announcement controls, and the mobile menu at 767 px or below. The standalone preview includes a third navigation level: Menu → Women/Men → By activity/By feature. This preview is not a Shopify runtime; use Shopify CLI for real menu, market, predictive-search, customer, product, and cart data.
+Then open <http://127.0.0.1:4173/>. Check the desktop/tablet mega-menu, repeated Pages/currency openings, the always-visible floating header, search/account/cart drawers, announcement controls, and the mobile menu at 767 px or below. Specifically compare 499 px (full-width, square-corner drawers) with 500 px (partial inset drawers). The standalone preview includes a third navigation level: Menu → Women/Men → By activity/By feature. This preview is not a Shopify runtime; use Shopify CLI for real menu, market, predictive-search, customer, product, and cart data.
 
 ## Production Shopify conversion — August 4, 2026
 
