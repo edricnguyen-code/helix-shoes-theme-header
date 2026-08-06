@@ -268,6 +268,15 @@ The checked-in section keeps the floating header visible on desktop, tablet, and
 - Entry animation: from `translateX(-100%)` to 0 over 0.5 s `cubic-bezier(0.7, 0, 0.2, 1)`.
 - Document scrolling is locked while open.
 
+**User-confirmed implementation override**
+
+- Treat the reference observation above as historical evidence, not the final target below 500 px.
+- At 499 px and narrower, every drawer surface must occupy the full viewport width and height: `width: 100vw`, `top: 0`, `bottom: 0`, no viewport inset, and no corner radius. This applies consistently to the main menu, second- and third-level navigation stages, search, account, and cart.
+- From 500 through 767 px, keep the partial layout: the narrower left navigation rail and the wider inset right-side utility drawers with rounded corners.
+- Do not change the desktop/tablet navigation switch: desktop navigation begins at 768 px; mobile controls end at 767 px.
+- Drawer entry and exit use the same 520 ms `cubic-bezier(0.7, 0, 0.2, 1)` transform. Render the closed off-canvas state for at least one completed paint before adding the visible state so native dialogs never pop directly into place.
+- Expose the drawer transition duration in the Shopify section editor, independently from the faster desktop mega-menu transition.
+
 **Observed nested Women panel**
 
 - Replaces the first panel inside the same drawer.
@@ -303,6 +312,8 @@ The checked-in section keeps the floating header visible on desktop, tablet, and
 - Title: Archivo 17 px, 700, line-height 23.8 px, letter spacing 0.34 px.
 - Close target: 36 × 36 px in the reference; implement a 44 px accessible hit area.
 - Inner padding: 30 px vertically and 16 px horizontally.
+
+For the final implementation, the user-confirmed under-500 override applies to this search surface: at 499 px and narrower it is edge-to-edge and square-cornered; from 500 through 767 px it keeps the partial inset treatment. Cart and account follow the same sizing and motion rules.
 - Search input: 342 × 44 px, pill radius, transparent border, 6% dark neutral fill.
 - Popular-search chips wrap onto multiple lines.
 
