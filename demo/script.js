@@ -208,11 +208,18 @@
     returnFocus = origin || document.activeElement;
     if (drawer === mobileNavigation) resetNestedNavigation(drawer, true);
     drawer.hidden = false;
+    drawer.classList.remove('is-open');
     drawer.setAttribute('aria-hidden', 'false');
     origin?.setAttribute('aria-expanded', 'true');
     showScrim('drawer');
-    requestAnimationFrame(() => drawer.classList.add('is-open'));
-    window.setTimeout(() => focusable(drawer)[0]?.focus(), reduceMotion.matches ? 0 : 90);
+    drawer.getBoundingClientRect();
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (activeDrawer !== drawer) return;
+        drawer.classList.add('is-open');
+        focusable(drawer)[0]?.focus();
+      });
+    });
   };
 
   document.querySelectorAll('[data-open-drawer]').forEach((button) => {

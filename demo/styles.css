@@ -155,8 +155,8 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 .scrim.is-menu { top: var(--menu-scrim-top, 0); background: rgba(28, 28, 28, .12); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
 .scrim.is-drawer { top: 0; background: rgba(28, 28, 28, .42); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
 .scrim.is-visible { opacity: 1; }
-.drawer { position: fixed; top: 6px; right: 6px; bottom: 6px; z-index: 90; display: flex; width: min(550px, calc(100vw - 12px)); flex-direction: column; border-radius: 14px; background: #fff; box-shadow: 0 20px 60px rgba(26, 19, 18, .24); opacity: 0; transform: translateX(110%); transition: opacity .3s ease, transform .42s var(--ease-drawer); }
-.drawer--left { right: auto; left: 6px; width: min(400px, calc(100vw - 12px)); transform: translateX(-110%); }
+.drawer { position: fixed; top: 6px; right: 6px; bottom: 6px; z-index: 90; display: flex; width: min(550px, calc(100vw - 12px)); flex-direction: column; border-radius: 14px; background: #fff; box-shadow: 0 20px 60px rgba(26, 19, 18, .24); opacity: 0; transform: translate3d(calc(100% + 12px), 0, 0); transition: opacity .3s ease, transform .52s var(--ease-drawer); will-change: transform; }
+.drawer--left { right: auto; left: 6px; width: min(400px, calc(100vw - 12px)); transform: translate3d(calc(-100% - 12px), 0, 0); }
 .drawer.is-open { opacity: 1; transform: translateX(0); }
 .drawer__header { display: flex; align-items: center; justify-content: space-between; padding: 24px 24px 16px; }
 .drawer__header h2 { margin: 0; font-size: 22px; font-weight: 500; letter-spacing: -.02em; }
@@ -333,6 +333,10 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
   .search-form .icon-button { width: 44px; height: 44px; flex-basis: 44px; }
   .search-body, .cart-empty { padding: 30px; }
   .cart-empty { padding-top: 36px; }
+}
+
+@media (max-width: 499px) {
+  .drawer:not(.navigation-drawer), .navigation-drawer { top: 0; right: 0; bottom: 0; left: 0; width: 100vw; max-width: none; border-radius: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
