@@ -18,6 +18,7 @@ if (!customElements.get('helix-header')) {
       const handoffOverlap = Number.parseInt(getComputedStyle(this).getPropertyValue('--helix-panel-handoff'), 10);
       this.handoffOverlap = Number.isNaN(handoffOverlap) ? 20 : Math.max(0, handoffOverlap);
       this.mobilePanelDuration = Number.parseInt(getComputedStyle(this).getPropertyValue('--helix-mobile-panel-duration'), 10) || 520;
+      this.drawerDuration = Number.parseInt(getComputedStyle(this).getPropertyValue('--helix-drawer-duration'), 10) || 520;
       this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       this.defaultPredictiveMarkup = new Map();
       this.onClick = this.handleClick.bind(this);
@@ -354,11 +355,16 @@ if (!customElements.get('helix-header')) {
       this.drawerTrigger = trigger;
       trigger?.setAttribute('aria-expanded', 'true');
       dialog.showModal();
+      dialog.classList.remove('is-visible');
       document.documentElement.classList.add('helix-scroll-locked');
+      dialog.querySelector('.helix-drawer__surface')?.getBoundingClientRect();
       requestAnimationFrame(() => {
-        dialog.classList.add('is-visible');
-        const focusTarget = dialog.querySelector('[autofocus], input:not([type="hidden"]), button, a[href]');
-        focusTarget?.focus({ preventScroll: true });
+        requestAnimationFrame(() => {
+          if (!dialog.open || dialog.dataset.closing === 'true') return;
+          dialog.classList.add('is-visible');
+          const focusTarget = dialog.querySelector('[autofocus], input:not([type="hidden"]), button, a[href]');
+          focusTarget?.focus({ preventScroll: true });
+        });
       });
     }
 
@@ -375,7 +381,7 @@ if (!customElements.get('helix-header')) {
         if (!this.querySelector('[data-helix-drawer][open]')) document.documentElement.classList.remove('helix-scroll-locked');
         trigger?.focus({ preventScroll: true });
         this.drawerTrigger = null;
-      }, this.panelDuration);
+      }, this.reducedMotion ? 0 : this.drawerDuration);
     }
 
     transitionMobilePanel(targetId, forward, control) {

@@ -1064,18 +1064,19 @@
   border-radius: 14px;
   background: var(--helix-surface, #fff);
   color: var(--helix-foreground, #1a1a1a);
-  transition: transform var(--helix-panel-duration, 300ms) ease-in-out;
+  transition: transform var(--helix-drawer-duration, 520ms) cubic-bezier(.7, 0, .2, 1);
+  will-change: transform;
 }
 
 .helix-drawer--menu .helix-drawer__surface {
   left: 6px;
   width: min(400px, calc(100% - 12px));
-  transform: translate3d(-100%, 0, 0);
+  transform: translate3d(calc(-100% - 12px), 0, 0);
 }
 
 .helix-drawer--right .helix-drawer__surface {
   right: 6px;
-  transform: translate3d(100%, 0, 0);
+  transform: translate3d(calc(100% + 12px), 0, 0);
 }
 
 .helix-drawer.is-visible .helix-drawer__surface {
@@ -1783,6 +1784,27 @@ html.helix-scroll-locked body {
   .helix-cart-summary {
     margin-inline: -20px;
     padding-inline: 20px;
+  }
+}
+
+@media (max-width: 499px) {
+  .helix-drawer--menu .helix-drawer__surface,
+  .helix-drawer--right .helix-drawer__surface {
+    top: 0;
+    bottom: 0;
+    width: 100vw;
+    max-height: none;
+    border-radius: 0;
+  }
+
+  .helix-drawer--menu .helix-drawer__surface {
+    right: auto;
+    left: 0;
+  }
+
+  .helix-drawer--right .helix-drawer__surface {
+    right: 0;
+    left: auto;
   }
 }
 
