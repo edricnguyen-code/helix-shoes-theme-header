@@ -357,6 +357,7 @@ if (!customElements.get('helix-header')) {
       dialog.showModal();
       dialog.classList.remove('is-visible');
       document.documentElement.classList.add('helix-scroll-locked');
+      void dialog.offsetWidth;
       dialog.querySelector('.helix-drawer__surface')?.getBoundingClientRect();
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
