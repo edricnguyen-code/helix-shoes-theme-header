@@ -132,7 +132,6 @@ if (!customElements.get('helix-header')) {
 
     openLocalization(details) {
       if (!details || (details.open && details.classList.contains('is-panel-open'))) return;
-      this.closeAllDesktopMenus();
       clearTimeout(details.helixCloseTimer);
       details.classList.remove('is-panel-open');
       if (!details.open) this.setPanelSequence(details, this.getPanelSequenceDelay());
