@@ -426,7 +426,7 @@
 
 .helix-localization__popover {
   position: absolute;
-  top: calc(100% + 12px);
+  top: calc(100% + 18px);
   right: 0;
   z-index: 4;
   width: min(320px, calc(100vw - 32px));

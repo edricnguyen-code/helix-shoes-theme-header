@@ -672,7 +672,7 @@ if (!customElements.get('helix-header')) {
       const rect = summary.getBoundingClientRect();
       const right = Math.max(16, Math.round(window.innerWidth - rect.right));
       details.style.setProperty('--helix-localization-right', `${right}px`);
-      details.style.setProperty('--helix-localization-top', `${Math.round(rect.bottom)}px`);
+      details.style.setProperty('--helix-localization-top', `${Math.round(rect.bottom) + 18}px`);
     }
 
     filterCountryOptions(input) {
