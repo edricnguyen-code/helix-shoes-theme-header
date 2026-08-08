@@ -132,6 +132,7 @@ if (!customElements.get('helix-header')) {
 
     openLocalization(details) {
       if (!details || (details.open && details.classList.contains('is-panel-open'))) return;
+      this.closeAllDesktopMenus();
       clearTimeout(details.helixCloseTimer);
       details.classList.remove('is-panel-open');
       if (!details.open) this.setPanelSequence(details, this.getPanelSequenceDelay());
@@ -269,6 +270,7 @@ if (!customElements.get('helix-header')) {
       const panel = item?.querySelector(':scope > [data-helix-menu-panel]');
       if (!item || !panel || !window.matchMedia('(min-width: 768px)').matches) return;
       if (item.classList.contains('is-open')) return;
+      this.closeAllLocalization();
       const isMega = item.dataset.panelType === 'mega';
       const sequenceDelay = isMega ? 0 : this.getPanelSequenceDelay();
       if (this.openItem && this.openItem !== item) this.closeDesktopItem(this.openItem, true, true);
