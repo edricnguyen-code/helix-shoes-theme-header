@@ -447,14 +447,22 @@
 
 .helix-localization__popover button {
   display: flex;
-  width: 100%;
+  width: calc(100% + 24px);
+  margin: 0 -12px;
   justify-content: space-between;
   gap: 20px;
-  padding: 10px 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: background-color 180ms ease;
   border: 0;
   background: transparent;
   text-align: left;
   cursor: pointer;
+}
+
+.helix-localization__popover button:hover,
+.helix-localization__popover button:focus-visible {
+  background: #f4f4f4;
 }
 
 .helix-localization__popover button[aria-current="true"] {
@@ -601,7 +609,8 @@
 .helix-localization__country-list button {
   min-height: 56px;
   align-items: center;
-  padding: 0 !important;
+  padding: 0 12px !important;
+  border-radius: 8px;
   font-size: 16px;
 }
 
