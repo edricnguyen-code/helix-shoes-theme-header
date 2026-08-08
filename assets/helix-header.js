@@ -140,7 +140,9 @@ if (!customElements.get('helix-header')) {
       const popover = details.querySelector('.helix-localization__popover');
       popover?.getBoundingClientRect();
       requestAnimationFrame(() => {
-        if (details.open) details.classList.add('is-panel-open');
+        requestAnimationFrame(() => {
+          if (details.open) details.classList.add('is-panel-open');
+        });
       });
     }
 
