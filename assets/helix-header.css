@@ -467,7 +467,7 @@
 
 .helix-localization--desktop .helix-localization__popover--country {
   position: fixed;
-  top: var(--helix-header-bottom);
+  top: var(--helix-localization-top, var(--helix-header-bottom));
   right: var(--helix-localization-right, var(--helix-header-padding, 50px));
   width: min(var(--helix-localization-width, 414px), calc(100vw - 32px));
   max-height: min(554px, calc(100vh - var(--helix-header-bottom) - 16px));
