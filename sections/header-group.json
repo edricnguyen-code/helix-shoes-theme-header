@@ -133,7 +133,7 @@
         "desktop_height": 80,
         "mobile_height": 56,
         "horizontal_padding": 50,
-        "navigation_gap": 28,
+        "navigation_gap": 22,
         "compact_menu_width": 338,
         "localization_panel_width": 414,
         "desktop_panel_radius": 20,
