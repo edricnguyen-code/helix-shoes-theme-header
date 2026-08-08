@@ -136,10 +136,9 @@ if (!customElements.get('helix-header')) {
       details.classList.remove('is-panel-open');
       if (!details.open) this.setPanelSequence(details, this.getPanelSequenceDelay());
       details.open = true;
-      this.positionLocalizationPopover(details);
+      this.syncLocalizationState();
       const popover = details.querySelector('.helix-localization__popover');
       popover?.getBoundingClientRect();
-      this.syncLocalizationState();
       requestAnimationFrame(() => {
         if (details.open) details.classList.add('is-panel-open');
       });
