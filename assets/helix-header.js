@@ -43,6 +43,10 @@ if (!customElements.get('helix-header')) {
       this.bindLocalization();
       this.bindDrawers();
       this.querySelectorAll('[data-helix-predictive-results]').forEach((element) => this.defaultPredictiveMarkup.set(element, element.innerHTML));
+      this.lastPointerType = 'mouse';
+      this.addEventListener('pointerdown', (e) => {
+        if (e.pointerType) this.lastPointerType = e.pointerType;
+      }, { passive: true });
       this.initialTop = this.getBoundingClientRect().top + window.scrollY;
       requestAnimationFrame(() => {
         this.updateHeaderBottom();
@@ -69,13 +73,15 @@ if (!customElements.get('helix-header')) {
 
     bindDesktopMenus() {
       this.menuItems.forEach((item) => {
-        item.addEventListener('pointerenter', () => {
+        item.addEventListener('pointerenter', (e) => {
           if (!window.matchMedia('(min-width: 768px)').matches) return;
+          if (e.pointerType === 'touch' || e.pointerType === 'pen' || window.matchMedia('(hover: none)').matches) return;
           clearTimeout(this.closeTimer);
           this.openDesktopItem(item);
         });
-        item.addEventListener('pointerleave', () => {
+        item.addEventListener('pointerleave', (e) => {
           if (!window.matchMedia('(min-width: 768px)').matches) return;
+          if (e.pointerType === 'touch' || e.pointerType === 'pen' || window.matchMedia('(hover: none)').matches) return;
           clearTimeout(this.closeTimer);
           this.closeTimer = setTimeout(() => this.closeDesktopItem(item), item.classList.contains('is-sequenced-open') ? this.surfaceDuration + 80 : 70);
         });
@@ -165,6 +171,18 @@ if (!customElements.get('helix-header')) {
     }
 
     handleClick(event) {
+      const navLink = event.target.closest('.helix-nav-link');
+      if (navLink && window.matchMedia('(min-width: 768px)').matches) {
+        const item = navLink.closest('[data-helix-menu-item]');
+        if (item && item.querySelector(':scope > [data-helix-menu-panel]')) {
+          if (this.lastPointerType === 'touch' || this.lastPointerType === 'pen' || window.matchMedia('(hover: none)').matches) {
+            event.preventDefault();
+            item.classList.contains('is-open') ? this.closeDesktopItem(item) : this.openDesktopItem(item);
+            return;
+          }
+        }
+      }
+
       const menuToggle = event.target.closest('[data-helix-menu-toggle]');
       if (menuToggle) {
         event.preventDefault();
