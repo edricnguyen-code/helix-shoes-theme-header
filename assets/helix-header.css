@@ -636,7 +636,7 @@
   pointer-events: auto;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 990px) {
   .helix-header-component.is-sticky .helix-mega {
     right: var(--helix-desktop-inset, 50px);
     left: var(--helix-desktop-inset, 50px);
@@ -1623,7 +1623,7 @@ html.helix-scroll-locked body {
   overflow: hidden;
 }
 
-@media (max-width: 1199px) and (min-width: 768px) {
+@media (max-width: 1199px) and (min-width: 990px) {
   .helix-header-component {
     --helix-header-padding: min(var(--helix-header-padding), 28px);
     --helix-header-nav-gap: min(var(--helix-header-nav-gap), 18px);
@@ -1649,7 +1649,7 @@ html.helix-scroll-locked body {
   }
 }
 
-@media (max-width: 899px) and (min-width: 768px) {
+@media (max-width: 899px) and (min-width: 990px) {
   .helix-header-component {
     --helix-header-padding: 16px;
     --helix-header-nav-gap: 12px;
@@ -1677,7 +1677,7 @@ html.helix-scroll-locked body {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 989px) {
   .helix-header-component {
     --helix-header-bottom: var(--helix-header-height-mobile, 56px);
     height: var(--helix-header-height-mobile, 56px);
@@ -1743,7 +1743,7 @@ html.helix-scroll-locked body {
 
 }
 
-@media (max-width: 767px) {
+@media (max-width: 989px) {
   .helix-drawer--menu .helix-drawer__surface,
   .helix-drawer--right .helix-drawer__surface {
     top: 6px;
