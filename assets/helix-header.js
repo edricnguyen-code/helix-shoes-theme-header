@@ -133,14 +133,15 @@ if (!customElements.get('helix-header')) {
     openLocalization(details) {
       if (!details || (details.open && details.classList.contains('is-panel-open'))) return;
       clearTimeout(details.helixCloseTimer);
+      cancelAnimationFrame(details.helixOpenTimer);
       details.classList.remove('is-panel-open');
       if (!details.open) this.setPanelSequence(details, this.getPanelSequenceDelay());
       details.open = true;
       this.syncLocalizationState();
       const popover = details.querySelector('.helix-localization__popover');
       popover?.getBoundingClientRect();
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
+      details.helixOpenTimer = requestAnimationFrame(() => {
+        details.helixOpenTimer = requestAnimationFrame(() => {
           if (details.open) details.classList.add('is-panel-open');
         });
       });
@@ -149,6 +150,7 @@ if (!customElements.get('helix-header')) {
     closeLocalization(details, immediate = false) {
       if (!details?.open) return;
       clearTimeout(details.helixCloseTimer);
+      cancelAnimationFrame(details.helixOpenTimer);
       details.classList.remove('is-panel-open');
       const finish = () => {
         if (details.classList.contains('is-panel-open')) return;
@@ -270,7 +272,7 @@ if (!customElements.get('helix-header')) {
       const panel = item?.querySelector(':scope > [data-helix-menu-panel]');
       if (!item || !panel || !window.matchMedia('(min-width: 768px)').matches) return;
       if (item.classList.contains('is-open')) return;
-      this.closeAllLocalization();
+      this.closeAllLocalization(false);
       const isMega = item.dataset.panelType === 'mega';
       const sequenceDelay = isMega ? 0 : this.getPanelSequenceDelay();
       if (this.openItem && this.openItem !== item) this.closeDesktopItem(this.openItem, true, true);
@@ -319,8 +321,8 @@ if (!customElements.get('helix-header')) {
       }
     }
 
-    closeAllDesktopMenus() {
-      this.menuItems.forEach((item) => this.closeDesktopItem(item, true));
+    closeAllDesktopMenus(immediate = true) {
+      this.menuItems.forEach((item) => this.closeDesktopItem(item, immediate));
     }
 
     syncLocalizationState() {
@@ -329,7 +331,7 @@ if (!customElements.get('helix-header')) {
       this.classList.toggle('has-open-localization', anyOpen);
       if (anyOpen) {
         this.positionLocalizationPopover(openDetails);
-        this.closeAllDesktopMenus();
+        this.closeAllDesktopMenus(false);
         this.classList.remove('is-hidden');
         this.scrollIntent = 0;
         this.showOverlay();
@@ -340,18 +342,25 @@ if (!customElements.get('helix-header')) {
       }
     }
 
-    closeAllLocalization() {
+    closeAllLocalization(immediate = true) {
       this.querySelectorAll('[data-helix-localization-details][open]').forEach((details) => {
-        clearTimeout(details.helixCloseTimer);
-        details.classList.remove('is-panel-open');
-        details.removeAttribute('open');
-        this.clearPanelSequence(details);
-        this.resetCountrySearch(details);
+        if (immediate) {
+          clearTimeout(details.helixCloseTimer);
+          cancelAnimationFrame(details.helixOpenTimer);
+          details.classList.remove('is-panel-open');
+          details.removeAttribute('open');
+          this.clearPanelSequence(details);
+          this.resetCountrySearch(details);
+        } else {
+          this.closeLocalization(details, false);
+        }
       });
-      this.classList.remove('has-open-localization');
-      if (!this.classList.contains('has-open-menu')) {
-        this.surfaceReadyAt = 0;
-        this.hideOverlay();
+      if (immediate) {
+        this.classList.remove('has-open-localization');
+        if (!this.classList.contains('has-open-menu')) {
+          this.surfaceReadyAt = 0;
+          this.hideOverlay();
+        }
       }
     }
 
