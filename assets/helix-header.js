@@ -74,13 +74,13 @@ if (!customElements.get('helix-header')) {
     bindDesktopMenus() {
       this.menuItems.forEach((item) => {
         item.addEventListener('pointerenter', (e) => {
-          if (!window.matchMedia('(min-width: 990px)').matches) return;
+          if (!window.matchMedia('(min-width: 768px)').matches) return;
           if (e.pointerType === 'touch' || e.pointerType === 'pen' || window.matchMedia('(hover: none)').matches) return;
           clearTimeout(this.closeTimer);
           this.openDesktopItem(item);
         });
         item.addEventListener('pointerleave', (e) => {
-          if (!window.matchMedia('(min-width: 990px)').matches) return;
+          if (!window.matchMedia('(min-width: 768px)').matches) return;
           if (e.pointerType === 'touch' || e.pointerType === 'pen' || window.matchMedia('(hover: none)').matches) return;
           clearTimeout(this.closeTimer);
           this.closeTimer = setTimeout(() => this.closeDesktopItem(item), item.classList.contains('is-sequenced-open') ? this.surfaceDuration + 80 : 70);
@@ -99,20 +99,20 @@ if (!customElements.get('helix-header')) {
         let hoverTimer;
         const summary = details.querySelector('summary');
         summary?.addEventListener('click', (event) => {
-          if (details.closest('[data-helix-drawer]') || !window.matchMedia('(min-width: 990px)').matches) return;
+          if (details.closest('[data-helix-drawer]') || !window.matchMedia('(min-width: 768px)').matches) return;
           event.preventDefault();
           details.open && details.classList.contains('is-panel-open')
             ? this.closeLocalization(details)
             : this.openLocalization(details);
         });
         details.addEventListener('pointerenter', (e) => {
-          if (!window.matchMedia('(min-width: 990px)').matches) return;
+          if (!window.matchMedia('(min-width: 768px)').matches) return;
           if (e.pointerType === 'touch' || e.pointerType === 'pen' || window.matchMedia('(hover: none)').matches) return;
           clearTimeout(hoverTimer);
           this.openLocalization(details);
         });
         details.addEventListener('pointerleave', (e) => {
-          if (!window.matchMedia('(min-width: 990px)').matches) return;
+          if (!window.matchMedia('(min-width: 768px)').matches) return;
           if (e.pointerType === 'touch' || e.pointerType === 'pen' || window.matchMedia('(hover: none)').matches) return;
           clearTimeout(hoverTimer);
           hoverTimer = setTimeout(() => this.closeLocalization(details), 70);
@@ -177,7 +177,7 @@ if (!customElements.get('helix-header')) {
 
     handleClick(event) {
       const navLink = event.target.closest('.helix-nav-link');
-      if (navLink && window.matchMedia('(min-width: 990px)').matches) {
+      if (navLink && window.matchMedia('(min-width: 768px)').matches) {
         const item = navLink.closest('[data-helix-menu-item]');
         if (item && item.querySelector(':scope > [data-helix-menu-panel]')) {
           if (this.lastPointerType === 'touch' || this.lastPointerType === 'pen' || window.matchMedia('(hover: none)').matches) {
@@ -270,7 +270,7 @@ if (!customElements.get('helix-header')) {
 
     openDesktopItem(item) {
       const panel = item?.querySelector(':scope > [data-helix-menu-panel]');
-      if (!item || !panel || !window.matchMedia('(min-width: 990px)').matches) return;
+      if (!item || !panel || !window.matchMedia('(min-width: 768px)').matches) return;
       if (item.classList.contains('is-open')) return;
       this.closeAllLocalization(false);
       const isMega = item.dataset.panelType === 'mega';
@@ -628,12 +628,12 @@ if (!customElements.get('helix-header')) {
       this.updateHeaderBottom();
       if (this.openItem?.dataset.panelType === 'mega') this.updateMegaSurfaceHeight();
       this.querySelectorAll('[data-helix-localization-details][open]').forEach((details) => this.positionLocalizationPopover(details));
-      if (!window.matchMedia('(min-width: 990px)').matches) this.closeAllDesktopMenus();
+      if (!window.matchMedia('(min-width: 768px)').matches) this.closeAllDesktopMenus();
     }
 
     getPanelSequenceDelay() {
       if (this.reducedMotion
-        || !window.matchMedia('(min-width: 990px)').matches
+        || !window.matchMedia('(min-width: 768px)').matches
         || this.dataset.transparent !== 'true'
         || this.classList.contains('is-sticky')) return 0;
       const now = performance.now();
@@ -666,7 +666,7 @@ if (!customElements.get('helix-header')) {
     }
 
     positionLocalizationPopover(details) {
-      if (!details || details.dataset.localizationContext !== 'desktop' || !window.matchMedia('(min-width: 990px)').matches) return;
+      if (!details || details.dataset.localizationContext !== 'desktop' || !window.matchMedia('(min-width: 768px)').matches) return;
       const summary = details.querySelector('summary');
       if (!summary) return;
       const rect = summary.getBoundingClientRect();

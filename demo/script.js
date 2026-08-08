@@ -72,7 +72,7 @@
   };
 
   const openMega = (item) => {
-    if (!item || !window.matchMedia('(min-width: 990px)').matches) return;
+    if (!item || !window.matchMedia('(min-width: 768px)').matches) return;
     if (item.classList.contains('is-open')) return;
     window.clearTimeout(megaCloseTimer);
     const panel = item.querySelector('[data-mega-panel]');
