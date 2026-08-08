@@ -269,17 +269,26 @@
   transition: transform 250ms cubic-bezier(.2, .7, .2, 1);
 }
 
-.helix-nav-trigger:hover .helix-nav-link > span::after,
-.helix-nav-trigger:focus-within .helix-nav-link > span::after,
-.helix-nav-item--single:hover .helix-nav-link > span::after,
-.helix-nav-item--single:focus-within .helix-nav-link > span::after,
+@media (hover: hover) {
+  .helix-nav-trigger:hover .helix-nav-link > span::after,
+  .helix-nav-trigger:focus-within .helix-nav-link > span::after,
+  .helix-nav-item--single:hover .helix-nav-link > span::after,
+  .helix-nav-item--single:focus-within .helix-nav-link > span::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .helix-nav-trigger:hover .helix-nav-toggle .helix-icon,
+  .helix-nav-trigger:focus-within .helix-nav-toggle .helix-icon {
+    transform: rotate(180deg);
+  }
+}
+
 .helix-nav-item.is-open .helix-nav-link > span::after {
   transform: scaleX(1);
   transform-origin: left;
 }
 
-.helix-nav-trigger:hover .helix-nav-toggle .helix-icon,
-.helix-nav-trigger:focus-within .helix-nav-toggle .helix-icon,
 .helix-nav-item.is-open .helix-nav-toggle .helix-icon {
   transform: rotate(180deg);
 }
