@@ -819,25 +819,6 @@
   position: relative;
 }
 
-.helix-dropdown a > span::after {
-  position: absolute;
-  right: 0;
-  bottom: -3px;
-  left: 0;
-  height: 1px;
-  background: currentColor;
-  content: "";
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 220ms cubic-bezier(.2, .7, .2, 1);
-}
-
-.helix-dropdown a:hover > span::after,
-.helix-dropdown a:focus-visible > span::after {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
 .helix-dropdown a:hover,
 .helix-dropdown a:focus-visible {
   background: #f4f4f4;
