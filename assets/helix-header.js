@@ -105,13 +105,15 @@ if (!customElements.get('helix-header')) {
             ? this.closeLocalization(details)
             : this.openLocalization(details);
         });
-        details.addEventListener('pointerenter', () => {
+        details.addEventListener('pointerenter', (e) => {
           if (!window.matchMedia('(min-width: 768px)').matches) return;
+          if (e.pointerType === 'touch' || e.pointerType === 'pen' || window.matchMedia('(hover: none)').matches) return;
           clearTimeout(hoverTimer);
           this.openLocalization(details);
         });
-        details.addEventListener('pointerleave', () => {
+        details.addEventListener('pointerleave', (e) => {
           if (!window.matchMedia('(min-width: 768px)').matches) return;
+          if (e.pointerType === 'touch' || e.pointerType === 'pen' || window.matchMedia('(hover: none)').matches) return;
           clearTimeout(hoverTimer);
           hoverTimer = setTimeout(() => this.closeLocalization(details), 70);
         });
