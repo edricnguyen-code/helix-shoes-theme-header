@@ -1209,9 +1209,7 @@
 
 .helix-mobile-list__item > a {
   padding: 13px 0;
-  font-family: inherit;
   font-size: 13px;
-  font-weight: 400;
   text-decoration: none;
 }
 
@@ -1242,7 +1240,6 @@
   border: 0;
   background: transparent;
   color: inherit;
-  font-family: inherit;
   font-size: 13px;
   font-weight: 400;
   text-align: left;
@@ -1251,6 +1248,8 @@
 
 .helix-mobile-list__full-link {
   grid-column: 1 / -1;
+  font-size: 13px;
+  font-weight: 400;
 }
 
 .helix-mobile-list--nested {
