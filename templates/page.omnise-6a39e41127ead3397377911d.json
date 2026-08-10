@@ -10,31 +10,31 @@
 {
   "layout": "theme",
   "sections": {
-    "beae-default-template": {
-      "type": "beae-home-page",
+    "omnise-6a39e41127ead3397377911d": {
+      "type": "omnise-6a39e41127ead3397377911d",
       "blocks": {
-        "beae-wyl7m5qo": {
-          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "beae-glo81x": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {}
         },
-        "beae-xzpj45vx": {
+        "beae-475irr": {
           "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {}
         },
-        "beae-9s7otcbn": {
+        "beae-1txipi": {
           "type": "shopify://apps/moast/blocks/carousel/1ac7547b-5443-446c-868c-7fab4566ee16",
           "settings": {}
         }
       },
       "block_order": [
-        "beae-wyl7m5qo",
-        "beae-xzpj45vx",
-        "beae-9s7otcbn"
+        "beae-glo81x",
+        "beae-475irr",
+        "beae-1txipi"
       ],
       "settings": {}
     }
   },
   "order": [
-    "beae-default-template"
+    "omnise-6a39e41127ead3397377911d"
   ]
 }

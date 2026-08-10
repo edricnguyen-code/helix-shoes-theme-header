@@ -1,0 +1,55 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "theme",
+  "sections": {
+    "beae-product-page": {
+      "type": "beae-product-page",
+      "blocks": {
+        "beae-9shubrel": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "beae-1epiouek": {
+          "type": "shopify://apps/moast/blocks/carousel/1ac7547b-5443-446c-868c-7fab4566ee16",
+          "settings": {}
+        },
+        "beae-5tfneduw": {
+          "type": "shopify://apps/moast/blocks/carousel/1ac7547b-5443-446c-868c-7fab4566ee16",
+          "settings": {}
+        },
+        "beae-fklrc7ll": {
+          "type": "shopify://apps/moast/blocks/carousel/1ac7547b-5443-446c-868c-7fab4566ee16",
+          "settings": {}
+        },
+        "beae-h0vsupbq": {
+          "type": "shopify://apps/moast/blocks/carousel/1ac7547b-5443-446c-868c-7fab4566ee16",
+          "settings": {}
+        },
+        "beae-i9b34ht1": {
+          "type": "shopify://apps/moast/blocks/carousel/1ac7547b-5443-446c-868c-7fab4566ee16",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "beae-9shubrel",
+        "beae-1epiouek",
+        "beae-5tfneduw",
+        "beae-fklrc7ll",
+        "beae-h0vsupbq",
+        "beae-i9b34ht1"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "beae-product-page"
+  ]
+}

@@ -1,0 +1,266 @@
+
+            {% assign omnise_root_url = routes.root_url %}
+            {% if omnise_root_url != '/'%}
+                {% assign omnise_root_url = routes.root_url | append: '/' %}
+            {% endif %}
+        <link rel="stylesheet" id="omnise-exported-page-css" media="all" href="{{'omnise-6a326f4327ead33973778b7b.css' | asset_url}}"><div data-beae-export-section-id="beae-hnfcr2" data-beae-export-has-ab="false"><div data-beae-ab-variant="a"><section data-bnode="beae-hnfcr2" data-bnode-index="1" class="beae-section beae-scheme-1"><div class="beae-section-container"><div class="beae-slot beae-virtual-slot" data-bnode-index="1"><div class="beae-content-list beae-carousel" data-beae-tabs-root="true" data-bnode="beae-jn2vfp" data-bnode-index="1"><div class="beae-slider-wrapper" data-navigation="navi-type-1" data-pagination="dots" data-dir="left" data-effect="slide" data-scroll="1" data-align="start" data-desktop-layout="slider" data-tablet-layout="slider" data-mobile-layout="slider" data-item="1" data-item-tablet="1" data-item-mobile="1" data-loop="false" data-play="false" data-transition="5s"><div class="beae-slider-items"><div class="beae-slider-item" role="tabpanel" data-beae-tabs-panel="true" data-index="0"><div class="beae-slot" data-bnode="beae-5tq7k8" data-bnode-index="1"></div></div><div class="beae-slider-item" role="tabpanel" data-beae-tabs-panel="true" data-index="1"><div class="beae-slot" data-bnode="beae-qe43ck" data-bnode-index="2"></div></div><div class="beae-slider-item" role="tabpanel" data-beae-tabs-panel="true" data-index="2"><div class="beae-slot" data-bnode="beae-e5r5ys" data-bnode-index="3"></div></div></div></div><div class="beae-slider-controls"><div class="beae-slider-controls-wrp"><div class="beae-slider-nav-left"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M9.78 3.47a.75.75 0 0 1 0 1.06l-3.47 3.47 3.47 3.47a.749.749 0 1 1-1.06 1.06l-4-4a.75.75 0 0 1 0-1.06l4-4a.75.75 0 0 1 1.06 0"></path></svg></div><div class="beae-slider-pagination-wrp"><div class="beae-slider-pagination-wrapper"></div></div><div class="beae-slider-nav-right"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M5.72 12.53a.75.75 0 0 1 0-1.06l3.47-3.47-3.47-3.47a.749.749 0 1 1 1.06-1.06l4 4a.75.75 0 0 1 0 1.06l-4 4a.75.75 0 0 1-1.06 0"></path></svg></div></div></div></div></div></div></section></div></div><div data-beae-export-section-id="beae-z6oxzw" data-beae-export-has-ab="false"><div data-beae-ab-variant="a"><section data-bnode="beae-z6oxzw" data-bnode-index="2" class="beae-section beae-scheme-1"><div class="beae-section-container"><div class="beae-slot" data-bnode="beae-sfe38y" data-bnode-index="1"><p class="beae-paragraph beae-p" data-bnode="beae-vst0y2" data-bnode-index="1">{{ 'sections.omnise-6a326f4327ead33973778b7b.beae_ptn7ue' | t }}</p><div class="beae-slot" data-bnode="beae-6xdcxt" data-bnode-index="2"></div></div></div></section></div></div><div data-beae-export-section-id="beae-dtw2hy" data-beae-export-has-ab="false"><div data-beae-ab-variant="a"><section data-bnode="beae-dtw2hy" data-bnode-index="3" class="beae-section beae-scheme-1"><div class="beae-section-container"><div class="beae-slot" data-bnode="beae-79cs8u" data-bnode-index="1"><h3 class="beae-heading beae-h3" data-bnode="beae-sixcvx" data-bnode-index="1">{{ 'sections.omnise-6a326f4327ead33973778b7b.beae_fe97d8' | t }}</h3><div class="beae-carousel beae-content-list" data-bnode="beae-ji8wx9" data-bnode-index="2" data-gap-control=":scope &gt; .beae-slider-wrapper &gt; .beae-slider-items"><div class="beae-slider-wrapper" data-navigation="navi-type-1" data-pagination="dots" data-dir="left" data-effect="slide" data-scroll="1" data-align="start" data-desktop-layout="slider" data-tablet-layout="slider" data-mobile-layout="slider" data-item="4" data-item-tablet="3" data-item-mobile="1" data-loop="true" data-play="false" data-transition="500"><div class="beae-slider-items">
+        {% assign collection = collections['feature-collection-elunea'] %}
+        {% if collection and collection.products.size > 0 %}
+        {% for product in collection.products limit: 8 %}
+        <div class="beae-slider-item" data-gap-item="true"><script type="application/json" class="product-json-data" aria-hidden="true">{ "id": {{ product.id }},"title": {{ product.title | json }},"handle": {{ product.handle | json }},"options": {{ product.options | json }},"available": {{ product.available | json }},"variants":[{% for variant in product.variants %}{"id": {{ variant.id }},"title": {{ variant.title | json }},"available": {{ variant.available | json }},"price": {{ variant.price | default: 0 }},"compare_at_price": {{ variant.compare_at_price | default: 0 }},"inventory_quantity": {{ variant.inventory_quantity | default: 0 }},"sku": {{ variant.sku | json }},"featured_image":{"src": {{ variant.featured_image.src | json }}}}{% unless forloop.last %},{% endunless %}{% endfor %}] }</script></div>
+        {% endfor %}
+        {% else %}
+          <div class="beae-content-list-empty">No products found</div>
+        {% endif %}
+        </div></div><div class="beae-slider-controls"><div class="beae-slider-controls-wrp"><div class="beae-slider-nav-left"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path d="M7.047 3.711a.625.625 0 0 0-.844-.922l-3 2.75a.626.626 0 0 0 0 .922l3 2.75.1.075a.626.626 0 0 0 .829-.902l-.085-.095-2.497-2.289z" fill="currentColor"></path></svg></div><div class="beae-slider-pagination-wrp"><div class="beae-slider-pagination-wrapper"></div></div><div class="beae-slider-nav-right"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path d="M4.953 3.71a.625.625 0 0 1 .844-.921l3 2.75a.626.626 0 0 1 0 .922l-3 2.75-.1.075a.626.626 0 0 1-.829-.902l.085-.095 2.497-2.289z" fill="currentColor"></path></svg></div></div></div></div></div></div></section></div></div><div data-beae-export-section-id="beae-i2zudm" data-beae-export-has-ab="false"><div data-beae-ab-variant="a"><section data-bnode="beae-i2zudm" data-bnode-index="4" class="beae-section beae-scheme-1"><div class="beae-section-container"><div class="beae-slot" data-bnode="beae-g74840" data-bnode-index="1"><p class="beae-paragraph beae-p3" data-bnode="beae-ck2gt7" data-bnode-index="1">{{ 'sections.omnise-6a326f4327ead33973778b7b.beae_d153mp' | t }}</p><h3 class="beae-heading beae-h2" data-bnode="beae-ebbxdg" data-bnode-index="2">{{ 'sections.omnise-6a326f4327ead33973778b7b.beae_xm7oz6' | t }}</h3></div><div class="beae-slot" data-bnode="beae-kkkbtl" data-bnode-index="2"><div class="beae-slot" data-bnode="beae-kb345d" data-bnode-index="1">
+{%- comment -%} beae-3ftjlh — Collection Tabs {%- endcomment -%}
+
+{%- assign cleaners_collection = collections['cleaners'] -%}
+{%- assign serums_collection = collections['serums'] -%}
+{%- assign moisturizers_collection = collections['moisturizers'] -%}
+
+<div class="beae-slot beae-tabs" data-beae-id="beae-3ftjlh" data-transition="false">
+
+  {%- comment -%} Tab 1: Cleaners — beae-zltpkt {%- endcomment -%}
+  <div class="beae-slot active" data-beae-id="beae-zltpkt" style="
+    --borderStyle: solid;
+    --borderColor: #666666;
+    --borderWidth-tl: 0px; --borderWidth-tr: 0px; --borderWidth-br: 1px; --borderWidth-bl: 0px;
+    --borderRadius-tl: 0px; --borderRadius-tr: 0px; --borderRadius-br: 0px; --borderRadius-bl: 0px;
+    padding: 36px 64px 36px 0px;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  ">
+    <div class="beae-tab-progress"></div>
+
+    <div style="display: flex; flex-direction: row; align-items: center; gap: 12px; max-width: 100%;">
+      <h3 class="beae-product-title beae-h2" style="
+        font-size: 32px;
+        color: #ffffff;
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: 0px;
+        text-transform: none;
+        text-align: start;
+        margin: 0;
+      ">{{ cleaners_collection.title | default: 'Cleaners' }}</h3>
+
+      <p class="beae-paragraph beae-p" style="
+        font-size: 15px;
+        color: #ffffff;
+        font-weight: 400;
+        line-height: 1.5;
+        margin: 0 12px 20px 0;
+      ">{{ cleaners_collection.products_count }}</p>
+
+      {%- if cleaners_collection.image -%}
+        <div class="beae-media-wrapper" style="width: 110px; flex-shrink: 0;">
+          <img src="{{ cleaners_collection.image | img_url: '110x' }}" alt="{{ cleaners_collection.title }}" loading="lazy" class="beae-image" style="width: 100%; height: auto; display: block;">
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="beae-collection-description beae-p beae-description" style="
+      font-size: 15px;
+      color: #ffffff;
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: 0px;
+    ">
+      <div>{{ cleaners_collection.description | default: 'Gentle formulas that cleanse without stripping, leaving your skin fresh, balanced, and ready for what follows.' }}</div>
+    </div>
+
+    <a class="beae-btn-button beae-btn-se" href="{{ cleaners_collection.url }}" style="
+      font-size: 15px;
+      height: 48px;
+      padding: 0 40px;
+      border-radius: 50px;
+      background-color: #ececec;
+      color: #121212;
+      text-transform: uppercase;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      width: fit-content;
+      white-space: nowrap;
+    ">shop Cleaners</a>
+  </div>
+
+  {%- comment -%} Tab 2: Serums — beae-05pp2j {%- endcomment -%}
+  <div class="beae-slot" data-beae-id="beae-05pp2j" style="
+    --borderStyle: solid;
+    --borderColor: #666666;
+    --borderWidth-tl: 0px; --borderWidth-tr: 0px; --borderWidth-br: 1px; --borderWidth-bl: 0px;
+    --borderRadius-tl: 0px; --borderRadius-tr: 0px; --borderRadius-br: 0px; --borderRadius-bl: 0px;
+    padding: 36px 64px 36px 0px;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  ">
+    <div class="beae-tab-progress"></div>
+
+    <div style="display: flex; flex-direction: row; align-items: center; gap: 12px; max-width: 100%;">
+      <h3 class="beae-product-title beae-h2" style="
+        font-size: 32px;
+        color: #ffffff;
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: 0px;
+        text-transform: none;
+        text-align: start;
+        margin: 0;
+      ">{{ serums_collection.title | default: 'Serums' }}</h3>
+
+      <p class="beae-paragraph beae-p" style="
+        font-size: 15px;
+        color: #ffffff;
+        font-weight: 400;
+        line-height: 1.5;
+        margin: 0 12px 20px 0;
+      ">{{ serums_collection.products_count }}</p>
+
+      {%- if serums_collection.image -%}
+        <div class="beae-media-wrapper" style="width: 110px; flex-shrink: 0;">
+          <img src="{{ serums_collection.image | img_url: '110x' }}" alt="{{ serums_collection.title }}" loading="lazy" class="beae-image" style="width: 100%; height: auto; display: block;">
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="beae-collection-description beae-p beae-description" style="
+      font-size: 16px;
+      color: #ffffff;
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: 0px;
+    ">
+      <div>{{ serums_collection.description | default: 'Lightweight, targeted formulas designed to deliver active ingredients deep into the skin for visible, lasting results.' }}</div>
+    </div>
+
+    <a class="beae-btn-button beae-btn-se" href="{{ serums_collection.url }}" style="
+      font-size: 15px;
+      height: 45px;
+      padding: 0 30px;
+      border-radius: 50px;
+      background-color: #ececec;
+      color: #121212;
+      text-transform: uppercase;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      width: fit-content;
+      white-space: nowrap;
+    ">shop Serums</a>
+  </div>
+
+  {%- comment -%} Tab 3: Moisturizers — beae-srlsa0 {%- endcomment -%}
+  <div class="beae-slot" data-beae-id="beae-srlsa0" style="
+    --borderStyle: solid;
+    --borderColor: #666666;
+    --borderWidth-tl: 0px; --borderWidth-tr: 0px; --borderWidth-br: 1px; --borderWidth-bl: 0px;
+    --borderRadius-tl: 0px; --borderRadius-tr: 0px; --borderRadius-br: 0px; --borderRadius-bl: 0px;
+    padding: 36px 64px 36px 0px;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  ">
+    <div class="beae-tab-progress"></div>
+
+    <div style="display: flex; flex-direction: row; align-items: center; gap: 12px; max-width: 100%;">
+      <h3 class="beae-product-title beae-h2" style="
+        font-size: 32px;
+        color: #ffffff;
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: 0px;
+        text-transform: none;
+        text-align: start;
+        margin: 0;
+      ">{{ moisturizers_collection.title | default: 'Moisturizers' }}</h3>
+
+      <p class="beae-paragraph beae-p" style="
+        font-size: 15px;
+        color: #ffffff;
+        font-weight: 400;
+        line-height: 1.5;
+        margin: 0 12px 20px 0;
+      ">{{ moisturizers_collection.products_count }}</p>
+
+      {%- if moisturizers_collection.image -%}
+        <div class="beae-media-wrapper" style="width: 110px; flex-shrink: 0;">
+          <img src="{{ moisturizers_collection.image | img_url: '110x' }}" alt="{{ moisturizers_collection.title }}" loading="lazy" class="beae-image" style="width: 100%; height: auto; display: block;">
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="beae-collection-description beae-p beae-description" style="
+      font-size: 16px;
+      color: #ffffff;
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: 0px;
+    ">
+      <div>{{ moisturizers_collection.description | default: 'Rich, barrier-supporting formulas that lock in moisture and keep skin soft, plump, and balanced all day.' }}</div>
+    </div>
+
+    <a class="beae-btn-button beae-btn-se" href="{{ moisturizers_collection.url }}" style="
+      font-size: 15px;
+      height: 45px;
+      padding: 0 30px;
+      border-radius: 50px;
+      background-color: #ececec;
+      color: #121212;
+      text-transform: uppercase;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      width: fit-content;
+      white-space: nowrap;
+    ">shop Moisturizers</a>
+  </div>
+
+</div>
+</div><div class="beae-slot" data-bnode="beae-qrtmu1" data-bnode-index="2"></div></div></div></section></div></div><div data-beae-export-section-id="beae-6sm5vc" data-beae-export-has-ab="false"><div data-beae-ab-variant="a"><section data-bnode="beae-6sm5vc" data-bnode-index="5" class="beae-section beae-scheme-1"><div class="beae-section-container"><div class="beae-slot" data-bnode="beae-80sz7u" data-bnode-index="1"><div class="beae-media-wrapper beae-media-card" data-bnode="beae-tel2xf" data-bnode-index="1" style="--beae-image-position: 0% 50%;"><img width="1020" height="1020" sizes="min(1900px, 100vw)" alt="Image" loading="lazy" class="beae-image" srcset="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Image_8_5e49c8c3-7bd2-4274-b9eb-ec3556f51163.jpg?v=1778048844&amp;width=2100 2100w,https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Image_8_5e49c8c3-7bd2-4274-b9eb-ec3556f51163.jpg?v=1778048844&amp;width=1600 1600w,https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Image_8_5e49c8c3-7bd2-4274-b9eb-ec3556f51163.jpg?v=1778048844&amp;width=1100 1100w,https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Image_8_5e49c8c3-7bd2-4274-b9eb-ec3556f51163.jpg?v=1778048844&amp;width=600 600w" src="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Image_8_5e49c8c3-7bd2-4274-b9eb-ec3556f51163.jpg?v=1778048844&amp;width=2100"></div></div><div class="beae-slot" data-bnode="beae-poa38j" data-bnode-index="2"><div class="beae-slot" data-bnode="beae-w1je02" data-bnode-index="1"></div><div class="beae-slot" data-bnode="beae-ywwykz" data-bnode-index="2"></div></div></div></section></div></div><div data-beae-export-section-id="beae-5e1i3j" data-beae-export-has-ab="false"><div data-beae-ab-variant="a"><section data-bnode="beae-5e1i3j" data-bnode-index="6" class="beae-section beae-scheme-1"><div class="beae-section-container"><div class="beae-content-list beae-1kwker-wrapper" data-bnode="beae-wfnloi" data-direction="right"><div class="beae-1kwker-track"><div class=" beae-1kwker-content"><div><div class="beae-slide-item beae-item beae-item-content" data-bnode="be-ctl-item" data-bnode-index="1" data-bnode-loop-index="0"></div><span class="beae-marquee-dot rounded-full mx-3 !flex "></span></div><div><div class="beae-slide-item beae-item beae-item-content" data-bnode="be-ctl-item" data-bnode-index="2" data-bnode-loop-index="1"></div><span class="beae-marquee-dot rounded-full mx-3 !flex "></span></div><div><div class="beae-slide-item beae-item beae-item-content" data-bnode="be-ctl-item" data-bnode-index="3" data-bnode-loop-index="2"></div><span class="beae-marquee-dot rounded-full mx-3 !flex "></span></div><div><div class="beae-slide-item beae-item beae-item-content" data-bnode="be-ctl-item" data-bnode-index="4" data-bnode-loop-index="3"></div><span class="beae-marquee-dot rounded-full mx-3 !flex "></span></div></div></div></div></div></section></div></div><div data-beae-export-section-id="beae-98wcvt" data-beae-export-has-ab="false"><div data-beae-ab-variant="a"><section data-bnode="beae-98wcvt" data-bnode-index="7" class="beae-section beae-scheme-1"><div class="beae-section-container"><div class="beae-slot" data-bnode="beae-73lfjh" data-bnode-index="1"><p class="beae-paragraph beae-p3" data-bnode="beae-b4ieb5" data-bnode-index="1">{{ 'sections.omnise-6a326f4327ead33973778b7b.beae_so0349' | t }}</p><h3 class="beae-heading beae-h2" data-bnode="beae-yi0taw" data-bnode-index="2">{{ 'sections.omnise-6a326f4327ead33973778b7b.beae_mzahb5' | t }}</h3><div class="beae-slot" data-bnode="beae-lufklo" data-bnode-index="3"><div class="beae-comparison-wrapper" data-layout="horizontal"><div class="beae-media-wrapper beae-comparison-before" style="--beae-image-ratio: auto;"><div class="beae-comparison-heading beae-comparison-heading-before"><h5 class="beae-heading beae-h5">Before</h5></div><picture><source media="(max-width: 639px)" srcset="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Image_12_5585b637-b853-42ef-b72b-e95aedbef2fe.jpg?v=1779241671&amp;width=600 600w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Image_12_5585b637-b853-42ef-b72b-e95aedbef2fe.jpg?v=1779241671&amp;width=800 800w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Image_12_5585b637-b853-42ef-b72b-e95aedbef2fe.jpg?v=1779241671&amp;width=1100 1100w"><source media="(max-width: 991px)" srcset="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Generated_Image_April_07_2026_-_5_47PM_1.jpg?v=1778119750&amp;width=1200 1200w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Generated_Image_April_07_2026_-_5_47PM_1.jpg?v=1778119750&amp;width=1800 1800w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Generated_Image_April_07_2026_-_5_47PM_1.jpg?v=1778119750&amp;width=2400 2400w"><img width="2121" height="900" sizes="100vw" alt="Before" loading="lazy" class="beae-image" srcset="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Generated_Image_April_07_2026_-_5_47PM_1.jpg?v=1778119750&amp;width=4300 4300w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Generated_Image_April_07_2026_-_5_47PM_1.jpg?v=1778119750&amp;width=3200 3200w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Generated_Image_April_07_2026_-_5_47PM_1.jpg?v=1778119750&amp;width=2200 2200w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Generated_Image_April_07_2026_-_5_47PM_1.jpg?v=1778119750&amp;width=1700 1700w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Generated_Image_April_07_2026_-_5_47PM_1.jpg?v=1778119750&amp;width=1300 1300w" src="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Generated_Image_April_07_2026_-_5_47PM_1.jpg?v=1778119750&amp;width=4300" style="--beae-image-position: 50% 50%;"></picture></div><div class="beae-media-wrapper beae-comparison-after" style="--beae-image-ratio: auto;"><div class="beae-comparison-heading beae-comparison-heading-after"><h5 class="beae-heading beae-h5">After</h5></div><picture><source media="(max-width: 639px)" srcset="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Image_12_5585b637-b853-42ef-b72b-e95aedbef2fe.jpg?v=1779241671&amp;width=600 600w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Image_12_5585b637-b853-42ef-b72b-e95aedbef2fe.jpg?v=1779241671&amp;width=800 800w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Image_12_5585b637-b853-42ef-b72b-e95aedbef2fe.jpg?v=1779241671&amp;width=1100 1100w"><source media="(max-width: 991px)" srcset="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Generated_Image_April_07_2026_-_5_26PM_1.jpg?v=1778119718&amp;width=1200 1200w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Generated_Image_April_07_2026_-_5_26PM_1.jpg?v=1778119718&amp;width=1800 1800w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Generated_Image_April_07_2026_-_5_26PM_1.jpg?v=1778119718&amp;width=2400 2400w"><img width="2121" height="900" sizes="100vw" alt="After" loading="lazy" class="beae-image" srcset="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Generated_Image_April_07_2026_-_5_26PM_1.jpg?v=1778119718&amp;width=4300 4300w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Generated_Image_April_07_2026_-_5_26PM_1.jpg?v=1778119718&amp;width=3200 3200w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Generated_Image_April_07_2026_-_5_26PM_1.jpg?v=1778119718&amp;width=2200 2200w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Generated_Image_April_07_2026_-_5_26PM_1.jpg?v=1778119718&amp;width=1700 1700w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Generated_Image_April_07_2026_-_5_26PM_1.jpg?v=1778119718&amp;width=1300 1300w" src="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/Generated_Image_April_07_2026_-_5_26PM_1.jpg?v=1778119718&amp;width=4300" style="--beae-image-position: 50% 50%;"></picture></div><button type="button" class="beae-comparison-button" data-bnode-nodrag="true" aria-label="Drag" tabindex="-1"><span class="beae-comparison-line"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button></div><div class="beae-slot-empty"><button data-beae-panel="elements" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4.25 8a.75.75 0 0 1 .75-.75h2.25v-2.25a.75.75 0 0 1 1.5 0v2.25h2.25a.75.75 0 0 1 0 1.5h-2.25v2.25a.75.75 0 0 1-1.5 0v-2.25h-2.25a.75.75 0 0 1-.75-.75"></path><path fill-rule="evenodd" d="M8 15a7 7 0 1 0 0-14 7 7 0 0 0 0 14m0-1.5a5.5 5.5 0 1 0 0-11 5.5 5.5 0 1 0 0 11"></path></svg></button></div></div></div></div></section></div></div><div data-beae-export-section-id="beae-zi0r6j" data-beae-export-has-ab="false"><div data-beae-ab-variant="a"><section data-bnode="beae-zi0r6j" data-bnode-index="8" class="beae-section beae-scheme-1"><div class="beae-section-container"><div class="beae-slot" data-bnode="beae-p549z3" data-bnode-index="1"><h3 class="beae-heading beae-h2" data-bnode="beae-oyvdp8" data-bnode-index="1">{{ 'sections.omnise-6a326f4327ead33973778b7b.beae_ho8lc' | t }}</h3></div><div class="beae-slot" data-bnode="beae-2r4vd9" data-bnode-index="2"><div class="beae-carousel beae-content-list" data-bnode="beae-sop3hg" data-bnode-index="1" data-gap-control=":scope &gt; .beae-slider-wrapper &gt; .beae-slider-items"><div class="beae-slider-wrapper" data-navigation="navi-type-1" data-pagination="none" data-dir="left" data-effect="slide" data-scroll="1" data-align="start" data-desktop-layout="slider" data-tablet-layout="slider" data-mobile-layout="slider" data-item="3" data-item-tablet="2" data-item-mobile="1" data-loop="true" data-play="false" data-transition="500"><div class="beae-slider-items"><div class="beae-slider-item" data-gap-item="true"></div><div class="beae-slider-item" data-gap-item="true"></div><div class="beae-slider-item" data-gap-item="true"></div><div class="beae-slider-item" data-gap-item="true"></div></div></div><div class="beae-slider-controls"><div class="beae-slider-controls-wrp"><div class="beae-slider-nav-left"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path d="M7.047 3.711a.625.625 0 0 0-.844-.922l-3 2.75a.626.626 0 0 0 0 .922l3 2.75.1.075a.626.626 0 0 0 .829-.902l-.085-.095-2.497-2.289z" fill="currentColor"></path></svg></div><div class="beae-slider-nav-right"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path d="M4.953 3.71a.625.625 0 0 1 .844-.921l3 2.75a.626.626 0 0 1 0 .922l-3 2.75-.1.075a.626.626 0 0 1-.829-.902l.085-.095 2.497-2.289z" fill="currentColor"></path></svg></div></div></div></div></div></div></section></div></div><div data-beae-export-section-id="beae-c0mmqy" data-beae-export-has-ab="false"><div data-beae-ab-variant="a"><section data-bnode="beae-c0mmqy" data-bnode-index="9" class="beae-section beae-scheme-1"><div class="beae-section-container"><div class="beae-slot" data-bnode="beae-2oy8nk" data-bnode-index="1"><h3 class="beae-heading beae-h6" data-bnode="beae-iv4u9c" data-bnode-index="1">{{ 'sections.omnise-6a326f4327ead33973778b7b.beae_ewf07m' | t }}</h3><a data-bnode="beae-xpbnu9" data-bnode-index="2" class="beae-btn-button beae-btn-te" beae-btn-po="right" href="#"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 18l6-6l-6-6"></path></svg></span>{{ 'sections.omnise-6a326f4327ead33973778b7b.beae_651wl9' | t }}</a></div><div class="beae-carousel beae-content-list" data-bnode="beae-oy966x" data-bnode-index="2" data-gap-control=":scope &gt; .beae-slider-wrapper &gt; .beae-slider-items"><div class="beae-slider-wrapper" data-navigation="navi-type-1" data-pagination="none" data-dir="left" data-effect="slide" data-scroll="1" data-align="start" data-desktop-layout="slider" data-tablet-layout="slider" data-mobile-layout="grid" data-item="3" data-item-tablet="1.7" data-item-mobile="1" data-loop="true" data-play="false" data-transition="5s"><div class="beae-slider-items"><div class="beae-slider-item" data-gap-item="true"><div class="beae-slot" data-bnode="be-ctl-item" data-bnode-index="1" data-bnode-loop-index="0"></div></div><div class="beae-slider-item" data-gap-item="true"><div class="beae-slot" data-bnode="be-ctl-item" data-bnode-index="2" data-bnode-loop-index="1"></div></div><div class="beae-slider-item" data-gap-item="true"></div></div></div><div class="beae-slider-controls"><div class="beae-slider-controls-wrp"><div class="beae-slider-nav-left"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path d="M7.047 3.711a.625.625 0 0 0-.844-.922l-3 2.75a.626.626 0 0 0 0 .922l3 2.75.1.075a.626.626 0 0 0 .829-.902l-.085-.095-2.497-2.289z" fill="currentColor"></path></svg></div><div class="beae-slider-nav-right"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path d="M4.953 3.71a.625.625 0 0 1 .844-.921l3 2.75a.626.626 0 0 1 0 .922l-3 2.75-.1.075a.626.626 0 0 1-.829-.902l.085-.095 2.497-2.289z" fill="currentColor"></path></svg></div></div></div></div></div></section></div></div><div data-beae-export-section-id="beae-t61dla" data-beae-export-has-ab="false"><div data-beae-ab-variant="a"><section data-bnode="beae-t61dla" data-bnode-index="10" class="beae-section beae-scheme-1"><div class="beae-section-container"><div class="beae-slot" data-bnode="beae-mrqj6j" data-bnode-index="1"></div></div></section></div></div><div data-beae-export-section-id="beae-czsod8" data-beae-export-has-ab="false"><div data-beae-ab-variant="a"><section data-bnode="beae-czsod8" data-bnode-index="11" class="beae-section beae-scheme-1"><div class="beae-section-container"><div class="beae-slot" data-bnode="beae-i471km" data-bnode-index="1"></div></div></section></div></div>
+<script id="omnise-exported-page-js" src="{{'omnise-6a326f4327ead33973778b7b.js'  | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "OMNISE BUILDER APP",
+  "locales": {
+    "en": {
+      "omnise_ptn7ue": "our values",
+      "omnise_fe97d8": "Daily Essentials",
+      "omnise_d153mp": "our Collections",
+      "omnise_xm7oz6": "Explore Our Curated Skincare Collections",
+      "omnise_so0349": "CLINICAL RESULTS",
+      "omnise_mzahb5": "Real Skin Visible Change",
+      "omnise_ho8lc": "What Real Skin Looks Like",
+      "omnise_ewf07m": "FROM THE JOURNAL",
+      "omnise_651wl9": "View Blog"
+    }
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "The section was generated by OMNISE BUILDER",
+      "info": "Omnise is a flexible page builder app on Shopify AppStore.\n              It provides 100+ Shopify Elements and pre-built templates library, \n              so you can build unlimited pages that you can imagine with it."
+    },
+    {
+      "type": "header",
+      "content": "[EDIT WITH OMNISE APP →](https://beae-edric.myshopify.com/admin/apps/3db283686bdf064c04e98e5cf61875ee/app/editor/v4/home/6a326f4327ead33973778b7b)",
+      "info": "(*You must install the app to start editing this section [Learn more](https://docs.beae.com/en/article/quick-start-guide-dkoesy/))"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ]
+}
+{% endschema %}
