@@ -726,7 +726,7 @@
   position: relative;
   width: fit-content;
   margin: 0 0 6px;
-  font-size: 16px;
+  font-size: clamp(13px, 1.3vw, 14px);
   font-weight: 400;
   line-height: 1.4;
   text-decoration: none;
@@ -738,6 +738,7 @@
 
 .helix-mega__column:first-child a {
   font-weight: 600;
+  font-size: clamp(14px, 1.5vw, 16px);
 }
 
 .helix-mega__column li + li {
@@ -748,7 +749,7 @@
   display: block;
   position: relative;
   width: fit-content;
-  font-size: 15px;
+  font-size: clamp(13px, 1.3vw, 14px);
   line-height: 1.45;
   text-decoration: none;
 }
