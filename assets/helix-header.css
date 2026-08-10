@@ -539,12 +539,12 @@
 .helix-localization--desktop .helix-localization__popover--country .helix-localization__search {
   opacity: 0;
   transform: translate3d(0, -12px, 0);
-  transition: opacity 180ms ease, transform 220ms var(--helix-surface-ease);
+  transition: opacity 260ms ease, transform 320ms var(--helix-surface-ease);
 }
 .helix-localization--desktop .helix-localization__popover--country .helix-localization__country-list > li {
   opacity: 0;
   transform: translate3d(12px, 0, 0);
-  transition: opacity 180ms ease, transform 220ms var(--helix-surface-ease);
+  transition: opacity 260ms ease, transform 320ms var(--helix-surface-ease);
 }
 
 .helix-localization--desktop .helix-localization__details[open].is-panel-open .helix-localization__popover--country .helix-localization__search,
@@ -805,7 +805,7 @@
 .helix-dropdown__content li {
     opacity: 0;
     transform: translate3d(12px, 0, 0);
-  transition: opacity 180ms ease, transform 220ms var(--helix-surface-ease);
+  transition: opacity 260ms ease, transform 320ms var(--helix-surface-ease);
 }
 
 .helix-nav-item.is-open > .helix-dropdown .helix-dropdown__content li {
