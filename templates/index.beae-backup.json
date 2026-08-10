@@ -8,33 +8,37 @@
  * ------------------------------------------------------------
  */
 {
-  "layout": "theme",
   "sections": {
-    "beae-default-template": {
-      "type": "beae-home-page",
-      "blocks": {
-        "beae-qzy15npb": {
-          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
-        },
-        "beae-c9wetu0k": {
-          "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
-        },
-        "beae-9d6amv8q": {
-          "type": "shopify://apps/moast/blocks/carousel/1ac7547b-5443-446c-868c-7fab4566ee16",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "beae-qzy15npb",
-        "beae-c9wetu0k",
-        "beae-9d6amv8q"
-      ],
-      "settings": {}
+    "main": {
+      "type": "main-helix-demo",
+      "settings": {
+        "background_color": "#56644e",
+        "overlay_opacity": 25,
+        "height": 720,
+        "eyebrow": "Move differently",
+        "heading": "Find your next pair",
+        "text": "<p>A complete preview surface for the responsive Helix header.</p>",
+        "button_label": "Shop all shoes",
+        "button_link": ""
+      }
+    },
+    "main_helix_demo_mCcFyK": {
+      "type": "main-helix-demo",
+      "name": "Header preview hero",
+      "settings": {
+        "background_color": "#56644E",
+        "overlay_opacity": 25,
+        "height": 720,
+        "eyebrow": "Move differently",
+        "heading": "Find your next pair",
+        "text": "<p>A complete preview surface for the responsive Helix header.</p>",
+        "button_label": "Shop all shoes",
+        "button_link": ""
+      }
     }
   },
   "order": [
-    "beae-default-template"
+    "main",
+    "main_helix_demo_mCcFyK"
   ]
 }
