@@ -725,16 +725,11 @@
   display: block;
   position: relative;
   width: fit-content;
-  margin: 0 0 6px;
+  margin: 0 0 14px;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.4;
   text-decoration: none;
-}
-
-.helix-mega__column:first-child .helix-mega__heading,
-.helix-mega__column:first-child a {
-  font-weight: 600;
 }
 
 .helix-mega__column li + li {
