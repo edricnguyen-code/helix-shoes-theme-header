@@ -1,4 +1,3 @@
-
 (() => { if (window.BEAEPAGEJS === undefined) {
             window.BEAEPAGEJS = [];
           }

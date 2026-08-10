@@ -10,10 +10,12 @@
 {
   "layout": "next",
   "sections": {
-    "beae-quickview-default": {
-      "type": "beae-quickview-default",
+    "beae-default-template": {
+      "type": "beae-quick-view",
       "settings": {}
     }
   },
-  "order": ["beae-quickview-default"]
+  "order": [
+    "beae-default-template"
+  ]
 }
