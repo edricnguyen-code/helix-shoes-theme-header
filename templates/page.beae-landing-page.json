@@ -8,14 +8,14 @@
  * ------------------------------------------------------------
  */
 {
-  "layout": "next",
+  "layout": "beae",
   "sections": {
-    "beae-default-template": {
-      "type": "beae-quick-view",
+    "beae-landing-page": {
+      "type": "beae-landing-page",
       "settings": {}
     }
   },
   "order": [
-    "beae-default-template"
+    "beae-landing-page"
   ]
 }
