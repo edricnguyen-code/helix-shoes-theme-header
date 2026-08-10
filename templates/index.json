@@ -13,23 +13,23 @@
     "beae-default-template": {
       "type": "beae-home-page",
       "blocks": {
-        "beae-wyl7m5qo": {
+        "beae-qzy15npb": {
           "type": "shopify://apps/judge-me-reviews/blocks/preview_badge_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {}
         },
-        "beae-xzpj45vx": {
+        "beae-c9wetu0k": {
           "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {}
         },
-        "beae-9s7otcbn": {
+        "beae-9d6amv8q": {
           "type": "shopify://apps/moast/blocks/carousel/1ac7547b-5443-446c-868c-7fab4566ee16",
           "settings": {}
         }
       },
       "block_order": [
-        "beae-wyl7m5qo",
-        "beae-xzpj45vx",
-        "beae-9s7otcbn"
+        "beae-qzy15npb",
+        "beae-c9wetu0k",
+        "beae-9d6amv8q"
       ],
       "settings": {}
     }
