@@ -1,0 +1,989 @@
+
+            {% assign beae_root_url = routes.root_url %}
+            {% if beae_root_url != '/'%}
+                {% assign beae_root_url = routes.root_url | append: '/' %}
+            {% endif %}
+        {%capture section_id %}beae-quick-view{% endcapture%}{% if section_id == section.id %}{% if shop.metafields.beae.global_css %}
+            <!--BEAE-EMBED-->
+            <link href="data:text/css;base64,{{-shop.metafields.beae.global_css-}}" rel="stylesheet" id="beae-global-css"/>
+            <!--/BEAE-EMBED-->
+        {% endif %}
+
+{% render 'beae_header', BEAE_THEME: true %}{% endif %}<link rel="stylesheet" id="beae-exported-page-css" media="all" href="{{"beae-6a2101a1f8139bac36d5d614.css" | asset_url}}"><link rel="preconnect" href="https://fonts.googleapis.com">
+                    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css?family=Quicksand:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Inter:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=DM+Sans:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"><div class="beae-builder-v2 beae-builder"><div class="beae-sections beae-content-wrapper">
+        
+        <script id="beae-popup_settings" type="application/json">
+            {"popupLayout":"center","popupWidth":1280,"popupCss":"div.beae-next-popup .beae-next-popup--container, div.beae-next-popup .beae-next-popup--container .beae-popup__body, div.beae-next-popup .beae-next-popup--container .beae-popup__content{ padding: 0;overflow: hidden;}div.beae-next-popup button.beae-popup__close{ cursor: none;border-radius: 50%;border: 1px solid #cacaca;color: black;top: 20px;right: 20px;}div.beae-next-popup .beae-next-popup--container .beae-popup__body{ border-radius: 20px;max-height: 90vh;}div.beae-next-popup .beae-sections-after{ display: none !important;}@media only screen and (max-width: 767px) {div.beae-next-popup .beae-next-popup--container .beae-popup__content{ padding: 0;overflow: auto;}div.beae-next-popup .beae-next-popup--container[data-layout=\"center\"]{ width: 100% !important;height: 100%;bottom: 0;}div.beae-next-popup .beae-next-popup--container .beae-popup__content{ align-items: center;}div.beae-next-popup .beae-popup__wrapper .beae-popup__body{ max-width: 100%;width: 100%;border-bottom-left-radius: 0;border-bottom-right-radius: 0;height: 85dvh;}}\n"}
+        </script><script type="text/javascript">if (!window.BEAEARGS) {window.BEAEARGS = {};}</script>
+<!----><section id="" data-sectionid="beae-kfpp6hz9" data-width="1470" data-margin="30px" data-margin-mobile="15px" data-type="flexContainer" class="beae-typo-p1 beae-kfpp6hz9 section-beae-kfpp6hz9 beae-section beae-core" data-template="Quickview 1"><!----><!----><div class="beae-flexbox beae-typo-p1" style="padding: 0px;"><div class="beae__section--container beae-flexbox-container" style="max-width: var(--beae-page-width, 1470px);"><!----><div class="beae-flexbox-core beae-x-flex-section grid-container-width"><!----><div class="beae-tk6lt80i beae-block beae-core beae-animation beae-unique-h7b186ui beae-custom-height" data-id="beae-tk6lt80i" data-uniqueid="h7b186ui""><!---->
+      {% capture beae_variant_size_guide_icon %}{% endcapture %}
+    {% capture beae_variant_size_guide_icon %}{% endcapture %}
+      {% capture beae_lp_unavailable_icon %}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M464 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm0 394c0 3.3-2.7 6-6 6H54c-3.3 0-6-2.7-6-6V86c0-3.3 2.7-6 6-6h404c3.3 0 6 2.7 6 6v340zM356.5 194.6L295.1 256l61.4 61.4c4.6 4.6 4.6 12.1 0 16.8l-22.3 22.3c-4.6 4.6-12.1 4.6-16.8 0L256 295.1l-61.4 61.4c-4.6 4.6-12.1 4.6-16.8 0l-22.3-22.3c-4.6-4.6-4.6-12.1 0-16.8l61.4-61.4-61.4-61.4c-4.6-4.6-4.6-12.1 0-16.8l22.3-22.3c4.6-4.6 12.1-4.6 16.8 0l61.4 61.4 61.4-61.4c4.6-4.6 12.1-4.6 16.8 0l22.3 22.3c4.7 4.6 4.7 12.1 0 16.8z"></path></svg>{% endcapture %}
+      {% capture beae_lp_icon %}<svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>{% endcapture %}
+        {% liquid
+          if request.page_type != 'product' or product == blank
+            assign beae_product = 'ergo-purrch-the-sustainable-desk-mounted-cat-bed'
+            if beae_product == blank or beae_product == '' or all_products[beae_product] == blank
+              assign product = collections['all'].products.first
+            else
+              assign product = all_products[beae_product]
+            endif
+          endif
+          assign tmp_product = product
+          assign beae_lp_view_store_information = 'undefined'
+          assign beae_lp_check_availability_at_other_stores = 'undefined'
+          assign beae_lp_pickup_available = 'undefined'
+          assign beae_lp_pickup_available_at = 'undefined'
+          assign beae_lp_pickup_unavailable_at = 'undefined'
+          
+          assign beae_variant_type = 'radio'
+          assign beae_variant_show_option_name = 'true'
+          assign beae_variant_color_selector_type = 'color_swatch'
+          assign beae_variant_is_link = 'false'
+          assign beae_variant_option_name = 'Color'
+          assign beae_optionValues = ''
+          assign beae_sourceTypes = ''
+          assign beae_variant_size_guide = false
+          assign beae_variant_size_guide_name = 'Size'
+          assign beae_variant_size_guide_label = 'Size guide'
+          assign beae_variant_size_guide_type = 'page'
+          assign beae_variant_size_guide_page = ''
+          assign beae_size_guide_type = 'page'
+          assign beae_size_guide_page = ''
+          assign beae_price_badged = 'sale'
+          assign beae_size_chart_type = 'custom'
+          assign beae_size_chart_show_when = 'all'
+          assign beae_size_chart_value = ''
+          assign beae_size_chart_page = ''
+          assign beae_tags_limit = '5'
+          assign beae_custom_badged_source = 'tags'
+          assign beae_custom_badged_tag = ''
+          assign beae_ct_content_type = 'custom'
+          assign beae_ct_page_handle = ''
+        %}
+        {% capture beae_custom_badged_metafield %}{{  }}{%- endcapture -%}
+        {% capture beae_size_guide_dynamic_source %}{% endcapture %}
+        {% capture beae_variant_dynamic_source %}{% endcapture %}
+        {% capture beae_ct_namespace_and_key %}{% endcapture %}
+        
+        {%- if product != blank -%}
+          {%- form 'product', product,class: "beae-product-form-next beae-product-form--single beae-product-form-detail", data-product_id: product.id, data-handle: product.handle, data-variant-id: product.selected_or_first_available_variant.id, data-available: product.available -%}
+            {%- liquid
+              assign selected_variant = product.selected_or_first_available_variant
+            -%}
+         <div class="beae-flexbox-core beae-x-featuted_product" data-product_id="{{ product.id }}"><!----><!----><div class="beae-5plnogl2 beae-block beae-core beae-animation beae-unique-y1d6iskb beae-flex-wrapper beae-featured-img" data-id="beae-5plnogl2" data-loop-index="0" data-uniqueid="y1d6iskb"><!----><!----><!----><div class="beae-2gmfl03i beae-block beae-core beae-animation beae-unique-d8z78hi2" data-id="beae-2gmfl03i" data-loop-index="0" data-uniqueid="d8z78hi2""><!----><!----><div class="beae-block beae-x-product-gallery" data-pagination-layout="dots" data-pagination-layout-mobile="dots"><style type="text/css"></style><div class="beae-slider-wrapper beae-slider slider-beae-2gmfl03i items-per-1" data-draggable="true" data-desktop-layout="slider" data-mobile-layout="slider" data-effect="slide" data-pagination="true" data-navigation="true" style="--items-per: 1; --items-per-mobile: 1; --items-gap: 0px; --items-gap-mobile: 20px; --autoplay-delay: 5s;"><div class="beae-slider-content beae-slider-items">
+      {%- for media in product.media -%}
+        {% case media.media_type %}
+          {% when 'image' %}
+            <div class="beae-slide-item" data-index="{{ forloop.index0 }}" data-media-id="{{ media.id  }}" type="{{media.media_type}}">
+              <img
+                src="{{ media | img_url: 'master' }}"
+                alt="{{ media.alt | escape | default: 'Product Image' }}"
+                width="{{ media.preview_image.width | default: 915 }}"
+                height="{{ media.preview_image.height | default: 915 }}"
+                loading="lazy"
+              />
+            </div>
+          {% when 'external_video'%}
+            <div class="beae-slide-item" data-index="{{ forloop.index0 }}" data-media-id="{{ media.id  }}" type="{{media.media_type}}">
+              <img
+                preview
+                style="display: none !important;"
+                src="{{ media.preview_image | img_url: 'master' }}"
+                alt="{{ media.preview_image.alt | escape | default: 'Product Image' }}"
+                width="{{ media.preview_image.width | default: 915 }}"
+                height="{{ media.preview_image.height | default: 915 }}"
+                loading="lazy"
+              />
+            {{ media | external_video_url:  controls: 1, loop: 1 | external_video_tag: image_size:'master'}}
+            </div>
+          {% when 'video' %}
+            <div class="beae-slide-item" data-index="{{ forloop.index0 }}" data-media-id="{{ media.id  }}" type="{{media.media_type}}">
+              <img
+                preview
+                style="display: none !important;"
+                src="{{ media.preview_image | img_url: 'master' }}"
+                alt="{{ media.preview_image.alt | escape | default: 'Product Image' }}"
+                width="{{ media.preview_image.width | default: 915 }}"
+                height="{{ media.preview_image.height | default: 915 }}"
+                loading="lazy"
+              />  
+              {% if beae_is_video_autoplay == true %}
+                {{ media | video_tag: image_size:'master', class: 'media-video', muted: true, autoPlay: true, controls: true, loop: true }}
+              {% else %}
+                {{ media | video_tag: image_size:'master', class: 'media-video', controls: true, loop: true }}
+              {% endif %}
+            </div>
+          {% when 'model' %}
+            <div class="beae-slide-item" data-index="{{ forloop.index0 }}" data-media-id="{{ media.id  }}" type="{{media.media_type}}">
+              <img
+                preview
+                style="display: none !important;"
+                src="{{ media.preview_image | img_url: 'master' }}"
+                alt="{{ media.preview_image.alt | escape | default: 'Product Image' }}"
+                width="{{ media.preview_image.width | default: 915 }}"
+                height="{{ media.preview_image.height | default: 915 }}"
+                loading="lazy"
+              />
+              {{ media | model_viewer_tag: image_size:'master', reveal: 'interaction', toggleable: true, data-model-id: media.id }}
+            </div>
+          {% else %}
+            <div class="beae-slide-item" data-index="{{ forloop.index0 }}" data-media-id="{{ media.id  }}" type="{{media.media_type}}">
+              {{ media | media_tag: image_size:'master', class: 'beae-product-single__media--item' }}
+            </div>
+        {% endcase %}
+      {% endfor %}
+  </div><div class="beae-slider-controls"><div class="beae-slider-controls-wrp"><!----><div class="beae-slider-nav-left"><button aria-label="button" type="button"><svg xmlns="http: //www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg></button></div><div class="beae-slider-pagination-wrp"></div><div class="beae-slider-nav-right"><button aria-label="button" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></button></div></div></div></div><script type="text/javascript">window.BEAEARGS['beae-2gmfl03isection-slide-show'] = {
+    "id": "beae-2gmfl03i",
+    "mode": {"value": "live"},
+    "layout":"slider","layoutMobile":"slider","effect":"slide","isLoop":false,"autoPlay":false,"autoPlayDelay":5,"itemsPerSlide":1,"itemsPerSlideMobile":1,"itemsGap":0,"itemsGapMobile":"20px","paginationImage":false,"paginationImageMobile":false,"typeScroll":"default","numItemsScroll":1,"showNavigation":true,"showPagination":true,"showProgress":false,"hookSliderInit":"window.addEventListener('load', () => {\n              setTimeout(() => {\n                \n      setTimeout(() => {\n        const layout = data.slider.getAttribute('data-desktop-layout');\n        const isGrid = layout === 'grid' && window.innerWidth >= 768;\n        const resetPlay = (el) => {\n            let video = el.querySelector('video'),\n                iframe = el.querySelector('iframe');\n            if (iframe) {\n              let src = iframe.getAttribute('src'),\n                  url = new URL(src),\n                  params = url.searchParams;\n              params.set('autoplay', 0);\n              url.search = new URLSearchParams(params).toString();\n              iframe.setAttribute('src', url.href);\n            } else if(video) {\n              video.autoplay = false;\n              video.pause();\n              video.currentTime = 0;\n            }\n        };\n        \n        \n        data.slides.forEach((slide) => {\n          \n          \n        \n        \n        });\n      }, 1000)\n    \n              }, 1000)\n            })","hookBeforeSlideChange":"","hookAfterSlideChange":"\n      setTimeout(() => {\n        const layout = data.slider.getAttribute('data-desktop-layout');\n        const isGrid = layout === 'grid' && window.innerWidth >= 768;\n        const resetPlay = (el) => {\n            let video = el.querySelector('video'),\n                iframe = el.querySelector('iframe');\n            if (iframe) {\n              let src = iframe.getAttribute('src'),\n                  url = new URL(src),\n                  params = url.searchParams;\n              params.set('autoplay', 0);\n              url.search = new URLSearchParams(params).toString();\n              iframe.setAttribute('src', url.href);\n            } else if(video) {\n              video.autoplay = false;\n              video.pause();\n              video.currentTime = 0;\n            }\n        };\n        \n        \n        data.slides.forEach((slide) => {\n          \n          \n        \n        \n        });\n      }, 1000)\n    ","noRunJs":false,"itemGap":0,"itemGapMobile":0
+  };</script></div><script type="text/javascript">window.BEAEARGS['beae-2gmfl03iblock-gallery'] = {
+    "id": "beae-2gmfl03i",
+    "mode": {"value": "live"},
+    
+  };</script><!----></div><!----><!----><!----></div><!----><!----><!----><div class="beae-t1zvtbmm beae-block beae-core beae-animation beae-unique-gpsqtuoh beae-flex-wrapper" data-id="beae-t1zvtbmm" data-loop-index="0" data-uniqueid="gpsqtuoh"><!----><!----><!----><div class="beae-7bnit5qm beae-block beae-core beae-animation beae-unique-kerp3w7h beae-flex-wrapper" data-id="beae-7bnit5qm" data-loop-index="0" data-uniqueid="kerp3w7h"><!----><!----><!----><div class="beae-and2luzc beae-block beae-core beae-animation beae-unique-lux51moh" data-id="beae-and2luzc" data-loop-index="0" data-uniqueid="lux51moh"><!----><div class="beae-block beae-x-text beae-typo-p2" data-autolayout="beae-and2luzc">
+          <span class="beae-vendor-label"></span>
+          <span class="beae-vendor-value">{{ product.vendor }}</span>
+      </div><!----><!----></div><!----><!----><!----><div class="beae-r5iml2ii beae-block beae-core beae-animation beae-unique-9i4w74xk beae-product-title" data-id="beae-r5iml2ii" data-loop-index="0" data-uniqueid="9i4w74xk"><!----><div class="beae-block beae-x-text beae-typo-h4" data-product-title="true" data-autolayout="beae-r5iml2ii"><a href="{{ product.url }}">{{ product.title }}</a></div><!----><!----></div><script type="text/javascript">window.BEAEARGS['beae-r5iml2iiblock-developer'] = {
+    "id": "beae-r5iml2ii",
+    "mode": {"value": "live"},
+    "title":"{{ product.title }}"
+  };</script><!----><!----><div class="beae-v11uxzy1 beae-block beae-core beae-animation beae-unique-vk8zns7f" data-id="beae-v11uxzy1" data-loop-index="0" data-uniqueid="vk8zns7f""><!----><!----><div class="beae-x-price" data-badged="percent"><div class="beae-prd-single-price-wrapper"><span class="beae-product-single__price" data-sale="true">
+    
+      {% if product.price_varies and product.compare_at_price %}
+        {% assign cheapest_variant = product.variants | sort: 'price' | first %}
+        {% capture price_normal %}
+          {% if settings.currency_code_enabled %}
+            {{ product.selected_or_first_available_variant.price | money_with_currency }}
+          {% else %}
+            {{ product.selected_or_first_available_variant.price | money }}
+          {% endif %}
+        {% endcapture %}
+        {% capture price_min %}
+          {% if settings.currency_code_enabled %}
+            {{ cheapest_variant.price | money_with_currency }}
+          {% else %}
+            {{ cheapest_variant.price | money }}
+          {% endif %}
+        {% endcapture %}
+        {% if cheapest_variant.price < cheapest_variant.compare_at_price %}
+          <span class="beae-price-on-sale">
+            <span class="beae-price-from">{{ 'sections.beae-quick-view.be978022322_html' | t: price_min:price_min }}</span>
+            <span class="beae-price-normal">{{ 'sections.beae-quick-view.be1950827197_html' | t: price_normal:price_normal }}</span>
+          </span>
+        {% else %}
+          <span class="beae-price-from">{{ 'sections.beae-quick-view.be978022322_html' | t: price_min:price_min }}</span>
+          <span class="beae-price-normal">{{ 'sections.beae-quick-view.be1950827197_html' | t: price_normal:price_normal }}</span>
+        {% endif %}
+      {% elsif product.price < product.compare_at_price %}
+        <span class="beae-price-on-sale">{% if settings.currency_code_enabled %}
+          {{ product.price | money_with_currency }}
+        {% else %}
+          {{ product.price | money }}
+        {% endif %}</span>
+      {% elsif product.price_varies %}
+        {% capture price_min %}
+          {% if settings.currency_code_enabled %}
+            {{ product.price_min | money_with_currency }}
+          {% else %}
+            {{ product.price_min | money }}
+          {% endif %}
+        {% endcapture %}
+        {% capture price_max %}
+          {% if settings.currency_code_enabled %}
+            {{ product.price_max | money_with_currency }}
+          {% else %}
+            {{ product.price_max | money }}
+          {% endif %}
+        {% endcapture %}
+        <span class="beae-price-from">{{ 'sections.beae-quick-view.be978022322_html' | t: price_min:price_min }}</span>
+        <span class="beae-price-normal">{{ 'sections.beae-quick-view.be1950827197_html' | t: price_normal:price_normal }}</span>
+      {% else %}
+        {% if settings.currency_code_enabled %}
+          {{ product.price | money_with_currency }}
+        {% else %}
+          {{ product.price | money }}
+        {% endif %}
+      {% endif %}
+      
+  </span><span class="beae-product-single__price--regular">{% liquid
+    assign print_compare = ''
+    if selected_variant != blank   
+      if selected_variant.price < selected_variant.compare_at_price
+        if settings.currency_code_enabled
+          assign print_compare = selected_variant.compare_at_price | money_with_currency
+        else
+          assign print_compare = selected_variant.compare_at_price | money
+        endif
+      endif
+    else                                                            
+      if product.price_varies and product.compare_at_price
+        assign cheapest_variant = product.variants | sort: 'price' | first
+        if cheapest_variant.price < cheapest_variant.compare_at_price
+          if settings.currency_code_enabled
+            assign print_compare = cheapest_variant.compare_at_price | money_with_currency
+          else
+            assign print_compare = cheapest_variant.compare_at_price | money
+          endif
+        endif
+      elsif product.price < product.compare_at_price
+        if settings.currency_code_enabled
+          assign print_compare = product.compare_at_price | money_with_currency
+        else
+          assign print_compare = product.compare_at_price | money
+        endif
+      endif
+    endif
+  %}{{ print_compare }}</span><span type="percent" class="beae-typo-p3 {% liquid
+    assign badge_class = ''
+    if product.available
+      assign checkHidden = true
+      if selected_variant != blank
+        if selected_variant.price < selected_variant.compare_at_price
+          assign checkHidden = false
+        endif
+      else
+        if product.price_varies and product.compare_at_price
+          assign cheapest_variant = product.variants | sort: 'price' | first
+          if cheapest_variant.price < cheapest_variant.compare_at_price
+            assign checkHidden = false
+          endif
+        elsif product.price < product.compare_at_price
+          assign checkHidden = false
+        endif
+      endif
+      if checkHidden
+        assign badge_class = 'beae-sale-hidden'
+      else
+        assign badge_class = 'beae-product-single__price--sale'
+      endif
+    else
+      assign badge_class = 'beae-sale-sold-out'
+    endif
+  %}{{ badge_class }} beae-product-single__price--badged" data-sale="{{ 'sections.beae-quick-view.be849688199_html' | t }}" data-sold-out="{{ 'sections.beae-quick-view.be1538363906_html' | t }}">{% if product.available %}
+        {% if selected_variant != blank %}
+            {% assign price_percent = selected_variant.compare_at_price | minus: selected_variant.price | times: 100 | divided_by: selected_variant.compare_at_price | round %}
+            {{ 'sections.beae-quick-view.be1066872809_html' | t: sale:price_percent }}
+        {% else %}
+            {% if product.price_varies and product.compare_at_price %}
+                {% assign cheapest_variant = product.variants | sort: 'price' | first %}
+                {% if cheapest_variant.price < cheapest_variant.compare_at_price %}
+                    {% assign price_percent = cheapest_variant.compare_at_price | minus: cheapest_variant.price | times: 100 | divided_by: cheapest_variant.compare_at_price | round %}
+                    {{ 'sections.beae-quick-view.be1066872809_html' | t: sale:price_percent }}
+                {% endif %}
+            {% elsif product.price < product.compare_at_price %}
+                {% assign price_percent = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price | round %}
+                {{ 'sections.beae-quick-view.be1066872809_html' | t: sale:price_percent }}
+            {% endif %}
+        {% endif %}
+    {% else %}
+        {{ 'sections.beae-quick-view.be1538363906_html' | t }}
+    {% endif %}</span></div><div class="beae-product-single__tax-shipping">
+      {%- if cart.taxes_included or shop.shipping_policy.body != blank -%}
+        <div class="beae-tax-shipping-policy">
+        {%- if shop.taxes_included -%}
+          {% capture include_taxes_text %}{{ 'products.product.include_taxes' | t }}{% endcapture %}
+          {% unless include_taxes_text contains 'Translation missing' %}
+            {{ include_taxes_text }}
+          {% else %}
+            {{ 'sections.beae-quick-view.be430210269_html' | t }} 
+          {% endunless %}
+        {%- endif -%}
+        {%- if shop.shipping_policy.body != blank -%}
+          {% capture shipping_policy_text %}{{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}{% endcapture %}
+          {% unless shipping_policy_text contains 'Translation missing' %}
+            {{ shipping_policy_text }}
+          {% else %}
+            <a href="{{shop.shipping_policy.url}}">{{ 'sections.beae-quick-view.be198651612937_html' | t }}
+          {% endunless %}
+        {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div></div><!----></div><!----><!----><!----><div class="beae-5byhu65v beae-block beae-core beae-animation beae-unique-v7n79o4i" data-id="beae-5byhu65v" data-loop-index="0" data-uniqueid="v7n79o4i" data-type="less_more"><!----><div data-height="100px" class="beae-product-des-wrp beae-less-more"><!----><div data-type="less_more" class="beae-des-content">{{ product.description }}</div></div><button class="btn-action-les-more" data-type="less" type="button" data-show-more-text="{{ 'sections.beae-quick-view.be42255992_html' | t }}" data-show-less-text="{{ 'sections.beae-quick-view.be42216636_html' | t }}">{{ 'sections.beae-quick-view.be42255992_html' | t }}</button><script type="text/javascript">window.BEAEARGS['beae-5byhu65vblock-description'] = {
+    "id": "beae-5byhu65v",
+    "mode": {"value": "live"},
+    "type":"less_more","numberOfWords":100,"extendOptions":"{}","hasDescription":"{% if product.description != blank %}true{% else %}false{% endif %}","loopIndex":0
+  };</script><!----></div><!----><!----><!----><div class="beae-0lfepsj0 beae-block beae-core beae-animation beae-unique-xjj50i6n" data-id="beae-0lfepsj0" data-loop-index="0" data-uniqueid="xjj50i6n""><!----><!----><div class="beae-block beae-x-variant" data-scroll="true"><div class="beae-variant-wrapper"><div class="beae-variant-container beae-typo-p2">
+    {% assign beae_has_variant_picker = true %}
+    {% assign variant_selected = product.selected_or_first_available_variant%}
+    {% assign store_colors = shop.metafields.beae.colors %}
+    {% if product.has_only_default_variant %}
+      {% assign beae_has_variant_picker = false %}
+    {% else %}
+
+    {% assign optionValues = beae_optionValues | split: "," %}
+    {% assign sourceTypes = beae_sourceTypes | split: "," %}
+
+      {%- for option in product.options_with_values -%}
+        {% assign option_index = option.position | minus: 1 %}
+
+        {% assign is_swatch = "false" %}
+
+        {% assign option_name = option.name %}
+        {% for item in optionValues %}
+            {% if item == option_name %}
+                {% assign source = sourceTypes[forloop.index0] %}
+            {% endif %}
+        {% endfor %}
+
+        {% if beae_variant_color_selector_type != blank and optionValues contains option_name %}
+          {% assign is_swatch = "true" %}
+        {% endif %}
+
+        {%- assign index = option.position | prepend:  'option' -%}
+        {% assign value_key_selected = variant_selected[index] %}
+
+        <div class="beae-product-option-cont beae-product-option-{{ option_name }}" 
+          data-type="{{beae_variant_type}}"
+          data-option-position="{{ option.position }}"
+          {% if optionValues contains option_name %}
+            data-swatch-type="{{beae_variant_color_selector_type}}"
+          {% endif %}
+        >
+          <div class="beae-variant-label-cont">
+            {% if beae_variant_show_option_name == 'true' %}
+              <div>
+                <span class="beae-product-{{ beae_variant_type }}-label">
+                  {{ option.name }}:
+                </span>
+                <span
+                  class="beae-variant-label"
+                  data-option-position="{{ option.position }}"
+                >
+                  {{ variant_selected.options[option_index] }}
+                </span>
+              </div>
+            {%- endif -%}
+            {% if beae_variant_size_guide and option.name contains beae_variant_size_guide_name %}
+            <div class="beae-variant-size-guide">
+              <div class="beae-variant-size-guide-btn">
+                {% if beae_variant_size_guide_icon %}
+                  <span class="beae-size-guide-icon">
+                    {{ beae_variant_size_guide_icon }}
+                  </span>
+                {% endif %}
+                {{ beae_variant_size_guide_label }}
+              </div>
+              {% assign size_guide_content = "" %}
+              {% if beae_variant_size_guide_type contains 'page' %}
+                {% assign p = pages[beae_variant_size_guide_page] %}
+                {% if p %}
+                  {% assign size_guide_content = p.content %}
+                {% endif %}
+              {% elsif beae_variant_size_guide_type contains 'dynamic' %}
+                {% if beae_variant_dynamic_source.type contains 'file_reference' %}
+                  {% capture size_guide_content %}
+                    <img src={{ beae_variant_dynamic_source | image_url }} width="300" height="300" alt="Size chart"/>
+                  {% endcapture %}
+                {% else %}
+                  {% assign size_guide_content = beae_variant_dynamic_source %}
+                {% endif %}
+              {% endif %}
+              {% if size_guide_content != blank %}
+                <div class="beae-variant-size-guide-content" style="display: none">
+                  {{ size_guide_content }}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+          </div>
+
+          {% assign is_dropdown = "false" %}
+          {% if is_swatch == "true" %}
+            {% if beae_variant_color_selector_type == 'dropdown_with_color' %}
+              {% assign is_dropdown = "true" %}
+            <div class="beae-custom-select_wrp">
+              <button class="beae-custom-select__btn" type="button" data-option-position="{{ option.position }}">
+                <span class="beae-selected-color" {% if store_colors and store_colors.value[variant_selected.options[option_index]] != blank  %} 
+                style="--beae-color-variant: {{store_colors.value[variant_selected.options[option_index]]}}"
+                {% endif %}></span>
+                <span class="beae-text-selected">{{ variant_selected.options[option_index] }}</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" class="icon" role="presentation" focusable="false" aria-hidden="true">
+                  <path d="M20 8.5 12.5 16 5 8.5" stroke="currentColor" stroke-width="1.5" fill="none"></path>
+                </svg>
+              </button>
+            {% endif %}
+          {% else %}
+            {% if beae_variant_type == 'dropdown' %}
+              {% assign is_dropdown = "true" %}
+              <div class="beae-custom-select_wrp">
+                <button class="beae-custom-select__btn" type="button" data-option-position="{{ option.position }}">
+                  <span class="beae-text-selected">{{ variant_selected.options[option_index] }}</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" class="icon" role="presentation" focusable="false" aria-hidden="true">
+                    <path d="M20 8.5 12.5 16 5 8.5" stroke="currentColor" stroke-width="1.5" fill="none"></path>
+                  </svg>
+                </button>
+            {% endif %}
+          {% endif %}
+
+        <ul 
+          class="beae-variant-option-list"
+          data-option-position="{{option.position}}"
+        >
+            {% assign option_values = "" %}
+            {% for option in variant_selected.options %}
+              {% if option != value_key_selected %}
+                {% assign option_values = option_values | append: option | append: "," %}
+              {% endif %}
+            {% endfor %}
+            {% assign option_values = option_values | split: "," %}
+            {% capture keyOption %}option{{option.position}}{% endcapture %}
+            {% assign optionActive = variant_selected[keyOption] %}
+           {% for op in option.values %}
+              {% assign url_variant = '#' %}
+              {% if beae_variant_is_link == 'true' and optionActive != op %} 
+                {% liquid 
+                  assign url_variant = op.variant.metafields.beae_link_variant.link_variant.value | strip
+                  if url_variant == blank
+                   assign url_variant = '#'
+                  endif
+                %}
+              {% endif %}
+              <li 
+                class="beae-product-variant-item{% 
+                    if beae_variant_color_selector_type == "variant_image" 
+                      %} beae-product-variant-item-image{% 
+                    endif %}{% 
+                    if optionActive == op 
+                      %} beae-product-variant-item--selected{% 
+                    endif %}{% 
+                    if beae_variant_is_link == 'true' 
+                      %} beae-variant-link{% 
+                    endif %}"
+                data-option-position="{{option.position}}"
+                data-value="{{ op | escape }}"
+                {% if is_swatch == "true" and store_colors and store_colors.value[op] != blank  %} 
+                  style="--beae-color-variant: {{store_colors.value[op]}}"
+                  data-color="{{store_colors.value[op]}}"
+                {% endif %}
+                {% if beae_variant_color_selector_type == "variant_image"
+                  and beae_variant_is_link == 'true'
+                  and url_variant != '#' %}
+                  data-link="{{ url_variant }}"
+                {% endif %}
+
+               >
+                {% if beae_variant_is_link == 'true' and url_variant != '#' %}
+                  <a class='beae-variant--link' href={{ url_variant }}>
+                {% endif %}
+               {% if is_swatch == "false" %}
+                      {{ op }}
+                    {% elsif beae_variant_color_selector_type == "color_swatch" %}
+                      {% if source == 'beae' %}
+                        <span
+                          {% if store_colors and store_colors.value[op] != blank  %} 
+                            style="background-color: var(--beae-color-variant)"
+                          {% else %}
+                            class="beae-product-colors--no-color"
+                            data-beae-tooltip="Please set the color in settings" 
+                          {% endif %}
+                        ></span>
+                      {% else %}
+                        <span class="beae-swatch-color--item" 
+                          {% if op.swatch.image %}
+                            style="--beae-swatch-background: url({{ op.swatch.image | image_url: width: 50 }}); {% if op.swatch.image.presentation.focal_point %} --beae-swatch-focal-point: {{ op.swatch.image.presentation.focal_point }};{% endif %}"
+                          {% elsif op.swatch.color %}
+                            style="--beae-swatch-background: {{ 'rgb(' | append: op.swatch.color.rgb | append: ')' }};"
+                          {% endif %}
+                        ></span>
+
+                      {% endif %}
+
+                    {% elsif beae_variant_color_selector_type == "variant_image" %}
+                    {% else %}
+                      <div class="beae-product-swatch-special">
+                      <span
+                        {% if is_swatch == "true" and store_colors and store_colors.value[op] != blank  %} 
+                          style="background-color: var(--beae-color-variant)"
+                          class="beae-variant-swatch-color"
+                        {% else %}
+                          class="beae-product-colors--no-color"
+                          data-beae-tooltip="Please set the color in settings" 
+                        {% endif %}
+                      ></span>
+                      <span class="beae-variant-swatch-label">{{ op }}</span>
+                      </div>
+                    {% endif %}
+                    {% if beae_variant_is_link == 'true' and url_variant != '#' %} </a>{% endif %}
+                    </li>
+             {% endfor %}
+            </ul>
+            {% if is_swatch == "true" %}
+              {% if beae_variant_color_selector_type == 'dropdown_with_color' %}
+                </div>
+              {% endif %}
+            {% else %}
+              {% if beae_variant_type == 'dropdown' %}
+                </div>
+              {% endif %}
+            {% endif %}
+          
+        </div>
+      {%- endfor -%}
+      <div
+        class="beae-variant--options"
+        style="display: none;"
+      >
+        <select 
+          name="id" 
+          class="beae-variant-options-combined" 
+          data-product-id="{{product.id}}"
+          data-selector
+          id="beae-variant-selector-{{section.id}}-beae-tk6lt80i"
+        >
+          {% for variant in product.variants%}
+            <option
+              value="{{variant.id}}"
+              {% if variant_selected.id == variant.id %}
+                selected="selected"
+              {% endif %}
+            >{{variant.title}}</option>
+          {% endfor %}
+        </select>
+      </div>
+    {% endif %}
+  </div></div></div><!----><!----></div><!----><!----><!----><div class="beae-y4t6ysfs beae-block beae-core beae-animation beae-unique-gs2nna7r" data-id="beae-y4t6ysfs" data-loop-index="0" data-uniqueid="gs2nna7r""><!----><div class="beae-block beae-x-inventory" data-in-stock-text="{{ 'sections.beae-quick-view.be641729472_html' | t }}" data-low-stock-text="{{ 'sections.beae-quick-view.be1197062785_html' | t }}" data-very-low-stock-text="{{ 'sections.beae-quick-view.be1197062785_html' | t }}" data-out-stock-text="{{ 'sections.beae-quick-view.be28375103_html' | t }}" data-pre-order-text="{{ 'sections.beae-quick-view.be912676988_html' | t }}" data-incoming-date-text="{{ 'sections.beae-quick-view.be1494994701_html' | t }}" data-very-low-number="5" data-low-number="20" data-max-number="60" data-show-next-incoming-date="true"><div class="beae-inventory-in-stock"><div class="beae-inventory-label beae-typo-p2">In stock ({quantity} units)</div><div class="beae-inventory-process"><div class="beae-inventory-process-body"></div></div></div></div><!----></div><!----><!----><!----><div class="beae-98g955wb beae-block beae-core beae-animation beae-unique-5zji6e41 beae-flex-wrapper" data-id="beae-98g955wb" data-loop-index="0" data-uniqueid="5zji6e41"><!----><!----><!----><div class="beae-a3zi0xhi beae-block beae-core beae-animation beae-unique-gu5sanch" data-id="beae-a3zi0xhi" data-loop-index="0" data-uniqueid="gu5sanch""><!----><div class="beae-quantity-label beae-typo-p3">{{ 'sections.beae-quick-view.be1220360021_html' | t }}</div><div class="beae-quantity-wrapper"><button type="button" class="beae-quantity-btn" name="minus"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" class="icon icon-minus" fill="none" viewBox="0 0 10 2"><path fill-rule="evenodd" clip-rule="evenodd" d="M.5 1C.5.7.7.5 1 .5h8a.5.5 0 110 1H1A.5.5 0 01.5 1z" fill="currentColor"></path></svg></button><input class="beae-quantity-input" type="number" min="1" step="1" name="quantity"><button type="button" class="beae-quantity-btn" name="plus"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" class="icon icon-plus" fill="none" viewBox="0 0 10 10"><path fill-rule="evenodd" clip-rule="evenodd" d="M1 4.51a.5.5 0 000 1h3.5l.01 3.5a.5.5 0 001-.01V5.5l3.5-.01a.5.5 0 00-.01-1H5.5L5.49.99a.5.5 0 00-1 .01v3.5l-3.5.01H1z" fill="currentColor"></path></svg></button></div><!----><!----></div><!----><!----><!----><div class="beae-ie8qp1zi beae-block beae-core beae-animation beae-unique-9jmrjpmr" data-id="beae-ie8qp1zi" data-loop-index="0" data-uniqueid="9jmrjpmr""><!----><button type="submit" class="beae-add-to-cart--submit beae-btn-cart beae-btn-pr" data-product-variant-media="{%- liquid
+            assign default_add_to_cart_text = 'actions.add_to_cart' | t
+            assign product_variant_media = product.selected_or_first_available_variant.featured_media.preview_image | image_url: width: 100
+            if product.selected_or_first_available_variant.featured_media.preview_image == blank
+                assign product_variant_media = product.featured_media.preview_image | image_url: width: 100
+            endif
+        -%}{{ product_variant_media }}" data-action="cart" data-add-to-cart-text="{{ 'sections.beae-quick-view.be649020154_html' | t }}" data-text-outstock="{{ 'sections.beae-quick-view.be28375103_html' | t }}" data-text-added-cart="{{ 'sections.beae-quick-view.be1182278043_html' | t }}" data-sold-out-text="{{ 'sections.beae-quick-view.be1538394658_html' | t }}" data-add-success="{{ 'sections.beae-quick-view.be1427617666_html' | t }}" data-link="" data-choose-options-text="{{ 'sections.beae-quick-view.be719299147_html' | t }}" data-type="text" data-show-icon-mobile="false"><!----><span class="beae-add-to-cart-text-content">{{ 'sections.beae-quick-view.be649020154_html' | t }}</span><!----><div class="beae-add-to-cart-loader-wrp"><span class="beae-add-to-cart-loader"></span></div></button><script type="text/javascript">window.BEAEARGS['beae-ie8qp1ziblock-add-to-cart'] = {
+    "id": "beae-ie8qp1zi",
+    "mode": {"value": "live"},
+    "loopIndex":0
+  };</script><!----></div><!----><!----><!----></div><!----><!----><!----><div class="beae-elgcjas1 beae-block beae-core beae-animation beae-unique-602dy5ul" data-id="beae-elgcjas1" data-loop-index="0" data-uniqueid="602dy5ul""><!----><div class="beae-block beae-x-checkout">{{ form | payment_button }}</div><script type="text/javascript">window.BEAEARGS['beae-elgcjas1'] = {
+    "id": "beae-elgcjas1",
+    "mode": {"value": "live"},
+    "buyItNowType":"beae-btn-se"
+  };</script><!----></div><!----><!----><!----><div class="beae-zdsr3tdj beae-block beae-core beae-animation beae-unique-2zwotq91 beae-x-local-pickup beae-product-single beae-pa" data-id="beae-zdsr3tdj" data-loop-index="0" data-uniqueid="2zwotq91"><!----><div class="beae-pa-wrapper"><div class="beae-pa-container beae-typo-p2" data-section-id-template="{{ section.id }}" data-beae-placeholder="">
+    {%- assign product_variant = product.selected_or_first_available_variant -%}
+      {%- capture pickup_icon -%}<span class="beae-ic-pa">{{ beae_lp_icon }}</span>{%- endcapture -%}
+      {%- capture unavailable_icon -%}<span class="beae-ic-pu">{{ beae_lp_unavailable_icon }}</span>{%-endcapture -%}
+      {% if product_variant %}
+      <Beae-custom-liquid-pickup>
+        {%- assign pick_up_availabilities = product_variant.store_availabilities | where: 'pick_up_enabled', true -%}
+        <div class="beae-pa-items" {%- if pick_up_availabilities.size <= 0 -%}style="display: none"{%- endif -%}>
+          <div class="beae-pa-item" data-variant_id="{{product_variant.id}}">
+            <div class="beae-pa-infor">
+              <div class="beae-pa-content">
+                <div class="beae-pa-icon" data-status="{% if pick_up_availabilities.first.available %}available{% else %}unavailable{% endif %}">
+                  {%- liquid
+                    assign closest_location = pick_up_availabilities.first
+                  -%}
+                  {{ pickup_icon }}
+                  {{ unavailable_icon }}
+                </div>
+                <div>
+                  <p 
+                    class="beae-pa-infor--caption-large" 
+                  >
+                  {% assign location_name_closest = closest_location.location.name %}
+                  {%- if pick_up_availabilities.first.available -%}
+                  {{ 'sections.beae-quick-view.be1203385433_html' | t: location_name:location_name_closest }}
+                  {%- else -%}
+                  {{ 'sections.beae-quick-view.be1121680012_html' | t: location_name:location_name_closest }}
+                  {%- endif -%}
+                    
+                  </p>
+                  {%- if closest_location and pick_up_availabilities.first.available -%}
+                  <p class="beae-pa-infor--caption">{{ closest_location.pick_up_time }}</p>
+                  {%- endif -%}
+                  <div class="beae-pa-container-btn beae-button-default">
+                    {%- if closest_location -%}
+                      <button 
+                        aria-label="button" 
+                        type="button" 
+                        class="beae-pa--btn"
+                        data-view-info="{{ 'sections.beae-quick-view.be1358949576_html' | t }}"
+                        data-check-other-stores="{{ 'sections.beae-quick-view.be260978430_html' | t }}"
+                      >
+                        {%- if pick_up_availabilities.size == 1 -%}
+                          {{ 'sections.beae-quick-view.be1358949576_html' | t }}
+                        {%- else -%}
+                          {{ 'sections.beae-quick-view.be260978430_html' | t }}
+                        {%- endif -%}
+                      </button>
+                    {%- else -%}
+                      {%- if pick_up_availabilities.size > 1 -%}
+                        <button aria-label="button" type="button" class="beae-pa--btn" 
+                        data-view-info="{{ 'sections.beae-quick-view.be1358949576_html' | t }}"
+                        data-check-other-stores="{{ 'sections.beae-quick-view.be260978430_html' | t }}"
+                        >
+                          {{ 'sections.beae-quick-view.be260978430_html' | t }}
+                        </button>
+                      {%- endif -%}
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="beae-pa--detail" style="display: none">
+              <div class="pickup-availability-header">
+                <h2 class="beae-pa--title beae-typo-h4">{{ product_variant.product.title | escape }}</h2>
+                {%- unless product_variant.product.has_only_default_variant -%}
+                  <p class="beae-pa--variant beae-typo-p2">
+                      {%- for product_option in product_variant.product.options_with_values -%}
+                        {{ product_option.name | escape }}:&nbsp;
+                        {%- for value in product_option.values -%}
+                            {%- if product_option.selected_value == value -%}
+                            <span class="beae-option__escape" data-position="{{ product_option.position }}">{{ value | escape }}</span>
+                            {%- endif -%}
+                        {%- endfor -%}
+                      {%- unless forloop.last -%},&nbsp;{%- endunless forloop.last -%}
+                      {%- endfor -%}
+                  </p>
+                {%- endunless -%}
+              </div>
+              <div class="beae-pa--content beae-typo-p2">
+                <ul class="beae-pa--list" role="list">
+                  {%- for availability in pick_up_availabilities -%}
+                    <li class="beae-pa--list-item">
+                    <h3 class="beae-pa--list-item-heading beae-typo-p1">{{ availability.location.name | escape }}</h3>
+                    <p class="beae-pa--list-item-caption-large">
+                      {%- if availability.available -%}
+                        {% assign pick_up_time = availability.pick_up_time | downcase %}
+                        {{ 'sections.beae-quick-view.be1316440194_html' | t: pickup_icon:pickup_icon,pick_up_time:pick_up_time }}
+                      {% else %}
+                        {% assign location_name = availability.location.name %}
+                        {{ 'sections.beae-quick-view.be1961221788_html' | t: unavailable_icon:unavailable_icon,location_name:location_name }}
+                      {%- endif -%}
+                    </p>
+                    {%- assign address = availability.location.address -%}
+                      <address class="beae-pa--list-item-address">
+                        {{ address | format_address }}
+                        {%- if address.phone.size > 0 -%}
+                        <p>{{ address.phone }}</p>
+                        {%- endif -%}
+                      </address>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            </div>
+          </div>          
+        </div>
+        </Beae-custom-liquid-pickup>
+    {%- endif -%}
+  </div></div><script type="text/javascript">window.BEAEARGS['beae-zdsr3tdjblock-local-pickup'] = {
+    "id": "beae-zdsr3tdj",
+    "mode": {"value": "live"},
+    "extendOptions":"{}"
+  };</script><!----></div><!----><!----><!----></div><!----><!----><!----><div class="beae-anxulc2h beae-block beae-core beae-animation beae-unique-tpqndwsg beae-flex-wrapper" data-id="beae-anxulc2h" data-loop-index="0" data-uniqueid="tpqndwsg"><!----><!----><!----><div class="beae-ke3tsbuk beae-block beae-core beae-animation beae-unique-2whogvis" data-id="beae-ke3tsbuk" data-loop-index="0" data-uniqueid="2whogvis"><!----><div class="beae-block beae-x-text beae-typo-p1" data-autolayout="beae-ke3tsbuk" data-id="view-detail"><a type="button" class="beae-not-rs-cl beae-product-view-detail beae-btn-te" href="{{ product.url }}">
+                          {{ 'sections.beae-quick-view.be1288739340_html' | t }}
+                      </a></div><!----><!----></div><!----><!----><!----><div class="beae-rgt336vz beae-block beae-core beae-animation beae-unique-wh7nwrx2 beae-x-icon" data-id="beae-rgt336vz" data-loop-index="0" data-uniqueid="wh7nwrx2"><!----><div class="beae-elm__ic"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"></path>
+</svg></div><!----></div><!----><!----><!----></div><!----><!----><!----></div><!----><!----></div><div class="beae-money-format" style="display: none;">{% if settings.currency_code_enabled %}{{ shop.money_with_currency_format | escape }}{% else %}{{ shop.money_format | escape }}{% endif %}</div><script data-id="Product-json-beae-tk6lt80i" type="application/json">
+    {
+      "id":  {{ product.id | json }},
+      "title":  {{ product.title | json }},
+      "handle":  {{ product.handle | json }},
+      "price":  {{ product.price| json }},
+      "price_min":  {{ product.price_min| json }},
+      "price_max":  {{ product.price_max| json }},
+      "price_normal":  {{ product.selected_or_first_available_variant.price| json }},
+      "available":  {{ product.available | json }},
+      "price_varies":  {{ product.price_varies| json }},
+      "compare_at_price":  {{ product.compare_at_price| json }},
+      "compare_at_price_min":  {{ product.compare_at_price_min| json }},
+      "compare_at_price_max":  {{ product.compare_at_price_max| json }},
+      "compare_at_price_varies":  {{ product.compare_at_price_varies| json }},
+      "has_only_default_variant":  {{ product.has_only_default_variant | json }},
+      "selected_or_first_available_variant":  {{ product.selected_or_first_available_variant | json }},
+      "options":  {{ product.options_with_values | json }},
+      "variants": [
+        {%- for variant in product.variants -%}
+          {
+            "id":  {{ variant.id | json }},
+            "title": " {{ variant.option1 | handleize }}{%- if product.options.size == 2 -%} / {%- endif -%} {{ variant.option2 | handleize }}{%- if product.options.size == 3 -%} / {%- endif -%} {{ variant.option3 | handleize }}",
+            "option1":  {{ variant.option1  | json }},
+            "option2": {%- if product.options.size == 1 -%}null{%-else-%} {{ variant.option2  | json }}{%-endif-%},
+            "option3": {%- if product.options.size == 1 or product.options.size == 2 -%}null{%-else-%} {{ variant.option3  | json }}{%-endif-%},
+            "sku":  {{ variant.sku | json }},
+            "requires_shipping":  {{ variant.requires_shipping }},
+            "taxable":  {{ variant.taxable | json }},
+            "selling_plan_allocations":{{variant.selling_plan_allocations | json }},
+            "featured_image": {%- if variant.image.id != blank -%}{
+              "id":  {{ variant.image.id | json }},
+              "product_id":  {{ product.id | json }},
+              "width":  {{ variant.image.width | json }},
+              "height":  {{ variant.image.height | json }},
+              "src":  {{ variant.image.src | json }},
+              "position": {{ variant.image.position }}
+            }{%- else-%}null{%-endif-%},
+            "featured_media": {{ variant.featured_media | json }},
+            "available":  {{ variant.available }},
+            "public_title": " {{ variant.option1 | handleize }}{%- if product.options.size == 2 -%} / {%- endif -%} {{ variant.option2 | handleize }}{%- if product.options.size == 3 -%} / {%- endif -%} {{ variant.option3 | handleize }}",
+            "options":   {{ variant.options | json }},
+            "price":  {{ variant.price | json }},
+            "weight":  {{ variant.weight | json }},
+            "compare_at_price":  {{ variant.compare_at_price | json }},
+            "inventory_quantity":  {{ variant.inventory_quantity | json }},
+            "inventory_management":  {{ variant.inventory_management | json }},
+            "inventory_policy":  {{ variant.inventory_policy | json }},
+            "next_incoming_date": {% if variant.next_incoming_date %}{{variant.next_incoming_date | date: "%Y-%m-%d %H:%M" | time_tag | json }}{% else%}null{% endif %},
+            "barcode":  {{ variant.barcode | json }},
+            "store_availabilities": [
+              {%- for variantStore in variant.store_availabilities -%}
+                {
+                  "location": {
+                    "name": {{ variantStore.location.name | json }},
+                    "address": {{ variantStore.location.address | json }},
+                    "id": {{ variantStore.location.id | json }}
+                  },
+                  "available": {{ variantStore.available | json }},
+                  "pick_up_enabled": {{ variantStore.pick_up_enabled | json }},
+                  "pick_up_time": {{ variantStore.pick_up_time | json }}
+                }{%- if forloop.last == false -%},{%- endif -%}
+              {%- endfor -%}
+            ],
+            "unit_price":  {{ variant.unit_price | json }},
+            "unit_price_measurement":  {
+              "measured_type": {{ variant.unit_price_measurement.measured_type | json }},
+              "quantity_value": {{ variant.unit_price_measurement.quantity_value | json }},
+              "quantity_unit": {{ variant.unit_price_measurement.quantity_unit | json }},
+              "reference_value": {{ variant.unit_price_measurement.reference_value | json }},
+              "reference_unit": {{ variant.unit_price_measurement.reference_unit | json }}
+            }
+          }{%- if forloop.last == false -%},{%- endif -%}
+        {%- endfor -%}
+      ],
+      "featured_image":  {{ product.featured_image | json }},
+      "size_available":[
+        {%- for value in product.options_with_values[0].values -%}
+        {%- assign available_ops = product.variants | where: "available" | where: "option1",value -%}
+          {{available_ops.size}}{%- unless forloop.last %},{% endunless -%}
+        {%- endfor -%}
+      ],
+      "shopColors": {{ shop.metafields.beae.colors }}
+    }
+  </script><script src="https://cdn.beae.com/vendors/js-v2/shopify_option_selection.min.js"></script><!----><script type="text/javascript">window.BEAEARGS['beae-tk6lt80isection-featured-product'] = {
+    "id": "beae-tk6lt80i",
+    "mode": {"value": "live"},
+    "reactiveJs":{"id":"9206616752354","name":"ERGO PURRCH - The Sustainable Desk-Mounted Cat Bed","thumbnail":"https://cdn.shopify.com/s/files/1/0814/8182/6530/files/ERGO-PURRCH-Woven-Crest-v1_796e9214-ea6b-4876-81c3-5f67c8080c71.jpg?v=1779955074","handle":"ergo-purrch-the-sustainable-desk-mounted-cat-bed","value":"ergo-purrch-the-sustainable-desk-mounted-cat-bed","image":"https://cdn.shopify.com/s/files/1/0814/8182/6530/files/ERGO-PURRCH-Woven-Crest-v1_796e9214-ea6b-4876-81c3-5f67c8080c71.jpg?v=1779955074"},"reactiveLength":18
+  };</script> 
+            <!-- <input type="hidden" name="id" value="{{product.selected_or_first_available_variant.id}}" /> -->
+    
+            <input type="hidden" name="sections" value="cart-notification-product,cart-notification-button,cart-icon-bubble">
+            <input type="hidden" name="section_url" value="{{product.handle}}">
+    
+          {%- endform -%}
+    
+            {% assign beae_has_variant_picker = false %}
+    
+          {%- endif -%}
+
+          {% assign product = tmp_product %}
+        <!----></div><!----><!----></div></div></div><!----><!----><!----><!----><!----><!----></section><!----><script type="text/javascript">window.BEAEARGS['beae-kfpp6hz9section-js'] = {
+    "id": "beae-kfpp6hz9",
+    "mode": {"value": "live"},
+    "optionsVideo":false,"optionsVideoMobile":false
+  };</script>
+<script type="text/javascript">
+  (() => {
+    let testText = document.createElement('div');
+    testText.innerHTML = 'test';
+    testText.style.fontSize = '100px';
+    document.body.appendChild(testText);
+    let realFontSize = parseFloat(window.getComputedStyle(testText).getPropertyValue('font-size').replace('px', ''));
+    testText.style.zoom = '50%';
+    let detectDesktopRequestMode = window.getComputedStyle(testText).getPropertyValue('font-size') !== '100px';
+    document.body.removeChild(testText);
+    
+    document.body.style.setProperty('--font-size-ratio', (realFontSize / 100).toString());
+
+    function getTextNodesIn(elem) {
+      let textNodes = [];
+      if (elem) {
+        for (var nodes = elem.childNodes, i = nodes.length; i--;) {
+          let node = nodes[i], nodeType = node.nodeType;
+          if (nodeType == 1 || nodeType == 9 || nodeType == 11) {
+            textNodes = textNodes.concat(getTextNodesIn(node));
+          }
+        }
+      }
+      return textNodes;
+    }
+
+    let scaleFitGridBlock = () => {
+
+      document.querySelectorAll('.beae-section.beae-core').forEach((sec) => {
+        let container = sec.querySelector(".beae__section--container");
+        if (!container) { return; };
+        let winWidth = document.documentElement.offsetWidth;
+        if (winWidth >= 768) {
+          sec.querySelectorAll('.beae__section--container').forEach(container => {
+            container.parentNode.style.setProperty("--container-width", container.closest('.grid-container-width') ? container.closest('.grid-container-width').parentNode.offsetWidth+'px' : container.offsetWidth+'px');
+          });
+        }
+      });
+
+      document.querySelectorAll('.beae-grid-block').forEach(block => {
+       let child = block.querySelector('.beae-block.beae-core > *'),
+           zoom = 0,
+           count = 0;
+        child.style.zoom = '';
+        child.style.lineHeight = '';
+        while(child.offsetHeight > block.offsetHeight && count < 14 && (zoom === 0 || block.offsetHeight < (child.offsetHeight*zoom))) {
+            zoom = (block.offsetHeight+block.offsetWidth)/(child.offsetHeight+child.offsetWidth);
+            child.style.zoom = zoom < 1 ? Math.floor(zoom*100)+'%' : '';
+            child.style.lineHeight = '2.4rem';
+            count++;
+        }
+      });
+    };
+
+    scaleFitGridBlock();
+    let timmer = 0;
+    window.addEventListener('resize', () => {
+      clearTimeout(timmer);
+      timmer = setTimeout(scaleFitGridBlock, 150);
+    });
+    window.addEventListener('load', scaleFitGridBlock);
+    
+    if (document.getElementById('beae-exported-page-css')) {
+      document.getElementById('beae-exported-page-css').addEventListener('load', scaleFitGridBlock);
+    }
+
+  })();
+</script>
+</div></div>{% if section_id == section.id %}{% endif%}
+<script id="beae-exported-page-js" src="{{'beae-6a2101a1f8139bac36d5d614.js'  | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "OMNISE BUILDER APP",
+  "locales": {
+    "en": {
+      "be76480_html": "N/A",
+      "be427520332_html": "Save { sale }",
+      "be1538363906_html": "Sold Out",
+      "be1066872809_html": "Save {{ sale }}%",
+      "be2569319_html": "Sale",
+      "be1203385433_html": "Pickup available at {{ location_name }}",
+      "be1121680012_html": "Pickup currently unavailable at {{ location_name }}",
+      "be1358949576_html": "View store info",
+      "be260978430_html": "Check availability at other stores",
+      "be1316440194_html": "{{ pickup_icon }} Pickup available, {{ pick_up_time }}",
+      "be1961221788_html": "{{ unavailable_icon }} Pickup currently unavailable at {{ location_name }}",
+      "be569066085_html": "</a> ",
+      "be2255103_html": "Home",
+      "be77694213_html": "Untitled",
+      "be978022322_html": "From {{ price_min }}",
+      "be1950827197_html": "{{ price_normal }}",
+      "be199019258_html": "ADD TO CART",
+      "be28375103_html": "Out of stock",
+      "be1182278043_html": "Added to cart",
+      "be1538394658_html": "Sold out",
+      "be1427617666_html": "Added to cart successfully",
+      "be719299147_html": "Choose options",
+      "be195279479_html": "SUSTAINABLE MATERIALS",
+      "be639507065_html": "Earth-friendly, responsibly crafted.",
+      "be1788117590_html": "FOR CATS UP TO 45 LBS",
+      "be1580363424_html": "Sturdy support for big &amp; small cats.",
+      "be1768807429_html": "BUY 1. PLANT 1.",
+      "be1531148423_html": "DELIVERY TIME",
+      "be37174071_html": "SHIPPING & RETURNS",
+      "be70686139_html": "USER MANUAL",
+      "be1825427884_html": "CARE INSTRUCTIONS",
+      "be1274808205224_html": "<div>CANADA &amp; USA:</div><div>ALL BEDS SHIP WITHIN 1 BUSINESS DAY</div><br><div>EUROPE &amp; REST OF WORLD:\r</div><div>HANDWOVEN: SOLD OUT (SHIPS JUNE 14 - est.)\r</div><div>BIRCHWOOD: SOLD OUT (SHIPS JULY 14 - est.)</div>",
+      "be2005632286296_html": "<div>Processing Time:\n</div><div>1 business day (excluding pre-orders).</div><br><div>Shipping:\n</div><div>US &amp; Canada: 1 - 6 business days.\n</div><div>International varies.</div><br><div>For our full policies, visit:\n</div><div>Shipping,  Returns &amp; Warranty</div><div>\n</div><div>\n</div>",
+      "be1242024098244_html": "<a href=\"https://cdn.shopify.com/s/files/1/0693/3014/1421/files/ERGO-PURRCH-USER-MANUAL.pdf?v=1724342277\" type=\"custom\" url=\"https://cdn.shopify.com/s/files/1/0693/3014/1421/files/ERGO-PURRCH-USER-MANUAL.pdf?v=1724342277\" handle=\"\">Download</a>",
+      "be308811849923_html": "<div>Hand-Woven Bed Care Instructions:\r</div><div>Use a soft cloth to wipe clean as needed. For deep cleaning, use a slightly damp cloth and immediately dry the surface thoroughly.</div><br><div>Wood Bed Care Instructions:\r</div><div>Maintain the natural beauty of the wood by wiping it with a soft, dry cloth. Avoid harsh chemicals and liquids. If the wood gets wet, quickly dry any excess moisture. Keep away from extreme humidity or dryness to prevent cracking.</div><br><div>Polyester Plush Pillow Care Instructions:\r</div><div>Machine washable for easy care. Use a hand-wash or gentle cycle with cold water and mild detergent. Do not bleach, iron, or tumble dry. Hang to dry. <i>Included with Handwoven Model only.</i></div><br><div>NOTE: Avoid overtightening the bed bolt. Regularly check and tighten as needed. Also, periodically tighten the desk mount dials based on usage.</div><div>\r</div><div>\r</div><div>\r</div>",
+      "be746220397_html": "360° Rotation.",
+      "be1644177885_html": "Allows for versatile 360-degree positioning and easy access, securely locking into place once you find the perfect spot for you and your cat.",
+      "be1090876978_html": "ELEVATE YOUR WORKSPACE",
+      "be138783185_html": "The ERGO PURRCH™ Desk-Mounted Cat Bed is a space-saving, ergonomic solution for home offices or apartments, attaching to desks up to 2.75 inches thick. It offers a cozy, elevated spot for cats up to 45 lbs.",
+      "be328279664_html": "Crafted from eco-friendly, sustainable materials, it combines modern style, durability, and adjustability to fit compact spaces effortlessly. Available in various styles, it ensures comfort and stability for your furry companion.",
+      "be1926671675_html": "Elevate your workspace and your cat’s comfort with the ERGO PURRCH™—a perfect harmony for you and your pet.",
+      "be2112528670_html": "HANDCRAFTED BEDS",
+      "be1845598369_html": "All bed options, including handwoven and hardwood, are handcrafted for quality and individuality. Each handwoven bed also includes a plush, soft pillow for added comfort.",
+      "be945000166_html": "ETHICALLY HARVESTED WOOD",
+      "be1875807302_html": "Sustainably sourced wood from ethically managed forests. Each wooden bed features its own unique color and grain.",
+      "be1042956689_html": "STRENGTH &amp; STYLE",
+      "be457743707_html": "Engineered for strength, the arm assembly withstands up to 176 lbs, while the Handwoven and Wood beds comfortably support pets up to 45 lbs. Designed for feline use only, with matte black or white arms to complement your space.",
+      "be1255351641_html": "SECURE &amp; STABLE",
+      "be1424145618_html": "Equipped with non-slip silicone pads for surface protection and secure grip. Fits securely on surfaces up to 2.75 inches thick.",
+      "be127538641434_html": "<b>FOR CATS &amp; THEIR HUMANS</b>",
+      "be1149693046_html": "Become a Purrch Insider.",
+      "be702874065_html": "Get early access to new releases and updates.",
+      "be1466350579_html": "Subscribe failed",
+      "be406277700_html": "Thanks for subscribe",
+      "be1566729641_html": "HANDCRAFTED &amp; SUSTAINABLY MADE",
+      "be299184911_html": "Each wood bed is meticulously handcrafted from sustainably sourced materials, ensuring that every piece features a unique grain and color. No two beds are alike, making each one truly special.",
+      "be602897937_html": "Precision. Stability. Versatility.",
+      "be652732414_html": "STRENGTH MEETS STYLE",
+      "be263095857_html": "Our patent-pending design is built for seamless adjustability and rock-solid support. Available in black and white, our arms elevate any space with a sleek, modern aesthetic. Pressure-tested up to 176 lbs, they offer unmatched durability while complementing your setup effortlessly.",
+      "be312294448_html": "SPECIFICATIONS",
+      "be381990598_html": "Desk-Mounted Arm Assembly",
+      "be1028105088_html": "3 kg (6.6 lb)",
+      "be168450348_html": "Handwoven Bed with Pillow",
+      "be2025187791_html": "45 * 45 * 15 cm / 1.1 kg (2.5 lb)",
+      "be415593310_html": "Handcrafted Wood Bed",
+      "be1980397881_html": "42 * 41 * 10 cm / 3 kg (6.6 lb)",
+      "be140167767647_html": "<i>Minor variances as beds are handcrafted.</i>",
+      "be1652856197_html": "FREQUENTLY ASKED QUESTIONS (FAQ)",
+      "be2111668732_html": " Will the ERGO PURRCH® hold a large or heavy cat?",
+      "be589799823_html": " Does the ERGO PURRCH® fit a standing desk?",
+      "be172414154_html": "Is ERGO PURRCH® a good option for small apartments?",
+      "be2121549284_html": "Where can ERGO PURRCH® be installed?",
+      "be383800726_html": "Does ERGO PURRCH® stay stable during everyday use?",
+      "be2070213862_html": "Which model is best for my cat?",
+      "be1106150414_html": "Do you ship internationally?",
+      "be837333939_html": "Yes. The ERGO PURRCH® beds are rated to support cats up to 45 lbs, backed by an arm assembly pressure-tested to 176 lbs — the highest documented weight capacity of any premium, handcrafted desk-mounted cat bed on the market. Suitable for large breeds including Maine Coons, Ragdolls, Norwegian Forest Cats, and Bengals. Featured cat models in our photos weigh between 14 and 22 lbs — often both in the bed at the same time.",
+      "be733788932_html": "Yes. ERGO PURRCH® clamps securely onto virtually any desk or flat surface up to 2.75 inches (7 cm) thick — if it has an edge, we mount to it. Standing desks, gaming desks, sit-stand desks, office desks, kitchen counters, shelves, nightstands, and more. Confirmed compatible with popular setups including the SecretLab Magnus, UPLIFT, FlexiSpot, and most IKEA desks — and that's just a handful of examples. If it has a surface edge, ERGO PURRCH® attaches to it. The non-slip silicone pads protect your surface, and the set screw locks the arm securely in place — an Allen-key is included.",
+      "be444978984_html": "Yes. Because ERGO PURRCH® mounts to the edge of a surface, it adds an elevated resting spot without taking up floor or surface space, making it well suited for small apartments and compact homes.",
+      "be888831548_html": "ERGO PURRCH® can be installed on many flat surfaces such as desks, tables, countertops, and sturdy window sills up to 2.75 inches thick, offering flexible placement throughout the home.",
+      "be1712855956_html": "Yes. ERGO PURRCH® is designed with a secure clamp system and stable arm construction to provide a safe, reliable resting place when installed properly. The clamp features non-slip silicone pads on both sides to protect your surface and prevent any movement. A set screw locks the arm into your preferred position — an Allen wrench is included for easy tightening. No drilling, no adhesives, no desk modification required.",
+      "be1354564160_html": "Both models are designed to support up to 45 lbs, making them suitable for larger cats. The wooden model offers a more spacious surface area, which may be preferred for multiple cats or those who like extra room. The handwoven model provides a different aesthetic while still accommodating larger breeds comfortably.",
+      "be962339791_html": "We proudly offer international shipping, with fees varying based on your location. If you don't see your country listed, feel free to reach out—we're happy to explore adding new markets to our store.",
+      "be663652197_html": "Have more questions? Visit our full FAQ →",
+      "be609502565_html": "HAPPY REVIEWS",
+      "be91843507_html": "Anonymous",
+      "be2125126235_html": "Verified Buyer",
+      "be17800766415_html": "Perfect Fit<br>",
+      "be1086759012_html": "My cat loves the bed, and solved the problem of her getting upset when I played games. Now she can be right there, and I can confirm this fits perfectly on a Secret Labs Magnus standing desk.",
+      "be2115070560_html": "Handwoven | Matte Black Arm",
+      "be575420463_html": "Birchwood | Matte White Arm",
+      "be806966070_html": "Handwoven | Matte White Arm",
+      "be994266100_html": "WHAT'S INCLUDED",
+      "be1759001046_html": "Arm Assembly (fits surface up to 2.75 inches)",
+      "be1416075679_html": "Handcrafted Cat Bed (supports up to 45 lb)",
+      "be193226076749_html": "Plush Pillow <i><b>(Handwoven model only)</b></i>",
+      "be247951320_html": "Instruction Manual",
+      "be1032361963_html": "Non-Slip Silicone Pads (pre-installed)",
+      "be474053973_html": "Allen Key Set",
+      "be140949788064_html": "<b><i>*Orthopedic Pillow sold separately for Wood models</i></b>",
+      "be430210269_html": "Tax included. ",
+      "be198651612937_html": "Shipping</a>  calculated at checkout.",
+      "be849688199_html": "Save {sale}%",
+      "be42255992_html": "Show more",
+      "be42216636_html": "Show less",
+      "be641729472_html": "In stock ({quantity} units)",
+      "be1197062785_html": "({quantity} units) in stock, hurry while stocks last!",
+      "be912676988_html": "Pre-order",
+      "be1494994701_html": "Back in stock {next_incoming_date}",
+      "be1220360021_html": "Quantity",
+      "be649020154_html": "Add to cart",
+      "be1288739340_html": "View detail"
+    }
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "The section was generated by OMNISE BUILDER",
+      "info": "Omnise is a flexible page builder app on Shopify AppStore.\n              It provides 100+ Shopify Elements and pre-built templates library, \n              so you can build unlimited pages that you can imagine with it."
+    },
+    {
+      "type": "header",
+      "content": "[EDIT WITH OMNISE APP →](https://beae-edric.myshopify.com/admin/apps/3db283686bdf064c04e98e5cf61875ee/app/editor/v3/quickview/6a2101a1f8139bac36d5d614)",
+      "info": "(*You must install the app to start editing this section [Learn more](https://docs.beae.com/en/article/quick-start-guide-dkoesy/))"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ]
+}
+{% endschema %}

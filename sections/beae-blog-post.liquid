@@ -1,0 +1,613 @@
+
+            {% assign beae_root_url = routes.root_url %}
+            {% if beae_root_url != '/'%}
+                {% assign beae_root_url = routes.root_url | append: '/' %}
+            {% endif %}
+        {%capture section_id %}beae-blog-post{% endcapture%}{% if section_id == section.id %}{% if shop.metafields.beae.global_css %}
+            <!--BEAE-EMBED-->
+            <link href="data:text/css;base64,{{-shop.metafields.beae.global_css-}}" rel="stylesheet" id="beae-global-css"/>
+            <!--/BEAE-EMBED-->
+        {% endif %}
+
+{% render 'beae_header', BEAE_THEME: true %}{% endif %}<link rel="stylesheet" id="beae-exported-page-css" media="all" href="{{"beae-6a20e19ff8139bac36d5d5ee.css" | asset_url}}"><link rel="preconnect" href="https://fonts.googleapis.com">
+                    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css?family=Inter:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"><div class="beae-builder-v2 beae-builder"><div class="beae-sections beae-content-wrapper"><script type="text/javascript">if (!window.BEAEARGS) {window.BEAEARGS = {};}</script>
+<!----><section id="" data-sectionid="beae-xzpt7z5d" data-width="1084" data-margin="30px" data-margin-mobile="15px" data-type="flexContainer" class="beae-typo-p1 beae-xzpt7z5d section-beae-xzpt7z5d beae-section beae-core" data-template="Blog post page 4"><!----><!----><div class="beae-flexbox beae-typo-p1" style="padding: 0px;"><div class="beae__section--container beae-flexbox-container" style="max-width: var(--beae-page-width, 1470px);"><!----><div class="beae-flexbox-core beae-x-flex-section grid-container-width"><!----><div class="beae-dzt79g4u beae-block beae-core beae-animation beae-unique-lc3nfdt0" data-id="beae-dzt79g4u" data-uniqueid="lc3nfdt0""><!---->
+            {% liquid
+                assign tmp_article = article
+                assign tmp_blog = blog
+            %}
+            {%- if article != blank -%}
+             <!----><!----><div class="beae-v0wx4x0j beae-block beae-core beae-animation beae-unique-hh62rjnd beae-flex-wrapper" data-id="beae-v0wx4x0j" data-loop-index="0" data-uniqueid="hh62rjnd"><!----><!----><!----><div class="beae-ccmzye3i beae-block beae-core beae-animation beae-unique-urh4fyd5" data-id="beae-ccmzye3i" data-loop-index="0" data-uniqueid="urh4fyd5"><!----><div class="beae-block beae-x-text beae-typo-p1" data-autolayout="beae-ccmzye3i"><div class="beae-article--tags">
+  <div class="beae-x-article-tags">
+    {% for tag in article.tags %}
+      {% if beae_include_tags contains tag %}
+      <span class="beae-article-tags-item" data-value="{{ tag }}">{{ tag }}</span>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div></div><!----><!----></div><!----><!----><!----><div class="beae-dpm0eip8 beae-block beae-core beae-animation beae-unique-dse1w2q2" data-id="beae-dpm0eip8" data-loop-index="0" data-uniqueid="dse1w2q2"><!----><h1 class="beae-block beae-x-text beae-typo-h1" data-autolayout="beae-dpm0eip8"><a class="beae-article--title" href="{{ article.url }}">{{ article.title }}</a></h1><!----><!----></div><!----><!----><!----><div class="beae-b3io28wz beae-block beae-core beae-animation beae-unique-0ytq0cwv beae-flex-wrapper" data-id="beae-b3io28wz" data-loop-index="0" data-uniqueid="0ytq0cwv"><!----><!----><!----><div class="beae-a6nkzzg1 beae-block beae-core beae-animation beae-unique-jjcwzx2i" data-id="beae-a6nkzzg1" data-loop-index="0" data-uniqueid="jjcwzx2i"><!----><div class="beae-block beae-x-text beae-typo-p2" data-autolayout="beae-a6nkzzg1"><div class="beae-x-article-author">{{ article.author }}</div></div><!----><!----></div><!----><!----><!----><div class="beae-59xuoyfg beae-block beae-core beae-animation beae-unique-3o9a3ch8 beae-x-icon" data-id="beae-59xuoyfg" data-loop-index="0" data-uniqueid="3o9a3ch8"><!----><div class="beae-elm__ic"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill" viewBox="0 0 16 16">
+  <circle cx="8" cy="8" r="8"></circle>
+</svg></div><!----></div><!----><!----><!----><div class="beae-8onkahjl beae-block beae-core beae-animation beae-unique-p6qsa0t5" data-id="beae-8onkahjl" data-loop-index="0" data-uniqueid="p6qsa0t5"><!----><div class="beae-block beae-x-text beae-typo-p2" data-autolayout="beae-8onkahjl"><div class="beae-x-article-create-at"> 
+           
+           {{ article.published_at | date: beae_date_format }}  
+       </div></div><!----><!----></div><!----><!----><!----><div class="beae-cof4ewb5 beae-block beae-core beae-animation beae-unique-526p6hxf beae-x-icon" data-id="beae-cof4ewb5" data-loop-index="0" data-uniqueid="526p6hxf"><!----><div class="beae-elm__ic"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill" viewBox="0 0 16 16">
+  <circle cx="8" cy="8" r="8"></circle>
+</svg></div><!----></div><!----><!----><!----><div class="beae-1676901c beae-block beae-core beae-animation beae-unique-504d3bng" data-id="beae-1676901c" data-loop-index="0" data-uniqueid="504d3bng""><div class="beae-block beae-x-code"">  {%- if article.comments_count > 0 -%}
+<div class="beae-typo-p2">
+{{article.comments_count}} comments
+</div>
+   {%- endif -%}</div><!----></div><!----><!----><!----></div><!----><!----><!----></div><!----><!----><!----><div class="beae-fyp4mr2d beae-block beae-core beae-animation beae-unique-cj0xo6dx beae-flex-wrapper" data-id="beae-fyp4mr2d" data-loop-index="0" data-uniqueid="cj0xo6dx"><!----><!----><!----><div class="beae-938ahqxc beae-block beae-core beae-animation beae-unique-ppdudipp beae-flex-wrapper" data-id="beae-938ahqxc" data-loop-index="0" data-uniqueid="ppdudipp"><!----><!----><!----><div class="beae-7w0l524o beae-block beae-core beae-animation beae-unique-vy0ojs0v" data-id="beae-7w0l524o" data-loop-index="0" data-uniqueid="vy0ojs0v""><!---->
+        
+        
+        
+        <!----><a class="beae-block beae-x-image beae-container-image beae-image-content-position beae-image-picture beae-image-product" hover-mode="false" href="{{ article.url }}"><!----><!----><picture image-mode="" class="beae-ngpcp beae-image-primary">
+    <img src="{{ article.image | img_url: 'master' }}" alt="{{ article.image.alt | escape | default: 'Article Image'}}" width="{{ article.image.width | default: 915 }}" height="{{ article.image.height | default: 915 }}" loading="lazy">
+  </picture><!----></a><script type="text/javascript">window.BEAEARGS['beae-7w0l524oblock-image'] = {
+    "id": "beae-7w0l524o",
+    "mode": {"value": "live"},
+    "autoHover":false
+  };</script><!----></div><!----><!----><!----></div><!----><!----><!----><div class="beae-5ritih51 beae-block beae-core beae-animation beae-unique-k1sovth0 beae-flex-wrapper" data-id="beae-5ritih51" data-loop-index="0" data-uniqueid="k1sovth0"><!----><!----><!----><div class="beae-zvh4lf6i beae-block beae-core beae-animation beae-unique-aeaixsl4" data-id="beae-zvh4lf6i" data-loop-index="0" data-uniqueid="aeaixsl4"><!----><div class="beae-block beae-x-text beae-typo-p1" data-autolayout="beae-zvh4lf6i">{{ 'sections.beae-blog-post.be165221068_html' | t }}</div><!----><!----></div><!----><!----><!----><div class="beae-8hsc3cov beae-block beae-core beae-animation beae-unique-0ufn0vs6 beae-flex-wrapper" data-id="beae-8hsc3cov" data-loop-index="0" data-uniqueid="0ufn0vs6"><!----><!----><!----><div class="beae-dnax12ky beae-block beae-core beae-animation beae-unique-muz9aydb" data-id="beae-dnax12ky" data-loop-index="0" data-uniqueid="muz9aydb"><!----><div class="beae-block beae-x-text beae-typo-h4" data-autolayout="beae-dnax12ky">{{ 'sections.beae-blog-post.be1897037342_html' | t }}</div><!----><!----></div><!----><!----><!----><div class="beae-2clkq5c4 beae-block beae-core beae-animation beae-unique-bd0e6wa3" data-id="beae-2clkq5c4" data-loop-index="0" data-uniqueid="bd0e6wa3"><!----><div class="beae-block beae-x-text beae-typo-p1" data-autolayout="beae-2clkq5c4">{{ 'sections.beae-blog-post.be1042508655_html' | t }}</div><!----><!----></div><!----><!----><!----></div><!----><!----><!----><div class="beae-ie46i8p0 beae-block beae-core beae-animation beae-unique-8f5kwhoj beae-flex-wrapper" data-id="beae-ie46i8p0" data-loop-index="0" data-uniqueid="8f5kwhoj"><!----><!----><!----><div class="beae-hzmnlir9 beae-block beae-core beae-animation beae-unique-02cs4e8q" data-id="beae-hzmnlir9" data-loop-index="0" data-uniqueid="02cs4e8q"><!----><div class="beae-block beae-x-text beae-typo-h4" data-autolayout="beae-hzmnlir9">{{ 'sections.beae-blog-post.be1273043259_html' | t }}</div><!----><!----></div><!----><!----><!----><div class="beae-mh5tparz beae-block beae-core beae-animation beae-unique-lnf6ug9a" data-id="beae-mh5tparz" data-loop-index="0" data-uniqueid="lnf6ug9a"><!----><div class="beae-block beae-x-text beae-typo-p1" data-autolayout="beae-mh5tparz">{{ 'sections.beae-blog-post.be1193596370_html' | t }}</div><!----><!----></div><!----><!----><!----></div><!----><!----><!----><div class="beae-rhe8rrm5 beae-block beae-core beae-animation beae-unique-jnfhye66 beae-flex-wrapper" data-id="beae-rhe8rrm5" data-loop-index="0" data-uniqueid="jnfhye66"><!----><!----><!----><div class="beae-ywpaxnux beae-block beae-core beae-animation beae-unique-2i771msp" data-id="beae-ywpaxnux" data-loop-index="0" data-uniqueid="2i771msp"><!----><div class="beae-block beae-x-text beae-typo-h4" data-autolayout="beae-ywpaxnux">{{ 'sections.beae-blog-post.be2145111408_html' | t }}</div><!----><!----></div><!----><!----><!----><div class="beae-51g5bbn3 beae-block beae-core beae-animation beae-unique-bp3kw8xx" data-id="beae-51g5bbn3" data-loop-index="0" data-uniqueid="bp3kw8xx"><!----><div class="beae-block beae-x-text beae-typo-p1" data-autolayout="beae-51g5bbn3">{{ 'sections.beae-blog-post.be428208866_html' | t }}</div><!----><!----></div><!----><!----><!----></div><!----><!----><!----><div class="beae-ee9afmx1 beae-block beae-core beae-animation beae-unique-gaofkpxh beae-flex-wrapper" data-id="beae-ee9afmx1" data-loop-index="0" data-uniqueid="gaofkpxh"><!----><!----><!----><div class="beae-4jq80zko beae-block beae-core beae-animation beae-unique-qwj6j4sd" data-id="beae-4jq80zko" data-loop-index="0" data-uniqueid="qwj6j4sd"><!----><div class="beae-block beae-x-text beae-typo-h4" data-autolayout="beae-4jq80zko">{{ 'sections.beae-blog-post.be571706898_html' | t }}</div><!----><!----></div><!----><!----><!----><div class="beae-m54tcda8 beae-block beae-core beae-animation beae-unique-4mismrjo" data-id="beae-m54tcda8" data-loop-index="0" data-uniqueid="4mismrjo"><!----><div class="beae-block beae-x-text beae-typo-p1" data-autolayout="beae-m54tcda8">{{ 'sections.beae-blog-post.be365138619_html' | t }}</div><!----><!----></div><!----><!----><!----></div><!----><!----><!----><div class="beae-wagm8mmv beae-block beae-core beae-animation beae-unique-mo7wrjoz" data-id="beae-wagm8mmv" data-loop-index="0" data-uniqueid="mo7wrjoz"><!----><div class="beae-block beae-x-text beae-typo-p1" data-autolayout="beae-wagm8mmv">{{ 'sections.beae-blog-post.be573313853_html' | t }}</div><!----><!----></div><!----><!----><!----></div><!----><!----><!----></div><!----><!----><!----><div class="beae-z5we7194 beae-block beae-core beae-animation beae-unique-ugau9tua beae-flex-wrapper" data-id="beae-z5we7194" data-loop-index="0" data-uniqueid="ugau9tua"><!----><!----><!----><div class="beae-77f6zt0h beae-block beae-core beae-animation beae-unique-3s8xo808" data-id="beae-77f6zt0h" data-loop-index="0" data-uniqueid="3s8xo808""><!----> <!----><!----><div class="beae-ejb3h1ky beae-block beae-core beae-animation beae-unique-pr339834" data-id="beae-ejb3h1ky" data-loop-index="0" data-uniqueid="pr339834"><!----><div class="beae-block beae-x-text beae-typo-p3" data-autolayout="beae-ejb3h1ky">{{ 'sections.beae-blog-post.be1209131241_html' | t }}</div><!----><!----></div><!----><!----><!----><div class="beae-5qjswhil beae-block beae-core beae-animation beae-unique-2qdimf2r" data-id="beae-5qjswhil" data-loop-index="0" data-uniqueid="2qdimf2r""><!---->
+        
+        
+        
+        <!----><div class="beae-block beae-x-image beae-container-image beae-image-content-position beae-image-picture beae-image-product" hover-mode="false"><!----><!----><picture image-mode="" class="beae-w9dzm beae-image-primary">
+  {% if blog.previous_article.image %}
+    <img src="{{ blog.previous_article.image | img_url: 'master' }}" alt="{{ blog.previous_article.image.alt | escape | default: 'Blog Image'}}" width="{{ blog.previous_article.image.width | default: 915 }}" height="{{ blog.previous_article.image.height | default: 915 }}" loading="lazy">
+  {% endif %}
+  </picture><!----></div><script type="text/javascript">window.BEAEARGS['beae-5qjswhilblock-image'] = {
+    "id": "beae-5qjswhil",
+    "mode": {"value": "live"},
+    "autoHover":false
+  };</script><!----></div><!----><!----><!----><div class="beae-qr8ulndf beae-block beae-core beae-animation beae-unique-7zy2vekh" data-id="beae-qr8ulndf" data-loop-index="0" data-uniqueid="7zy2vekh"><!----><div class="beae-block beae-x-text beae-typo-p2" data-autolayout="beae-qr8ulndf"><a class="beae-blog--title beae-prev-title" href="{{ blog.previous_article.url }}">{{ blog.previous_article.title }}</a></div><!----><!----></div><!----><!----> <!----></div><!----><!----><!----><div class="beae-t007pjle beae-block beae-core beae-animation beae-unique-nkvl7y9k" data-id="beae-t007pjle" data-loop-index="0" data-uniqueid="nkvl7y9k""><!----> <!----><!----><div class="beae-o6btd0kr beae-block beae-core beae-animation beae-unique-trg6hwm3" data-id="beae-o6btd0kr" data-loop-index="0" data-uniqueid="trg6hwm3"><!----><div class="beae-block beae-x-text beae-typo-p3" data-autolayout="beae-o6btd0kr">{{ 'sections.beae-blog-post.be2424595_html' | t }}</div><!----><!----></div><!----><!----><!----><div class="beae-ihi8bhli beae-block beae-core beae-animation beae-unique-wrwaxfs2" data-id="beae-ihi8bhli" data-loop-index="0" data-uniqueid="wrwaxfs2""><!---->
+        
+        
+        
+        <!----><div class="beae-block beae-x-image beae-container-image beae-image-content-position beae-image-picture beae-image-product" hover-mode="false"><!----><!----><picture image-mode="" class="beae-hob8r beae-image-primary">
+    {% if blog.next_article.image %}
+      <img src="{{ blog.next_article.image | img_url: 'master' }}" alt="{{ blog.next_article.image.alt | escape | default: 'Blog Image'}}" width="{{ blog.next_article.image.width | default: 915 }}" height="{{ blog.next_article.image.height | default: 915 }}" loading="lazy">
+   {% endif %}
+</picture><!----></div><script type="text/javascript">window.BEAEARGS['beae-ihi8bhliblock-image'] = {
+    "id": "beae-ihi8bhli",
+    "mode": {"value": "live"},
+    "autoHover":false
+  };</script><!----></div><!----><!----><!----><div class="beae-l06as62y beae-block beae-core beae-animation beae-unique-1a05pql6" data-id="beae-l06as62y" data-loop-index="0" data-uniqueid="1a05pql6"><!----><div class="beae-block beae-x-text beae-typo-p2" data-autolayout="beae-l06as62y"><a class="beae-blog--title beae-next-title" href="{{ blog.next_article.url }}">{{ blog.next_article.title }}</a></div><!----><!----></div><!----><!----> <!----></div><!----><!----><!----></div><!----><!----><!----><div class="beae-u1alrhrx beae-block beae-core beae-animation beae-unique-oyxw39x2 beae-flex-wrapper" data-id="beae-u1alrhrx" data-loop-index="0" data-uniqueid="oyxw39x2"><!----><!----><!----><div class="beae-altijns3 beae-block beae-core beae-animation beae-unique-i2c4f5fp" data-id="beae-altijns3" data-loop-index="0" data-uniqueid="i2c4f5fp""><!----><div><div>
+    {% assign limit_comments = '2' %}
+    {% assign random_avatar = 'true' %}
+    {% assign type_pagination = 'pagination_text' %}
+    {% assign prev_icon = '<svg viewBox="0 0 20 20" width="20" height="20" fill="currentColor" class="inline" aria-hidden="true"><path fill-rule="evenodd" d="M11.764 5.204a.75.75 0 0 1 .032 1.06l-3.516 3.736 3.516 3.736a.75.75 0 1 1-1.092 1.028l-4-4.25a.75.75 0 0 1 0-1.028l4-4.25a.75.75 0 0 1 1.06-.032Z"></path></svg>' %}
+    {% assign next_icon = ' <svg viewBox="0 0 20 20" width="20" height="20" fill="currentColor" class="inline" aria-hidden="true"><path fill-rule="evenodd" d="M7.72 14.53a.75.75 0 0 1 0-1.06l3.47-3.47-3.47-3.47a.75.75 0 0 1 1.06-1.06l4 4a.75.75 0 0 1 0 1.06l-4 4a.75.75 0 0 1-1.06 0Z"></path></svg>' %}
+    {% assign prev_text = 'Previous' %}
+    {% assign next_text = 'Next' %}
+    </div><div class="blog-post-comments" id="beae-altijns3">{% if article != empty %}
+    <div class="beae-article-comments-count">
+      {% if article.comments_enabled? %}
+         {% if article.comments_count == 1 %}
+           
+                {{ article.comments_count }} comment
+           
+         {% else %}
+            
+                {{ article.comments_count }} comments
+       
+         {% endif %}
+     {%- else -%}
+         <div>Please enable blog comments to show</div>
+     {% endif %}
+    </div>
+{% else %}
+    <div>Please select the article in settings</div>
+{% endif %}
+
+
+{% if article != empty %}
+    {% if article.comments_enabled? %}
+        <div class="beae-article-comment-wrapper">
+            <div id="comments" class="beae-article-comments">
+                {%- unless article.comments_count == 0 -%}
+                    {%- assign anchorId = '#comments-' | append: article.id -%}
+               
+                    {% paginate article.comments by limit_comments %}
+                   
+                        <div class="beae-content-comments">
+                        
+                            {%- for comment in article.comments -%}
+                                {%- if comment.status == 'pending' and comment.content -%}
+                                    <article id="{{ comment.id }}" class="beae-comment-item">
+                                    <div class="beae-comment-author-name">  {{ comment.author }} </div>
+                                        <div class="right">
+                                            <span class="beae-content__comment">
+                                                {{ comment.content }}
+                                            </span>
+                                        </div>
+                                    </article>
+                                {%- endif -%}
+
+                                <article id="{{ comment.id }}" class="beae-comment-item">
+                                    {% assign base_url = "https://www.gravatar.com/avatar/000000" | append: comment.id | append: "?s=40&amp;d=identicon" %}
+                                    {% if random_avatar and random_avatar != "" %}
+                                        <div class="beae-author-avatar">
+                                            <img src="{{ base_url }}" alt="Author">
+                                        </div>
+                                    {% endif %}
+                                <div>
+                                        <div class="beae-comment-author-name">  {{ comment.author }} </div>
+                                        <div class="beae-content__comments">
+                                            <span class="beae-content__comment">
+                                                {{ comment.content }}
+                                            </span>
+                                            <span class="">
+                                                {{ comment.created_at | time_tag: format: "basic" }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </article>
+                            {%- endfor -%}
+                        </div>
+
+                        {%- if paginate -%}
+                            <nav role="navigation">
+                            <ol class="beae-pagination-navigation">
+                                {%- if paginate.previous -%}
+                                  <li class="beae-pagination-prev">
+                                        {%- if type_pagination == 'pagination_text' -%}
+                                            <a class="beae-pagination-item beae-paginate-action" href="{{ paginate.previous.url }}">
+                                                {{prev_text}}
+                                            </a>
+                                        {%- else -%}
+                                            <a class="beae-pagination-item beae-paginate-action" href="{{ paginate.previous.url }}">
+                                                {{prev_icon}}
+                                            </a>
+                                        {%- endif -%}
+                                        </li>
+                                    {%- endif -%}
+
+                                    {%- for part in paginate.parts -%}
+                                    {%- if part.is_link -%}
+                                    <li class="beae-pagination-item">
+                                    <a href="{{ part.url }}" title="{{ part.title }}">
+                                        {{ part.title }}
+                                    </a>
+                                    </li>
+                                    {%- else -%}
+                                    {%- if part.title == paginate.current_page -%}
+                                    <li class="beae-pagination-item beae-button-active" aria-current="page">
+                                    <a href="javascript:void(0);" title="{{ part.title }}">
+                                        {{ part.title }}
+                                    </a>
+                                    </li>
+                                    {%- else -%}
+                                    <li class="beae-pagination-item">
+                                    <a href="{{ part.url }}" title="{{ part.title }}">
+                                        {{ part.title }}
+                                    </a>
+                                    </li>
+                                    {%- endif -%}
+                                    {%- endif -%}
+                                    {%- endfor -%}
+
+                                    {%- if paginate.next -%}
+                                       <li class="beae-pagination-next">
+                                        {%- if type_pagination == 'pagination_text' -%}
+                                            <a class="beae-pagination-item beae-paginate-action" href="{{ paginate.next.url }}">
+                                                {{next_text}}
+                                            </a>
+                                        {%- else -%}
+                                            <a class="beae-pagination-item beae-paginate-action" href="{{ paginate.next.url }}">
+                                                {{next_icon}}
+                                            </a>
+                                        {%- endif -%}
+                                        </li>
+                                    {%- endif -%}
+                            </ol>
+                            </nav>
+                        {%- endif -%}
+                    </div>
+                   {% endpaginate %}
+                {%- endunless -%}
+        </div>
+    {%- else -%}
+        <div>Please enable blog comments to show</div>
+    {% endif %}
+{%- else -%}
+    <div>Please select the article in settings</div>
+{% endif %}
+</div></div><!----><!----></div><!----><!----><!----><div class="beae-10jvs4v1 beae-block beae-core beae-animation beae-unique-s2pj0xqm beae-flex-wrapper" data-id="beae-10jvs4v1" data-loop-index="0" data-uniqueid="s2pj0xqm"><!----><!----><!----><div class="beae-ff4uu9zz beae-block beae-core beae-animation beae-unique-xyueja4f" data-id="beae-ff4uu9zz" data-loop-index="0" data-uniqueid="xyueja4f"><!----><div class="beae-block beae-x-text beae-typo-h5" data-autolayout="beae-ff4uu9zz">{{ 'sections.beae-blog-post.be1655090967_html' | t }}</div><!----><!----></div><!----><!----><!----><div class="beae-ps2gx5qb beae-block beae-core beae-animation beae-unique-kp6ehv85" data-id="beae-ps2gx5qb" data-loop-index="0" data-uniqueid="kp6ehv85"><!----><div class="beae-block beae-x-text beae-typo-p1" data-autolayout="beae-ps2gx5qb">{{ 'sections.beae-blog-post.be410774954_html' | t }}</div><!----><!----></div><!----><!----><!----></div><!----><!----><!----><div class="beae-vwkgeiuc beae-block beae-core beae-animation beae-unique-yfeafctz" data-id="beae-vwkgeiuc" data-loop-index="0" data-uniqueid="yfeafctz""><!----><div><div>
+    {% assign name_label = '' %}
+    {% assign name_placeholder = 'Name' %}
+    {% assign email_label = '' %}
+    {% assign email_placeholder = 'Email' %}
+    {% assign message_label = '' %}
+    {% assign message_placeholder = 'Message' %}
+    {% assign submit_label = 'Submit comment' %}
+    {% assign success_message = '' %}
+    {% assign success_moderated = '' %}
+    {% assign error_heading = '' %}
+    {% assign moderated = '' %}
+    </div><div id="beae-vwkgeiuc">
+  {%- if article != empty -%}
+    {%- if article.comments_enabled? -%}
+        {% capture icon_success %}
+            <svg aria-hidden="true" focusable="false" role="presentation" class="icon beae-shopify__article--icon-success" viewBox="0 0 13 13">
+                <path d="M6.5 12.35C9.73087 12.35 12.35 9.73086 12.35 6.5C12.35 3.26913 9.73087 0.65 6.5 0.65C3.26913 0.65 0.65 3.26913 0.65 6.5C0.65 9.73086 3.26913 12.35 6.5 12.35Z" fill="#428445" stroke="white" stroke-width="0.7"></path>
+                <path d="M5.53271 8.66357L9.25213 4.68197" stroke="white"></path>
+                <path d="M4.10645 6.7688L6.13766 8.62553" stroke="white"></path>
+            </svg>
+        {% endcapture %}
+        
+        {% capture icon_error %}
+            <svg aria-hidden="true" focusable="false" role="presentation" class="icon beae-shopify__article--icon-error" viewBox="0 0 13 13">
+                <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"></circle>
+                <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"></circle>
+                <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"></path>
+            </svg>
+        {% endcapture %}
+
+        {% if article.id %}
+            <div>
+                {% form 'new_comment', article %}
+                    {% capture post_message %}
+                        {{success_message}}
+                    {% endcapture %}
+                    {%- if article.moderated? and comment.status == 'unapproved' -%}
+                        {% capture post_message %}
+                            {{success_moderated}}
+                        {% endcapture %}
+                    {% endif %}
+                    {%- if form.errors -%}
+                        <div class="beae-shopify__article-form__message beae-shopify__article-form__message--error" role="alert">
+                            <h3 class="beae-shopify__article-form-status beae-shopify__article-caption-large" tabindex="-1" autofocus="">
+                                {{error_heading}}
+                            </h3>
+                            <ul class="beae-shopify__article-form-status-list beae-shopify__article-caption-large">
+                                {%- for field in form.errors -%}
+                                    <li>
+                                        <a href="#CommentForm-{{ field }}" class="link">
+                                            {%- if form.errors.translated_fields[field] contains 'author' -%}
+                                                {{name_label}}
+                                            {%- elsif form.errors.translated_fields[field] contains 'body'-%}
+                                                {{message_label}}
+                                            {%- else -%}
+                                                {{ form.errors.translated_fields[field] }}
+                                            {%- endif -%}
+                                            {{ form.errors.messages[field] }}
+                                        </a>
+                                    </li>
+                                {%- endfor -%}
+                            </ul>
+                        </div>
+                    {%- endif -%}
+
+                    {%- if form.posted_successfully? -%}
+                        <div class="beae-shopify__article-form__message beae-shopify__article-form__message--success" role="status">
+                            <h3 class="beae-shopify__article-form-status" tabindex="-1" autofocus="">{{ post_message }}</h3>
+                        </div>
+                    {%- endif -%}
+
+                    <div class="beae-shopify__article-comment-fields {% if article.moderated? == false %}beae-shopify__article-comments-fields{% endif %}">
+
+                        <div class="beae-shopify__article-comment-field beae-first beae-w-full">
+                            {% if name_label and name_label != "" %}
+                                <label for="CommentForm-author" class="beae-shopify__article-comment-field-label">
+                                    {{name_label}}
+                                    <span>*</span>
+                                </label>
+                            {% endif %}
+                            <input type="text" name="comment[author]" id="CommentForm-author" value="{{ form.author }}" required="" placeholder="{{ name_placeholder }}" class="beae-shopify__article-comment-field__input">
+
+                            {%- if form.errors['author'] -%}
+                                <small id="CommentForm-author-error">
+                                    <span class="beae-shopify__article-comment-form-message">
+                                        {{ icon_error }}
+                                        {{name_label}}
+                                        {{ form.errors.messages['author'] }}.
+                                    </span>
+                                </small>
+                            {%- endif -%}
+                        </div>
+
+                        <div class="beae-shopify__article-comment-field beae-last beae-w-full">
+                            {% if email_label and email_label != "" %}
+                            <label for="CommentForm-email" class="beae-shopify__article-comment-field-label">
+                                {{email_label}}
+                            <span>*</span>
+                            </label>
+                            {% endif %}
+                            <input type="email" name="comment[email]" id="CommentForm-email" value="{{ form.email }}" required="" placeholder="{{ email_placeholder }}" class="beae-shopify__article-comment-field__input">
+                            
+                            {%- if form.errors['email'] -%}
+                                <small id="CommentForm-email-error">
+                                    <span class="beae-shopify__article-comment-form-message">
+                                        {{ icon_error }}
+                                        {{ email_label}}
+                                        {{ form.errors.messages['email'] }}.
+                                    </span>
+                                </small>
+                            {%- endif -%}
+                        </div>
+                        
+                        <div class="beae-shopify__article-comment-field beae-w-full">
+                            {% if message_label and message_label != "" %}
+                            <label for="CommentForm-body" class="beae-shopify__article-comment-field-label">
+                                {{message_label}}
+                            <span>*</span>
+                            </label>
+                            {% endif %}
+                            <textarea name="comment[body]" id="CommentForm-body" rows="5" required="" placeholder="{{ message_placeholder }}" class="beae-shopify__article-comment-field__input">                                {{ form.body }}
+                             </textarea>
+
+                            {%- if form.errors['body'] -%}
+                                <small id="CommentForm-body-error">
+                                    <span class="beae-shopify__article-comment-form-message">
+                                        {{ icon_error }}
+                                        {{message_label}}
+                                        {{ form.errors.messages['body'] }}.
+                                    </span>
+                                </small>
+                            {%- endif -%}
+                        </div>
+
+                        <div class="element__button beae-button-default beae-shopify__article-comment-field-button-container">
+                            <button type="submit" aria-label="button" class="beae-shopify__article-comment-field-button">
+                                {{submit_label}}
+                            </button>
+                        </div>
+
+                    </div>
+
+                    {%- if article.moderated? -%}
+                        <p class="beae-shopify__article-comment-warning">{{moderated}}</p>
+                    {%- endif -%}
+                {% endform %}
+            </div>
+        {% endif %}
+    {%- else -%}
+        <div>Please enable blog comments to show</div>
+    {%- endif -%}
+{%- else -%}
+    <div>Please select the article in settings</div>
+{%- endif -%}
+</div></div><!----><!----></div><!----><!----><!----></div><!----><!----> 
+            {%- endif -%}
+                {%- assign blog = tmp_blog -%}
+                {%- assign article = tmp_blog -%}
+            <!----></div><!----><!----></div></div></div><!----><!----><!----><!----><!----><!----></section><!----><script type="text/javascript">window.BEAEARGS['beae-xzpt7z5dsection-js'] = {
+    "id": "beae-xzpt7z5d",
+    "mode": {"value": "live"},
+    "optionsVideo":false,"optionsVideoMobile":false
+  };</script><!----><section id="" data-sectionid="beae-dwb1llwc" data-width="1470" data-margin="30px" data-margin-mobile="15px" data-type="flexContainer" class="beae-typo-p1 beae-dwb1llwc section-beae-dwb1llwc beae-section beae-core" data-template="Blog post page 4"><!----><!----><div class="beae-flexbox beae-typo-p1" style="padding: 0px;"><div class="beae__section--container beae-flexbox-container" style="max-width: var(--beae-page-width, 1470px);"><!----><div class="beae-flexbox-core beae-x-flex-section grid-container-width"><!----><div class="beae-lsq38vv3 beae-block beae-core beae-animation beae-unique-uonf9z1n" data-id="beae-lsq38vv3" data-uniqueid="uonf9z1n"><!----><div class="beae-block beae-x-text beae-typo-h2" data-autolayout="beae-lsq38vv3">{{ 'sections.beae-blog-post.be348751941_html' | t }}</div><!----><!----></div><!----><!----><!----><div class="beae-bez0el2x beae-block beae-core beae-animation beae-unique-ck7xu624" data-id="beae-bez0el2x" data-uniqueid="ck7xu624""><!----><!----><div class="beae-flexbox-core beae-x-collection-list"><style type="text/css"></style><div class="beae-slider-wrapper beae-slider slider-beae-bez0el2x items-per-3" data-draggable="true" data-desktop-layout="slider" data-mobile-layout="slider" data-effect="slide" data-pagination="false" data-navigation="false" style="--items-per: 3; --items-per-mobile: 1.2; --items-gap: 1.5vmax; --items-gap-mobile: 1.5vmax; --autoplay-delay: 5s;"><div class="beae-slider-content beae-slider-items">
+        {% liquid
+          assign tmp_collection = collection
+          assign selected_collections = "basketball,nano,golf" | split: ","
+          assign image_src = "https://upload.beae.com/tasks/67b6838fb47b8feb58221d91/images/banner1.jpg?v=1740025026681|https://upload.beae.com/tasks/67b6838fb47b8feb58221d91/images/banner2.jpg?v=1740025028986|https://upload.beae.com/tasks/67b6838fb47b8feb58221d91/images/banner3.jpg?v=1740025031946" | split: "|"
+          assign image_width = "1080,1080,1080" | split: ","
+          assign image_height = "1080,1080,1080" | split: ","
+          assign image_alt = "banner1,banner2,banner3" | split: ","
+          assign index_loop = 0
+        %}
+
+        {% for collection_handle in selected_collections %}
+          
+          {% liquid 
+            assign collection = collections[collection_handle] 
+          %}
+       <div class="beae-slide-item"><div class="beae-collection-card beae-ggt4psac"><!----><!----><div class="beae-n1efxr99 beae-block beae-core beae-unique-r8c8d6xj" data-id="beae-n1efxr99" data-loop-index="0" data-uniqueid="r8c8d6xj""><!---->
+        
+        
+        
+        <!----><a class="beae-block beae-x-image beae-container-image beae-image-content-position beae-image-picture beae-image-product" hover-mode="false" href="{{ collection.url }}"><!----><!----><picture image-mode="" class="beae-p7d3a beae-image-primary">
+  {% if image_src[index_loop] != blank %}
+    <img
+        src="{{ image_src[index_loop] }}"
+        alt="{{ image_alt[index_loop] | default: 'Collection Image'}}" 
+        width="{{ image_width[index_loop] | default: 915 }}"
+        height="{{ image_height[index_loop] | default: 915 }}"
+        loading="lazy"
+      />
+  {% else %}
+    {% if collection.featured_image %}
+    <img
+      src="{{ collection.featured_image | img_url: 'master' }}"
+      alt="{{ collection.featured_image.alt | escape | default: 'Collection Image'}}"
+      width="{{ collection.featured_image.width | default: 915 }}"
+      height="{{ collection.featured_image.height | default: 915 }}"
+      loading="lazy"
+    />
+    
+    {% else %}
+    <img
+    src="undefined"
+    alt="{{ collection.title | escape | default: 'Collection Image'}}" 
+    width="undefined"
+    height="undefined"
+    loading="lazy"
+  />
+    {% endif %}
+  {% endif %}
+  </picture><!----></a><script type="text/javascript">window.BEAEARGS['beae-n1efxr99block-image'] = {
+    "id": "beae-n1efxr99",
+    "mode": {"value": "live"},
+    "autoHover":false
+  };</script><!----></div><!----><!----><!----><div class="beae-0klapu6l beae-block beae-core beae-unique-bqooxfwq beae-flex-wrapper" data-id="beae-0klapu6l" data-loop-index="0" data-uniqueid="bqooxfwq"><!----><!----><!----><div class="beae-mzjbh0nl beae-block beae-core beae-unique-tuhys6uu" data-id="beae-mzjbh0nl" data-loop-index="0" data-uniqueid="tuhys6uu"><!----><div class="beae-block beae-x-text beae-typo-h4" data-autolayout="beae-mzjbh0nl"><a class="beae-collection--title" href="{{ collection.url }}">{{ collection.title }}</a></div><!----><!----></div><!----><!----><!----></div><!----><!----></div></div> 
+          {% liquid 
+            assign index_loop = index_loop | plus: 1
+            assign image_collection = ''
+          %}
+          
+        {% endfor %}
+        {%- assign collection = tmp_collection -%}   
+      </div><div class="beae-slider-controls"><div class="beae-slider-controls-wrp"><!----><!----><!----><!----></div></div></div><script type="text/javascript">window.BEAEARGS['beae-bez0el2xsection-slide-show'] = {
+    "id": "beae-bez0el2x",
+    "mode": {"value": "live"},
+    "layout":"slider","layoutMobile":"slider","effect":"slide","isLoop":false,"autoPlay":false,"autoPlayDelay":5,"itemsPerSlide":3,"itemsPerSlideMobile":1.2,"itemsGap":"1.5vmax","itemsGapMobile":"1.5vmax","paginationImage":false,"paginationImageMobile":false,"typeScroll":"default","numItemsScroll":1,"showNavigation":false,"showPagination":false,"showProgress":false,"hookSliderInit":"","hookBeforeSlideChange":"","hookAfterSlideChange":"","noRunJs":false
+  };</script><!----></div><script type="text/javascript">window.BEAEARGS['beae-bez0el2xsection-featured-collection'] = {
+    "id": "beae-bez0el2x",
+    "mode": {"value": "live"},
+    "mobileMode":false
+  };</script><!----></div><!----><!----></div></div></div><!----><!----><!----><!----><!----><!----></section><!----><script type="text/javascript">window.BEAEARGS['beae-dwb1llwcsection-js'] = {
+    "id": "beae-dwb1llwc",
+    "mode": {"value": "live"},
+    "optionsVideo":false,"optionsVideoMobile":false
+  };</script><!----><section id="" data-sectionid="beae-mkumpqug" data-width="1470" data-margin="30px" data-margin-mobile="15px" data-type="flexContainer" class="beae-typo-p1 beae-mkumpqug section-beae-mkumpqug beae-section beae-core" data-template="Blog post page 4"><!----><!----><div class="beae-flexbox beae-typo-p1" style="padding: 0px;"><div class="beae__section--container beae-flexbox-container" style="max-width: var(--beae-page-width, 1470px);"><!----><div class="beae-flexbox-core beae-x-flex-section grid-container-width"><!----><div class="beae-whu9noqb beae-block beae-core beae-animation beae-unique-0s9l0tmq beae-flex-wrapper" data-id="beae-whu9noqb" data-uniqueid="0s9l0tmq"><!----><!----><!----><div class="beae-qyyrjsbz beae-block beae-core beae-animation beae-unique-p5tnqilg beae-flex-wrapper" data-id="beae-qyyrjsbz" data-uniqueid="p5tnqilg"><!----><!----><!----><div class="beae-kzcs9sgk beae-block beae-core beae-animation beae-unique-w1vzr9qs" data-id="beae-kzcs9sgk" data-uniqueid="w1vzr9qs""><!---->{% assign beae_image_pr = images['banner4.jpg'].alt %}
+        
+        
+        
+        <!----><div class="beae-block beae-x-image beae-container-image beae-image-content-position beae-image-picture beae-replace-notice" hover-mode="false"><!----><!----><picture image-mode="" class="beae-ypnsi beae-image-primary"><!----><img src="https://upload.beae.com/tasks/67b6838fb47b8feb58221d91/images/banner4.jpg?v=1740025016888" alt="banner4.jpg" width="1440" height="1080" fetchpriority="high" loading="lazy"></picture><!----></div><script type="text/javascript">window.BEAEARGS['beae-kzcs9sgkblock-image'] = {
+    "id": "beae-kzcs9sgk",
+    "mode": {"value": "live"},
+    "autoHover":false
+  };</script><!----></div><!----><!----><!----></div><!----><!----><!----><div class="beae-h0cnle10 beae-block beae-core beae-animation beae-unique-3c60n1l5 beae-flex-wrapper" data-id="beae-h0cnle10" data-uniqueid="3c60n1l5"><!----><!----><!----><div class="beae-11p5fmed beae-block beae-core beae-animation beae-unique-p3gi62zh beae-x-icon" data-id="beae-11p5fmed" data-uniqueid="p3gi62zh"><!----><div class="beae-elm__ic"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+  <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"></path>
+</svg></div><!----></div><!----><!----><!----><div class="beae-hapvz9qb beae-block beae-core beae-animation beae-unique-h18sq1ji" data-id="beae-hapvz9qb" data-uniqueid="h18sq1ji"><!----><div class="beae-block beae-x-text beae-typo-h2" data-autolayout="beae-hapvz9qb">{{ 'sections.beae-blog-post.be832508341_html' | t }}</div><!----><!----></div><!----><!----><!----><div class="beae-qm7drm2g beae-block beae-core beae-animation beae-unique-syv4cs3h" data-id="beae-qm7drm2g" data-uniqueid="syv4cs3h"><!----><div class="beae-block beae-x-text beae-typo-p2" data-autolayout="beae-qm7drm2g">{{ 'sections.beae-blog-post.be455048183_html' | t }}</div><!----><!----></div><!----><!----><!----><div class="beae-5yzxz3ig beae-block beae-core beae-animation beae-unique-x9u93ql1" data-id="beae-5yzxz3ig" data-uniqueid="x9u93ql1""><!---->{% form 'customer' %}<div class="beae-newsletter-email"><input id="email-beae-5yzxz3ig" type="email" placeholder="Enter your email" name="contact[email]"><button type="submit" class="beae-newsletter-btn">Subscribe <!----></button></div>{%- if form.errors -%} <div class="beae-newsletter-error">"{{ 'sections.beae-blog-post.be1466350579_html' | t }}"</div>{%- endif -%} {%- if form.posted_successfully? -%} <div class="beae-newsletter-success">"{{ 'sections.beae-blog-post.be406277700_html' | t }}"</div>{%- endif -%}{% endform %}<!----><!----></div><!----><!----><!----></div><!----><!----><!----></div><!----><!----></div></div></div><!----><!----><!----><!----><!----><!----></section><!----><script type="text/javascript">window.BEAEARGS['beae-mkumpqugsection-js'] = {
+    "id": "beae-mkumpqug",
+    "mode": {"value": "live"},
+    "optionsVideo":false,"optionsVideoMobile":false
+  };</script>
+<script type="text/javascript">
+  (() => {
+    let testText = document.createElement('div');
+    testText.innerHTML = 'test';
+    testText.style.fontSize = '100px';
+    document.body.appendChild(testText);
+    let realFontSize = parseFloat(window.getComputedStyle(testText).getPropertyValue('font-size').replace('px', ''));
+    testText.style.zoom = '50%';
+    let detectDesktopRequestMode = window.getComputedStyle(testText).getPropertyValue('font-size') !== '100px';
+    document.body.removeChild(testText);
+    
+    document.body.style.setProperty('--font-size-ratio', (realFontSize / 100).toString());
+
+    function getTextNodesIn(elem) {
+      let textNodes = [];
+      if (elem) {
+        for (var nodes = elem.childNodes, i = nodes.length; i--;) {
+          let node = nodes[i], nodeType = node.nodeType;
+          if (nodeType == 1 || nodeType == 9 || nodeType == 11) {
+            textNodes = textNodes.concat(getTextNodesIn(node));
+          }
+        }
+      }
+      return textNodes;
+    }
+
+    let scaleFitGridBlock = () => {
+
+      document.querySelectorAll('.beae-section.beae-core').forEach((sec) => {
+        let container = sec.querySelector(".beae__section--container");
+        if (!container) { return; };
+        let winWidth = document.documentElement.offsetWidth;
+        if (winWidth >= 768) {
+          sec.querySelectorAll('.beae__section--container').forEach(container => {
+            container.parentNode.style.setProperty("--container-width", container.closest('.grid-container-width') ? container.closest('.grid-container-width').parentNode.offsetWidth+'px' : container.offsetWidth+'px');
+          });
+        }
+      });
+
+      document.querySelectorAll('.beae-grid-block').forEach(block => {
+       let child = block.querySelector('.beae-block.beae-core > *'),
+           zoom = 0,
+           count = 0;
+        child.style.zoom = '';
+        child.style.lineHeight = '';
+        while(child.offsetHeight > block.offsetHeight && count < 14 && (zoom === 0 || block.offsetHeight < (child.offsetHeight*zoom))) {
+            zoom = (block.offsetHeight+block.offsetWidth)/(child.offsetHeight+child.offsetWidth);
+            child.style.zoom = zoom < 1 ? Math.floor(zoom*100)+'%' : '';
+            child.style.lineHeight = '2.4rem';
+            count++;
+        }
+      });
+    };
+
+    scaleFitGridBlock();
+    let timmer = 0;
+    window.addEventListener('resize', () => {
+      clearTimeout(timmer);
+      timmer = setTimeout(scaleFitGridBlock, 150);
+    });
+    window.addEventListener('load', scaleFitGridBlock);
+    
+    if (document.getElementById('beae-exported-page-css')) {
+      document.getElementById('beae-exported-page-css').addEventListener('load', scaleFitGridBlock);
+    }
+
+  })();
+</script>
+</div></div>{% if section_id == section.id %}{% endif%}
+<script id="beae-exported-page-js" src="{{'beae-6a20e19ff8139bac36d5d5ee.js'  | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "OMNISE BUILDER APP",
+  "locales": {
+    "en": {
+      "be76480_html": "N/A",
+      "be427520332_html": "Save { sale }",
+      "be1538363906_html": "Sold Out",
+      "be1066872809_html": "Save {{ sale }}%",
+      "be2569319_html": "Sale",
+      "be1143496776_html": "DESK-MOUNTED CAT BEDS",
+      "be2085341006_html": "Designed For Comfort, Inspired By Nature.",
+      "be1595328831_html": "Create a seamless space where you and your cat coexist in perfect balance. The ERGO PURRCH® desk-mounted cat bed is designed for effortless integration into your workspace, offering a cozy, elevated perch for your feline without compromising your desk space. With a fully adjustable 360-degree rotating arm, it adapts to your cat’s needs—so you both can work, relax, and live in harmony.",
+      "be1930474824_html": "REPLACEMENT PARTS &amp; UPGRADES",
+      "be2011047137_html": "Discover the desk-mounted cat bed",
+      "be649020154_html": "Add to cart",
+      "be1538394658_html": "Sold out",
+      "be719299147_html": "Choose options",
+      "be978022322_html": "From {{ price_min }}",
+      "be1950827197_html": "{{ price_normal }}",
+      "be28375103_html": "Out of stock",
+      "be1182278043_html": "Added to cart",
+      "be1427617666_html": "Added to cart successfully",
+      "be2020974675_html": "CUSTOMER SERVICE",
+      "be1139228681_html": "We’re here to help. Quality support is built into every order.",
+      "be531866397_html": "REFER A FRIEND",
+      "be282715910_html": "Share the love—order now and get a discount for friends &amp; family.",
+      "be1083775202_html": "FREE SHIPPING",
+      "be1186335943_html": "Fast, free domestic shipping in the U.S. &amp; Canada",
+      "be632046141_html": "SECURE PAYMENT",
+      "be1738677981_html": "Your payment information is processed securely.",
+      "be28030219_html": "ERGO PURRCH Insider",
+      "be920893742_html": "Join to get special offers, free giveaways, and once-in-a-lifetime deals.",
+      "be1466350579_html": "Subscribe failed",
+      "be406277700_html": "Thanks for subscribe",
+      "be757561357_html": "Save 5%",
+      "be959797713_html": "Load more",
+      "be2073538_html": "Blog",
+      "be2005283103_html": "Turn up your lifestyle with the latest sound trends, expert tips, and everything you need to know about Bluetooth speakers.",
+      "be1288739340_html": "View detail",
+      "be1209131241_html": "Previous",
+      "be2424595_html": "Next",
+      "be165221068_html": "Creating a beautiful outdoor garden starts with choosing the right plants. Whether you have a spacious backyard or a small balcony, here’s how to select plants that will thrive in your outdoor space:",
+      "be1897037342_html": "1. Assess Your Sunlight",
+      "be1042508655_html": "Observe how much sunlight your outdoor space receives throughout the day. Plants like succulents and cacti love full sun, while ferns and hostas prefer shade.",
+      "be1273043259_html": "2. Consider Your Climate",
+      "be1193596370_html": "Choose plants that are well-suited to your local climate. If you live in a dry area, opt for drought-tolerant plants like lavender or yucca.",
+      "be2145111408_html": "3. Plan for Growth",
+      "be428208866_html": "4. Make sure to consider the mature size of the plants you choose. Some may grow larger than expected and need more space to thrive.",
+      "be571706898_html": "4. Mix and Match",
+      "be365138619_html": "Combine different textures, colors, and heights to create a visually interesting and dynamic garden. Pair tall plants like Bird of Paradise with ground covers or low-growing succulents.",
+      "be573313853_html": "By selecting the right plants, you can create a vibrant and thriving outdoor space that reflects your style and needs.",
+      "be1655090967_html": "LEAVE A COMMENT",
+      "be410774954_html": "All comments are moderated before being published.",
+      "be348751941_html": "Explore our products",
+      "be832508341_html": "Stay in touch",
+      "be455048183_html": "Subscribe to our newsletter and receive an exclusive 10% discount on your first purchase."
+    }
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "The section was generated by OMNISE BUILDER",
+      "info": "Omnise is a flexible page builder app on Shopify AppStore.\n              It provides 100+ Shopify Elements and pre-built templates library, \n              so you can build unlimited pages that you can imagine with it."
+    },
+    {
+      "type": "header",
+      "content": "[EDIT WITH OMNISE APP →](https://beae-edric.myshopify.com/admin/apps/3db283686bdf064c04e98e5cf61875ee/app/editor/v3/article/6a20e19ff8139bac36d5d5ee)",
+      "info": "(*You must install the app to start editing this section [Learn more](https://docs.beae.com/en/article/quick-start-guide-dkoesy/))"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ]
+}
+{% endschema %}
