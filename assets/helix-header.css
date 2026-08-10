@@ -538,8 +538,8 @@
 
 .helix-localization--desktop .helix-localization__popover--country .helix-localization__search,
 .helix-localization--desktop .helix-localization__popover--country .helix-localization__country-list > li {
-  opacity: 0;
-  transform: translate3d(0, -12px, 0);
+    opacity: 0;
+    transform: translate3d(12px, 0, 0);
   transition: opacity 180ms ease, transform 220ms var(--helix-surface-ease);
 }
 
@@ -799,8 +799,8 @@
 }
 
 .helix-dropdown__content li {
-  opacity: 0;
-  transform: translate3d(0, -12px, 0);
+    opacity: 0;
+    transform: translate3d(12px, 0, 0);
   transition: opacity 180ms ease, transform 220ms var(--helix-surface-ease);
 }
 
