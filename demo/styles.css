@@ -93,7 +93,8 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 .currency-switcher.is-open .currency-menu { clip-path: inset(0 0 0 0); opacity: 1; transform: translate3d(0, 0, 0); visibility: visible; transition-delay: 0s; pointer-events: auto; }
 .currency-switcher.is-open.is-sequenced-open .currency-menu { transition-delay: var(--sequence-delay, var(--surface-duration)); }
 .currency-menu__content { opacity: 1; transform: none; }
-.currency-search, .currency-list button { opacity: 0; transform: translate3d(12px, 0, 0); transition: opacity .18s ease, transform .22s cubic-bezier(.6, .14, 0, 1); }
+.currency-search { opacity: 0; transform: translate3d(0, -12px, 0); transition: opacity .18s ease, transform .22s cubic-bezier(.6, .14, 0, 1); }
+.currency-list button { opacity: 0; transform: translate3d(12px, 0, 0); transition: opacity .18s ease, transform .22s cubic-bezier(.6, .14, 0, 1); }
 .currency-search { --item-delay: 0ms; }
 .currency-list button:nth-child(1) { --item-delay: 35ms; }
 .currency-list button:nth-child(2) { --item-delay: 70ms; }
