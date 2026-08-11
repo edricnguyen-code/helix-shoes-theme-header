@@ -1,0 +1,973 @@
+
+            {% assign omnise_root_url = routes.root_url %}
+            {% if omnise_root_url != '/'%}
+                {% assign omnise_root_url = routes.root_url | append: '/' %}
+            {% endif %}
+        <link rel="stylesheet" id="omnise-exported-page-css" media="all" href="{{'omnise-9e89c8cee974217ea40ccf5b.css' | asset_url}}"><div data-omnise-export-section-id="omnise-zonk31" data-omnise-export-has-ab="false"><section data-bnode="omnise-zonk31" data-bnode-index="1" class="omnise-section omnise-surface-light"><div class="omnise-section-container"><div class="omnise-slot omnise-virtual-slot" data-bnode-index="1">
+        {% assign originalProduct = product %}
+        
+        {% if product != blank and product.id != blank %}
+          {% assign variant = product.selected_or_first_available_variant %}
+          {% assign formId = 'omnise-product-form-' | append: product.id %}
+          {% form 'product', product, id: formId, class: 'form', style: 'display: contents;', novalidate: 'novalidate', data-type: 'add-to-cart-form' %}
+            <input type="hidden" name="id" value="{{ variant.id }}">
+            
+            <script type="application/json" class="product-json-data">
+              {
+                "id": {{ product.id }},
+                "title": {{ product.title | json }},
+                "handle": {{ product.handle | json }},
+                "vendor": {{ product.vendor | json }},
+                "type": {{ product.type | json }},
+                "options": {{ product.options | json }},
+                "tags": {{ product.tags | json }},
+                "price": {{ product.price | default: 0 }},
+                "price_min": {{ product.price_min }},
+                "price_max": {{ product.price_max }},
+                "price_varies": {{ product.price_varies | json }},
+                "compare_at_price_varies": {{ product.compare_at_price_varies | json }},
+                "requires_selling_plan": {{ product.requires_selling_plan | json }},
+                "available": {{ product.available | json }},
+                "currency": {{ cart.currency.iso_code | default: localization.country.currency.iso_code | default: shop.currency | json }},
+                "money_format": {{ shop.money_format | strip_html | escape | json }},
+                "money_with_currency_format": {{ shop.money_with_currency_format | strip_html | escape | json }},
+                "created_at": {{ product.created_at | date: "%Y-%m-%dT%H:%M:%S%:z" | json }},
+                "published_at": {{ product.published_at | date: "%Y-%m-%dT%H:%M:%S%:z" | json }},
+                "description": {{ product.description | json }},
+                "featured_image": {{ product.featured_image.src | img_url: 'master' | json }},
+                "images": [
+                  {% for image in product.images %}
+                    {{ image | img_url: 'master' | json }}{% unless forloop.last %},{% endunless %}
+                  {% endfor %}
+                ],
+                "media": [
+                  {% for media in product.media %}
+                    {
+                      "alt": {{ media.alt | json }},
+                      "media_type": {{ media.media_type | json }},
+                      "preview_image": {{ media.preview_image.src | img_url: 'master' | json }},
+                      "sources": {{ media.sources | json }}
+                    }{% unless forloop.last %},{% endunless %}
+                  {% endfor %}
+                ],
+                "variants": [
+                  {% for variant in product.variants %}
+                    {
+                      "id": {{ variant.id }},
+                      "title": {{ variant.title | json }},
+                      "available": {{ variant.available | json }},
+                      "price": {{ variant.price | default: 0 }},
+                      "compare_at_price": {{ variant.compare_at_price | default: 0 }},
+                      "inventory_quantity": {{ variant.inventory_quantity | default: 0 }},
+                      "sku": {{ variant.sku | json }},
+                      "barcode": {{ variant.barcode | json }},
+                      "options": {{ variant.options | json }},
+                      "featured_image": {
+                        "src": {{ variant.featured_image.src | img_url: 'master' | json }}
+                      }
+                    }{% unless forloop.last %},{% endunless %}
+                  {% endfor %}
+                ]
+              }
+            </script>
+      <div class="omnise-slot omnise-featured-product " data-filter-alt="false" data-bnode="omnise-l4sboo" data-bnode-index="1"><script type="application/json" class="product-json-data">{"id":"gid://shopify/Product/8690209226909","handle":"example-product-title-8","title":"Example product title with variant","vendor":"Vendor","productType":"Product type","tags":["New"],"status":"ACTIVE","publishedAt":"2025-08-22T01:53:12Z","onlineStoreUrl":null,"priceRangeV2":{"minVariantPrice":{"amount":"9.0","currencyCode":"USD"},"maxVariantPrice":{"amount":"12.0","currencyCode":"USD"}},"compareAtPriceRange":{"minVariantCompareAtPrice":{"amount":"10.0","currencyCode":"USD"},"maxVariantCompareAtPrice":{"amount":"12.0","currencyCode":"USD"}},"descriptionHtml":"<p>The Example product title with variant is engineered for professionals who demand precision and versatility. Its carefully designed variants allow customization to suit specific expert applications, ensuring optimal performance and reliability. This product combines advanced features with practical adaptability, making it an essential choice for specialized tasks.</p>","featuredImage":{"url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595","altText":"Gray"},"options":[{"name":"Color","values":["Black","Yellow","Red","Green","Grey","Navy","Brown","Crimson Shadow","Gold Tone","Orange"]},{"name":"Size","values":["S","M","L","XL"]}],"images":{"edges":[{"node":{"id":"gid://shopify/ProductImage/40315960459421","url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595","altText":"Gray"}},{"node":{"id":"gid://shopify/ProductImage/40315960492189","url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-3_15e09850-be69-4530-b933-f2e791d05fab.svg?v=1755827595","altText":"Yellow"}},{"node":{"id":"gid://shopify/ProductImage/40315960524957","url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-2_7fa78ec2-4980-48dd-bef6-4d66f65cd848.svg?v=1755827595","altText":"Red"}},{"node":{"id":"gid://shopify/ProductImage/40315960557725","url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-1_9fae1654-ea62-46dc-9ddc-44ba08364581.svg?v=1755827595","altText":"Green"}}]},"variants":{"edges":[{"node":{"id":"gid://shopify/ProductVariant/47100413968541","title":"Black / S","inventoryQuantity":12,"price":"10.00","compareAtPrice":null,"sku":"OMNISEBS","availableForSale":true,"selectedOptions":[{"name":"Color","value":"Black"},{"name":"Size","value":"S"}],"image":{"url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595"}}},{"node":{"id":"gid://shopify/ProductVariant/47100414001309","title":"Black / M","availableForSale":true,"inventoryQuantity":10,"price":"10.00","compareAtPrice":null,"selectedOptions":[{"name":"Color","value":"Black"},{"name":"Size","value":"M"}],"image":{"url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595"}}},{"node":{"id":"gid://shopify/ProductVariant/47100414034077","title":"Black / L","availableForSale":true,"inventoryQuantity":12,"price":"10.00","compareAtPrice":null,"selectedOptions":[{"name":"Color","value":"Black"},{"name":"Size","value":"L"}],"image":{"url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595"}}},{"node":{"id":"gid://shopify/ProductVariant/47100414066845","title":"Black / XL","availableForSale":true,"inventoryQuantity":11,"price":"10.00","compareAtPrice":null,"selectedOptions":[{"name":"Color","value":"Black"},{"name":"Size","value":"XL"}],"image":{"url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595"}}},{"node":{"id":"gid://shopify/ProductVariant/47100414099613","title":"Yellow / S","availableForSale":true,"inventoryQuantity":18,"price":"12.00","compareAtPrice":null,"selectedOptions":[{"name":"Color","value":"Yellow"},{"name":"Size","value":"S"}],"image":{"url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-3_15e09850-be69-4530-b933-f2e791d05fab.svg?v=1755827595"}}},{"node":{"id":"gid://shopify/ProductVariant/47100414132381","title":"Yellow / M","availableForSale":true,"inventoryQuantity":19,"price":"10.00","compareAtPrice":null,"selectedOptions":[{"name":"Color","value":"Yellow"},{"name":"Size","value":"M"}],"image":{"url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-3_15e09850-be69-4530-b933-f2e791d05fab.svg?v=1755827595"}}},{"node":{"id":"gid://shopify/ProductVariant/47100414165149","title":"Yellow / L","availableForSale":true,"inventoryQuantity":12,"price":"10.00","compareAtPrice":null,"selectedOptions":[{"name":"Color","value":"Yellow"},{"name":"Size","value":"L"}],"image":{"url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-3_15e09850-be69-4530-b933-f2e791d05fab.svg?v=1755827595"}}},{"node":{"id":"gid://shopify/ProductVariant/47100414197917","title":"Yellow / XL","availableForSale":true,"inventoryQuantity":1,"price":"10.00","compareAtPrice":null,"selectedOptions":[{"name":"Color","value":"Yellow"},{"name":"Size","value":"XL"}],"image":{"url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-3_15e09850-be69-4530-b933-f2e791d05fab.svg?v=1755827595"}}},{"node":{"id":"gid://shopify/ProductVariant/47100414230685","title":"Red / S","availableForSale":true,"inventoryQuantity":1,"price":"10.00","compareAtPrice":null,"selectedOptions":[{"name":"Color","value":"Red"},{"name":"Size","value":"S"}],"image":{"url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-2_7fa78ec2-4980-48dd-bef6-4d66f65cd848.svg?v=1755827595"}}},{"node":{"id":"gid://shopify/ProductVariant/47100414263453","title":"Red / M","availableForSale":true,"inventoryQuantity":1,"price":"0.00","compareAtPrice":null,"selectedOptions":[{"name":"Color","value":"Red"},{"name":"Size","value":"M"}],"image":{"url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-2_7fa78ec2-4980-48dd-bef6-4d66f65cd848.svg?v=1755827595"}}},{"node":{"id":"gid://shopify/ProductVariant/47100414296221","title":"Red / L","availableForSale":true,"inventoryQuantity":1,"price":"10.00","compareAtPrice":null,"selectedOptions":[{"name":"Color","value":"Red"},{"name":"Size","value":"L"}],"image":{"url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-2_7fa78ec2-4980-48dd-bef6-4d66f65cd848.svg?v=1755827595"}}},{"node":{"id":"gid://shopify/ProductVariant/47100414328989","title":"Red / XL","availableForSale":true,"inventoryQuantity":1,"price":"10.00","compareAtPrice":null,"selectedOptions":[{"name":"Color","value":"Red"},{"name":"Size","value":"XL"}],"image":{"url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-2_7fa78ec2-4980-48dd-bef6-4d66f65cd848.svg?v=1755827595"}}},{"node":{"id":"gid://shopify/ProductVariant/47100414361757","title":"Green / S","availableForSale":true,"inventoryQuantity":1,"price":"10.00","compareAtPrice":"24.0","selectedOptions":[{"name":"Color","value":"Green"},{"name":"Size","value":"S"}],"image":{"url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-1_9fae1654-ea62-46dc-9ddc-44ba08364581.svg?v=1755827595"}}},{"node":{"id":"gid://shopify/ProductVariant/47100414394525","title":"Green / M","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Green"},{"name":"Size","value":"M"}],"image":{"url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-1_9fae1654-ea62-46dc-9ddc-44ba08364581.svg?v=1755827595"}}},{"node":{"id":"gid://shopify/ProductVariant/47100414427293","title":"Green / L","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Green"},{"name":"Size","value":"L"}],"image":{"url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-1_9fae1654-ea62-46dc-9ddc-44ba08364581.svg?v=1755827595"}}},{"node":{"id":"gid://shopify/ProductVariant/47100414460061","title":"Green / XL","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Green"},{"name":"Size","value":"XL"}],"image":{"url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-1_9fae1654-ea62-46dc-9ddc-44ba08364581.svg?v=1755827595"}}},{"node":{"id":"gid://shopify/ProductVariant/47100486090909","title":"Grey / S","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Grey"},{"name":"Size","value":"S"}],"image":{"url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595"}}},{"node":{"id":"gid://shopify/ProductVariant/47100486123677","title":"Grey / M","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Grey"},{"name":"Size","value":"M"}],"image":{"url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595"}}},{"node":{"id":"gid://shopify/ProductVariant/47100486156445","title":"Grey / L","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Grey"},{"name":"Size","value":"L"}],"image":{"url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595"}}},{"node":{"id":"gid://shopify/ProductVariant/47100486189213","title":"Grey / XL","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Grey"},{"name":"Size","value":"XL"}],"image":{"url":"https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595"}}},{"node":{"id":"gid://shopify/ProductVariant/47100486221981","title":"Navy / S","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Navy"},{"name":"Size","value":"S"}],"image":null}},{"node":{"id":"gid://shopify/ProductVariant/47100486254749","title":"Navy / M","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Navy"},{"name":"Size","value":"M"}],"image":null}},{"node":{"id":"gid://shopify/ProductVariant/47100486287517","title":"Navy / L","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Navy"},{"name":"Size","value":"L"}],"image":null}},{"node":{"id":"gid://shopify/ProductVariant/47100486320285","title":"Navy / XL","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Navy"},{"name":"Size","value":"XL"}],"image":null}},{"node":{"id":"gid://shopify/ProductVariant/47100486353053","title":"Brown / S","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Brown"},{"name":"Size","value":"S"}],"image":null}},{"node":{"id":"gid://shopify/ProductVariant/47100486385821","title":"Brown / M","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Brown"},{"name":"Size","value":"M"}],"image":null}},{"node":{"id":"gid://shopify/ProductVariant/47100486418589","title":"Brown / L","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Brown"},{"name":"Size","value":"L"}],"image":null}},{"node":{"id":"gid://shopify/ProductVariant/47100486451357","title":"Brown / XL","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Brown"},{"name":"Size","value":"XL"}],"image":null}},{"node":{"id":"gid://shopify/ProductVariant/47100486484125","title":"Crimson Shadow / S","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Crimson Shadow"},{"name":"Size","value":"S"}],"image":null}},{"node":{"id":"gid://shopify/ProductVariant/47100486516893","title":"Crimson Shadow / M","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Crimson Shadow"},{"name":"Size","value":"M"}],"image":null}},{"node":{"id":"gid://shopify/ProductVariant/47100486549661","title":"Crimson Shadow / L","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Crimson Shadow"},{"name":"Size","value":"L"}],"image":null}},{"node":{"id":"gid://shopify/ProductVariant/47100486582429","title":"Crimson Shadow / XL","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Crimson Shadow"},{"name":"Size","value":"XL"}],"image":null}},{"node":{"id":"gid://shopify/ProductVariant/47100486615197","title":"Gold Tone / S","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Gold Tone"},{"name":"Size","value":"S"}],"image":null}},{"node":{"id":"gid://shopify/ProductVariant/47100486647965","title":"Gold Tone / M","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Gold Tone"},{"name":"Size","value":"M"}],"image":null}},{"node":{"id":"gid://shopify/ProductVariant/47100486680733","title":"Gold Tone / L","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Gold Tone"},{"name":"Size","value":"L"}],"image":null}},{"node":{"id":"gid://shopify/ProductVariant/47100486713501","title":"Gold Tone / XL","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Gold Tone"},{"name":"Size","value":"XL"}],"image":null}},{"node":{"id":"gid://shopify/ProductVariant/47100486746269","title":"Orange / S","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Orange"},{"name":"Size","value":"S"}],"image":null}},{"node":{"id":"gid://shopify/ProductVariant/47100486779037","title":"Orange / M","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Orange"},{"name":"Size","value":"M"}],"image":null}},{"node":{"id":"gid://shopify/ProductVariant/47100486811805","title":"Orange / L","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Orange"},{"name":"Size","value":"L"}],"image":null}},{"node":{"id":"gid://shopify/ProductVariant/47100486844573","title":"Orange / XL","availableForSale":false,"selectedOptions":[{"name":"Color","value":"Orange"},{"name":"Size","value":"XL"}],"image":null}}]},"metafields":{"edges":[{"node":{"namespace":"shopify","key":"color-pattern","value":"[\"gid://shopify/Metaobject/102857605277\",\"gid://shopify/Metaobject/103613792413\",\"gid://shopify/Metaobject/103613759645\",\"gid://shopify/Metaobject/102692978845\",\"gid://shopify/Metaobject/103613726877\",\"gid://shopify/Metaobject/102857670813\",\"gid://shopify/Metaobject/102857638045\",\"gid://shopify/Metaobject/102857572509\",\"gid://shopify/Metaobject/102857506973\",\"gid://shopify/Metaobject/102693077149\"]","type":"list.metaobject_reference"}},{"node":{"namespace":"custom","key":"summary","value":"{\"type\":\"root\",\"children\":[{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.\"}]}]}","type":"rich_text_field"}}]}}</script><div class="omnise-slot" data-bnode="omnise-mn9tnb" data-bnode-index="1"><div class="omnise-media-wrapper" data-bnode="omnise-ti5qoq" data-bnode-index="1" data-gap-control=":scope &gt; .omnise-media-product" data-product-id="gid://shopify/Product/8690209226909"><div class="omnise-media-product omnise-carousel" data-position-thumbs="bottom" data-position-thumbs-tablet="bottom" data-position-thumbs-mobile="bottom"><div class="omnise-main-slider-wrap" data-gap-item="true" style="position: relative;"><div class="omnise-product-media-main omnise-slider-wrapper omnise-slider-container" data-play="false" data-transition="5" data-effect="fade" data-navigation="none" data-pagination="none" data-item="1" data-item-tablet="1" data-item-mobile="1" data-desktop-layout="slider" data-tablet-layout="slider" data-mobile-layout="slider"><div class="omnise-slider-items"><div class="omnise-slider-item" data-src="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595?width=1440"><picture class="omnise-product-picture" data-enable-zoom="false" style="--omnise-image-position: 50% 50%;"><img class="omnise-product-image" alt="Gray" sizes="(max-width: 1180px) 100vw, 50vw" width="1440" height="1440" loading="lazy" fetchpriority="auto" decoding="async" srcset="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595?width=165 165w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595?width=320 320w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595?width=480 480w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595?width=768 768w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595?width=1024 1024w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595?width=1440 1440w" src="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595?width=1440"></picture></div><div class="omnise-slider-item" data-src="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-3_15e09850-be69-4530-b933-f2e791d05fab.svg?v=1755827595?width=1440"><picture class="omnise-product-picture" data-enable-zoom="false" style="--omnise-image-position: 50% 50%;"><img class="omnise-product-image" alt="Yellow" sizes="(max-width: 1180px) 100vw, 50vw" width="1440" height="1440" loading="lazy" fetchpriority="auto" decoding="async" srcset="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-3_15e09850-be69-4530-b933-f2e791d05fab.svg?v=1755827595?width=165 165w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-3_15e09850-be69-4530-b933-f2e791d05fab.svg?v=1755827595?width=320 320w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-3_15e09850-be69-4530-b933-f2e791d05fab.svg?v=1755827595?width=480 480w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-3_15e09850-be69-4530-b933-f2e791d05fab.svg?v=1755827595?width=768 768w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-3_15e09850-be69-4530-b933-f2e791d05fab.svg?v=1755827595?width=1024 1024w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-3_15e09850-be69-4530-b933-f2e791d05fab.svg?v=1755827595?width=1440 1440w" src="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-3_15e09850-be69-4530-b933-f2e791d05fab.svg?v=1755827595?width=1440"></picture></div><div class="omnise-slider-item" data-src="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-2_7fa78ec2-4980-48dd-bef6-4d66f65cd848.svg?v=1755827595?width=1440"><picture class="omnise-product-picture" data-enable-zoom="false" style="--omnise-image-position: 50% 50%;"><img class="omnise-product-image" alt="Red" sizes="(max-width: 1180px) 100vw, 50vw" width="1440" height="1440" loading="lazy" fetchpriority="auto" decoding="async" srcset="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-2_7fa78ec2-4980-48dd-bef6-4d66f65cd848.svg?v=1755827595?width=165 165w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-2_7fa78ec2-4980-48dd-bef6-4d66f65cd848.svg?v=1755827595?width=320 320w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-2_7fa78ec2-4980-48dd-bef6-4d66f65cd848.svg?v=1755827595?width=480 480w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-2_7fa78ec2-4980-48dd-bef6-4d66f65cd848.svg?v=1755827595?width=768 768w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-2_7fa78ec2-4980-48dd-bef6-4d66f65cd848.svg?v=1755827595?width=1024 1024w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-2_7fa78ec2-4980-48dd-bef6-4d66f65cd848.svg?v=1755827595?width=1440 1440w" src="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-2_7fa78ec2-4980-48dd-bef6-4d66f65cd848.svg?v=1755827595?width=1440"></picture></div><div class="omnise-slider-item" data-src="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-1_9fae1654-ea62-46dc-9ddc-44ba08364581.svg?v=1755827595?width=1440"><picture class="omnise-product-picture" data-enable-zoom="false" style="--omnise-image-position: 50% 50%;"><img class="omnise-product-image" alt="Green" sizes="(max-width: 1180px) 100vw, 50vw" width="1440" height="1440" loading="lazy" fetchpriority="auto" decoding="async" srcset="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-1_9fae1654-ea62-46dc-9ddc-44ba08364581.svg?v=1755827595?width=165 165w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-1_9fae1654-ea62-46dc-9ddc-44ba08364581.svg?v=1755827595?width=320 320w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-1_9fae1654-ea62-46dc-9ddc-44ba08364581.svg?v=1755827595?width=480 480w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-1_9fae1654-ea62-46dc-9ddc-44ba08364581.svg?v=1755827595?width=768 768w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-1_9fae1654-ea62-46dc-9ddc-44ba08364581.svg?v=1755827595?width=1024 1024w, https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-1_9fae1654-ea62-46dc-9ddc-44ba08364581.svg?v=1755827595?width=1440 1440w" src="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-1_9fae1654-ea62-46dc-9ddc-44ba08364581.svg?v=1755827595?width=1440"></picture></div></div></div><div class="omnise-slider-controls" show-desktop="true"><div class="omnise-slider-controls-wrp"><div class="omnise-slider-nav-left"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div class="omnise-slider-nav-right"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></div></div></div><div class="omnise-thumb-wrapper" data-gap-item="true"><div class="omnise-product-thumb-slide omnise-slider-wrapper omnise-slider-container" data-align="start" data-desktop-layout="slider" data-tablet-layout="slider" data-mobile-layout="slider" data-item="1" data-item-tablet="1" data-item-mobile="1"><div class="omnise-slider-items"><div class="omnise-slider-item"><div class="omnise-thumb-image"><img class="omnise-thumb-img" alt="Gray" sizes="(max-width:767px) 64px, (max-width:1180px) 80px,  112px" width="112" height="112" loading="lazy" decoding="async" srcset="
+                                                            https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595&amp;width=36 36w,
+                                                            https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595&amp;width=64 64w,
+                                                            https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595&amp;width=96 96w,
+                                                            https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595&amp;width=128 128w,
+                                                            https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595&amp;width=160 160w
+                                                          " src="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595&amp;width=112"></div></div><div class="omnise-slider-item"><div class="omnise-thumb-image"><img class="omnise-thumb-img" alt="Yellow" sizes="(max-width:767px) 64px, (max-width:1180px) 80px,  112px" width="112" height="112" loading="lazy" decoding="async" srcset="
+                                                            https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-3_15e09850-be69-4530-b933-f2e791d05fab.svg?v=1755827595&amp;width=36 36w,
+                                                            https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-3_15e09850-be69-4530-b933-f2e791d05fab.svg?v=1755827595&amp;width=64 64w,
+                                                            https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-3_15e09850-be69-4530-b933-f2e791d05fab.svg?v=1755827595&amp;width=96 96w,
+                                                            https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-3_15e09850-be69-4530-b933-f2e791d05fab.svg?v=1755827595&amp;width=128 128w,
+                                                            https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-3_15e09850-be69-4530-b933-f2e791d05fab.svg?v=1755827595&amp;width=160 160w
+                                                          " src="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-3_15e09850-be69-4530-b933-f2e791d05fab.svg?v=1755827595&amp;width=112"></div></div><div class="omnise-slider-item"><div class="omnise-thumb-image"><img class="omnise-thumb-img" alt="Red" sizes="(max-width:767px) 64px, (max-width:1180px) 80px,  112px" width="112" height="112" loading="lazy" decoding="async" srcset="
+                                                            https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-2_7fa78ec2-4980-48dd-bef6-4d66f65cd848.svg?v=1755827595&amp;width=36 36w,
+                                                            https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-2_7fa78ec2-4980-48dd-bef6-4d66f65cd848.svg?v=1755827595&amp;width=64 64w,
+                                                            https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-2_7fa78ec2-4980-48dd-bef6-4d66f65cd848.svg?v=1755827595&amp;width=96 96w,
+                                                            https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-2_7fa78ec2-4980-48dd-bef6-4d66f65cd848.svg?v=1755827595&amp;width=128 128w,
+                                                            https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-2_7fa78ec2-4980-48dd-bef6-4d66f65cd848.svg?v=1755827595&amp;width=160 160w
+                                                          " src="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-2_7fa78ec2-4980-48dd-bef6-4d66f65cd848.svg?v=1755827595&amp;width=112"></div></div><div class="omnise-slider-item"><div class="omnise-thumb-image"><img class="omnise-thumb-img" alt="Green" sizes="(max-width:767px) 64px, (max-width:1180px) 80px,  112px" width="112" height="112" loading="lazy" decoding="async" srcset="
+                                                            https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-1_9fae1654-ea62-46dc-9ddc-44ba08364581.svg?v=1755827595&amp;width=36 36w,
+                                                            https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-1_9fae1654-ea62-46dc-9ddc-44ba08364581.svg?v=1755827595&amp;width=64 64w,
+                                                            https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-1_9fae1654-ea62-46dc-9ddc-44ba08364581.svg?v=1755827595&amp;width=96 96w,
+                                                            https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-1_9fae1654-ea62-46dc-9ddc-44ba08364581.svg?v=1755827595&amp;width=128 128w,
+                                                            https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-1_9fae1654-ea62-46dc-9ddc-44ba08364581.svg?v=1755827595&amp;width=160 160w
+                                                          " src="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-1_9fae1654-ea62-46dc-9ddc-44ba08364581.svg?v=1755827595&amp;width=112"></div></div></div></div></div></div></div><div class="omnise-slot" data-hide-mobile="true" data-bnode="omnise-v1iec8" data-bnode-index="2"><div class="omnise-slot omnise-virtual-slot" data-bnode-index="1"><div class="omnise-accordion-root" data-omnise-accordion-root="true" data-bnode="omnise-li3hfa" data-bnode-index="1" data-type="single" data-default="first" data-gap-control=":scope" style="--omnise-icon-dir: row;"><details class="omnise-accordion-item" open="" data-omnise-index="0" data-omnise-active="true" data-gap-item="true"><summary class="omnise-accordion-summary omnise-h5"><span class="omnise-accordion-title">{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_xqskk' | t }}</span><span class="omnise-accordion-icon"><svg width="20px" height="20px" viewBox="0 0 20 20" class="omnise-icon-chevron" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg></span></summary><div class="omnise-accordion-content"><div class="omnise-slot" data-bnode="omnise-jes29y" data-bnode-index="1">
+      
+      
+      
+      
+      
+      
+      
+      <div class="omnise-product-description omnise-p2" data-bnode="omnise-fg6lv0" data-bnode-index="1" data-omnise-description-root="false">
+        <div class="omnise-description" data-omnise-description-content="false" style="">
+          {{ product.description }}
+        </div>
+        
+      </div>
+    </div></div></details><details class="omnise-accordion-item" data-omnise-index="1" data-omnise-active="false" data-gap-item="true"><summary class="omnise-accordion-summary omnise-h5"><span class="omnise-accordion-title">{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_34i10' | t }}</span><span class="omnise-accordion-icon"><svg width="20px" height="20px" viewBox="0 0 20 20" class="omnise-icon-chevron" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg></span></summary><div class="omnise-accordion-content"><div class="omnise-slot" data-bnode="omnise-myzw96" data-bnode-index="2">
+
+
+
+
+
+
+
+
+
+
+
+  
+    {% assign omnise_metafield = product.metafields.custom["size_fit"] %}
+    {% if omnise_metafield == blank %}
+      {% assign omnise_metafield = product.metafields.shopify["size_fit"] %}
+    {% endif %}
+  
+
+  {% if omnise_metafield != blank %}
+    {% if omnise_metafield.value != blank %}
+      {% if omnise_metafield.type == 'single_line_text_field' or omnise_metafield.type == 'rich_text_field' %}
+    
+      <div class="omnise-metafield omnise-p2" data-bnode="omnise-kimac6" data-bnode-index="1">
+        {% if omnise_metafield.type == 'rich_text_field' %}
+          {{ omnise_metafield | metafield_tag }}
+        {% else %}
+          {{ omnise_metafield.value | escape }}
+        {% endif %}
+      </div>
+    
+      {% endif %}
+    {% endif %}
+  {% endif %}
+
+  </div></div></details><details class="omnise-accordion-item" data-omnise-index="2" data-omnise-active="false" data-gap-item="true"><summary class="omnise-accordion-summary omnise-h5"><span class="omnise-accordion-title">{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_4tk9ja' | t }}</span><span class="omnise-accordion-icon"><svg width="20px" height="20px" viewBox="0 0 20 20" class="omnise-icon-chevron" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg></span></summary><div class="omnise-accordion-content"><div class="omnise-slot" data-bnode="omnise-z3atux" data-bnode-index="3">
+
+
+
+
+
+
+
+
+
+
+
+  
+    {% assign omnise_metafield = product.metafields.custom["how_to_use"] %}
+    {% if omnise_metafield == blank %}
+      {% assign omnise_metafield = product.metafields.shopify["how_to_use"] %}
+    {% endif %}
+  
+
+  {% if omnise_metafield != blank %}
+    {% if omnise_metafield.value != blank %}
+      {% if omnise_metafield.type == 'single_line_text_field' or omnise_metafield.type == 'rich_text_field' %}
+    
+      <div class="omnise-metafield omnise-p2" data-bnode="omnise-z0ma8g" data-bnode-index="1">
+        {% if omnise_metafield.type == 'rich_text_field' %}
+          {{ omnise_metafield | metafield_tag }}
+        {% else %}
+          {{ omnise_metafield.value | escape }}
+        {% endif %}
+      </div>
+    
+      {% endif %}
+    {% endif %}
+  {% endif %}
+
+  </div></div></details></div></div></div></div><div class="omnise-slot omnise-surface-light" data-bnode="omnise-8zw2kg" data-bnode-index="2"><div class="omnise-slot" data-bnode="omnise-jyvqh7" data-bnode-index="1"><div class="omnise-slot" data-bnode="omnise-x0i19l" data-bnode-index="1">
+
+
+{% assign tag_input = 'Sleep Well' | downcase | split: '|' %}
+{% assign has_match = false %}
+
+{% capture matched_tags %}
+  {% for input_tag in tag_input %}
+    {% assign input_clean = input_tag | strip | downcase %}
+
+    {% for tag in product.tags %}
+      {% assign tag_down = tag | downcase %}
+
+      {% if input_clean == tag_down %}
+        {% assign has_match = true %}
+
+        <div
+          class="omnise-product-tag omnise-product-tag-{{ forloop.index }}"
+          data-gap-item="true"
+        >
+          {{ tag }}
+        </div>
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+{% endcapture %}
+
+{% if has_match %}
+<div
+  class="omnise-product-tags omnise-p"
+  data-gap-control=":scope"
+  data-bnode="omnise-y7wzwn" data-bnode-index="1"
+>
+    {{ matched_tags }}
+</div>
+{% endif %}
+  
+    
+    
+    
+    
+    <h3 class="omnise-product-title omnise-h2" data-bnode="omnise-14y1dm" data-bnode-index="2">
+      <a href="{{ product.url }}">
+        {{ product.title }}
+      </a>
+    </h3>
+    <div class="omnise-app-block" data-bnode="omnise-7q1ppy" data-bnode-index="3">{%- for block in section.blocks -%}{% if block.id contains 'omnise-7q1ppy' %}{% render block %}{% endif %}{%- endfor -%}</div>
+    
+        <div class="omnise-product-price-wrapper {% if product.compare_at_price > product.price %} omnise-on-sale {% endif %} omnise-p" data-bnode="omnise-47i1tz" data-bnode-index="4">
+          <span class="omnise-product-price omnise-price-sale">
+            {{ product.price | money_with_currency | strip_html | escape }}
+          </span>
+          <span class="omnise-product-price-compare" {% unless product.compare_at_price > product.price %} style="display:none;"  {% endunless %}>
+            {{ product.compare_at_price | money_with_currency | strip_html | escape }}
+          </span>
+        </div>
+    </div>
+{% assign variants = product.variants %}
+{% assign firstVariant = variants.first %}
+{% assign inventory_quantity = firstVariant.inventory_quantity | default: 0 %}
+{% assign available = variant.available %}
+{% assign has_multiple_variants = false %}
+
+{% if variants.size > 1 %}
+  {% assign has_multiple_variants = true %}
+{% endif %}
+
+{% assign veryLowThreshold = '8' | default: 0 | plus: 0 %}
+{% assign lowThreshold = '10' | default: 0 | plus: 0 %}
+
+{% assign is_very_low = false %}
+{% assign is_low = false %}
+{% assign is_in_stock = false %}
+{% assign is_out_of_stock = false %}
+
+{% if available and inventory_quantity > 0 and inventory_quantity <= veryLowThreshold %}
+  {% assign is_very_low = true %}
+{% endif %}
+
+{% if available and inventory_quantity > veryLowThreshold and inventory_quantity <= lowThreshold %}
+  {% assign is_low = true %}
+{% endif %}
+
+{% if available and inventory_quantity > lowThreshold %}
+  {% assign is_in_stock = true %}
+{% endif %}
+
+{% if available == false or inventory_quantity <= 0 %}
+  {% assign is_out_of_stock = true %}
+{% endif %}
+
+{% capture state_class %}
+    {% if is_out_of_stock %}
+        omnise-inventory-out
+    {% elsif is_very_low %}
+        omnise-inventory-critical
+    {% elsif is_low %}
+        omnise-inventory-low
+    {% else %}
+        omnise-inventory-in
+    {% endif %}
+{% endcapture %}
+{% assign state_class = state_class | strip %}
+
+{% capture in_stock_label %}
+    {{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_ib45h' | t }}
+  {% endcapture %}
+{% assign in_stock_label = in_stock_label | strip | default: 'In stock' %}
+
+{% capture low_stock_label %}
+    {{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_ib45h' | t }}
+  {% endcapture %}
+{% assign low_stock_label = low_stock_label | strip | default: 'Low stock' %}
+
+{% capture very_low_label %}
+    {{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_ib45h' | t }}
+  {% endcapture %}
+{% assign very_low_label = very_low_label | strip | default: 'Very low stock' %}
+
+{% capture sold_out_label %}
+    {{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_ib45h' | t }}
+  {% endcapture %}
+{% assign sold_out_label = sold_out_label | strip | default: 'Sold out' %}
+
+{% if has_multiple_variants == false %}
+  {% assign in_stock_label = in_stock_label | replace: '{stock}', inventory_quantity %}
+  {% assign low_stock_label = low_stock_label | replace: '{stock}', inventory_quantity %}
+  {% assign very_low_label = very_low_label | replace: '{stock}', inventory_quantity %}
+  {% assign sold_out_label = sold_out_label | replace: '{stock}', inventory_quantity %}
+{% endif %}
+
+{% assign base = 100 %}
+{% assign percent = inventory_quantity | times: 100.0 | divided_by: base | round %}
+{% if percent > 100 %}
+  {% assign percent = 100 %}
+{% endif %}
+
+<div
+  class="omnise-inventory omnise-p {{ state_class }}"
+  data-bnode="omnise-785qk1" data-bnode-index="2"
+  data-max="100"
+  data-low="10"
+  data-critical="8"
+>
+  <div
+    class="omnise-inventory-text {% if is_in_stock and is_out_of_stock == false  -%} omnise-show {%- endif %}"
+    data-omnise-inventory="instock"
+    data-template="{{ in_stock_label }}"
+  >
+    {{ in_stock_label }}
+  </div>
+
+  <div
+    class="omnise-inventory-text {% if is_low and is_out_of_stock == false  -%} omnise-show {%- endif %}"
+    data-omnise-inventory="lowstock"
+    data-template="{{ low_stock_label }}"
+  >
+    {{ low_stock_label }}
+  </div>
+
+  <div
+    class="omnise-inventory-text {% if is_very_low or is_out_of_stock == false  -%} omnise-show {%- endif %}"
+    data-omnise-inventory="criticalstock"
+    data-template="{% if is_out_of_stock %} {{ sold_out_label }} {%  else %} {{ very_low_label }} {% endif %}"
+  >
+    {% if is_out_of_stock %} {{ sold_out_label }} {% else %} {{ very_low_label }} {% endif %}
+  </div>
+
+  
+    <div class="omnise-inventory-progress">
+    <div class="omnise-inventory-progress-bar"
+        style="width: {{ percent }}%"
+    >
+    </div>
+    </div>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    {% assign omnise_metafield = product.metafields.custom["summary"] %}
+    {% if omnise_metafield == blank %}
+      {% assign omnise_metafield = product.metafields.shopify["summary"] %}
+    {% endif %}
+  
+
+  {% if omnise_metafield != blank %}
+    {% if omnise_metafield.value != blank %}
+      {% if omnise_metafield.type == 'single_line_text_field' or omnise_metafield.type == 'rich_text_field' %}
+    
+      <div class="omnise-metafield omnise-p2" data-bnode="omnise-jspmi5" data-bnode-index="3">
+        {% if omnise_metafield.type == 'rich_text_field' %}
+          {{ omnise_metafield | metafield_tag }}
+        {% else %}
+          {{ omnise_metafield.value | escape }}
+        {% endif %}
+      </div>
+    
+      {% endif %}
+    {% endif %}
+  {% endif %}
+
+  
+  
+
+  {% if product.variants.size > 0 and product.has_only_default_variant == false %}
+  <div class="omnise-variant-box" data-omnise-size-chart-root data-size-chart-modal-id="omnise-size-chart-modal-{{ product.id }}-{{ section.id }}" data-bnode="omnise-pxogy0" data-bnode-index="4">
+    {% assign omnise_size_chart_page = blank %}
+    
+
+    {% for option in product.options_with_values %}
+      {% assign opt_name_handle = option.name | downcase | strip %}
+      {% assign skip_option = false %}
+      
+
+      {% unless skip_option %}
+        <div class="omnise-option" data-option-index="{{ forloop.index0 }}">
+          
+          
+            <div class="omnise-option-heading">
+              <label class="omnise-option-lb omnise-p2">
+                {{ option.name }}
+              </label>
+              
+              
+            </div>
+          
+
+          
+            <div class="omnise-swatch omnise-p2">
+              {% for value in option.values %}
+                {% assign avai = false %}
+                {% assign v_img = "" %}
+                
+                {% for v in product.variants %}
+                  {% if v.options contains value %}
+                    {% if v.available %}{% assign avai = true %}{% endif %}
+                    {% if v.featured_image != blank %}
+                      {% assign v_img = v.featured_image | img_url: '300x' %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+
+                {% assign is_color = false %}
+                {% if opt_name_handle == "color" %}
+                  {% assign is_color = true %}
+                {% endif %}
+
+                {% assign is_image = false %}
+                {% if opt_name_handle == "color" and "buttons" == "image" %}
+                  {% assign is_image = true %}
+                {% endif %}
+
+                {% assign is_image_display = false %}
+                {% if is_image and v_img != blank %}
+                  {% assign is_image_display = true %}
+                {% endif %}
+
+                {% assign is_color_fallback = false %}
+                {% if is_image and v_img == blank %}
+                  {% assign is_color_fallback = true %}
+                {% endif %}
+
+                <label 
+                  class="omnise-radio-wrap {% if is_color and "buttons" == "color" or is_color_fallback %}omnise-swatch-color{% endif %}{% if is_image_display %} omnise-swatch-image{% endif %} {% unless avai %}omnise-variant-disabled{% endunless %}"
+                  data-src-image="{{ v_img }}"
+                  {% if is_color and "buttons" == "color" or is_color_fallback %}
+                    style="background-color: {{ value.swatch.color | default: '#eeeeee' }};"
+                  {% elsif is_image_display %}
+                    style="background-image: url('{{ v_img }}');"
+                  {% endif %}
+                >
+                  <input type="radio" 
+                        name="option{{ option.position }}-{{ product.id }}-{{ section.id }}" 
+                        value="{{ value | escape }}" 
+                        class="omnise-radio"
+                        {% if option.selected_value == value %}checked{% endif %}
+                        {% unless avai %}disabled{% endunless %}
+                        data-option-index="{{ forloop.parentloop.index0 }}"
+                        data-src-image="{{ v_img }}">
+                  <span class="omnise-radio-lb">{{ value }}</span>
+                </label>
+              {% endfor %}
+            </div>
+          
+
+        </div>
+      {% endunless %}
+    {% endfor %}
+
+    
+    {% unless collection %}
+    <select name="id" class="omnise-option-selector" style="display:none;" data-omnise-variant-select>
+      {% for variant in product.variants %}
+        <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %}>
+          {{ variant.title }}
+        </option>
+      {% endfor %}
+    </select>
+     {% endunless collection %}
+   
+  </div>
+  {% endif %}
+    <div class="omnise-slot" data-bnode="omnise-zipmo8" data-bnode-index="5"><div class="omnise-slot" data-bnode="omnise-tj0nii" data-bnode-index="1">
+    <div class="omnise-qty" data-bnode="omnise-yqr51u" data-bnode-index="1">
+        
+        <label class="omnise-qty-label omnise-p2">{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_k6kjth' | t }}</label>
+        
+        <div class="omnise-qty-wrap">
+        <button type="button" class="omnise-qty-btn omnise-qty-btn-m" aria-label="Decrease quantity">
+            <svg width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1H11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </button>
+        <input
+            class="omnise-qty-input"
+            type="text"
+            name="quantity"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            value="1"
+            maxlength="3"
+        />
+        <button type="button" class="omnise-qty-btn omnise-qty-btn-p" aria-label="Increase quantity">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 1V11M1 6H11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </button>
+        </div>
+        <div class="omnise-qty-warning omnise-p" role="alert" style="display: none" data-template="{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_rpr4iy' | t }}">{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_rpr4iy' | t }}</div>
+    </div>
+    <div class="omnise-slot" data-bnode="omnise-slbmqz" data-bnode-index="2">
+        {% assign variants = product.variants %}
+        {% assign variant_size = product.variants | size %}
+        {% if variant_size > 1 %}
+        {% assign has_variants = true %}
+        {% else %}
+        {% assign has_variants = false %}
+        {% endif %}
+        {% if current_variant and current_variant.available %}
+        {% assign is_available = true %}
+        {% else %}
+        {% assign is_available = false %}
+        {% endif %}
+        
+          <button
+              class="omnise-atc-btn omnise-btn-button omnise-btn-se"
+              data-bnode="omnise-ex28rs" data-bnode-index="1"
+              data-atc-text="{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_aqer5m' | t }}"
+              data-select-text="{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_nmgw2u' | t }}"
+              data-contact-text="{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_rri8sg' | t }}"
+              data-sold-out-text="{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_pfx4wy' | t }}"
+              omnise-btn-po="left"
+          >
+              
+
+              
+              <span class="omnise-atc-text">
+                  {% unless is_available %}
+                  {{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_pfx4wy' | t }}
+                  
+                  {% elsif has_variants and collection != blank %}
+                  {{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_nmgw2u' | t }}
+                  {% else %}
+                  {{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_aqer5m' | t }}
+                  {% endunless %}
+
+              </span>
+              
+          </button>
+    </div></div>
+    {% assign variants = product.variants %}
+    {% assign variant_size = product.variants | size %}
+    {% if variant_size > 1 %}
+    {% assign has_variants = true %}
+    {% else %}
+    {% assign has_variants = false %}
+    {% endif %}
+    {% if current_variant and current_variant.available %}
+    {% assign is_available = true %}
+    {% else %}
+    {% assign is_available = false %}
+    {% endif %}
+    
+      <button
+          class="omnise-co-btn omnise-btn-button omnise-btn-pr"
+          data-bnode="omnise-gs43kp" data-bnode-index="2"
+          data-co-text="{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_crx36j' | t }}"
+          omnise-btn-po="left"
+      >
+          
+
+          
+          <span class="omnise-checkout-text">
+              {{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_crx36j' | t }}
+          </span>
+          
+      </button>
+  </div></div><div class="omnise-slot omnise-surface-muted" data-bnode="omnise-t6hdcx" data-bnode-index="2"><div class="omnise-slot" data-bnode="omnise-lvbvvr" data-bnode-index="1"><h3 class="omnise-heading omnise-h5" data-bnode="omnise-vpoy54" data-bnode-index="1">{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_chg42r' | t }}</h3><p class="omnise-paragraph omnise-p2" data-bnode="omnise-wgbaws" data-bnode-index="2">{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_6iim5c' | t }}</p></div>
+
+{% assign user_methods = "visa|master|american_express|paypal| diners_club|discover" | split: "|" %}
+
+<ul class="omnise-payment-method-list" data-bnode="omnise-jalilc" data-bnode-index="2">
+  {% for type in user_methods %}
+    {% assign type_down = type | downcase | strip %}
+
+    {% if type_down != blank %}
+      <li class="omnise-pro-spm-item">
+        {{ type_down | payment_type_svg_tag }}
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul></div><div class="omnise-slot" data-hide-desktop="true" data-hide-tablet="true" data-bnode="omnise-ss1vuu" data-bnode-index="3"><div class="omnise-slot omnise-virtual-slot" data-bnode-index="1"><div class="omnise-accordion-root" data-omnise-accordion-root="true" data-bnode="omnise-qn3831" data-bnode-index="1" data-type="single" data-default="first" data-gap-control=":scope" style="--omnise-icon-dir: row;"><details class="omnise-accordion-item" open="" data-omnise-index="0" data-omnise-active="true" data-gap-item="true"><summary class="omnise-accordion-summary omnise-h5"><span class="omnise-accordion-title">{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_xqskk' | t }}</span><span class="omnise-accordion-icon"><svg width="20px" height="20px" viewBox="0 0 20 20" class="omnise-icon-chevron" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg></span></summary><div class="omnise-accordion-content"><div class="omnise-slot" data-bnode="omnise-b8x2g0" data-bnode-index="1">
+      
+      
+      
+      
+      
+      
+      
+      <div class="omnise-product-description omnise-p2" data-bnode="omnise-o11eje" data-bnode-index="1" data-omnise-description-root="false">
+        <div class="omnise-description" data-omnise-description-content="false" style="">
+          {{ product.description }}
+        </div>
+        
+      </div>
+    </div></div></details><details class="omnise-accordion-item" data-omnise-index="1" data-omnise-active="false" data-gap-item="true"><summary class="omnise-accordion-summary omnise-h5"><span class="omnise-accordion-title">{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_34i10' | t }}</span><span class="omnise-accordion-icon"><svg width="20px" height="20px" viewBox="0 0 20 20" class="omnise-icon-chevron" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg></span></summary><div class="omnise-accordion-content"><div class="omnise-slot" data-bnode="omnise-7ggo2u" data-bnode-index="2">
+
+
+
+
+
+
+
+
+
+
+
+  
+    {% assign omnise_metafield = product.metafields.custom["materials"] %}
+    {% if omnise_metafield == blank %}
+      {% assign omnise_metafield = product.metafields.shopify["materials"] %}
+    {% endif %}
+  
+
+  {% if omnise_metafield != blank %}
+    {% if omnise_metafield.value != blank %}
+      {% if omnise_metafield.type == 'single_line_text_field' or omnise_metafield.type == 'rich_text_field' %}
+    
+      <div class="omnise-metafield omnise-p2" data-bnode="omnise-88lsva" data-bnode-index="1">
+        {% if omnise_metafield.type == 'rich_text_field' %}
+          {{ omnise_metafield | metafield_tag }}
+        {% else %}
+          {{ omnise_metafield.value | escape }}
+        {% endif %}
+      </div>
+    
+      {% endif %}
+    {% endif %}
+  {% endif %}
+
+  </div></div></details><details class="omnise-accordion-item" data-omnise-index="2" data-omnise-active="false" data-gap-item="true"><summary class="omnise-accordion-summary omnise-h5"><span class="omnise-accordion-title">{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_4tk9ja' | t }}</span><span class="omnise-accordion-icon"><svg width="20px" height="20px" viewBox="0 0 20 20" class="omnise-icon-chevron" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg></span></summary><div class="omnise-accordion-content"><div class="omnise-slot" data-bnode="omnise-bh6efj" data-bnode-index="3">
+
+
+
+
+
+
+
+
+
+
+
+  
+    {% assign omnise_metafield = product.metafields.custom["delivery_returns"] %}
+    {% if omnise_metafield == blank %}
+      {% assign omnise_metafield = product.metafields.shopify["delivery_returns"] %}
+    {% endif %}
+  
+
+  {% if omnise_metafield != blank %}
+    {% if omnise_metafield.value != blank %}
+      {% if omnise_metafield.type == 'single_line_text_field' or omnise_metafield.type == 'rich_text_field' %}
+    
+      <div class="omnise-metafield omnise-p2" data-bnode="omnise-eg2mvw" data-bnode-index="1">
+        {% if omnise_metafield.type == 'rich_text_field' %}
+          {{ omnise_metafield | metafield_tag }}
+        {% else %}
+          {{ omnise_metafield.value | escape }}
+        {% endif %}
+      </div>
+    
+      {% endif %}
+    {% endif %}
+  {% endif %}
+
+  </div></div></details></div></div></div><div class="omnise-slot" data-bnode="omnise-wfhw9z" data-bnode-index="4"><h3 class="omnise-heading omnise-h4" data-bnode="omnise-rh81jh" data-bnode-index="1">{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_r8xf86' | t }}</h3><div class="omnise-carousel omnise-content-list" data-bnode="omnise-awy7j2" data-bnode-index="2" data-gap-control=":scope &gt; .omnise-slider-wrapper &gt; .omnise-slider-items"><div class="omnise-slider-wrapper" data-navigation="navi-type-1" data-pagination="dots" data-dir="left" data-effect="slide" data-scroll="1" data-align="start" data-desktop-layout="slider" data-tablet-layout="slider" data-mobile-layout="slider" data-item="2" data-item-tablet="2" data-item-mobile="2" data-loop="true" data-play="false" data-transition="500"><div class="omnise-slider-items">
+        
+      {% assign omnise_original_collection = collection %}
+      {% assign collection = collections['abercrombie-fitch'] %}
+    
+        {% if collection and collection.products.size > 0 %}
+        {% for product in collection.products limit: 2 %}
+        <div class="omnise-slider-item" data-gap-item="true"><script type="application/json" class="product-json-data" aria-hidden="true">{ "id": {{ product.id }},"title": {{ product.title | json }},"handle": {{ product.handle | json }},"options": {{ product.options | json }},"available": {{ product.available | json }},"currency": {{ cart.currency.iso_code | default: localization.country.currency.iso_code | default: shop.currency | json }},"money_format": {{ shop.money_format | strip_html | escape | json }},"money_with_currency_format": {{ shop.money_with_currency_format | strip_html | escape | json }},"variants":[{% for variant in product.variants %}{"id": {{ variant.id }},"title": {{ variant.title | json }},"available": {{ variant.available | json }},"price": {{ variant.price | default: 0 }},"compare_at_price": {{ variant.compare_at_price | default: 0 }},"inventory_quantity": {{ variant.inventory_quantity | default: 0 }},"sku": {{ variant.sku | json }}, "options": {{ variant.options | json }},"featured_image":{"src": {{ variant.featured_image.src | json }}}}{% unless forloop.last %},{% endunless %}{% endfor %}] }</script><div class="omnise-slide-item" data-bnode="be-ctl-item" data-bnode-index="1" data-bnode-loop-index="0"><div class="omnise-slot" data-bnode="omnise-ujrydd" data-bnode-index="1"><div class="omnise-slot" data-bnode="omnise-ks1orx" data-bnode-index="1"><div class="omnise-slot omnise-virtual-slot" data-bnode-index="1">
+
+
+<a 
+  href="{{ product.url | default: '#' }}"
+  class="omnise-product-picture has-hover"
+  data-bnode="omnise-p1uaz3" data-bnode-index="1"
+>
+    {% if product != blank %}
+
+      <img
+        srcset="{%- if product.featured_media.width >= 165 -%}{{ product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
+        {%- if product.featured_media.width >= 330 -%}{{ product.featured_media | image_url: width: 330 }} 330w,{%- endif -%}
+        {%- if product.featured_media.width >= 535 -%}{{ product.featured_media | image_url: width: 535 }} 535w,{%- endif -%}
+        {{ product.featured_media | image_url }} {{ product.featured_media.width }}w"
+        src="{{ product.featured_media | image_url: width: 535 }}"
+        alt="{{ product.featured_media.alt | escape }}"
+        loading="lazy"
+        class="omnise-img-main"
+      >
+    
+        {%- if product.media.size > 1 -%}
+        <img
+            srcset="{%- if product.media[1].width >= 165 -%}{{ product.media[1] | image_url: width: 165 }} 165w,{%- endif -%}
+            {%- if product.media[1].width >= 535 -%}{{ product.media[1] | image_url: width: 535 }} 535w,{%- endif -%}
+            {{ product.media[1] | image_url }} {{ product.media[1].width }}w"
+            src="{{ product.media[1] | image_url: width: 535 }}"
+            alt="{{ product.media[1].alt | escape }}"
+            loading="lazy"
+            class="omnise-img-secondary"
+        >
+        {%- endif -%}
+    
+
+    {% else %}
+
+      <img
+        src="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595"
+        alt="Default Product"
+        class="omnise-img-main"
+        loading="lazy"
+      >
+    {% endif %}
+</a></div></div><div class="omnise-slot" data-bnode="omnise-l4sb9o" data-bnode-index="2"><div class="omnise-app-block" data-bnode="omnise-0bjrzc" data-bnode-index="1">{%- for block in section.blocks -%}{% if block.id contains 'omnise-0bjrzc' %}{% render block %}{% endif %}{%- endfor -%}</div>
+    
+    
+    
+    
+    <h3 class="omnise-product-title omnise-h5" data-bnode="omnise-36c7du" data-bnode-index="2">
+      <a href="{{ product.url }}">
+        {{ product.title }}
+      </a>
+    </h3>
+    
+    
+        <div class="omnise-product-price-wrapper {% if product.compare_at_price > product.price %} omnise-on-sale {% endif %} omnise-p" data-bnode="omnise-oza5b6" data-bnode-index="3">
+          <span class="omnise-product-price omnise-price-sale">
+            {{ product.price | money_with_currency | strip_html | escape }}
+          </span>
+          <span class="omnise-product-price-compare" {% unless product.compare_at_price > product.price %} style="display:none;"  {% endunless %}>
+            {{ product.compare_at_price | money_with_currency | strip_html | escape }}
+          </span>
+        </div>
+    </div></div></div></div>
+        {% endfor %}
+        {% else %}
+          <div class="omnise-content-list-empty">No products found</div>
+        {% endif %}
+        {% assign collection = omnise_original_collection %}
+        </div></div><div class="omnise-slider-controls"><div class="omnise-slider-controls-wrp"><div class="omnise-slider-nav-left"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path d="M7.047 3.711a.625.625 0 0 0-.844-.922l-3 2.75a.626.626 0 0 0 0 .922l3 2.75.1.075a.626.626 0 0 0 .829-.902l-.085-.095-2.497-2.289z" fill="currentColor"></path></svg></div><div class="omnise-slider-pagination-wrp"><div class="omnise-slider-pagination-wrapper"></div></div><div class="omnise-slider-nav-right"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path d="M4.953 3.71a.625.625 0 0 1 .844-.921l3 2.75a.626.626 0 0 1 0 .922l-3 2.75-.1.075a.626.626 0 0 1-.829-.902l.085-.095 2.497-2.289z" fill="currentColor"></path></svg></div></div></div></div></div></div></div>
+          {% endform %}
+        {% else %}
+          <div class="omnise-product-not-found">Product not found</div>
+        {% endif %}
+        {% assign product = originalProduct %}
+      </div></div></section></div><div data-omnise-export-section-id="omnise-ptemwt" data-omnise-export-has-ab="false"><section data-bnode="omnise-ptemwt" data-bnode-index="2" class="omnise-section omnise-surface-light"><div class="omnise-section-container"><div class="omnise-slot" data-bnode="omnise-h6o70a" data-bnode-index="1"><h3 class="omnise-heading omnise-h2" data-bnode="omnise-u5kdp9" data-bnode-index="1">{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_npytbt' | t }}</h3></div><div class="omnise-carousel omnise-content-list" data-bnode="omnise-8y7j1g" data-bnode-index="2" data-gap-control=":scope &gt; .omnise-slider-wrapper &gt; .omnise-slider-items"><div class="omnise-slider-wrapper" data-navigation="navi-type-1" data-pagination="progress" data-dir="left" data-effect="slide" data-scroll="1" data-align="start" data-desktop-layout="slider" data-tablet-layout="slider" data-mobile-layout="slider" data-item="4" data-item-tablet="3" data-item-mobile="1" data-loop="true" data-play="false" data-transition="500"><div class="omnise-slider-items">
+        
+      {% assign omnise_original_collection = collection %}
+      {% assign collection = collections['acqua-di-parma'] %}
+    
+        {% if collection and collection.products.size > 0 %}
+        {% for product in collection.products limit: 10 %}
+        <div class="omnise-slider-item" data-gap-item="true"><script type="application/json" class="product-json-data" aria-hidden="true">{ "id": {{ product.id }},"title": {{ product.title | json }},"handle": {{ product.handle | json }},"options": {{ product.options | json }},"available": {{ product.available | json }},"variants":[{% for variant in product.variants %}{"id": {{ variant.id }},"title": {{ variant.title | json }},"available": {{ variant.available | json }},"price": {{ variant.price | default: 0 }},"compare_at_price": {{ variant.compare_at_price | default: 0 }},"inventory_quantity": {{ variant.inventory_quantity | default: 0 }},"sku": {{ variant.sku | json }}, "options": {{ variant.options | json }},"featured_image":{"src": {{ variant.featured_image.src | json }}}}{% unless forloop.last %},{% endunless %}{% endfor %}] }</script><div class="omnise-slide-item" data-bnode="be-ctl-item" data-bnode-index="1" data-bnode-loop-index="0"><div class="omnise-slot" data-bnode="omnise-x15lkg" data-bnode-index="1">
+
+
+<a 
+  href="{{ product.url | default: '#' }}"
+  class="omnise-product-picture "
+  data-bnode="omnise-z6a4wo" data-bnode-index="1"
+>
+    {% if product != blank %}
+
+      <img
+        srcset="{%- if product.featured_media.width >= 165 -%}{{ product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
+        {%- if product.featured_media.width >= 330 -%}{{ product.featured_media | image_url: width: 330 }} 330w,{%- endif -%}
+        {%- if product.featured_media.width >= 535 -%}{{ product.featured_media | image_url: width: 535 }} 535w,{%- endif -%}
+        {{ product.featured_media | image_url }} {{ product.featured_media.width }}w"
+        src="{{ product.featured_media | image_url: width: 535 }}"
+        alt="{{ product.featured_media.alt | escape }}"
+        loading="lazy"
+        class="omnise-img-main"
+      >
+    
+
+    {% else %}
+
+      <img
+        src="https://cdn.shopify.com/s/files/1/0730/1110/1853/files/image-product-4_e1a50d90-86fa-402d-99f5-ffd3046ea39a.svg?v=1755827595"
+        alt="Default Product"
+        class="omnise-img-main"
+        loading="lazy"
+      >
+    {% endif %}
+</a><div class="omnise-slot" data-bnode="omnise-y8ks0m" data-bnode-index="2">
+    {% unless product.available %}
+      <div
+        class="omnise-product-badge omnise-badge-soldout omnise-p"
+        data-bnode="omnise-flbpco" data-bnode-index="1"
+      >
+        {{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_pfx4wy' | t }}
+      </div>
+
+    {% else %}
+      {% assign price = product.price_min %}
+      {% assign compare_at_price = product.compare_at_price_min %}
+
+      {% if compare_at_price > price %}
+        <div
+          class="omnise-product-badge omnise-badge-sale omnise-p"
+          data-show-discount="false"
+          data-discount-prefix="minus"
+          data-discount-off-label="{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_2ctr' | t }}"
+          data-discount-save-label="{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_1j2ql' | t }}"
+          data-bnode="omnise-flbpco" data-bnode-index="1"
+        >
+          {% if compare_at_price %}
+            {% assign discount = compare_at_price
+              | minus: price
+              | times: 100.0
+              | divided_by: compare_at_price
+            %}
+            {% assign discount = discount | round: 2 %}
+          {% else %}
+            {% assign discount = 0 %}
+          {% endif %}
+          {% assign discount_value = discount | round %}
+
+          
+            {{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_1j2hz' | t }}
+          
+        </div>
+
+      {% else %}
+        <div
+          class="omnise-product-badge omnise-badge-empty omnise-live-product omnise-p"
+          data-bnode="omnise-flbpco" data-bnode-index="1"
+        >
+         
+        </div>
+      {% endif %}
+    {% endunless %}
+  
+
+
+{% assign tag_input = 'New|Best Seller' | downcase | split: '|' %}
+{% assign has_match = false %}
+
+{% capture matched_tags %}
+  {% for input_tag in tag_input %}
+    {% assign input_clean = input_tag | strip | downcase %}
+
+    {% for tag in product.tags %}
+      {% assign tag_down = tag | downcase %}
+
+      {% if input_clean == tag_down %}
+        {% assign has_match = true %}
+
+        <div
+          class="omnise-product-tag omnise-product-tag-{{ forloop.index }}"
+          data-gap-item="true"
+        >
+          {{ tag }}
+        </div>
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+{% endcapture %}
+
+{% if has_match %}
+<div
+  class="omnise-product-tags omnise-p"
+  data-gap-control=":scope"
+  data-bnode="omnise-02ap0q" data-bnode-index="2"
+>
+    {{ matched_tags }}
+</div>
+{% endif %}
+  </div><div class="omnise-slot" data-bnode="omnise-bcdb86" data-bnode-index="3"><div class="omnise-app-block" data-bnode="omnise-a0chb1" data-bnode-index="1">{%- for block in section.blocks -%}{% if block.id contains 'omnise-a0chb1' %}{% render block %}{% endif %}{%- endfor -%}</div><div class="omnise-slot" data-bnode="omnise-le1vb2" data-bnode-index="2">
+    
+    
+    
+    
+    <h3 class="omnise-product-title omnise-h5" data-bnode="omnise-rqwlsx" data-bnode-index="1">
+      <a href="{{ product.url }}">
+        {{ product.title }}
+      </a>
+    </h3>
+    
+    
+        <div class="omnise-product-price-wrapper {% if product.compare_at_price > product.price %} omnise-on-sale {% endif %} omnise-p" data-bnode="omnise-o8kqqh" data-bnode-index="2">
+          <span class="omnise-product-price omnise-price-sale">
+            {{ product.price | money_with_currency | strip_html | escape }}
+          </span>
+          <span class="omnise-product-price-compare" {% unless product.compare_at_price > product.price %} style="display:none;"  {% endunless %}>
+            {{ product.compare_at_price | money_with_currency | strip_html | escape }}
+          </span>
+        </div>
+    </div></div></div></div></div>
+        {% endfor %}
+        {% else %}
+          <div class="omnise-content-list-empty">No products found</div>
+        {% endif %}
+        {% assign collection = omnise_original_collection %}
+        </div></div><div class="omnise-slider-controls"><div class="omnise-slider-controls-wrp"><div class="omnise-slider-pagination-wrp"><div class="omnise-slider-pagination-wrapper"></div><div class="omnise-slider-pagination-progress"><span></span></div></div><div class="omnise-slider-nav"><div class="omnise-slider-nav-left"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path d="M7.047 3.711a.625.625 0 0 0-.844-.922l-3 2.75a.626.626 0 0 0 0 .922l3 2.75.1.075a.626.626 0 0 0 .829-.902l-.085-.095-2.497-2.289z" fill="currentColor"></path></svg></div><div class="omnise-slider-nav-right"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path d="M4.953 3.71a.625.625 0 0 1 .844-.921l3 2.75a.626.626 0 0 1 0 .922l-3 2.75-.1.075a.626.626 0 0 1-.829-.902l.085-.095 2.497-2.289z" fill="currentColor"></path></svg></div></div></div></div></div></div></section></div><div data-omnise-export-section-id="omnise-8ri8tu" data-omnise-export-has-ab="false"><section data-bnode="omnise-8ri8tu" data-bnode-index="3" class="omnise-section omnise-surface-light"><div class="omnise-section-container"><div class="omnise-slot omnise-surface-muted" data-bnode="omnise-247qhk" data-bnode-index="1"><div class="omnise-slot" data-bnode="omnise-km71bx" data-bnode-index="1"><h3 class="omnise-heading omnise-h2" data-bnode="omnise-6e2lyk" data-bnode-index="1">{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_4ybabs' | t }}</h3><p class="omnise-paragraph omnise-p2" data-bnode="omnise-dtdhjh" data-bnode-index="2">{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_6fetrr' | t }}</p></div><div class="omnise-accordion-root" data-omnise-accordion-root="true" data-bnode="omnise-lx8cb0" data-bnode-index="2" data-type="single" data-default="none" data-gap-control=":scope" style="--omnise-icon-dir: row;"><details class="omnise-accordion-item" data-omnise-index="0" data-omnise-active="false" data-gap-item="true"><summary class="omnise-accordion-summary omnise-h5"><span class="omnise-accordion-title">{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_aihyzq' | t }}</span><span class="omnise-accordion-icon"><svg xmlns="http://www.w3.org/2000/svg" class="omnise-svg-plus" viewBox="0 0 20 20" width="20px" height="20px" fill="currentColor"><path class="stroke-horizontal" d="M3.125 10H16.875" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path class="stroke-vertical" d="M10 3.125L10 16.875" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></summary><div class="omnise-accordion-content"><div class="omnise-slot" data-bnode="omnise-v6kis9" data-bnode-index="1"><p class="omnise-paragraph omnise-p2" data-bnode="omnise-n74ctv" data-bnode-index="1">{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_xiyti8' | t }}</p></div></div></details><details class="omnise-accordion-item" data-omnise-index="1" data-omnise-active="false" data-gap-item="true"><summary class="omnise-accordion-summary omnise-h5"><span class="omnise-accordion-title">{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_uo45ip' | t }}</span><span class="omnise-accordion-icon"><svg xmlns="http://www.w3.org/2000/svg" class="omnise-svg-plus" viewBox="0 0 20 20" width="20px" height="20px" fill="currentColor"><path class="stroke-horizontal" d="M3.125 10H16.875" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path class="stroke-vertical" d="M10 3.125L10 16.875" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></summary><div class="omnise-accordion-content"><div class="omnise-slot" data-bnode="omnise-932711" data-bnode-index="2"><p class="omnise-paragraph omnise-p2" data-bnode="omnise-283y09" data-bnode-index="1">{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_g5qfre' | t }}</p></div></div></details><details class="omnise-accordion-item" data-omnise-index="2" data-omnise-active="false" data-gap-item="true"><summary class="omnise-accordion-summary omnise-h5"><span class="omnise-accordion-title">{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_8y22pp' | t }}</span><span class="omnise-accordion-icon"><svg xmlns="http://www.w3.org/2000/svg" class="omnise-svg-plus" viewBox="0 0 20 20" width="20px" height="20px" fill="currentColor"><path class="stroke-horizontal" d="M3.125 10H16.875" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path class="stroke-vertical" d="M10 3.125L10 16.875" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></summary><div class="omnise-accordion-content"><div class="omnise-slot" data-bnode="omnise-jbxz3h" data-bnode-index="3"><p class="omnise-paragraph omnise-p2" data-bnode="omnise-yh1b72" data-bnode-index="1">{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_xq9f03' | t }}</p></div></div></details><details class="omnise-accordion-item" data-omnise-index="3" data-omnise-active="false" data-gap-item="true"><summary class="omnise-accordion-summary omnise-h5"><span class="omnise-accordion-title">{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_593xm9' | t }}</span><span class="omnise-accordion-icon"><svg xmlns="http://www.w3.org/2000/svg" class="omnise-svg-plus" viewBox="0 0 20 20" width="20px" height="20px" fill="currentColor"><path class="stroke-horizontal" d="M3.125 10H16.875" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path class="stroke-vertical" d="M10 3.125L10 16.875" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></summary><div class="omnise-accordion-content"><div class="omnise-slot" data-bnode="omnise-dngt1b" data-bnode-index="4"><p class="omnise-paragraph omnise-p2" data-bnode="omnise-xeiv5i" data-bnode-index="1">{{ 'sections.omnise-9e89c8cee974217ea40ccf5b.omnise_whq0k2' | t }}</p></div></div></details></div></div></div></section></div>
+<script id="omnise-exported-page-js" src="{{'omnise-9e89c8cee974217ea40ccf5b.js'  | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "OMNISE BUILDER APP",
+  "locales": {
+    "en": {
+      "omnise_xqskk": "Description",
+      "omnise_34i10": "Size and Materials",
+      "omnise_4tk9ja": "Shipping Information",
+      "omnise_ib45h": "🔥 Hurry up! Only {stock} items left in stock.",
+      "omnise_k6kjth": "Quantity",
+      "omnise_rpr4iy": "Only {stock} items available in stock.",
+      "omnise_aqer5m": "Add to cart",
+      "omnise_nmgw2u": "Select options",
+      "omnise_rri8sg": "Contact",
+      "omnise_pfx4wy": "Sold out",
+      "omnise_crx36j": "Buy it now",
+      "omnise_chg42r": "Secure Payment",
+      "omnise_6iim5c": "Your payment information is encrypted and protected.",
+      "omnise_r8xf86": "Frequently Bought Together",
+      "omnise_npytbt": "Related Products",
+      "omnise_2ctr": "off",
+      "omnise_1j2ql": "Save",
+      "omnise_1j2hz": "Sale",
+      "omnise_4ybabs": "Common Questions About This Product",
+      "omnise_6fetrr": "Find clear answers to the most common questions from our customers.",
+      "omnise_aihyzq": "When will my Crate ship?",
+      "omnise_xiyti8": "Due to high demand, some of our Signature Crates are backordered. Please see the “shipping information” section for the most up-to-date estimates of shipping dates by crate type.\n\nCustomers will receive an email with tracking information once their crate has been fulfilled and shipped.\n\nCrates are delivered in the order they are purchased, secure yours now to ensure the earliest delivery.\n\nPlease email help@fablepets.com if you have questions.",
+      "omnise_uo45ip": "What does this limited warranty cover?",
+      "omnise_g5qfre": "This Limited Warranty covers any defects in material or workmanship under normal use during the Warranty Period. During the Warranty Period, Fable will replace, at no charge, products or parts of the Crate that prove defective because of improper material or workmanship, under normal use and maintenance.",
+      "omnise_8y22pp": "Why is the Crate non-refundable?",
+      "omnise_xq9f03": "We are unable to accept crate returns as we have no way of receiving large/furniture return shipments. Please keep in mind there may be minor imperfections or variations in the wood as with any piece of furniture. Before purchasing a Crate, it is important you ensure the Crate is a good fit for your dog’s size and behavior, as our Crate may not work for every dog. Please email us at help@fablepets.com if you have any questions about the Crate.",
+      "omnise_593xm9": "Is the Crate a good fit for my dog?",
+      "omnise_whq0k2": "If your dog enjoys a cozy spot of its own to relax in, it’d be a great fit! If your dog is a bit more rambunctious, a known chewer, and/or fearful of being crated - it may not be the best option for them."
+    }
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "The section was generated by OMNISE BUILDER",
+      "info": "Omnise is a flexible page builder app on Shopify AppStore.\n              It provides 100+ Shopify Elements and pre-built templates library, \n              so you can build unlimited pages that you can imagine with it."
+    },
+    {
+      "type": "header",
+      "content": "[EDIT WITH OMNISE APP →](https://beae-edric.myshopify.com/admin/apps/3db283686bdf064c04e98e5cf61875ee/app/editor/v4/product/9e89c8cee974217ea40ccf5b)",
+      "info": "(*You must install the app to start editing this section [Learn more](https://docs.beae.com/en/article/quick-start-guide-dkoesy/))"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ]
+}
+{% endschema %}
