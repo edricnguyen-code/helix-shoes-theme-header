@@ -116,7 +116,10 @@ Renders merchant-configured promotion cards or collection products in a mega men
                       <form class="helix-mega-product__quick-add" method="post" action="{{ routes.cart_add_url }}" data-helix-quick-add>
                         <input type="hidden" name="id" value="{{ selected_variant.id }}">
                         <input type="hidden" name="quantity" value="1">
-                        <button type="submit" aria-label="{{ 'sections.header.quick_add' | t: product: product.title }}">Quick add</button>
+                        <button type="submit" aria-label="{{ 'sections.header.quick_add' | t: product: product.title }}">
+                          <span class="helix-mega-product__quick-add-label">Quick add</span>
+                          <span class="helix-mega-product__quick-add-icon" aria-hidden="true">{% render 'helix-icon', name: 'cart' %}</span>
+                        </button>
                       </form>
                     {%- endif -%}
                   </div>
@@ -306,7 +309,7 @@ Renders merchant-configured promotion cards or collection products in a mega men
     color: #1a1a1a;
     opacity: 0;
     pointer-events: none;
-    transform: translateY(-6px);
+    transform: translateX(18px);
     transition: opacity 180ms ease, transform 180ms ease;
   }
 
@@ -329,7 +332,7 @@ Renders merchant-configured promotion cards or collection products in a mega men
   .helix-mega-products--carousel .helix-mega-product__quick-add button {
     display: grid;
     width: 100%;
-    min-height: 52px;
+    min-height: 44px;
     place-items: center;
     padding: 0 18px;
     border: 0;
@@ -337,13 +340,23 @@ Renders merchant-configured promotion cards or collection products in a mega men
     background: #fff;
     color: #1a1a1a;
     font: inherit;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 500;
     line-height: 1;
     box-shadow: none;
   }
 
+  .helix-mega-products--carousel .helix-mega-product__quick-add-icon {
+    display: none;
+  }
+
   .helix-mega-products--carousel .helix-mega-product:hover .helix-mega-product__quick-view,
-  .helix-mega-products--carousel .helix-mega-product:focus-within .helix-mega-product__quick-view,
+  .helix-mega-products--carousel .helix-mega-product:focus-within .helix-mega-product__quick-view {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+  }
+
   .helix-mega-products--carousel .helix-mega-product:hover .helix-mega-product__quick-add,
   .helix-mega-products--carousel .helix-mega-product:focus-within .helix-mega-product__quick-add {
     opacity: 1;
@@ -351,9 +364,42 @@ Renders merchant-configured promotion cards or collection products in a mega men
     transform: translateY(0);
   }
 
-  .helix-mega-feature--mobile .helix-mega-product__quick-view,
-  .helix-mega-feature--mobile .helix-mega-product__quick-add {
+  .helix-mega-feature--mobile .helix-mega-product__quick-view {
     display: none;
+  }
+
+  .helix-mega-feature--mobile .helix-mega-product__quick-add {
+    right: 10px;
+    bottom: 12px;
+    left: auto;
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    transition: none;
+  }
+
+  .helix-mega-feature--mobile .helix-mega-product__quick-add button {
+    width: 32px;
+    height: 32px;
+    min-height: 32px;
+    padding: 0;
+    border: 1px solid #e4e4e4;
+    border-radius: 50%;
+  }
+
+  .helix-mega-feature--mobile .helix-mega-product__quick-add-label {
+    display: none;
+  }
+
+  .helix-mega-feature--mobile .helix-mega-product__quick-add-icon {
+    display: grid;
+    place-items: center;
+  }
+
+  .helix-mega-feature--mobile .helix-mega-product__quick-add-icon .helix-icon {
+    width: 14px;
+    height: 14px;
   }
 
   .helix-mega-feature--mobile .helix-mega-products__controls {
@@ -364,19 +410,31 @@ Renders merchant-configured promotion cards or collection products in a mega men
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-auto-flow: row;
     grid-auto-columns: auto;
-    gap: 8px;
+    column-gap: 8px;
+    row-gap: 28px;
     overflow: visible;
     scroll-snap-type: none;
   }
 
   .helix-mega-feature--mobile .helix-mega-products--carousel .helix-mega-product__thumbnail {
-    width: 38px;
-    height: 38px;
-    flex-basis: 38px;
+    width: 30px;
+    height: 30px;
+    flex-basis: 30px;
+    border-radius: 6px;
   }
 
   .helix-mega-feature--mobile .helix-mega-products--carousel .helix-mega-product__thumbnails {
-    min-height: 38px;
+    min-height: 30px;
+    gap: 6px;
+  }
+
+  .helix-mega-feature--mobile .helix-mega-products--carousel .helix-mega-product__details {
+    padding-top: 10px;
+    font-size: 13px;
+  }
+
+  .helix-mega-feature--mobile .helix-mega-products--carousel .helix-mega-product__price {
+    font-size: 13px;
   }
 
   @media (prefers-reduced-motion: reduce) {
