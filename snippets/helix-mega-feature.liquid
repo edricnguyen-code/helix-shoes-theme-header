@@ -71,49 +71,339 @@ Renders merchant-configured promotion cards or collection products in a mega men
       {%- when 'collection' -%}
         {%- assign featured_collection = menu_block.settings.featured_collection -%}
         {%- if featured_collection != blank -%}
-          <div class="helix-mega-products">
+          <helix-mega-products class="helix-mega-products helix-mega-products--carousel">
             <div class="helix-mega-products__heading">
               <strong>{{ menu_block.settings.collection_heading | default: featured_collection.title | escape }}</strong>
-              <a href="{{ featured_collection.url }}">{{ 'sections.header.view_all' | t }} {% render 'helix-icon', name: 'arrow-up-right' %}</a>
+              <div class="helix-mega-products__controls">
+                <button type="button" aria-label="{{ 'sections.announcement.previous' | t }}" data-helix-products-previous disabled>
+                  {% render 'helix-icon', name: 'chevron-left' %}
+                </button>
+                <button type="button" aria-label="{{ 'sections.announcement.next' | t }}" data-helix-products-next>
+                  {% render 'helix-icon', name: 'chevron-right' %}
+                </button>
+              </div>
             </div>
-            <div class="helix-mega-products__grid">
+            <div class="helix-mega-products__grid" data-helix-products-track>
               {%- for product in featured_collection.products limit: menu_block.settings.product_limit -%}
                 {%- liquid
                   assign selected_variant = product.selected_or_first_available_variant
                   assign product_image_alt = product.featured_image.alt | default: product.title
                 -%}
                 <article class="helix-mega-product">
-                  <a class="helix-mega-product__media" href="{{ product.url }}">
-                    {%- if product.featured_image != blank -%}
-                      {{ product.featured_image | image_url: width: 500 | image_tag: widths: '180, 260, 360, 500', sizes: product_sizes, loading: 'lazy', alt: product_image_alt }}
-                    {%- else -%}
-                      {{ 'product-1' | placeholder_svg_tag: 'helix-mega-product__placeholder' }}
+                  <div class="helix-mega-product__image-shell">
+                    <a class="helix-mega-product__media" href="{{ product.url }}">
+                      {%- if product.featured_image != blank -%}
+                        {{ product.featured_image | image_url: width: 700 | image_tag: widths: '220, 320, 440, 560, 700', sizes: product_sizes, loading: 'lazy', alt: product_image_alt, data-helix-product-image: '' }}
+                      {%- else -%}
+                        {{ 'product-1' | placeholder_svg_tag: 'helix-mega-product__placeholder' }}
+                      {%- endif -%}
+                      {%- if menu_block.settings.show_discount and product.compare_at_price_max > product.price -%}
+                        {%- assign discount_amount = product.compare_at_price_max | minus: product.price | times: 100.0 | divided_by: product.compare_at_price_max | round -%}
+                        <span class="helix-mega-product__badge">-{{ discount_amount }}%</span>
+                      {%- endif -%}
+                    </a>
+                    {%- if menu_block.settings.show_quick_add and selected_variant.available -%}
+                      <form class="helix-mega-product__quick-add" method="post" action="{{ routes.cart_add_url }}" data-helix-quick-add>
+                        <input type="hidden" name="id" value="{{ selected_variant.id }}">
+                        <input type="hidden" name="quantity" value="1">
+                        <button type="submit" aria-label="{{ 'sections.header.quick_add' | t: product: product.title }}">{% render 'helix-icon', name: 'cart' %}</button>
+                      </form>
                     {%- endif -%}
-                    {%- if menu_block.settings.show_discount and product.compare_at_price_max > product.price -%}
-                      {%- assign discount_amount = product.compare_at_price_max | minus: product.price | times: 100.0 | divided_by: product.compare_at_price_max | round -%}
-                      <span class="helix-mega-product__badge">-{{ discount_amount }}%</span>
-                    {%- endif -%}
-                  </a>
+                  </div>
+                  {%- if product.images.size > 0 -%}
+                    <div class="helix-mega-product__thumbnails" role="group" aria-label="{{ product.title | escape }}">
+                      {%- for product_image in product.images limit: 2 -%}
+                        {%- assign thumbnail_alt = product_image.alt | default: product.title -%}
+                        <button
+                          class="helix-mega-product__thumbnail{% if forloop.first %} is-active{% endif %}"
+                          type="button"
+                          aria-label="{{ thumbnail_alt | escape }}"
+                          aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
+                          data-helix-product-thumbnail
+                          data-image-src="{{ product_image | image_url: width: 700 }}"
+                          data-image-alt="{{ thumbnail_alt | escape }}"
+                        >
+                          {{ product_image | image_url: width: 100 | image_tag: widths: '50, 75, 100', sizes: '50px', loading: 'lazy', alt: thumbnail_alt }}
+                        </button>
+                      {%- endfor -%}
+                    </div>
+                  {%- endif -%}
                   <div class="helix-mega-product__details">
                     <a href="{{ product.url }}">{{ product.title | escape }}</a>
                     {%- if menu_block.settings.show_prices -%}
                       <span class="helix-mega-product__price">{{ product.price | money }}{%- if product.compare_at_price_max > product.price -%} <s>{{ product.compare_at_price_max | money }}</s>{%- endif -%}</span>
                     {%- endif -%}
                   </div>
-                  {%- if menu_block.settings.show_quick_add and selected_variant.available -%}
-                    <form class="helix-mega-product__quick-add" method="post" action="{{ routes.cart_add_url }}" data-helix-quick-add>
-                      <input type="hidden" name="id" value="{{ selected_variant.id }}">
-                      <input type="hidden" name="quantity" value="1">
-                      <button type="submit" aria-label="{{ 'sections.header.quick_add' | t: product: product.title }}">{% render 'helix-icon', name: 'cart' %}</button>
-                    </form>
-                  {%- endif -%}
                 </article>
               {%- else -%}
                 <p>{{ 'sections.header.collection_empty' | t }}</p>
               {%- endfor -%}
             </div>
-          </div>
+          </helix-mega-products>
         {%- endif -%}
     {%- endcase -%}
   </div>
 {%- endif -%}
+
+{% stylesheet %}
+  .helix-mega-products--carousel {
+    display: block;
+    min-width: 0;
+  }
+
+  .helix-mega-products--carousel .helix-mega-products__heading {
+    margin-bottom: 18px;
+  }
+
+  .helix-mega-products--carousel .helix-mega-products__heading strong {
+    font-size: 20px;
+    line-height: 1.25;
+  }
+
+  .helix-mega-products__controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .helix-mega-products__controls button {
+    display: grid;
+    width: 28px;
+    height: 28px;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    transition: opacity 160ms ease;
+  }
+
+  .helix-mega-products__controls button:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  .helix-mega-products__controls .helix-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .helix-mega-products--carousel .helix-mega-products__grid {
+    display: grid;
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% - 24px) / 3);
+    gap: 12px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .helix-mega-products--carousel .helix-mega-products__grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .helix-mega-products--carousel .helix-mega-product {
+    scroll-snap-align: start;
+  }
+
+  .helix-mega-products--carousel .helix-mega-product__image-shell {
+    position: relative;
+  }
+
+  .helix-mega-products--carousel .helix-mega-product__media {
+    aspect-ratio: 1;
+    border-radius: 14px;
+    background: #f3f3f3;
+  }
+
+  .helix-mega-products--carousel .helix-mega-product__media img {
+    transition: opacity 160ms ease;
+  }
+
+  .helix-mega-products--carousel .helix-mega-product__badge {
+    top: 14px;
+    left: 14px;
+    padding: 4px 10px;
+    font-size: 11px;
+  }
+
+  .helix-mega-products--carousel .helix-mega-product__thumbnails {
+    display: flex;
+    min-height: 50px;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .helix-mega-products--carousel .helix-mega-product__thumbnail {
+    width: 50px;
+    height: 50px;
+    flex: 0 0 50px;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    background: #f3f3f3;
+    cursor: pointer;
+  }
+
+  .helix-mega-products--carousel .helix-mega-product__thumbnail.is-active {
+    border-color: #d5d5d5;
+  }
+
+  .helix-mega-products--carousel .helix-mega-product__thumbnail:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  .helix-mega-products--carousel .helix-mega-product__thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .helix-mega-products--carousel .helix-mega-product__details {
+    gap: 4px;
+    padding-top: 10px;
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  .helix-mega-products--carousel .helix-mega-product__price {
+    font-size: 13px;
+  }
+
+  .helix-mega-products--carousel .helix-mega-product__price s {
+    margin-left: 5px;
+    font-size: 11px;
+  }
+
+  .helix-mega-products--carousel .helix-mega-product__quick-add {
+    right: 10px;
+    bottom: 10px;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 160ms ease, transform 160ms ease;
+  }
+
+  .helix-mega-products--carousel .helix-mega-product:hover .helix-mega-product__quick-add,
+  .helix-mega-products--carousel .helix-mega-product:focus-within .helix-mega-product__quick-add {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .helix-mega-feature--mobile .helix-mega-products__controls {
+    display: none;
+  }
+
+  .helix-mega-feature--mobile .helix-mega-products--carousel .helix-mega-products__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    gap: 8px;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .helix-mega-feature--mobile .helix-mega-products--carousel .helix-mega-product__thumbnail {
+    width: 38px;
+    height: 38px;
+    flex-basis: 38px;
+  }
+
+  .helix-mega-feature--mobile .helix-mega-products--carousel .helix-mega-product__thumbnails {
+    min-height: 38px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .helix-mega-products--carousel .helix-mega-products__grid {
+      scroll-behavior: auto;
+    }
+
+    .helix-mega-products--carousel .helix-mega-product__media img,
+    .helix-mega-products--carousel .helix-mega-product__quick-add {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('helix-mega-products')) {
+    customElements.define(
+      'helix-mega-products',
+      class extends HTMLElement {
+        connectedCallback() {
+          this.track = this.querySelector('[data-helix-products-track]');
+          this.previousButton = this.querySelector('[data-helix-products-previous]');
+          this.nextButton = this.querySelector('[data-helix-products-next]');
+
+          if (!this.track) return;
+
+          this.addEventListener('click', this.handleClick);
+          this.track.addEventListener('scroll', this.updateControls, { passive: true });
+          this.addEventListener('mouseenter', this.updateControls);
+          this.addEventListener('focusin', this.updateControls);
+          this.resizeObserver = new ResizeObserver(this.updateControls);
+          this.resizeObserver.observe(this.track);
+          requestAnimationFrame(this.updateControls);
+        }
+
+        disconnectedCallback() {
+          this.removeEventListener('click', this.handleClick);
+          this.track?.removeEventListener('scroll', this.updateControls);
+          this.removeEventListener('mouseenter', this.updateControls);
+          this.removeEventListener('focusin', this.updateControls);
+          this.resizeObserver?.disconnect();
+        }
+
+        handleClick = (event) => {
+          const thumbnail = event.target.closest('[data-helix-product-thumbnail]');
+
+          if (thumbnail && this.contains(thumbnail)) {
+            const card = thumbnail.closest('.helix-mega-product');
+            const image = card?.querySelector('[data-helix-product-image]');
+            if (!image) return;
+
+            image.style.opacity = '0.55';
+            image.src = thumbnail.dataset.imageSrc;
+            image.srcset = '';
+            image.alt = thumbnail.dataset.imageAlt || '';
+            card.querySelectorAll('[data-helix-product-thumbnail]').forEach((item) => {
+              const active = item === thumbnail;
+              item.classList.toggle('is-active', active);
+              item.setAttribute('aria-pressed', String(active));
+            });
+            requestAnimationFrame(() => {
+              image.style.opacity = '1';
+            });
+            return;
+          }
+
+          const direction = event.target.closest('[data-helix-products-previous]')
+            ? -1
+            : event.target.closest('[data-helix-products-next]')
+              ? 1
+              : 0;
+
+          if (!direction) return;
+
+          const card = this.track.querySelector('.helix-mega-product');
+          const gap = Number.parseFloat(getComputedStyle(this.track).columnGap) || 0;
+          const distance = (card?.getBoundingClientRect().width || this.track.clientWidth) + gap;
+          const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          this.track.scrollBy({ left: distance * direction, behavior: reducedMotion ? 'auto' : 'smooth' });
+        };
+
+        updateControls = () => {
+          if (!this.track) return;
+          const maxScroll = Math.max(0, this.track.scrollWidth - this.track.clientWidth);
+          if (this.previousButton) this.previousButton.disabled = this.track.scrollLeft <= 2;
+          if (this.nextButton) this.nextButton.disabled = this.track.scrollLeft >= maxScroll - 2;
+        };
+      }
+    );
+  }
+{% endjavascript %}
