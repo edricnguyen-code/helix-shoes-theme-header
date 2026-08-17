@@ -102,11 +102,21 @@ Renders merchant-configured promotion cards or collection products in a mega men
                         <span class="helix-mega-product__badge">-{{ discount_amount }}%</span>
                       {%- endif -%}
                     </a>
+                    <a
+                      class="helix-mega-product__quick-view"
+                      href="{{ product.url }}"
+                      aria-label="{{ product.title | escape }}"
+                    >
+                      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="12" cy="12" r="2.7" fill="none" stroke="currentColor" stroke-width="1.7"/>
+                      </svg>
+                    </a>
                     {%- if menu_block.settings.show_quick_add and selected_variant.available -%}
                       <form class="helix-mega-product__quick-add" method="post" action="{{ routes.cart_add_url }}" data-helix-quick-add>
                         <input type="hidden" name="id" value="{{ selected_variant.id }}">
                         <input type="hidden" name="quantity" value="1">
-                        <button type="submit" aria-label="{{ 'sections.header.quick_add' | t: product: product.title }}">{% render 'helix-icon', name: 'cart' %}</button>
+                        <button type="submit" aria-label="{{ 'sections.header.quick_add' | t: product: product.title }}">Quick add</button>
                       </form>
                     {%- endif -%}
                   </div>
@@ -281,18 +291,69 @@ Renders merchant-configured promotion cards or collection products in a mega men
     font-size: 11px;
   }
 
-  .helix-mega-products--carousel .helix-mega-product__quick-add {
-    right: 10px;
-    bottom: 10px;
+  .helix-mega-products--carousel .helix-mega-product__quick-view {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 2;
+    display: grid;
+    width: 52px;
+    height: 52px;
+    place-items: center;
+    border: 1px solid #ececec;
+    border-radius: 50%;
+    background: #fff;
+    color: #1a1a1a;
     opacity: 0;
-    transform: translateY(4px);
-    transition: opacity 160ms ease, transform 160ms ease;
+    pointer-events: none;
+    transform: translateY(-6px);
+    transition: opacity 180ms ease, transform 180ms ease;
   }
 
+  .helix-mega-products--carousel .helix-mega-product__quick-view svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .helix-mega-products--carousel .helix-mega-product__quick-add {
+    right: 15px;
+    bottom: 15px;
+    left: 15px;
+    z-index: 2;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+
+  .helix-mega-products--carousel .helix-mega-product__quick-add button {
+    display: grid;
+    width: 100%;
+    min-height: 52px;
+    place-items: center;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 999px;
+    background: #fff;
+    color: #1a1a1a;
+    font: inherit;
+    font-size: 16px;
+    line-height: 1;
+    box-shadow: none;
+  }
+
+  .helix-mega-products--carousel .helix-mega-product:hover .helix-mega-product__quick-view,
+  .helix-mega-products--carousel .helix-mega-product:focus-within .helix-mega-product__quick-view,
   .helix-mega-products--carousel .helix-mega-product:hover .helix-mega-product__quick-add,
   .helix-mega-products--carousel .helix-mega-product:focus-within .helix-mega-product__quick-add {
     opacity: 1;
+    pointer-events: auto;
     transform: translateY(0);
+  }
+
+  .helix-mega-feature--mobile .helix-mega-product__quick-view,
+  .helix-mega-feature--mobile .helix-mega-product__quick-add {
+    display: none;
   }
 
   .helix-mega-feature--mobile .helix-mega-products__controls {
@@ -324,6 +385,7 @@ Renders merchant-configured promotion cards or collection products in a mega men
     }
 
     .helix-mega-products--carousel .helix-mega-product__media img,
+    .helix-mega-products--carousel .helix-mega-product__quick-view,
     .helix-mega-products--carousel .helix-mega-product__quick-add {
       transition: none;
     }
